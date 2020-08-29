@@ -3,16 +3,10 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MotorsComponent } from './motors/motors.component';
-import { WowComponent } from './wow/wow.component';
-import { FitnessComponent } from './fitness/fitness.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MotorsComponent,
-    WowComponent,
-    FitnessComponent
   ],
   imports: [
     BrowserModule,

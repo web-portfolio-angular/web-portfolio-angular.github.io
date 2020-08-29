@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-wow',
-  templateUrl: './wow.component.html',
+  selector: 'app-header',
+  templateUrl: './header.component.html',
   styles: []
 })
-export class WowComponent implements OnInit {
+export class HeaderComponent implements OnInit {
 
   constructor() { }
 
