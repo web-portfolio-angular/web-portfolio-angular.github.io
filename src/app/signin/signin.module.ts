@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common'
 
 import { SigninComponent } from './signin.component';
+import { AuthGuardOut } from '../authOut.guard.service';
 
 @NgModule({
   declarations:[
@@ -13,10 +14,8 @@ import { SigninComponent } from './signin.component';
     CommonModule,
     ReactiveFormsModule,
     RouterModule.forChild([
-      {path: 'signin', component: SigninComponent}
+      {path: 'signin', component: SigninComponent, canActivate: [AuthGuardOut]}
     ])
   ]
 })
-export class Signin{
-
-}
+export class Signin{}
