@@ -18,6 +18,7 @@ export interface AuthRess {
 @Injectable({providedIn: 'root'})
 export class AuthService{
   user = new BehaviorSubject<User>(null);
+  tokenExpTimer;
 
   constructor(private http: HttpClient){}
 
@@ -45,9 +46,14 @@ export class AuthService{
 
   logout(){
     this.user.next(null);
+    localStorage.removeItem('userData');
+    if(this.tokenExpTimer){
+      clearTimeout(this.tokenExpTimer);      
+    }
+    this.tokenExpTimer = null;
   }
 
-  autoSignin(){ 
+  autoLogin(){ 
     const userData:{
       email: string,
       id: string,
@@ -65,7 +71,15 @@ export class AuthService{
     )
     if(loadedUser.token){
       this.user.next(loadedUser);
+      const expDuration = new Date(userData._tokenExpTime).getTime() - new Date().getTime();
+      this.autoLogout(expDuration)
     } 
+  }
+
+  autoLogout(expDuration: number){
+    this.tokenExpTimer = setTimeout(() =>{
+      this.logout();
+    }, expDuration)
   }
 
   private errorHandler(errorRess: HttpErrorResponse){
@@ -87,7 +101,8 @@ export class AuthService{
   private handleAuth(email:string, id: string, tokenId: string, tokenExpIn: number){
     const tokenExpTime = new Date(new Date().getTime() + tokenExpIn*1000);
     const user = new User(email, id, tokenId, tokenExpTime);
-    this.user.next(user);    
+    this.user.next(user);
+    this.autoLogout(tokenExpIn*1000);
     localStorage.setItem('userData', JSON.stringify(user));
   }
 }
