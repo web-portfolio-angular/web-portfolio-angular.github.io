@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
-import { throwError, Subject } from 'rxjs';
+import { throwError, Subject, BehaviorSubject } from 'rxjs';
 
 import { environment } from '../environments/environment';
 import { User } from './user.model';
@@ -17,7 +17,7 @@ export interface AuthRess {
 
 @Injectable({providedIn: 'root'})
 export class AuthService{
-  user = new Subject<User>();
+  user = new BehaviorSubject<User>(null);
 
   constructor(private http: HttpClient){}
 
@@ -47,25 +47,25 @@ export class AuthService{
     this.user.next(null);
   }
 
-  autoSignin(){
+  autoSignin(){ 
     const userData:{
       email: string,
       id: string,
-      _idToken: string,
-      _expTime: string
+      _tokenId: string,
+      _tokenExpTime: string
     } = JSON.parse(localStorage.getItem('userData'));
-    if(!userData){
+    if(!userData){     
       return;
     }
     const loadedUser = new User(
       userData.email,
       userData.id,
-      userData._idToken,
-      new Date(userData._expTime)      
+      userData._tokenId,
+      new Date(userData._tokenExpTime)
     )
     if(loadedUser.token){
       this.user.next(loadedUser);
-    }    
+    } 
   }
 
   private errorHandler(errorRess: HttpErrorResponse){
@@ -87,7 +87,7 @@ export class AuthService{
   private handleAuth(email:string, id: string, tokenId: string, tokenExpIn: number){
     const tokenExpTime = new Date(new Date().getTime() + tokenExpIn*1000);
     const user = new User(email, id, tokenId, tokenExpTime);
-    this.user.next(user);
+    this.user.next(user);    
     localStorage.setItem('userData', JSON.stringify(user));
   }
 }
