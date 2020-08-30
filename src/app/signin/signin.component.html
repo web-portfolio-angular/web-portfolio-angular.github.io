@@ -4,10 +4,12 @@
     <div>
       <label for="email">Email</label>
       <input type="text" name="email" formControlName="email">
+      <span *ngIf="!signinForm.get('email').valid && signinForm.get('email').touched">Please enter a valid email!</span>
     </div>
     <div>
       <label for="password">Password</label>
       <input type="password" name="password" formControlName="password">
+      <span *ngIf="!signinForm.get('password').valid && signinForm.get('password').touched">The password should be between 8 and 30 symbols!</span>
     </div>
     <div>
       <button type="submit" [disabled]="!signinForm.valid">Sighnin</button>
