@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
-import { throwError, Subject, BehaviorSubject } from 'rxjs';
+import { throwError, BehaviorSubject } from 'rxjs';
 
-import { environment } from '../environments/environment';
-import { User } from './user.model';
+import { environment } from '../../../environments/environment';
+import { User } from '../models/user.model';
 
 export interface AuthRess {
   idToken: string,

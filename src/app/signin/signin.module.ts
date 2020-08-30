@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common'
 
 import { SigninComponent } from './signin.component';
-import { AuthGuardOut } from '../authOut.guard.service';
+import { AuthGuardOut } from '../shared/services/authOut.guard.service';
 
 @NgModule({
   declarations:[

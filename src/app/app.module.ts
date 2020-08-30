@@ -8,7 +8,7 @@ import { ServicesComponent } from './services/services.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { HeaderComponent } from './header/header.component';
-import { AuthGuardIn } from './authIn.guard.service';
+import { AuthGuardIn } from './shared/services/authIn.guard.service';
 
 import { AppComponent } from './app.component';
 import { Signin } from './signin/signin.module';
