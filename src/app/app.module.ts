@@ -15,13 +15,13 @@ import { Signin } from './signin/signin.module';
 import { Signup } from './signup/signup.module';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: '', redirectTo: '/signin', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
   {path: 'products', component: ProductsComponent, canActivate: [AuthGuardIn]},
   {path: 'gallery', component: GalleryComponent, canActivate: [AuthGuardIn]},
   {path: 'services', component: ServicesComponent, canActivate: [AuthGuardIn]},
   {path: 'contacts', component: ContactsComponent},
-  {path: '**', redirectTo: '/home'}
+  {path: '**', redirectTo: '/signin'}
 ];
 
 

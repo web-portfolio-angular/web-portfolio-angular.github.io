@@ -1,10 +1,10 @@
 <div class="navigation">
-  <div [routerLink]="['/home']">Home</div>
-  <div *ngIf="isAuth" [routerLink]="['/products']">Products</div>
-  <div *ngIf="isAuth" [routerLink]="['/services']">Services</div>
-  <div *ngIf="isAuth" [routerLink]="['/gallery']">Callery</div>
-  <div [routerLink]="['/contacts']">Contacts</div>
-  <div *ngIf="!isAuth" [routerLink]="['/signin']">Signin</div>
-  <div *ngIf="!isAuth" [routerLink]="['/signup']">Signup</div>
+  <div [routerLink]="['/home']" routerLinkActive="nav-active">Home</div>
+  <div *ngIf="isAuth" [routerLink]="['/products']" routerLinkActive="nav-active">Products</div>
+  <div *ngIf="isAuth" [routerLink]="['/services']" routerLinkActive="nav-active">Services</div>
+  <div *ngIf="isAuth" [routerLink]="['/gallery']" routerLinkActive="nav-active">Callery</div>
+  <div [routerLink]="['/contacts']" routerLinkActive="nav-active">Contacts</div>
+  <div *ngIf="!isAuth" [routerLink]="['/signin']" routerLinkActive="nav-active">Signin</div>
+  <div *ngIf="!isAuth" [routerLink]="['/signup']" routerLinkActive="nav-active">Signup</div>
   <div *ngIf="isAuth" (click)="onLogout()">Logout</div>
 </div>
