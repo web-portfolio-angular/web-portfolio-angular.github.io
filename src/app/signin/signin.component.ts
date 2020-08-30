@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
-import { AuthService } from '../auth-service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-signin',
@@ -11,7 +13,7 @@ export class SigninComponent implements OnInit {
   signinForm: FormGroup;
   errorMsg = null;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.signinForm = new FormGroup({
@@ -20,11 +22,12 @@ export class SigninComponent implements OnInit {
     });
   }
 
-  onSubmit(signinForm: NgForm){
+  onSubmit(signinForm){
     const email = signinForm.value.email;
     const password =  signinForm.value.password;
     this.authService.signIn(email, password).subscribe(() => {
       this.errorMsg = null;
+      this.router.navigate(['/home']);
     }, error => {
       this.errorMsg = error;  
     });

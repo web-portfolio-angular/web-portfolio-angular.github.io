@@ -1,10 +1,10 @@
 <div class="navigation">
   <div [routerLink]="['/home']">Home</div>
-  <div [routerLink]="['/products']">Products</div>
-  <div [routerLink]="['/services']">Services</div>
-  <div [routerLink]="['/gallery']">Callery</div>
+  <div *ngIf="isAuth" [routerLink]="['/products']">Products</div>
+  <div *ngIf="isAuth" [routerLink]="['/services']">Services</div>
+  <div *ngIf="isAuth" [routerLink]="['/gallery']">Callery</div>
   <div [routerLink]="['/contacts']">Contacts</div>
-  <div [routerLink]="['/signin']">Signin</div>
-  <div [routerLink]="['/signup']">Signup</div>
-  <div>Logout</div>
+  <div *ngIf="!isAuth" [routerLink]="['/signin']">Signin</div>
+  <div *ngIf="!isAuth" [routerLink]="['/signup']">Signup</div>
+  <div *ngIf="isAuth" (click)="onLogout()">Logout</div>
 </div>

@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { throwError, Subject } from 'rxjs';
+
 import { environment } from '../environments/environment';
+import { User } from './user.model';
 
 export interface AuthRess {
   idToken: string,
@@ -15,6 +17,8 @@ export interface AuthRess {
 
 @Injectable({providedIn: 'root'})
 export class AuthService{
+  user = new Subject<User>();
+
   constructor(private http: HttpClient){}
 
   signUp(email: string, password: string){
@@ -32,10 +36,39 @@ export class AuthService{
       email: email,
       password: password,
       returnSecureToken: true
-    }).pipe(catchError(this.errorHandler));
+    }).pipe(
+      catchError(this.errorHandler),
+      tap(ressData => {
+        this.handleAuth(ressData.email, ressData.localId, ressData.idToken, +ressData.expiresIn)
+      }));
   }
 
-  errorHandler(errorRess: HttpErrorResponse){
+  logout(){
+    this.user.next(null);
+  }
+
+  autoSignin(){
+    const userData:{
+      email: string,
+      id: string,
+      _idToken: string,
+      _expTime: string
+    } = JSON.parse(localStorage.getItem('userData'));
+    if(!userData){
+      return;
+    }
+    const loadedUser = new User(
+      userData.email,
+      userData.id,
+      userData._idToken,
+      new Date(userData._expTime)      
+    )
+    if(loadedUser.token){
+      this.user.next(loadedUser);
+    }    
+  }
+
+  private errorHandler(errorRess: HttpErrorResponse){
     let errorMsg = 'Unknown Error!';
     if (!errorRess.error || !errorRess.error.error){
      return throwError(errorMsg);
@@ -49,5 +82,12 @@ export class AuthService{
       }
       return throwError(errorMsg);
     }
+  }
+
+  private handleAuth(email:string, id: string, tokenId: string, tokenExpIn: number){
+    const tokenExpTime = new Date(new Date().getTime() + tokenExpIn*1000);
+    const user = new User(email, id, tokenId, tokenExpTime);
+    this.user.next(user);
+    localStorage.setItem('userData', JSON.stringify(user));
   }
 }
