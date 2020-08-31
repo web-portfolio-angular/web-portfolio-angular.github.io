@@ -1,4 +1,5 @@
 <div>
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
   <p *ngIf="errorMsg">{{ errorMsg }}</p>
   <form [formGroup]="signinForm" (ngSubmit)="onSubmit(signinForm)">
     <div>

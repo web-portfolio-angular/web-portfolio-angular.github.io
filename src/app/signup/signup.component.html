@@ -1,4 +1,12 @@
 <div>
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+  <div *ngIf="isRegistered">
+    <p>Your registration was created successfully. Do you want to log in?</p>
+    <div>
+      <button (click)="isRegistered = false" [routerLink]="['/signin']">Yes</button>
+      <button (click)="isRegistered = false">Close</button>
+    </div>
+  </div>
   <p *ngIf="errorMsg">{{ errorMsg }}</p>
   <form [formGroup]="signupForm" (ngSubmit)="onSubmit(signupForm)">
     <div>

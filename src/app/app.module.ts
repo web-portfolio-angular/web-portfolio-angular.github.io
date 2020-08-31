@@ -11,6 +11,7 @@ import { HeaderComponent } from './header/header.component';
 import { AuthGuardIn } from './shared/services/authIn.guard.service';
 
 import { AppComponent } from './app.component';
+import { SharedModule } from './shared/shared.module';
 import { Signin } from './signin/signin.module';
 import { Signup } from './signup/signup.module';
 
@@ -37,6 +38,7 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    SharedModule,
     Signin,
     Signup,
     RouterModule.forRoot(routes),

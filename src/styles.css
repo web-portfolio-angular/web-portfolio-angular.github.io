@@ -1,16 +1,23 @@
-.navigation{
+.navigation {
   display: flex;
 }
-.navigation div{
+
+.navigation div {
   padding: 5px;
   cursor: pointer;
 }
+
+
 /*  */
 
-.nav-active{
+body * {
+  outline: none;
+}
+
+.nav-active {
   background-color: lightblue;
 }
 
-input.ng-invalid.ng-touched{
+input.ng-invalid.ng-touched {
   border: 1px solid red;
 }
