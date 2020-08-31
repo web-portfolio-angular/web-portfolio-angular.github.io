@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common'
 
 import { SignupComponent } from '../signup/signup.component';
 import { AuthGuardOut } from '../shared/services/authOut.guard.service';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations:[
@@ -15,6 +16,7 @@ import { AuthGuardOut } from '../shared/services/authOut.guard.service';
     CommonModule,
     HttpClientModule,
     ReactiveFormsModule,
+    SharedModule,
     RouterModule.forChild([
       {path: 'signup', component: SignupComponent, canActivate: [AuthGuardOut]}
     ])

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../shared/services/auth.service';
 
@@ -11,8 +12,10 @@ import { AuthService } from '../shared/services/auth.service';
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   errorMsg = null;
+  isRegistered = false;
+  isLoading = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.signupForm = new FormGroup({
@@ -23,6 +26,7 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(signupForm){
+    this.isLoading = true;
     if (!signupForm.valid){
       return;
     }
@@ -34,8 +38,12 @@ export class SignupComponent implements OnInit {
     }
     this.authService.signUp(email, password).subscribe(() => {
       this.errorMsg = null;
+      this.isRegistered = true;      
+      this.signupForm.reset();
+      this.isLoading = false;
     }, error => {
-      this.errorMsg = error;    
+      this.errorMsg = error;
+      this.isLoading = false;
     });
   }
 }
