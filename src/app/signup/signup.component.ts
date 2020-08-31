@@ -19,7 +19,8 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {
     this.signupForm = new FormGroup({
-      'email': new FormControl (null, [Validators.required, Validators.email, Validators.maxLength(30)]),
+      'name': new FormControl (null, [Validators.required]),
+      'email': new FormControl (null, [Validators.required, Validators.email]),
       'password': new FormControl (null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
       'confirmPass': new FormControl (null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)])
     })
@@ -34,16 +35,23 @@ export class SignupComponent implements OnInit {
     const password =  signupForm.value.password;
     const confirmPass = signupForm.value.confirmPass;
     if(password != confirmPass){
-      console.log('razli4ni');      
+      console.log('different');      
     }
     this.authService.signUp(email, password).subscribe(() => {
       this.errorMsg = null;
       this.isRegistered = true;      
       this.signupForm.reset();
       this.isLoading = false;
+
+      // this.authService.signUpAdditionalData(signupForm.value.name, signupForm.value.email).subscribe(()=>{
+      //   console.log('success');      
+      // }, error => {
+      //   console.log('ERROR: ' + error); 
+      // })
+
     }, error => {
       this.errorMsg = error;
       this.isLoading = false;
-    });
+    });   
   }
 }

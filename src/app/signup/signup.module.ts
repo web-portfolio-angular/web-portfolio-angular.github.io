@@ -22,4 +22,4 @@ import { SharedModule } from '../shared/shared.module';
     ])
   ]
 })
-export class Signup{}
+export class SignupModule{}

@@ -20,4 +20,4 @@ import { AuthGuardOut } from '../shared/services/authOut.guard.service';
     ])
   ]
 })
-export class Signin{}
+export class SigninModule{}

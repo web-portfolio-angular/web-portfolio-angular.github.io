@@ -10,6 +10,11 @@
   <p *ngIf="errorMsg">{{ errorMsg }}</p>
   <form [formGroup]="signupForm" (ngSubmit)="onSubmit(signupForm)">
     <div>
+      <label for="name">Name</label>
+      <input type="text" name="name" formControlName="name">
+      <span *ngIf="!signupForm.get('name').valid && signupForm.get('name').touched">Please enter a valid name!</span>
+    </div>
+    <div>
       <label for="email">Email</label>
       <input type="text" name="email" formControlName="email" #email>
       <span *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched">Please enter a valid email!</span>

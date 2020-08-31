@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap, take, exhaustMap } from 'rxjs/operators';
 import { throwError, BehaviorSubject } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
@@ -29,6 +29,17 @@ export class AuthService{
       password: password,
       returnSecureToken: true
     }).pipe(catchError(this.errorHandler));
+  }
+
+  signUpAdditionalData(email: string, name: string){
+    return this.user.pipe(take(1), exhaustMap(user => {
+      return this.http.post('https://portfolio-e1ec5.firebaseio.com/test.json?auth=' + user.token, 
+      {
+        'email': email,
+        'name': name
+      }
+      )
+    }))
   }
 
   signIn(email: string, password: string){
