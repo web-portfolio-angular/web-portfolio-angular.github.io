@@ -12,17 +12,16 @@ import { AuthService } from '../shared/services/auth.service';
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   errorMsg = null;
-  isRegistered = false;
   isLoading = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.signupForm = new FormGroup({
-      'name': new FormControl (null, [Validators.required]),
+      'name': new FormControl (null),
       'email': new FormControl (null, [Validators.required, Validators.email]),
       'password': new FormControl (null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
-      'confirmPass': new FormControl (null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)])
+      'confirmPass': new FormControl (null, [Validators.minLength(8), Validators.maxLength(30)])
     })
   }
 
@@ -34,21 +33,16 @@ export class SignupComponent implements OnInit {
     const email = signupForm.value.email;
     const password =  signupForm.value.password;
     const confirmPass = signupForm.value.confirmPass;
+    const name = signupForm.value.name;
     if(password != confirmPass){
       console.log('different');      
     }
-    this.authService.signUp(email, password).subscribe(() => {
+    this.authService.signUp(email, password)
+    .subscribe(() => {
+      // this.authService.signUpAdditionalData(name).subscribe();
       this.errorMsg = null;
-      this.isRegistered = true;      
-      this.signupForm.reset();
+      this.router.navigate(['/home']);
       this.isLoading = false;
-
-      // this.authService.signUpAdditionalData(signupForm.value.name, signupForm.value.email).subscribe(()=>{
-      //   console.log('success');      
-      // }, error => {
-      //   console.log('ERROR: ' + error); 
-      // })
-
     }, error => {
       this.errorMsg = error;
       this.isLoading = false;

@@ -1,12 +1,5 @@
 <div>
   <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
-  <div *ngIf="isRegistered">
-    <p>Your registration was created successfully. Do you want to log in?</p>
-    <div>
-      <button (click)="isRegistered = false" [routerLink]="['/signin']">Yes</button>
-      <button (click)="isRegistered = false">Close</button>
-    </div>
-  </div>
   <p *ngIf="errorMsg">{{ errorMsg }}</p>
   <form [formGroup]="signupForm" (ngSubmit)="onSubmit(signupForm)">
     <div>
@@ -16,7 +9,7 @@
     </div>
     <div>
       <label for="email">Email</label>
-      <input type="text" name="email" formControlName="email" #email>
+      <input type="text" name="email" formControlName="email">
       <span *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched">Please enter a valid email!</span>
     </div>
     <div>

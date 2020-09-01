@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { FooterComponent } from '../footer/footer.component';
 
 @NgModule({
 	declarations: [
-		LoadingSpinnerComponent
+		LoadingSpinnerComponent,
+		FooterComponent
 	],
 	exports: [
-		LoadingSpinnerComponent
+		LoadingSpinnerComponent,
+		FooterComponent
 	]
 })
 export class SharedModule{}

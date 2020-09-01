@@ -28,16 +28,19 @@ export class AuthService{
       email: email,
       password: password,
       returnSecureToken: true
-    }).pipe(catchError(this.errorHandler));
+    }).pipe(
+      catchError(this.errorHandler),
+      tap(ressData => {
+        this.handleAuth(ressData.email, ressData.localId, ressData.idToken, +ressData.expiresIn)
+      }));
   }
 
-  signUpAdditionalData(email: string, name: string){
+  signUpAdditionalData(name: string){
     return this.user.pipe(take(1), exhaustMap(user => {
       return this.http.post('https://portfolio-e1ec5.firebaseio.com/test.json?auth=' + user.token, 
-      {
-        'email': email,
-        'name': name
-      }
+        {
+          'name': name
+        }
       )
     }))
   }
