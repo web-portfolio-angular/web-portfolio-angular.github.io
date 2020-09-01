@@ -20,7 +20,7 @@
     <div>
       <label for="confirmPass">Confirm Password</label>
       <input type="password" name="confirmPass" formControlName="confirmPass">
-      <span *ngIf="!signupForm.get('confirmPass').valid && signupForm.get('confirmPass').touched">Please repeat your password!</span>
+      <span *ngIf="!signupForm.get('confirmPass').valid && signupForm.get('confirmPass').touched && signupForm.get('confirmPass').value === ''">Please repeat your password!</span>
       <span>The passwords do not match!</span>
     </div>
     <div>

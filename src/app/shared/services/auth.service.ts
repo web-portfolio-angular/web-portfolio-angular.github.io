@@ -35,14 +35,15 @@ export class AuthService{
       }));
   }
 
-  signUpAdditionalData(name: string){
+  signUpAdditionalData(name: string, email: string){
     return this.user.pipe(take(1), exhaustMap(user => {
-      return this.http.post('https://portfolio-e1ec5.firebaseio.com/test.json?auth=' + user.token, 
+      return this.http.post('https://portfolio-e1ec5.firebaseio.com/registrations.json?auth=' + user.token, 
         {
-          'name': name
+          'name': name,
+          'email': email
         }
       )
-    }))
+    }));
   }
 
   signIn(email: string, password: string){
