@@ -5,7 +5,7 @@
     <div>
       <label for="name">Name</label>
       <input type="text" name="name" formControlName="name">
-      <span *ngIf="!signupForm.get('name').valid && signupForm.get('name').touched">Please enter a valid name!</span>
+      <span *ngIf="!signupForm.get('name').valid && signupForm.get('name').touched">Please enter your name!</span>
     </div>
     <div>
       <label for="email">Email</label>
@@ -20,7 +20,8 @@
     <div>
       <label for="confirmPass">Confirm Password</label>
       <input type="password" name="confirmPass" formControlName="confirmPass">
-      <span *ngIf="">The passwords do not match!</span>
+      <span *ngIf="!signupForm.get('confirmPass').valid && signupForm.get('confirmPass').touched">Please repeat your password!</span>
+      <span>The passwords do not match!</span>
     </div>
     <div>
       <button type="submit" [disabled]="!signupForm.valid">Sighnup</button>

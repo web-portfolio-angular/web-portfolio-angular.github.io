@@ -7,6 +7,7 @@ import { ProductsComponent } from './products/products.component';
 import { ServicesComponent } from './services/services.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 import { AuthGuardIn } from './shared/services/authIn.guard.service';
 
 import { AppComponent } from './app.component';
@@ -31,7 +32,8 @@ const routes: Routes = [
     ProductsComponent,
     ServicesComponent,
     GalleryComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

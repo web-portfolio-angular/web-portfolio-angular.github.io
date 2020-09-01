@@ -18,25 +18,27 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {
     this.signupForm = new FormGroup({
-      'name': new FormControl (null),
+      'name': new FormControl (null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]),
       'email': new FormControl (null, [Validators.required, Validators.email]),
       'password': new FormControl (null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
-      'confirmPass': new FormControl (null, [Validators.minLength(8), Validators.maxLength(30)])
+      'confirmPass': new FormControl (null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)])
     })
+  }
+
+  passwordCheck(control: FormControl){
+//https://stackoverflow.com/questions/51605737/confirm-password-validation-in-angular-6
   }
 
   onSubmit(signupForm){
     this.isLoading = true;
     if (!signupForm.valid){
-      return;
+      this.isLoading = false;
+      return;      
     }
     const email = signupForm.value.email;
     const password =  signupForm.value.password;
     const confirmPass = signupForm.value.confirmPass;
-    const name = signupForm.value.name;
-    if(password != confirmPass){
-      console.log('different');      
-    }
+    const name = signupForm.value.name; //up
     this.authService.signUp(email, password)
     .subscribe(() => {
       // this.authService.signUpAdditionalData(name).subscribe();
