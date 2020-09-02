@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, ValidatorFn } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../shared/services/auth.service';
-import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-signup',
@@ -15,21 +14,44 @@ export class SignupComponent implements OnInit {
   errorMsg = null;
   isLoading = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    this.signupForm = new FormGroup({
-      'name': new FormControl (null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]),
-      'email': new FormControl (null, [Validators.required, Validators.email]),
-      'password': new FormControl (null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
-      'confirmPass': new FormControl (null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)])
-    })    
+    this.signupForm = this.formBuilder.group({
+      name: new FormControl (null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]),
+      email: new FormControl (null, [Validators.required, Validators.email]),
+      password: new FormControl (null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
+      confirmPass: new FormControl (null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)])
+    },{
+      validator: this.mustMatch('password', 'confirmPass')
+    });
   }
+
   // this.passwordCheck.bind(this)
-  passwordCheck(control: FormControl){
-    const password =  this.signupForm.get('password').value;
-    const confirmPass = control.value;
-    return password === confirmPass ? null : { notEqual: true}
+  // ValidatorFn = (fg: FormGroup) =>
+  // passwordCheck(){
+  //   const password =  this.formBuilder.get('password').value;
+  //   const confirmPass = this.formBuilder.get('confirmPass').value;
+  //   return password === confirmPass ? null : { notEqual: true}
+  // }
+
+  mustMatch(controlName: string, matchingControlName: string) {
+    return (formGroup: FormGroup) => {
+        const control = formGroup.controls[controlName];
+        const matchingControl = formGroup.controls[matchingControlName];
+
+        if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+            // return if another validator has already found an error on the matchingControl
+            return;
+        }
+
+        // set error on matchingControl if validation fails
+        if (control.value !== matchingControl.value) {
+            matchingControl.setErrors({ mustMatch: true });
+        } else {
+            matchingControl.setErrors(null);
+        }
+    }
   }
 
   onSubmit(signupForm){
