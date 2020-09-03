@@ -18,7 +18,7 @@ import { SharedModule } from '../shared/shared.module';
     ReactiveFormsModule,
     SharedModule,
     RouterModule.forChild([
-      {path: 'signup', component: SignupComponent, canActivate: [AuthGuardOut]}
+      {path: '', component: SignupComponent, canActivate: [AuthGuardOut]}
     ])
   ]
 })
