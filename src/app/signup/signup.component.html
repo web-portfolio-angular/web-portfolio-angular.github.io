@@ -19,7 +19,7 @@
     </div>
     <div>
       <label for="confirmPass">Confirm Password</label>
-      <input type="password" name="confirmPass" formControlName="confirmPass">
+      <input type="password" name="confirmPass" formControlName="confirmPass" [className]="!signupForm.get('confirmPass').valid && signupForm.get('confirmPass').dirty ? 'invalid' : ''">
       <span *ngIf="!signupForm.get('confirmPass').valid && signupForm.get('confirmPass').dirty">The passwords do not match!</span>
     </div>
     <div>
