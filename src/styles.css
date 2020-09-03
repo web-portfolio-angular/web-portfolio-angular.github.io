@@ -23,7 +23,7 @@ input.ng-invalid.ng-touched, .invalid {
 }
 
 @media not all and (pointer: coarse) {
-  div:hover {
-    background-color: transparent;
-  }
+  /* div:hover {
+    background-color: blue;
+  } */
 }
