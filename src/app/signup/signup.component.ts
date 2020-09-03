@@ -27,25 +27,10 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  // this.passwordCheck.bind(this)
-  // ValidatorFn = (fg: FormGroup) =>
-  // passwordCheck(){
-  //   const password =  this.formBuilder.get('password').value;
-  //   const confirmPass = this.formBuilder.get('confirmPass').value;
-  //   return password === confirmPass ? null : { notEqual: true}
-  // }
-
   mustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
         const control = formGroup.controls[controlName];
         const matchingControl = formGroup.controls[matchingControlName];
-
-        if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-            // return if another validator has already found an error on the matchingControl
-            return;
-        }
-
-        // set error on matchingControl if validation fails
         if (control.value !== matchingControl.value) {
             matchingControl.setErrors({ mustMatch: true });
         } else {

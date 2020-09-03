@@ -20,10 +20,10 @@
     <div>
       <label for="confirmPass">Confirm Password</label>
       <input type="password" name="confirmPass" formControlName="confirmPass">
-      <span *ngIf="!signupForm.get('confirmPass').valid">The passwords do not match!</span>
+      <span *ngIf="!signupForm.get('confirmPass').valid && signupForm.get('confirmPass').dirty">The passwords do not match!</span>
     </div>
     <div>
-      <button type="submit" [disabled]="!signupForm.valid">Sighnup</button>
+      <button type="submit" [disabled]="!signupForm.valid">Signup</button>
     </div>
   </form>
 </div>
