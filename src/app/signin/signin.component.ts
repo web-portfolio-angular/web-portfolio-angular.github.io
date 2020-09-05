@@ -18,8 +18,8 @@ export class SigninComponent implements OnInit {
 
   ngOnInit() {
     this.signinForm = new FormGroup({
-      email: new FormControl (null, [Validators.required, Validators.email]),
-      password: new FormControl (null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
+      email: new FormControl ('test_user@gmail.com', [Validators.required, Validators.email]),
+      password: new FormControl ('12345678', [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
     });
   }
 

@@ -9,7 +9,7 @@ import { ContactsComponent } from './contacts.component'
   ],
   imports:[
     RouterModule.forChild([
-      {path: 'contacts', component: ContactsComponent}
+      {path: '', component: ContactsComponent}
     ])
   ]
 })

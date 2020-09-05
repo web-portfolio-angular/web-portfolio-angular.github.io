@@ -16,7 +16,7 @@ import { AuthGuardOut } from '../shared/services/authOut.guard.service';
     SharedModule,
     ReactiveFormsModule,
     RouterModule.forChild([
-      {path: 'signin', component: SigninComponent, canActivate: [AuthGuardOut]}
+      {path: '', component: SigninComponent, canActivate: [AuthGuardOut]}
     ])
   ]
 })

@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common'
 
 import { SignupComponent } from '../signup/signup.component';
 import { AuthGuardOut } from '../shared/services/authOut.guard.service';
@@ -14,7 +13,6 @@ import { SharedModule } from '../shared/shared.module';
   ],
   imports:[
     CommonModule,
-    HttpClientModule,
     ReactiveFormsModule,
     SharedModule,
     RouterModule.forChild([
