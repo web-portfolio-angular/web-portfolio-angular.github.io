@@ -1,8 +1,6 @@
 <div class="lamborghini">
-  <div *ngFor="let car of lamborghiniCars">
-    <p>{{ car.carImg }}</p>
-    <p>{{ car.carHoverImg }}</p>
-    <p>{{ car.carInfo }}</p>
-    <p>{{ car.carPrice }}</p>
-  </div>
+<app-car-item *ngFor="let carElement of lamborghiniCars" [car]="carElement"></app-car-item>
 </div>
+
+<!-- <button (click)="add()">add</button> -->
+<!-- <button (click)="test()">test</button> -->

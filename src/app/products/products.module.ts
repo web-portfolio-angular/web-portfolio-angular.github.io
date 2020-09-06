@@ -6,17 +6,19 @@ import { ProductsComponent } from './products.component';
 import { AuthGuardIn } from '../shared/services/authIn.guard.service';
 import { LamborghiniComponent } from './cars/lamborghini/lamborghini.component';
 import { PorscheComponent } from './cars/porsche/porsche.component';
+import { CarItemComponent } from './cars/car-item/car-item.component';
 
 @NgModule({
   declarations: [
     ProductsComponent,
     LamborghiniComponent,
-    PorscheComponent
+    PorscheComponent,
+    CarItemComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild([
-      {path: '', component: ProductsComponent, //canActivate: [AuthGuardIn],
+      {path: '', component: ProductsComponent, canActivate: [AuthGuardIn],
         children:[
           {path: 'lamborghini', component: LamborghiniComponent},
           {path: 'porsche', component: PorscheComponent},
