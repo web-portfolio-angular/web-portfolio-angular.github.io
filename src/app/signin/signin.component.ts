@@ -33,7 +33,7 @@ export class SigninComponent implements OnInit {
       this.isLoading = false;
     }, error => {      
       this.errorMsg = error; 
-      this.isLoading = false;      
+      this.isLoading = false;
     });
   }
 }

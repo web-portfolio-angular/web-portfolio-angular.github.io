@@ -11,23 +11,35 @@ export class CarStorateService{
 
   getLamborghiniCars(){
     return this.authService.user.pipe(take(1), exhaustMap(user => {
-      return this.http.get('https://portfolio-e1ec5.firebaseio.com/lamborghiniCars.json?auth=' + user.token)
-    })).subscribe(data =>{
-      console.log(data);      
-    }, error =>{
-      console.log(error);      
-    });
+      return this.http.get<Car>('https://portfolio-e1ec5.firebaseio.com/lamborghiniCars.json?auth=' + user.token)
+    }))
+    .pipe(
+      map(ressData =>{
+        const carsArray: Car[] = [];
+        for(const key in ressData){
+          if (ressData.hasOwnProperty(key)){
+            carsArray.push({...ressData[key], id: key})
+          }
+        }
+        return carsArray;
+      })
+    )
   }
 
-  lamborghiniCars: Car[] = [
-    new Car ('img1', 'imgHover1', 'textInfo1', 1),
-    new Car ('img2', 'imgHover2', 'textInfo2', 2),
-    new Car ('img3', 'imgHover3', 'textInfo3', 3)
-  ];
-
-  porscheCars: Car[] = [
-    new Car ('img1', 'imgHover1', 'textInfo1', 1),
-    new Car ('img2', 'imgHover2', 'textInfo2', 2),
-    new Car ('img3', 'imgHover3', 'textInfo3', 3)
-  ];
+  getPorscheCars(){
+    return this.authService.user.pipe(take(1), exhaustMap(user => {
+      return this.http.get<Car>('https://portfolio-e1ec5.firebaseio.com/porscheCars.json?auth=' + user.token)
+    }))
+    .pipe(
+      map(ressData =>{
+        const carsArray: Car[] = [];
+        for(const key in ressData){
+          if (ressData.hasOwnProperty(key)){
+            carsArray.push({...ressData[key], id: key})
+          }
+        }
+        return carsArray;
+      })
+    )
+  }
 }

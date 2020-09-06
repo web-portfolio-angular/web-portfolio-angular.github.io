@@ -7,6 +7,7 @@ import { AuthGuardIn } from '../shared/services/authIn.guard.service';
 import { LamborghiniComponent } from './cars/lamborghini/lamborghini.component';
 import { PorscheComponent } from './cars/porsche/porsche.component';
 import { CarItemComponent } from './cars/car-item/car-item.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { CarItemComponent } from './cars/car-item/car-item.component';
   ],
   imports: [
     CommonModule,
+    SharedModule,
     RouterModule.forChild([
       {path: '', component: ProductsComponent, canActivate: [AuthGuardIn],
         children:[

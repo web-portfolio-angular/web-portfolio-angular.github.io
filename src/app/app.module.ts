@@ -25,5 +25,10 @@ import { CarStorateService } from './products/cars/car-storage.service';
 })
 export class AppModule {}
 
+// the cars are loaded on init every time
 // preload images
 // on relload with save data the button is not active
+// loader on every page?
+
+// ng build --prod --base-href "https://web-portfolio-angular.github.io"
+// ngh --dir=dist/index
