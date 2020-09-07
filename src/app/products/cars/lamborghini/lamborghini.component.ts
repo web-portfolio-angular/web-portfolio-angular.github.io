@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 import { Car } from '../car.model';
 import {CarStorateService} from '../car-storage.service';
@@ -10,25 +9,16 @@ import {CarStorateService} from '../car-storage.service';
   styles: []
 })
 export class LamborghiniComponent implements OnInit {
-  isLoading = true;
+  isLoading = false;
   lamborghiniCars: Car[] = [];
 
-  constructor(private http: HttpClient, private carStore: CarStorateService) { }
+  constructor(private carStore: CarStorateService) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.carStore.getLamborghiniCars().subscribe(ressData =>{
       this.lamborghiniCars = ressData;
+      this.isLoading = false;
     })
   }
-
-  // add(){
-  //   this.http.post('https://portfolio-e1ec5.firebaseio.com/porscheCars.json',
-  //   {
-  //     carImg: 'img1', 
-  //     carHoverImg: 'imgHover1', 
-  //     carInfo: 'textInfo1', 
-  //     carPrice: 1
-  //   }).subscribe();    
-  // }
-
 }

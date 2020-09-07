@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap, take, exhaustMap } from 'rxjs/operators';
 import { throwError, BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 
 import { environment } from '../../../environments/environment';
 import { User } from '../models/user.model';
@@ -20,7 +21,7 @@ export class AuthService{
   user = new BehaviorSubject<User>(null);
   tokenExpTimer;
 
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient, private router: Router){}
 
   signUp(email: string, password: string){
     return this.http.post<AuthRess>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.fireBaseAPIKey,
@@ -62,6 +63,7 @@ export class AuthService{
   logout(){
     this.user.next(null);
     localStorage.removeItem('userData');
+    this.router.navigate(['signin'])
     if(this.tokenExpTimer){
       clearTimeout(this.tokenExpTimer);      
     }

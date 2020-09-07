@@ -24,8 +24,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "src/hovers.css"
+              "src/assets/css/styles.css",
+              "src/assets/css/hovers.css"
             ],
             "scripts": []
           },

@@ -1,1 +1,8 @@
-<p>porsche works!</p>
+<div>
+  <div *ngIf="isLoading" class="particular-loading-spinner">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  <div *ngIf="!isLoading" class="cars">
+    <app-car-item *ngFor="let carElement of porshceCars" [car]="carElement"></app-car-item>
+  </div>
+</div>

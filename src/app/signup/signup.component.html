@@ -1,5 +1,7 @@
 <div>
-  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+  <div *ngIf="isLoading" class="loading-spinner">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
   <p *ngIf="errorMsg">{{ errorMsg }}</p>
   <form [formGroup]="signupForm" (ngSubmit)="onSubmit(signupForm)">
     <div>

@@ -1,7 +1,8 @@
-<div class="lamborghini">
-    <!-- <app-loading-spinner></app-loading-spinner> -->
-  <app-car-item *ngFor="let carElement of lamborghiniCars" [car]="carElement"></app-car-item>
+<div>
+  <div *ngIf="isLoading" class="particular-loading-spinner">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  <div *ngIf="!isLoading" class="cars">
+    <app-car-item *ngFor="let carElement of lamborghiniCars" [car]="carElement"></app-car-item>
+  </div>
 </div>
-
-<!-- <button (click)="add()">add</button> -->
-<!-- <button (click)="test()">test</button> -->

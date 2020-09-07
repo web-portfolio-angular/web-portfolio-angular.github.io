@@ -1,4 +1,4 @@
-.loader-bg {
+/* .loader-bg {
   position: fixed;
   left: 0px;
   top: 0px;
@@ -9,7 +9,7 @@
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
-}
+} */
 
 .loading {
   color: #b53636;
