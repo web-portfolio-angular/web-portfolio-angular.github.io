@@ -214,6 +214,7 @@ body img {
   text-align: center;
   color: #b4b4b4;
   margin-bottom: 100px;
+  padding-top: 30px;
 }
 
 .footer-info ul li, .footer-info ul {
@@ -225,10 +226,6 @@ body img {
   color: #ffffff;
   font-weight: bold;
   font-size: 1.3em;
-}
-
-.footer-main {
-  padding-top: 30px;
 }
 
 .footer-main ul li:not(:first-child) {
