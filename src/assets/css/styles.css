@@ -76,7 +76,7 @@ body img {
 
 .container {
   max-width: 980px;
-  padding: 0 10px;
+  padding: 0 5%;
   margin: 0 auto;
 }
 
@@ -102,7 +102,7 @@ body img {
   margin-top: 30px;
   background-color: #ffffff;
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
-  padding: 0 15px 15px 15px;
+  padding: 20px;
   text-align: center;
 }
 
@@ -164,7 +164,7 @@ body img {
 }
 
 
-/* signup enf */
+/* signup end */
 
 
 /* footer start */
@@ -295,4 +295,52 @@ body img {
 
 /* footer end */
 
-@media screen and (min-width: 320px) {}
+@media screen and (min-width: 540px) {
+  /* footer start */
+  .footer-banner, .footer-banner-info {
+    display: flex;
+  }    
+  .footer-banner-info {
+    width: calc(100% - 100px);
+  }
+  .footer-banner-info p {
+    padding: 0 20px;
+  }
+  .footer-banner-btn {
+    width: 100px;
+    height: 100px;
+  }
+  /* footer end */
+}
+
+@media screen and (min-width: 767px) {
+  /* home start */
+  .main-container{
+    display: flex;
+    align-items: center;
+  }
+  .main-content:not(:last-child){
+    padding-right: 20px;
+  }
+  .main-container1 .main-content{
+    width: 50%;    
+  }
+  .main-container h2{
+    padding: 0 0 15px 0;
+  }
+  /* home end */
+
+  /* footer start */
+  .footer-info {
+    display: flex;
+    text-align: left;
+  }
+  .footer-main, .footer-social {
+    width: 30%;
+  }
+  .footer-about {
+    width: 60%;
+    margin-right: 4%;
+  }
+  /* footer end */
+}
