@@ -29,6 +29,8 @@ export class AppModule {}
 // on relload with save data the button is not active
 // loader on every page?
 // fix loading spinner
+// separated buttons
+// index title
 
 // ng build --prod --base-href "https://web-portfolio-angular.github.io"
 // ngh --dir=dist/index
