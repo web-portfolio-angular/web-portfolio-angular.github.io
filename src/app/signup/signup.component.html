@@ -10,26 +10,38 @@
     <hr>
     <div class="sign-element">
       <label for="name">Name</label>
-      <input class="name" type="text" name="name" formControlName="name">
+      <div class="name">
+        <div></div>
+        <input type="text" name="name" formControlName="name">
+      </div>     
       <span class="sign-error" *ngIf="!signupForm.get('name').valid && signupForm.get('name').touched">Please enter your
         name!</span>
     </div>
     <div class="sign-element">
       <label for="email">Email</label>
-      <input class="email" type="text" name="email" formControlName="email">
+      <div class="email">
+        <div></div>
+        <input type="text" name="email" formControlName="email">
+      </div>      
       <span class="sign-error" *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched">Please enter a
         valid email!</span>
     </div>
     <div class="sign-element">
       <label for="password">Password</label>
-      <input class="password" type="password" name="password" formControlName="password">
+      <div class="password">
+        <div></div>
+        <input type="password" name="password" formControlName="password">
+      </div>      
       <span class="sign-error" *ngIf="!signupForm.get('password').valid && signupForm.get('password').touched">The
         password should be between 8 and 30 symbols!</span>
     </div>
     <div class="sign-element">
       <label for="confirmPass">Confirm Password</label>
-      <input class="password" type="password" name="confirmPass" formControlName="confirmPass"
+      <div  class="password">
+        <div></div>
+        <input type="password" name="confirmPass" formControlName="confirmPass"
         [className]="!signupForm.get('confirmPass').valid && signupForm.get('confirmPass').dirty ? 'invalid' : ''">
+      </div>
       <span class="sign-error" *ngIf="!signupForm.get('confirmPass').valid && signupForm.get('confirmPass').dirty">The
         passwords do not match!</span>
     </div>

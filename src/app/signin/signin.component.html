@@ -10,12 +10,18 @@
     <hr>
     <div class="sign-element">
       <label for="email">Email</label>
-      <input type="text" name="email" formControlName="email">
+      <div class="email">
+        <div></div>
+        <input type="text" name="email" formControlName="email">
+      </div>      
       <span class="sign-error" *ngIf="!signinForm.get('email').valid && signinForm.get('email').touched">Please check your email it looks invalid!</span>
     </div>
     <div class="sign-element">
       <label for="password">Password</label>
-      <input type="password" name="password" formControlName="password">
+      <div class="password">
+        <div></div>
+        <input type="password" name="password" formControlName="password">
+      </div>
       <span class="sign-error" *ngIf="!signinForm.get('password').valid && signinForm.get('password').touched">The password should be between 8 and 30 symbols!</span>
     </div>
     <div>
