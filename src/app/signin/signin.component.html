@@ -3,19 +3,23 @@
     <app-loading-spinner></app-loading-spinner>
   </div>
   <p *ngIf="errorMsg">{{ errorMsg }}</p>
-  <form [formGroup]="signinForm" (ngSubmit)="onSubmit(signinForm)">
-    <div>
+  <form class="sign-form" [formGroup]="signinForm" (ngSubmit)="onSubmit(signinForm)">
+    <div class="sign-up-header">
+      <h2>Sign in</h2>
+    </div>
+    <hr>
+    <div class="sign-element">
       <label for="email">Email</label>
       <input type="text" name="email" formControlName="email">
-      <span *ngIf="!signinForm.get('email').valid && signinForm.get('email').touched">Please check your email it looks invalid!</span>
+      <span class="sign-error" *ngIf="!signinForm.get('email').valid && signinForm.get('email').touched">Please check your email it looks invalid!</span>
     </div>
-    <div>
+    <div class="sign-element">
       <label for="password">Password</label>
       <input type="password" name="password" formControlName="password">
-      <span *ngIf="!signinForm.get('password').valid && signinForm.get('password').touched">The password should be between 8 and 30 symbols!</span>
+      <span class="sign-error" *ngIf="!signinForm.get('password').valid && signinForm.get('password').touched">The password should be between 8 and 30 symbols!</span>
     </div>
     <div>
-      <button type="submit" [disabled]="!signinForm.valid">Signin</button>
+      <button class="btn-default" type="submit" [disabled]="!signinForm.valid">Sign in</button>
     </div>
   </form>
 </div>
