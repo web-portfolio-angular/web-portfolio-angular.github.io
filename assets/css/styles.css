@@ -119,7 +119,8 @@ body img {
   background-color: #ffffff;
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
   padding: 20px;
-  text-align: center;
+  margin-bottom: 30px;
+  text-align: justify;
 }
 
 .main-container h2 {
@@ -145,14 +146,22 @@ body img {
 /* home end */
 
 
-/* signup start */
+/* sign start */
 
-.signup-form {
+.sign-form {
   background-color: #ffffff;
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
   max-width: 767px;
   padding: 20px;
   margin: 0 auto;
+}
+
+.sign-form * {
+  display: block;
+}
+
+.sign-form hr {
+  margin: 20px 0;
 }
 
 .sign-element {
@@ -162,7 +171,7 @@ body img {
 
 .sign-element input {
   border: 1px solid #e1e1e1;
-  border-radius: 3px;
+  border-radius: 0 3px 3px 0;
   box-sizing: border-box;
   padding: 7px;
   font-size: 1.1em;
@@ -176,21 +185,56 @@ body img {
   width: 100%;
 }
 
-.signup-form * {
-  display: block;
-}
-
 input.ng-invalid.ng-touched, .invalid {
   border: 2px solid #b53636;
 }
 
 .sign-error {
   color: #b53636;
-  padding: 10px 0;
+  padding: 10px 0 0 0;
+}
+
+.sign-up-header h2 {
+  text-align: center;
+  font-size: 1.3em;
+  padding: 5px;
+}
+
+.name, .email, .password {
+  display: flex;
+}
+
+.name div, .email div, .password div {
+  background-color: #b53636;
+  background-size: contain;
+  background-position: center;
+  background-origin: content-box;
+  background-repeat: no-repeat;
+  width: 50px;
+  border-radius: 3px 0 0 3px;
+  padding: 7px;
+  box-sizing: border-box;
+}
+
+.name input, .email input, .password input {
+  width: calc(100% - 50px);
+}
+
+.name div {
+  background-image: url("../img/sign/user.png");
+}
+
+.email div {
+  background-image: url("../img/sign/email.png");
+  padding: 10px;
+}
+
+.password div {
+  background-image: url("../img/sign/password.png");
 }
 
 
-/* signup end */
+/* sign end */
 
 
 /* footer start */
