@@ -112,7 +112,7 @@ body img {
 
 .btn-default:disabled {
   background-color: #ccc !important;
-  background: linear-gradient(to left, #ccc 35%, #ccc 65%);
+  background: linear-gradient(to left, #7a2626 35%, #7a2626 65%);
   color: #999;
   cursor: not-allowed;
 }

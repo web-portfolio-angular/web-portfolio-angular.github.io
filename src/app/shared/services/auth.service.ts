@@ -24,7 +24,7 @@ export class AuthService{
   constructor(private http: HttpClient, private router: Router){}
 
   signUp(email: string, password: string){
-    return this.http.post<AuthRess>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.fireBaseAPIKey,
+    return this.http.post<AuthRess>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.firebaseConfig.apiKey,
     {
       email: email,
       password: password,
@@ -48,7 +48,7 @@ export class AuthService{
   }
 
   signIn(email: string, password: string){
-    return this.http.post<AuthRess>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.fireBaseAPIKey,
+    return this.http.post<AuthRess>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.firebaseConfig.apiKey,
     {
       email: email,
       password: password,
