@@ -1,5 +1,5 @@
 const functions = require('firebase-functions');
-const admin = require ('firebase-admin');
+const admin = require('firebase-admin');
 const nodemailer = require('nodemailer');
 
 admin.initializeApp();
@@ -29,4 +29,3 @@ exports.sendEmailNotification = functions.firestore.document('submissions/{docId
     html: `${data.email}`,
   }).then(() => console.log('The email is sent successfully')).catch(err => console.log(err));
 });
-
