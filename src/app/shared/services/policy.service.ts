@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 import { Policy } from '../models/policy.model';
 
@@ -9,7 +9,7 @@ export class PolicyService {
   constructor(private firestore: AngularFirestore) {}
 
   getPolicies() {
-    return this.firestore.collection('policies').snapshotChanges();
+    return this.firestore.collection('policies', ressData => ressData.orderBy('description', 'asc')).snapshotChanges();
   }
 
   createPolicy(policy: Policy){

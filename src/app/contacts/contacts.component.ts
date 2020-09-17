@@ -28,7 +28,7 @@ export class ContactsComponent implements OnInit {
 
   policy: Policy = {
     // id: 'dasda',
-    description: 'test4'
+    description: 'test6'
   }
   
   add(){
