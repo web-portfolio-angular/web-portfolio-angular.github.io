@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
+
 .loading-spinner {
   position: fixed;
   left: 0px;
@@ -381,52 +382,3 @@ input.ng-invalid.ng-touched, .invalid {
 
 
 /* footer end */
-
-@media screen and (min-width: 540px) {
-  /* footer start */
-  .footer-banner, .footer-banner-info {
-    display: flex;
-  }
-  .footer-banner-info {
-    width: calc(100% - 100px);
-  }
-  .footer-banner-info p {
-    padding: 0 20px;
-  }
-  .footer-banner-btn {
-    width: 100px;
-    height: 100px;
-  }
-  /* footer end */
-}
-
-@media screen and (min-width: 767px) {
-  /* home start */
-  .main-container {
-    display: flex;
-    align-items: center;
-  }
-  .main-content:not(:last-child) {
-    padding-right: 20px;
-  }
-  .main-container1 .main-content {
-    width: 50%;
-  }
-  .main-container h2 {
-    padding: 0 0 15px 0;
-  }
-  /* home end */
-  /* footer start */
-  .footer-info {
-    display: flex;
-    text-align: left;
-  }
-  .footer-main, .footer-social {
-    width: 30%;
-  }
-  .footer-about {
-    width: 60%;
-    margin-right: 4%;
-  }
-  /* footer end */
-}

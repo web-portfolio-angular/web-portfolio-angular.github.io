@@ -1,5 +1,9 @@
 @media not all and (pointer: coarse) {
-  /* div:hover{
-    background-color: green;
-  } */
+  .btn-default:hover {
+    background-position: left bottom;
+    color: #b53636;
+  }
+  .footer-banner-btn:hover{
+    color: #000;
+  }
 }
