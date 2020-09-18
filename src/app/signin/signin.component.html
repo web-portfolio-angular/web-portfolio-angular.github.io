@@ -15,8 +15,17 @@
         <input type="text" name="email" formControlName="email">
       </div>
       <ul class="sign-error">
-        <li *ngIf="!signinForm.get('email').valid && !signinForm.get('email').hasError('email') && signinForm.get('email').touched">Please enter your email!</li>
-        <li *ngIf="signinForm.get('email').hasError('email') && signinForm.get('email').touched">Please enter a valid email!</li>
+        <li *ngIf="
+        !signinForm.get('email').valid && 
+        !signinForm.get('email').hasError('email') && 
+        signinForm.get('email').touched">
+          Please enter your email!
+        </li>
+        <li *ngIf="
+        signinForm.get('email').hasError('email') &&
+        signinForm.get('email').touched">
+          Please enter a valid email!
+        </li>
       </ul>
     </div>
     <div class="sign-element">
@@ -33,8 +42,16 @@
         signinForm.get('password').touched">
           Please enter a passowrd!
         </li>
-        <li *ngIf="signinForm.get('password').hasError('maxlength') && signinForm.get('password').touched">The password could not be longer then 30 symbols!</li>
-        <li *ngIf="signinForm.get('password').hasError('minlength') && signinForm.get('password').touched">The password should be at least 8 symbols!</li>
+        <li *ngIf="
+        signinForm.get('password').hasError('maxlength') &&
+        signinForm.get('password').touched">
+          The password could not be longer then 30 symbols!
+        </li>
+        <li *ngIf="
+        signinForm.get('password').hasError('minlength') &&
+        signinForm.get('password').touched">
+          The password should be at least 8 symbols!
+        </li>
       </ul>
     </div>
     <div>

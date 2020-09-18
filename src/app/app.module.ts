@@ -41,12 +41,3 @@ export class AppModule {}
 
 // ng build --prod --base-href "https://web-portfolio-angular.github.io"
 // ngh --dir=dist/index
-
-// npm install --save firebase @angular/fire
-
-//npm install -g firebase-tools
-//firebase login
-//firebase init
-//cd functions
-//npm i nodemailer dotenv
-//firebase deploy
