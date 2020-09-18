@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../shared/services/auth.service';
+import { FirestoreService} from '../shared/services/firestore.service';
+import { UserAdditionalInfo } from '../shared/models/user-additional-info.model';
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +17,12 @@ export class SignupComponent implements OnInit {
   isLoading = false;
   name;
 
-  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) {}
+  constructor(
+    private authService: AuthService, 
+    private firestore: FirestoreService, 
+    private router: Router, 
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit() {
     this.signupForm = this.formBuilder.group({
@@ -26,7 +33,7 @@ export class SignupComponent implements OnInit {
       confirmPass: new FormControl (null, [Validators.required])
     },{
       validator: this.mustMatch('password', 'confirmPass')
-    });
+    });    
   }
 
   mustMatch(controlName: string, matchingControlName: string) {
@@ -66,16 +73,20 @@ export class SignupComponent implements OnInit {
     this.isLoading = true;
     if (!signupForm.valid){
       this.isLoading = false;
-      this.isLoading = false;
       return;      
     }
+
     const name = signupForm.value.name;
+    const phone = signupForm.value.phone;
     const email = signupForm.value.email;
     const password =  signupForm.value.password;
+
+    const user: UserAdditionalInfo = {name, phone, email};
+
     this.authService.signUp(email, password)
     .subscribe(() => {
 
-      this.authService.signUpAdditionalData(name, email).subscribe();
+      this.firestore.createRegistration(user)
 
       this.errorMsg = null;
       this.router.navigate(['/home']);

@@ -36,16 +36,16 @@ export class AuthService{
       }));
   }
 
-  signUpAdditionalData(name: string, email: string){
-    return this.user.pipe(take(1), exhaustMap(user => {
-      return this.http.post('https://portfolio-e1ec5.firebaseio.com/registrations.json?auth=' + user.token, 
-        {
-          'name': name,
-          'email': email
-        }
-      )
-    }));
-  }
+  // signUpAdditionalData(name: string, email: string){
+  //   return this.user.pipe(take(1), exhaustMap(user => {
+  //     return this.http.post('https://portfolio-e1ec5.firebaseio.com/registrations.json?auth=' + user.token, 
+  //       {
+  //         'name': name,
+  //         'email': email
+  //       }
+  //     )
+  //   }));
+  // }
 
   signIn(email: string, password: string){
     return this.http.post<AuthRess>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.firebaseConfig.apiKey,
