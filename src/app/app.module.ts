@@ -36,6 +36,8 @@ export class AppModule {}
 // fix loading spinner
 // separated buttons
 // index title
+// directive for length check
+// ul li style
 
 // ng build --prod --base-href "https://web-portfolio-angular.github.io"
 // ngh --dir=dist/index

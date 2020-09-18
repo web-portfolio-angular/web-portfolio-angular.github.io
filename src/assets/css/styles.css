@@ -68,6 +68,7 @@ body img {
 
 ::selection {
   background: #b53636;
+  color: #fff;
 }
 
 .container {
@@ -197,8 +198,9 @@ input.ng-invalid.ng-touched, .invalid {
   border: 2px solid #b53636;
 }
 
-.sign-error {
+.sign-error li {
   color: #b53636;
+  font-size: 1.1em;
   padding: 10px 0 0 0;
 }
 
@@ -208,11 +210,11 @@ input.ng-invalid.ng-touched, .invalid {
   padding: 5px;
 }
 
-.name, .email, .password {
+.name, .phone, .email, .password {
   display: flex;
 }
 
-.name div, .email div, .password div {
+.name div, .phone div, .email div, .password div {
   background-color: #b53636;
   background-size: contain;
   background-position: center;
@@ -224,12 +226,16 @@ input.ng-invalid.ng-touched, .invalid {
   box-sizing: border-box;
 }
 
-.name input, .email input, .password input {
+.name input, .phone input .email input, .password input {
   width: calc(100% - 50px);
 }
 
 .name div {
   background-image: url("../img/sign/user.png");
+}
+
+.phone div {
+  background-image: url("../img/sign/phone.png");
 }
 
 .email div {
@@ -239,6 +245,12 @@ input.ng-invalid.ng-touched, .invalid {
 
 .password div {
   background-image: url("../img/sign/password.png");
+}
+
+.phone input::-webkit-outer-spin-button, .phone input::-webkit-inner-spin-button, .phone input {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  margin: 0;
 }
 
 

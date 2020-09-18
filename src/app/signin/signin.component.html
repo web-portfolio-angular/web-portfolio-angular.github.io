@@ -13,8 +13,11 @@
       <div class="email">
         <div></div>
         <input type="text" name="email" formControlName="email">
-      </div>      
-      <span class="sign-error" *ngIf="!signinForm.get('email').valid && signinForm.get('email').touched">Please check your email it looks invalid!</span>
+      </div>
+      <ul class="sign-error">
+        <li *ngIf="!signinForm.get('email').valid && !signinForm.get('email').hasError('email') && signinForm.get('email').touched">Please enter your email!</li>
+        <li *ngIf="signinForm.get('email').hasError('email') && signinForm.get('email').touched">Please enter a valid email!</li>
+      </ul>
     </div>
     <div class="sign-element">
       <label for="password">Password</label>
@@ -22,7 +25,17 @@
         <div></div>
         <input type="password" name="password" formControlName="password">
       </div>
-      <span class="sign-error" *ngIf="!signinForm.get('password').valid && signinForm.get('password').touched">The password should be between 8 and 30 symbols!</span>
+      <ul class="sign-error">
+        <li *ngIf="
+        !signinForm.get('password').valid &&
+        !signinForm.get('password').hasError('maxlength') &&
+        !signinForm.get('password').hasError('minlength') &&
+        signinForm.get('password').touched">
+          Please enter a passowrd!
+        </li>
+        <li *ngIf="signinForm.get('password').hasError('maxlength') && signinForm.get('password').touched">The password could not be longer then 30 symbols!</li>
+        <li *ngIf="signinForm.get('password').hasError('minlength') && signinForm.get('password').touched">The password should be at least 8 symbols!</li>
+      </ul>
     </div>
     <div>
       <button class="btn-default" type="submit" [disabled]="!signinForm.valid">Sign in</button>
