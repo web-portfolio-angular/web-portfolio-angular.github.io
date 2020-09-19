@@ -1,6 +1,19 @@
-posts:
-<div *ngFor="let policy of policies">
-  <p>{{ policy.id }} - {{ policy.description }}</p>
+<div class="container">
+  <div>
+    comments:
+    <div *ngFor="let comment of comments">
+     {{ comment.name }} - {{ comment.date }} - {{ comment.comment }}
+    </div>
+  </div>
+  <div *ngIf="!isAuth">
+    <p>Please Sign in to add your comment!</p>
+  </div>
+  <form *ngIf="isAuth" [formGroup]="postForm" (ngSubmit)="onSubmit(postForm)">
+    <div>
+      <textarea placeholder="Your comment..." formControlName="commentArea"></textarea>
+    </div>
+    <div>
+      <button type="submit">Add your comment</button>
+    </div>
+  </form>
 </div>
-
-<button (click)="add()">Add</button>

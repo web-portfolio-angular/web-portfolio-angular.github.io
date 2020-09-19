@@ -79,14 +79,10 @@ export class SignupComponent implements OnInit {
     const phone = signupForm.value.phone;
     const email = signupForm.value.email;
     const password =  signupForm.value.password;
-
     const user: UserAdditionalInfo = {name, phone, email};
-
     this.authService.signUp(email, password)
     .subscribe(() => {
-
       this.firestore.createRegistration(user)
-
       this.errorMsg = null;
       this.router.navigate(['/home']);
       this.isLoading = false;

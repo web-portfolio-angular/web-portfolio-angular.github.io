@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserAdditionalInfo } from 'src/app/shared/models/user-additional-info.model';
 
 import { FirestoreService } from 'src/app/shared/services/firestore.service';
@@ -9,9 +9,9 @@ import { FirestoreService } from 'src/app/shared/services/firestore.service';
   styles: [
   ]
 })
-export class UserInfoComponent implements OnInit {
-  userInfo: UserAdditionalInfo[];
-
+export class UserInfoComponent implements OnInit, OnDestroy {
+  userInfo: UserAdditionalInfo [];
+ 
   constructor(private firestore: FirestoreService) { }
 
   ngOnInit(): void {
@@ -35,7 +35,11 @@ export class UserInfoComponent implements OnInit {
           ...e.payload.doc.data() as UserAdditionalInfo
         }
       })
-    }); 
+      localStorage.setItem('userAdditionalData', JSON.stringify(this.userInfo))
+    })
   }
 
+  ngOnDestroy(){
+    localStorage.removeItem('userAdditionalData');
+  }
 }

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { Policy } from '../shared/models/policy.model';
-import { PolicyService } from '../shared/services/policy.service';
+import { FirestoreService } from '../shared/services/firestore.service';
+import { Comment } from '../shared/models/comment.model';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-comments',
@@ -9,45 +12,45 @@ import { PolicyService } from '../shared/services/policy.service';
   styleUrls: []
 })
 export class CommentsComponent implements OnInit {
+  private subUser: Subscription;
+  isAuth = false;
+  postForm: FormGroup;
+  comments: Comment [];
 
-  policies: Policy[];
-  constructor(private policyService: PolicyService) { }
+  constructor(
+    private firestore: FirestoreService,
+    private formBuilder: FormBuilder,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
-    this.policyService.getPolicies().subscribe(data => {
-      this.policies = data.map(e => {
+    this.subUser = this.authService.user.subscribe(user => {
+      this.isAuth = !user ? false : true;
+    })
+
+    this.firestore.getComments().subscribe(data => {
+      this.comments = data.map(e => {
         return {
           id: e.payload.doc.id,
-          ...e.payload.doc.data() as Policy
-        } 
+          ...e.payload.doc.data() as Comment
+        }
       })
-      console.log(this.policies);
     });
 
-    
-    
+    this.postForm = this.formBuilder.group({
+      commentArea: new FormControl(null, Validators.required)
+    });
   }
 
-  policy: Policy = {
-    // id: 'dasda',
-    description: 'test6'
-  }
-  
-  add(){
-    this.create(this.policy);
-  }
+  onSubmit(postForm){
+    // if(!this.postForm.valid){
+    //   return;
+    // }
 
-
-  create(policy: Policy){
-    this.policyService.createPolicy(policy);
+    const name = 'Name';
+    const date = new Date();
+    const comment = 'comment';
+    const post: Comment = {name, date, comment};
+    this.firestore.createComment(post);    
   }
-
-  update(policy: Policy) {
-    this.policyService.updatePolicy(policy);
-  }
-
-  delete(id: string) {
-    this.policyService.deletePolicy(id);
-  }
-
 }
