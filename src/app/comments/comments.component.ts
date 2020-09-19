@@ -47,14 +47,23 @@ export class CommentsComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(postForm){
-    // if(!this.postForm.valid){
-    //   return;
-    // }
-
-    const name = 'Name';
+    if(!this.postForm.valid){
+      return;
+    }
+    const userAdditionalData: {
+      name: string,
+      phone: number,
+      email: string,
+      id: string
+    } = JSON.parse(localStorage.getItem('userAdditionalData'))
+    if(!userAdditionalData){
+      return;
+    }
+    const name = userAdditionalData[0].name;
     const date = new Date().toLocaleString();
-    const comment = 'comment';
+    const comment = postForm.value.commentArea;
     const post: Comment = {name, date, comment};
-    this.firestore.createComment(post);    
+    this.firestore.createComment(post);
+    this.postForm.reset();  
   }
 }

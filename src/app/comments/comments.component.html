@@ -1,8 +1,9 @@
 <div class="container">
   <div>
     comments:
-    <div *ngFor="let comment of comments">
-     {{ comment.name }} - {{ comment.date | date:'dd.mm.yyyy HH:mm' }} - {{ comment.comment }}
+    <div style="white-space: pre-line;" *ngFor="let comment of comments">
+     {{ comment.name }} - {{ comment.date | date:'dd.mm.yyyy HH:mm' }} - 
+     {{ comment.comment }}
     </div>
   </div>
   <div *ngIf="!isAuth">
@@ -13,7 +14,7 @@
       <textarea placeholder="Your comment..." formControlName="commentArea"></textarea>
     </div>
     <div>
-      <button type="submit">Add your comment</button>
+      <button type="submit" [disabled]="!postForm.valid">Add your comment</button>
     </div>
   </form>
 </div>

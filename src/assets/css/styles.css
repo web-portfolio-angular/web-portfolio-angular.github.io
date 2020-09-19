@@ -117,9 +117,9 @@ body img {
 }
 
 .btn-default:disabled {
-  background-color: #ccc !important;
+  background-color:  #7a2626 !important;
   background: linear-gradient(to left, #7a2626 35%, #7a2626 65%);
-  color: #999;
+  color: #999 !important;
   cursor: not-allowed;
 }
 
