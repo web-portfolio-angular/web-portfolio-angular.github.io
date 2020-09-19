@@ -1,7 +1,7 @@
 export class Comment{
   constructor(
     public name: string,
-    public date: Date,
+    public date: string,
     public comment: string,
     public id?: string
   ){}

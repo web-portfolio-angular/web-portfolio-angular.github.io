@@ -24,7 +24,7 @@ export class FirestoreService {
 
   getComments() {
     return this.firestore
-    .collection('comments', data => data.orderBy('date', 'desc'))
+    .collection('comments', data => data.orderBy('date', 'asc'))
     .snapshotChanges();
   }
 

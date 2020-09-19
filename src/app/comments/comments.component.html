@@ -2,7 +2,7 @@
   <div>
     comments:
     <div *ngFor="let comment of comments">
-     {{ comment.name }} - {{ comment.date }} - {{ comment.comment }}
+     {{ comment.name }} - {{ comment.date | date:'dd.mm.yyyy HH:mm' }} - {{ comment.comment }}
     </div>
   </div>
   <div *ngIf="!isAuth">

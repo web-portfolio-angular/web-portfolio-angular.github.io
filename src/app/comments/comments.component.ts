@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { FirestoreService } from '../shared/services/firestore.service';
@@ -11,7 +11,7 @@ import { AuthService } from '../shared/services/auth.service';
   templateUrl: './comments.component.html',
   styleUrls: []
 })
-export class CommentsComponent implements OnInit {
+export class CommentsComponent implements OnInit, OnDestroy {
   private subUser: Subscription;
   isAuth = false;
   postForm: FormGroup;
@@ -39,7 +39,11 @@ export class CommentsComponent implements OnInit {
 
     this.postForm = this.formBuilder.group({
       commentArea: new FormControl(null, Validators.required)
-    });
+    });       
+  }
+
+  ngOnDestroy(){
+    this.subUser.unsubscribe();
   }
 
   onSubmit(postForm){
@@ -48,7 +52,7 @@ export class CommentsComponent implements OnInit {
     // }
 
     const name = 'Name';
-    const date = new Date();
+    const date = new Date().toLocaleString();
     const comment = 'comment';
     const post: Comment = {name, date, comment};
     this.firestore.createComment(post);    
