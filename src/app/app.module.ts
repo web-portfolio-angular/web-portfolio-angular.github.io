@@ -6,17 +6,17 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule} from './app-routing.module';
-import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { environment } from '../environments/environment';
+import { HeaderModule } from './header/header.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     FooterComponent
   ],
   imports: [
+    HeaderModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,

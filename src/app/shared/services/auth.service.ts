@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, tap, take, exhaustMap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { throwError, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -21,7 +21,10 @@ export class AuthService{
   user = new BehaviorSubject<User>(null);
   tokenExpTimer;
 
-  constructor(private http: HttpClient, private router: Router){}
+  constructor(
+    private http: HttpClient, 
+    private router: Router
+  ){}
 
   signUp(email: string, password: string){
     return this.http.post<AuthRess>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.firebaseConfig.apiKey,
@@ -35,17 +38,6 @@ export class AuthService{
         this.handleAuth(ressData.email, ressData.localId, ressData.idToken, +ressData.expiresIn)
       }));
   }
-
-  // signUpAdditionalData(name: string, email: string){
-  //   return this.user.pipe(take(1), exhaustMap(user => {
-  //     return this.http.post('https://portfolio-e1ec5.firebaseio.com/registrations.json?auth=' + user.token, 
-  //       {
-  //         'name': name,
-  //         'email': email
-  //       }
-  //     )
-  //   }));
-  // }
 
   signIn(email: string, password: string){
     return this.http.post<AuthRess>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.firebaseConfig.apiKey,
@@ -90,7 +82,7 @@ export class AuthService{
       this.user.next(loadedUser);
       const expDuration = new Date(userData._tokenExpTime).getTime() - new Date().getTime();
       this.autoLogout(expDuration)
-    } 
+    }
   }
 
   autoLogout(expDuration: number){

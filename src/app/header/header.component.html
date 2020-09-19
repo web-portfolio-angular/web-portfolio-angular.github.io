@@ -1,11 +1,16 @@
-<div class="navigation">
-  <div [routerLink]="['/home']" routerLinkActive="nav-active">Home</div>
-  <div *ngIf="isAuth" [routerLink]="['/products']" routerLinkActive="nav-active">Products</div>
-  <div *ngIf="isAuth" [routerLink]="['/services']" routerLinkActive="nav-active">Services</div>
-  <div *ngIf="isAuth" [routerLink]="['/gallery']" routerLinkActive="nav-active">Callery</div>
-  <div [routerLink]="['/comments']" routerLinkActive="nav-active">Comments</div>
-  <div [routerLink]="['/contacts']" routerLinkActive="nav-active">Contacts</div>
-  <div *ngIf="!isAuth" [routerLink]="['/signin']" routerLinkActive="nav-active">Signin</div>
-  <div *ngIf="!isAuth" [routerLink]="['/signup']" routerLinkActive="nav-active">Signup</div>
-  <div *ngIf="isAuth" (click)="onLogout()">Logout</div>
+<div class="container navigation-container">
+  <div class="navigation">
+    <div [routerLink]="['/home']" routerLinkActive="nav-active">Home</div>
+    <div *ngIf="isAuth" [routerLink]="['/products']" routerLinkActive="nav-active">Products</div>
+    <div *ngIf="isAuth" [routerLink]="['/services']" routerLinkActive="nav-active">Services</div>
+    <div *ngIf="isAuth" [routerLink]="['/gallery']" routerLinkActive="nav-active">Callery</div>
+    <div [routerLink]="['/comments']" routerLinkActive="nav-active">Comments</div>
+    <div [routerLink]="['/contacts']" routerLinkActive="nav-active">Contacts</div>
+    <div *ngIf="!isAuth" [routerLink]="['/signin']" routerLinkActive="nav-active">Signin</div>
+    <div *ngIf="!isAuth" [routerLink]="['/signup']" routerLinkActive="nav-active">Signup</div>
+    <div *ngIf="isAuth" (click)="onLogout()">Logout</div>
+  </div>
+  <div *ngIf="isAuth">
+    <app-user-info></app-user-info>
+  </div>
 </div>

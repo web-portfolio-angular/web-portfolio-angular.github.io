@@ -15,7 +15,6 @@ export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   errorMsg = null;
   isLoading = false;
-  name;
 
   constructor(
     private authService: AuthService, 
@@ -49,13 +48,13 @@ export class SignupComponent implements OnInit {
   }
 
   numeric() {
-    // const phone = this.signupForm.value.phone;
-    // console.log(phone);
-    // if (!phone.toString().match(/^[0-9]+(\.?[0-9]+)?$/)) {
-    //  return { invalidNumber: true };
-    // } else {
-    //   return null;
-    // }
+    const phone = this.signupForm.value.phone;
+    console.log(phone);
+    if (!phone.toString().match(/^[0-9]+(\.?[0-9]+)?$/)) {
+     return { invalidNumber: true };
+    } else {
+      return null;
+    }
     
     
 

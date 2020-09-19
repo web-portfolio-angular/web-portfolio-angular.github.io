@@ -41,6 +41,10 @@
   display: flex;
 }
 
+.navigation-container {
+  display: flex;
+}
+
 
 /* default start */
 

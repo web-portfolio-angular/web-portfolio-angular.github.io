@@ -12,7 +12,7 @@ export class FirestoreService {
     return this.firestore.collection('registrations').add(user);
   }
 
-  getPolicies() {
-    return this.firestore.collection('policies', ressData => ressData.where('email', '==', 'test_user@gmail.com')).snapshotChanges();
+  getRegistration(email: string) {
+    return this.firestore.collection('registrations', ressData => ressData.where('email', '==', email)).snapshotChanges();
   }
 }
