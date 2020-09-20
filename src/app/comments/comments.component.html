@@ -1,21 +1,33 @@
 <div class="container">
-  <div #allComments>
-    Comments (number):
-    <div class="test" style="white-space: pre-line;" *ngFor="let comment of comments">
-     {{ comment.name }} - 
-     {{ comment.date | date:'dd.MM.yyyy' }} {{ comment.date | date:'HH:mm' }} - 
-     {{ comment.comment }}
-    </div>
-  </div>
-  <div *ngIf="!isAuth">
-    <p>Please Sign in to add your comment!</p>
-  </div>
-  <form *ngIf="isAuth" [formGroup]="postForm" (ngSubmit)="onSubmit(postForm)">
+  <div class="comments-container">
+    <p class="comments-count">Comments (number):</p>
     <div>
-      <textarea placeholder="Your comment..." formControlName="commentArea"></textarea>
+      <div class="comment" *ngFor="let comment of comments">
+        <div class="comment-header">
+          <p class="comment-name">
+            {{ comment.name }}
+          </p>
+          <p class="comment-date">
+            {{ comment.date | date:'dd.MM.yyyy' }} at {{ comment.date | date:'HH:mm' }}
+          </p>
+        </div>
+        <div class="comment-content">
+          {{ comment.comment }}
+        </div>
+      </div>
     </div>
-    <div>
-      <button type="submit" [disabled]="!postForm.valid">Add your comment</button>
+    <div *ngIf="!isAuth" class="comments-auth">
+      <hr class="hr-border">
+      <p>Please Sign in to add your comment!</p>
     </div>
-  </form>
+    <form *ngIf="isAuth" [formGroup]="postForm" (ngSubmit)="onSubmit(postForm)">
+      <hr class="hr-border">
+      <div>
+        <textarea class="comments-textarea" placeholder="Type your comment..." formControlName="commentArea"></textarea>
+      </div>
+      <div>
+        <button class="btn-default btn-default-center" type="submit" [disabled]="!postForm.valid">Add your comment</button>
+      </div>
+    </form>
+  </div>
 </div>

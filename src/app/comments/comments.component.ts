@@ -17,10 +17,6 @@ export class CommentsComponent implements OnInit, OnDestroy {
   postForm: FormGroup;
   comments: Comment [];
 
-  // @ViewChild('allComments') allComments: ElementRef;
-
-  // acommentsCount = this.allComments.nativeElement
-
   constructor(
     private firestore: FirestoreService,
     private formBuilder: FormBuilder,

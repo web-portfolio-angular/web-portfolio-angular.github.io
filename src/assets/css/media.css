@@ -1,4 +1,7 @@
 @media screen and (min-width: 540px) {
+  .btn-default{
+    width: 190px;
+  }
   /* footer start */
   .footer-banner, .footer-banner-info {
     display: flex;
@@ -17,10 +20,25 @@
 }
 
 @media screen and (min-width: 767px) {
+  .sign-form, .comments-container {
+    background-image: url(../img/form-bg.jpg);
+    background-repeat: no-repeat;
+    background-position: right bottom;
+  }
   /* home start */
-  .main-container {
+  .main-container1 {
     display: flex;
     align-items: center;
+  }
+  .main-container2, .main-container3{
+    display: flex;
+  }
+  .main-container2 .main-content, .main-container3 .main-content{
+    display: flex;
+    flex-direction: column;
+  }
+  .main-container-text{
+    flex: 1;
   }
   .main-content:not(:last-child) {
     padding-right: 20px;
