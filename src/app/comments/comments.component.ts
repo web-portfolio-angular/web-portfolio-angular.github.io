@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { FirestoreService } from '../shared/services/firestore.service';
@@ -16,6 +16,10 @@ export class CommentsComponent implements OnInit, OnDestroy {
   isAuth = false;
   postForm: FormGroup;
   comments: Comment [];
+
+  // @ViewChild('allComments') allComments: ElementRef;
+
+  // acommentsCount = this.allComments.nativeElement
 
   constructor(
     private firestore: FirestoreService,

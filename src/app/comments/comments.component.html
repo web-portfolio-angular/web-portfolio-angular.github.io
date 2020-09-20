@@ -1,8 +1,9 @@
 <div class="container">
-  <div>
-    comments:
-    <div style="white-space: pre-line;" *ngFor="let comment of comments">
-     {{ comment.name }} - {{ comment.date | date:'dd.mm.yyyy HH:mm' }} - 
+  <div #allComments>
+    Comments (number):
+    <div class="test" style="white-space: pre-line;" *ngFor="let comment of comments">
+     {{ comment.name }} - 
+     {{ comment.date | date:'dd.MM.yyyy' }} {{ comment.date | date:'HH:mm' }} - 
      {{ comment.comment }}
     </div>
   </div>

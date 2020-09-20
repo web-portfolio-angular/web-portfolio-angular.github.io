@@ -359,6 +359,34 @@ input.ng-invalid.ng-touched, .invalid {
   background-image: url("../img/footer/socials/f4.png");
 }
 
+.f1::after {
+  background-image: url("../img/footer/socials/f1-hover.png");
+}
+
+.f2::after {
+  background-image: url("../img/footer/socials/f2-hover.png");
+}
+
+.f3::after {
+  background-image: url("../img/footer/socials/f3-hover.png");
+}
+
+.f4::after {
+  background-image: url("../img/footer/socials/f4-hover.png");
+}
+
+.f1::after, .f2::after, .f3::after, .f4::after {
+  content: "";
+  display: block;
+  background-size: cover;
+  opacity: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  -webkit-transition: opacity .5s ease-in-out;
+  transition: opacity .5s ease-in-out;
+}
+
 .footer-copyright {
   position: relative;
 }

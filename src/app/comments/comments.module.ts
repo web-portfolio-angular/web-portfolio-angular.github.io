@@ -4,12 +4,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { CommentsComponent } from './comments.component';
-import { ReplacePipe } from './replace-pipe';
 
 @NgModule({
 	declarations: [
-		CommentsComponent,
-		ReplacePipe
+		CommentsComponent
 	],
 	imports: [
 		CommonModule,
