@@ -16,6 +16,7 @@
           {{ comment.comment }}
         </div>
 
+
         <hr>
         <button (click)="reply(
             comment.name, 
@@ -23,9 +24,11 @@
             comment.comment, 
             comment.id
           )">Reply</button>
-        <!-- <div>
-          {{ comment.reply?.name }} / {{ comment.reply?.date }} / {{ comment.reply?.comment }}
-        </div> -->
+        <div>
+        <div *ngFor="let reply of comment.replies">
+          {{ reply.name }}, {{ reply.date }}, {{ reply.comment }}
+        </div>
+
 
       </div>
     </div>
@@ -45,5 +48,3 @@
     </form>
   </div>
 </div>
-
-<button (click)="update()">Update</button>

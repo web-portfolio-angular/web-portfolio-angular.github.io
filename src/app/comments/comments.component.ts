@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { FirestoreService } from '../shared/services/firestore.service';
@@ -18,17 +18,6 @@ export class CommentsComponent implements OnInit, OnDestroy {
   comments: Comment [];
   isLoading = false;
   errorMsg = null;
-
-  // comments: Comment[] = [{
-  //   name: 'name',
-  //   date: '10.09.2020 10:53',
-  //   comment: 'comment',
-  //   reply: {
-  //     name: 'Rname',
-  //     date: '10.09.2020 10:54',
-  //     comment: 'Rcomment',
-  //   }
-  // }]
 
   constructor(
     private firestore: FirestoreService,
@@ -50,6 +39,10 @@ export class CommentsComponent implements OnInit, OnDestroy {
         }
       })
       this.isLoading = false;
+      this.errorMsg = null;
+    }, error => {
+      this.isLoading = false;
+      this.errorMsg = error;
     });
 
     this.postForm = this.formBuilder.group({
@@ -94,6 +87,11 @@ export class CommentsComponent implements OnInit, OnDestroy {
       name: name,
       date: date,
       comment: comment,
+      replies: [{
+        name: 'name',
+        date: new Date().toLocaleString(),
+        comment: 'comment3'
+      }],
       id: id
     }
     this.firestore.updateComment(orgComment)
@@ -107,18 +105,5 @@ export class CommentsComponent implements OnInit, OnDestroy {
     // .catch(error => {
     //   this.errorMsg = error;
     // });    
-  }
-
-
-
-
-  update(){
-    const comment: Comment = {
-      name: 'name',
-      date: new Date().toLocaleString(),
-      comment: 'comment3',
-      id: 'oFOWYl1YK2WMqemocYgA'
-    }
-    this.firestore.updateComment(comment)
   }
 }
