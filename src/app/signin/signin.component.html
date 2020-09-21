@@ -54,10 +54,6 @@
     <div>
       <button class="btn-default" type="submit" [disabled]="!signinForm.valid">Sign in</button>
     </div>
-    <ul class="sign-error">
-      <li *ngIf="errorMsg">
-        {{ errorMsg }}
-      </li>
-    </ul>
+    <p class="error-msg">{{ errorMsg }}</p>
   </form>
 </div>

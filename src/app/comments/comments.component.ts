@@ -17,6 +17,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
   postForm: FormGroup;
   comments: Comment [];
   isLoading = false;
+  errorMsg = null;
 
   constructor(
     private firestore: FirestoreService,
@@ -65,7 +66,24 @@ export class CommentsComponent implements OnInit, OnDestroy {
     const date = new Date().toLocaleString();
     const comment = postForm.value.commentArea;
     const post: Comment = {name, date, comment};
-    this.firestore.createComment(post);
-    this.postForm.reset();  
+    this.firestore.createComment(post)
+    .then(() => {
+      this.postForm.reset();
+      this.errorMsg = null;
+    })
+    .catch(error => {
+      this.errorMsg = error;
+    });
+    
+  }
+
+  update(){
+    const comment: Comment = {
+      name: 'name',
+      date: new Date().toLocaleString(),
+      comment: 'comment3',
+      id: 'oFOWYl1YK2WMqemocYgA'
+    }
+    this.firestore.updateComment(comment)
   }
 }

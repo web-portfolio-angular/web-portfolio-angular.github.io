@@ -28,9 +28,20 @@ export class FirestoreService {
     .snapshotChanges();
   }
 
-  // updatePolicy(policy: Policy){
-  //   delete policy.id;
-  //   this.firestore.doc('policies/' + policy.id).update(policy);
+  updateComment(comment: Comment){
+    this.firestore.doc('comments/' + comment.id).update({
+      'comment': comment.comment
+    });
+  }
+
+  deleteComment(commentsId: string){
+    this.firestore.doc('comments/' + commentsId).delete();
+  }
+
+  // updateComment(comment: Comment){
+  //   this.firestore.doc('comments/' + comment.id).update({
+  //     'comment': comment.comment
+  //   });
   // }
 
   // deletePolicy(policyId: string){

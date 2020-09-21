@@ -39,6 +39,7 @@ export class AppModule {}
 // directive for length check
 // ul li style
 // response after Crud
+// comment trimp space
 
 // ng build --prod --base-href "https://web-portfolio-angular.github.io"
 // ngh --dir=dist/index
