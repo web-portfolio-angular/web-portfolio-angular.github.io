@@ -1,30 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
-.loading-spinner {
-  position: fixed;
-  left: 0px;
-  top: 0px;
-  width: 100vw;
-  height: 100vh;
-  z-index: 9999;
-  background-color: #1e1e1e;
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-}
-
-.particular-loading-spinner {
-  position: relative;
-  min-height: 150px;
-  width: 100%;
-  height: 100%;
-  z-index: 9999;
-  background-color: #eae9ef;
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-}
-
-
 /*  */
 
 .navigation, .categories {
@@ -252,6 +226,7 @@ body img {
   max-width: 767px;
   padding: 20px;
   margin: 0 auto;
+  position: relative;
 }
 
 .sign-form * {

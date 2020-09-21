@@ -26,13 +26,13 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     this.signupForm = this.formBuilder.group({
       name: new FormControl (null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]),
-      phone: new FormControl (null, [Validators.required]),
+      phone: new FormControl (null, Validators.required),
       email: new FormControl (null, [Validators.required, Validators.email]),
       password: new FormControl (null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
       confirmPass: new FormControl (null, [Validators.required])
     },{
       validator: this.mustMatch('password', 'confirmPass')
-    });    
+    });
   }
 
   mustMatch(controlName: string, matchingControlName: string) {
@@ -47,26 +47,16 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  numeric() {
-    const phone = this.signupForm.value.phone;
-    console.log(phone);
-    if (!phone.toString().match(/^[0-9]+(\.?[0-9]+)?$/)) {
-     return { invalidNumber: true };
-    } else {
-      return null;
-    }
-    
-    
-
-    // return (formGroup: FormGroup) => {
-    //   const control = formGroup.controls[controlName];
-    //   if (control.toString().match(/^[0-9]+(\.?[0-9]+)?$/)) {
-    //     control.setErrors({ invalidNumber: true });
-    //   } else {
-    //     control.setErrors(null);
-    //   }
-    // }
-  }
+  // numeric() {
+  //   const phone = this.signupForm.value.phone;
+  //   if (phone.toString().match(/^[0-9]+(\.?[0-9]+)?$/)) {
+  //     console.log('1');      
+  //    return { invalidNumber: true };
+  //   } else {
+  //     console.log('1');
+  //     return null;
+  //   }
+  // }
 
   onSubmit(signupForm){
     this.isLoading = true;

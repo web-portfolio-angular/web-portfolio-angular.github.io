@@ -1,13 +1,10 @@
 <div class="container">
-  <div *ngIf="isLoading" class="loading-spinner">
-    <app-loading-spinner></app-loading-spinner>
-  </div>
-  <p *ngIf="errorMsg">{{ errorMsg }}</p>
   <form class="sign-form" [formGroup]="signupForm" (ngSubmit)="onSubmit(signupForm)">
+    <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
     <div class="sign-up-header">
       <h2>Sign up</h2>
     </div>
-    <hr class="hr-border">    
+    <hr class="hr-border">
     <div class="sign-element">
       <label for="name">Name</label>
       <div class="name">
@@ -98,22 +95,24 @@
       <label for="confirmPass">Confirm Password</label>
       <div class="password">
         <div></div>
-        <input 
-        type="password" 
-        name="confirmPass" 
-        formControlName="confirmPass" 
-        [className]="!signupForm.get('confirmPass').valid && signupForm.get('confirmPass').dirty ? 'invalid' : ''">
+        <input type="password" name="confirmPass" formControlName="confirmPass"
+          [className]="!signupForm.get('confirmPass').valid && signupForm.get('confirmPass').dirty ? 'invalid' : ''">
       </div>
       <ul class="sign-error">
         <li *ngIf="
         !signupForm.get('confirmPass').valid && 
         signupForm.get('confirmPass').dirty">
           The passwords do not match!
-      </li>
+        </li>
       </ul>
     </div>
     <div class="sign-form-btn">
       <button class="btn-default" type="submit" [disabled]="!signupForm.valid">Sign up</button>
     </div>
+    <ul class="sign-error">
+      <li *ngIf="errorMsg">
+        {{ errorMsg }}
+      </li>
+    </ul>
   </form>
 </div>

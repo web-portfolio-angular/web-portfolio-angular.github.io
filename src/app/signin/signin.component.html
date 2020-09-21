@@ -1,9 +1,6 @@
-<div class="container">
-  <div *ngIf="isLoading" class="loading-spinner">
-    <app-loading-spinner></app-loading-spinner>
-  </div>
-  <p *ngIf="errorMsg">{{ errorMsg }}</p>
+<div class="container">  
   <form class="sign-form" [formGroup]="signinForm" (ngSubmit)="onSubmit(signinForm)">
+    <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
     <div class="sign-up-header">
       <h2>Sign in</h2>
     </div>
@@ -57,5 +54,10 @@
     <div>
       <button class="btn-default" type="submit" [disabled]="!signinForm.valid">Sign in</button>
     </div>
+    <ul class="sign-error">
+      <li *ngIf="errorMsg">
+        {{ errorMsg }}
+      </li>
+    </ul>
   </form>
 </div>

@@ -16,6 +16,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
   isAuth = false;
   postForm: FormGroup;
   comments: Comment [];
+  isLoading = false;
 
   constructor(
     private firestore: FirestoreService,
@@ -27,7 +28,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
     this.subUser = this.authService.user.subscribe(user => {
       this.isAuth = !user ? false : true;
     })
-
+    this.isLoading = true;
     this.firestore.getComments().subscribe(data => {
       this.comments = data.map(e => {
         return {
@@ -35,6 +36,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
           ...e.payload.doc.data() as Comment
         }
       })
+      this.isLoading = false;
     });
 
     this.postForm = this.formBuilder.group({

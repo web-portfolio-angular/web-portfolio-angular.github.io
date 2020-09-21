@@ -3,8 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-loading-spinner',
   template: `
-  <!-- <div class="loader-bg"> -->
-    <div class="loading">Loading...</div>
+  <div class="loading-spinner">
     <div class="loader">
       <div></div>
       <div></div>
@@ -19,7 +18,7 @@ import { Component, OnInit } from '@angular/core';
       <div></div>
       <div></div>
     </div>
-  <!-- </div> -->
+  </div>
   `,
   styleUrls: ['./loading-spinner.component.css']
 })
