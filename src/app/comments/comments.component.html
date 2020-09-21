@@ -15,18 +15,31 @@
         <div class="comment-content">
           {{ comment.comment }}
         </div>
+
+        <hr>
+        <button (click)="reply(
+            comment.name, 
+            comment.date, 
+            comment.comment, 
+            comment.id
+          )">Reply</button>
+        <!-- <div>
+          {{ comment.reply?.name }} / {{ comment.reply?.date }} / {{ comment.reply?.comment }}
+        </div> -->
+
       </div>
     </div>
     <hr class="hr-border">
-    <div *ngIf="!isAuth" class="comments-auth">      
+    <div *ngIf="!isAuth" class="comments-auth">
       <p>Please Sign in to add your comment!</p>
     </div>
-    <form *ngIf="isAuth" [formGroup]="postForm" (ngSubmit)="onSubmit(postForm)">      
+    <form *ngIf="isAuth" [formGroup]="postForm" (ngSubmit)="onSubmit(postForm)">
       <div>
         <textarea class="comments-textarea" placeholder="Type your comment..." formControlName="commentArea"></textarea>
       </div>
       <div>
-        <button class="btn-default btn-default-center" type="submit" [disabled]="!postForm.valid">Add your comment</button>
+        <button class="btn-default btn-default-center" type="submit" [disabled]="!postForm.valid">Add your
+          comment</button>
       </div>
       <p class="error-msg">{{ errorMsg }}</p>
     </form>

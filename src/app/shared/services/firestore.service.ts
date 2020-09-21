@@ -28,14 +28,12 @@ export class FirestoreService {
     .snapshotChanges();
   }
 
-  updateComment(comment: Comment){
-    this.firestore.doc('comments/' + comment.id).update({
-      'comment': comment.comment
+  updateComment(orgComment: Comment){
+    this.firestore.doc('comments/' + orgComment.id).update({
+      // 'reply.name': orgComment.reply.name,
+      // 'reply.date': orgComment.reply.date,
+      // 'reply.comment': orgComment.reply.comment,
     });
-  }
-
-  deleteComment(commentsId: string){
-    this.firestore.doc('comments/' + commentsId).delete();
   }
 
   // updateComment(comment: Comment){
@@ -44,7 +42,7 @@ export class FirestoreService {
   //   });
   // }
 
-  // deletePolicy(policyId: string){
-  //   this.firestore.doc('policies/' + policyId).delete();
-  // }
+  deleteComment(commentId: string){
+    this.firestore.doc('comments/' + commentId).delete();
+  }
 }

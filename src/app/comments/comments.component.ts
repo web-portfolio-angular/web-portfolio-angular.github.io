@@ -19,6 +19,17 @@ export class CommentsComponent implements OnInit, OnDestroy {
   isLoading = false;
   errorMsg = null;
 
+  // comments: Comment[] = [{
+  //   name: 'name',
+  //   date: '10.09.2020 10:53',
+  //   comment: 'comment',
+  //   reply: {
+  //     name: 'Rname',
+  //     date: '10.09.2020 10:54',
+  //     comment: 'Rcomment',
+  //   }
+  // }]
+
   constructor(
     private firestore: FirestoreService,
     private formBuilder: FormBuilder,
@@ -29,6 +40,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
     this.subUser = this.authService.user.subscribe(user => {
       this.isAuth = !user ? false : true;
     })
+
     this.isLoading = true;
     this.firestore.getComments().subscribe(data => {
       this.comments = data.map(e => {
@@ -73,9 +85,32 @@ export class CommentsComponent implements OnInit, OnDestroy {
     })
     .catch(error => {
       this.errorMsg = error;
-    });
-    
+    });    
   }
+
+  reply(name: string, date: string, comment: string, id: string){
+    
+    const orgComment: Comment = {
+      name: name,
+      date: date,
+      comment: comment,
+      id: id
+    }
+    this.firestore.updateComment(orgComment)
+
+
+
+    // .then(() => {
+    //   this.postForm.reset();
+    //   this.errorMsg = null;
+    // })
+    // .catch(error => {
+    //   this.errorMsg = error;
+    // });    
+  }
+
+
+
 
   update(){
     const comment: Comment = {
