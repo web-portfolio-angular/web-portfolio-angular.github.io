@@ -15,10 +15,11 @@ export class CommentsComponent implements OnInit, OnDestroy {
   private subUser: Subscription;
   isAuth = false;
   postForm: FormGroup;
+  replyForm: FormGroup;
   comments: Comment [];
   isLoading = false;
   errorMsg = null;
-  isReply = false;
+  isReply = null;
 
   constructor(
     private firestore: FirestoreService,
@@ -48,7 +49,10 @@ export class CommentsComponent implements OnInit, OnDestroy {
 
     this.postForm = this.formBuilder.group({
       commentArea: new FormControl(null, Validators.required)
-    });       
+    });
+    this.replyForm = this.formBuilder.group({
+      replyArea: new FormControl(null, Validators.required)
+    });         
   }
 
   ngOnDestroy(){
@@ -82,25 +86,42 @@ export class CommentsComponent implements OnInit, OnDestroy {
     });    
   }
 
-  reply(name: string, date: string, comment: string, id: string){    
+  reply(commentId: string){
+    this.isReply = commentId;
+  }
+
+  onReply(name: string, date: string, comment: string, id: string, replyForm){    
+    if(!this.replyForm.valid){
+      return;
+    }
+    const userAdditionalData: {
+      name: string,
+      phone: number,
+      email: string,
+      id: string
+    } = JSON.parse(localStorage.getItem('userAdditionalData'))
+    if(!userAdditionalData){
+      return;
+    }
     const orgComment: Comment = {
       name: name,
       date: date,
       comment: comment,
       replies: [{
-        name: 'name',
+        name: userAdditionalData[0].name,
         date: new Date().toLocaleString(),
-        comment: 'comment3'
+        comment: replyForm.value.replyArea
       }],
       id: id
     }
     this.firestore.updateComment(orgComment)
-    // .then(() => {
-    //   this.postForm.reset();
-    //   this.errorMsg = null;
-    // })
-    // .catch(error => {
-    //   this.errorMsg = error;
-    // });    
+    .then(() => {
+      this.isReply = null;
+      this.replyForm.reset();
+      this.errorMsg = null;
+    })
+    .catch(error => {
+      this.errorMsg = error;
+    });
   }
 }

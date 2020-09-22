@@ -13,7 +13,7 @@
           </p>
         </div>
         <div class="comment-content">
-          <p>{{ comment.comment }}</p>          
+          <p>{{ comment.comment }}</p>
           <div class="comment-replies">
             <div class="reply" *ngFor="let reply of comment.replies">
               <div class="comment-header">
@@ -25,11 +25,33 @@
                 </p>
               </div>
               <div class="comment-content">
-                <p>{{ comment.comment }}</p>
+                <p>{{ reply.comment }}</p>
               </div>
             </div>
           </div>
-          <button class="btn-default reply-btn">Reply</button>
+          <button 
+          class="btn-default reply-btn" 
+          (click)="reply(comment.id)"
+          *ngIf="isAuth">Reply</button>
+          <form 
+          class="replyForm" 
+          *ngIf="isReply == comment.id" 
+          [formGroup]="replyForm" 
+          (ngSubmit)="onReply(
+            comment.name,
+            comment.date, 
+            comment.comment,
+            comment.id,
+            replyForm)">
+            <div>
+              <textarea class="comments-textarea" placeholder="Type your reply..."
+                formControlName="replyArea"></textarea>
+            </div>
+            <div>
+              <button class="btn-default btn-default-center" type="submit" [disabled]="!replyForm.valid">Add your comment</button>
+            </div>
+            <p class="error-msg">{{ errorMsg }}</p>
+          </form>
         </div>
       </div>
       <hr class="hr-border">
