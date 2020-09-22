@@ -233,6 +233,7 @@ body img {
   height: auto;
   line-height: 1.1em;
   padding: 5px;
+  margin-right: 10px;
 }
 
 .replyForm{

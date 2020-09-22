@@ -29,10 +29,16 @@
               </div>
             </div>
           </div>
-          <button 
-          class="btn-default reply-btn" 
-          (click)="reply(comment.id)"
-          *ngIf="isAuth">Reply</button>
+          <div>
+            <button 
+            class="btn-default reply-btn" 
+            (click)="reply(comment.id)"
+            *ngIf="isAuth">Reply</button>
+            <button
+            class="btn-default reply-btn"
+            *ngIf="isReply == comment.id"
+            (click)="isReply = null">Colse Reply</button>
+          </div>
           <form 
           class="replyForm" 
           *ngIf="isReply == comment.id" 
