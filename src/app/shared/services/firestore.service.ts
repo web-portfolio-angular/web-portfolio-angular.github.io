@@ -10,6 +10,7 @@ import { Comment } from '../models/comment.model';
 export class FirestoreService {
   constructor(private firestore: AngularFirestore) {}
 
+  //registrations
   createRegistration(user: UserAdditionalInfo){
     return this.firestore.collection('registrations').add(user);
   }
@@ -20,6 +21,7 @@ export class FirestoreService {
     .snapshotChanges();
   }
 
+  //comments
   createComment(comment: Comment){
     return this.firestore.collection('comments').add(comment);
   }
@@ -42,5 +44,12 @@ export class FirestoreService {
 
   deleteComment(commentId: string){
     return this.firestore.doc('comments/' + commentId).delete();
+  }
+
+  //products
+  getLamborghiniCars() {
+    return this.firestore
+    .collection('lamborghiniCars', data => data.orderBy('carPrice', 'asc'))
+    .snapshotChanges();
   }
 }
