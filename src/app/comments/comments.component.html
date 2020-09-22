@@ -1,7 +1,7 @@
 <div class="container">
   <div style="position: relative;" class="comments-container">
     <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
-    <p class="comments-count">Comments (number):</p>
+    <p class="comments-count">Comments</p>
     <div>
       <div class="comment" *ngFor="let comment of comments">
         <div class="comment-header">
@@ -13,38 +13,39 @@
           </p>
         </div>
         <div class="comment-content">
-          {{ comment.comment }}
+          <p>{{ comment.comment }}</p>          
+          <div class="comment-replies">
+            <div class="reply" *ngFor="let reply of comment.replies">
+              <div class="comment-header">
+                <p class="comment-name">
+                  {{ reply.name }}
+                </p>
+                <p class="comment-date">
+                  {{ reply.date | date:'dd.MM.yyyy' }} at {{ reply.date | date:'HH:mm' }}
+                </p>
+              </div>
+              <div class="comment-content">
+                <p>{{ comment.comment }}</p>
+              </div>
+            </div>
+          </div>
+          <button class="btn-default reply-btn">Reply</button>
         </div>
-
-
-        <hr>
-        <button (click)="reply(
-            comment.name, 
-            comment.date, 
-            comment.comment, 
-            comment.id
-          )">Reply</button>
+      </div>
+      <hr class="hr-border">
+      <div *ngIf="!isAuth" class="comments-auth">
+        <p>Please Sign in to add your comment!</p>
+      </div>
+      <form *ngIf="isAuth" [formGroup]="postForm" (ngSubmit)="onSubmit(postForm)">
         <div>
-        <div *ngFor="let reply of comment.replies">
-          {{ reply.name }}, {{ reply.date }}, {{ reply.comment }}
+          <textarea class="comments-textarea" placeholder="Type your comment..."
+            formControlName="commentArea"></textarea>
         </div>
-
-
-      </div>
+        <div>
+          <button class="btn-default btn-default-center" type="submit" [disabled]="!postForm.valid">Add your
+            comment</button>
+        </div>
+        <p class="error-msg">{{ errorMsg }}</p>
+      </form>
     </div>
-    <hr class="hr-border">
-    <div *ngIf="!isAuth" class="comments-auth">
-      <p>Please Sign in to add your comment!</p>
-    </div>
-    <form *ngIf="isAuth" [formGroup]="postForm" (ngSubmit)="onSubmit(postForm)">
-      <div>
-        <textarea class="comments-textarea" placeholder="Type your comment..." formControlName="commentArea"></textarea>
-      </div>
-      <div>
-        <button class="btn-default btn-default-center" type="submit" [disabled]="!postForm.valid">Add your
-          comment</button>
-      </div>
-      <p class="error-msg">{{ errorMsg }}</p>
-    </form>
   </div>
-</div>

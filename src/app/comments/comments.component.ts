@@ -18,6 +18,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
   comments: Comment [];
   isLoading = false;
   errorMsg = null;
+  isReply = false;
 
   constructor(
     private firestore: FirestoreService,
@@ -81,8 +82,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
     });    
   }
 
-  reply(name: string, date: string, comment: string, id: string){
-    
+  reply(name: string, date: string, comment: string, id: string){    
     const orgComment: Comment = {
       name: name,
       date: date,
@@ -95,9 +95,6 @@ export class CommentsComponent implements OnInit, OnDestroy {
       id: id
     }
     this.firestore.updateComment(orgComment)
-
-
-
     // .then(() => {
     //   this.postForm.reset();
     //   this.errorMsg = null;
