@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Car } from '../car.model';
-import {CarStorateService} from '../car-storage.service';
+import { Car } from 'src/app/shared/models/car.model';
+import { FirestoreService } from 'src/app/shared/services/firestore.service';
 
 @Component({
   selector: 'app-lamborghini',
@@ -10,15 +10,26 @@ import {CarStorateService} from '../car-storage.service';
 })
 export class LamborghiniComponent implements OnInit {
   isLoading = false;
-  lamborghiniCars: Car[] = [];
+  lamborghiniCars: Car[];
+  errorMsg = null;
 
-  constructor(private carStore: CarStorateService) { }
+  constructor(private firestore: FirestoreService) { }
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.carStore.getLamborghiniCars().subscribe(ressData =>{
-      this.lamborghiniCars = ressData;
+    this.firestore.getLamborghiniCars().subscribe(data => {
+      this.lamborghiniCars = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data() as Car
+        }
+      })
       this.isLoading = false;
-    })
+      this.errorMsg = null;
+      
+    }, error => {
+      this.isLoading = false;
+      this.errorMsg = error;
+    });
   }
 }

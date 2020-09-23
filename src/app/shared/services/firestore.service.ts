@@ -52,4 +52,9 @@ export class FirestoreService {
     .collection('lamborghiniCars', data => data.orderBy('carPrice', 'asc'))
     .snapshotChanges();
   }
+  getPorscheCars() {
+    return this.firestore
+    .collection('porscheCars', data => data.orderBy('carPrice', 'asc'))
+    .snapshotChanges();
+  }
 }
