@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 import { FirestoreService } from '../shared/services/firestore.service';
 import { Comment } from '../shared/models/comment.model';
-import { Subscription } from 'rxjs';
 import { AuthService } from '../shared/services/auth.service';
 
 @Component({
