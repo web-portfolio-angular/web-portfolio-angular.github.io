@@ -43,6 +43,3 @@ export class AppModule {}
 
 // ng build --prod --base-href "https://web-portfolio-angular.github.io"
 // ngh --dir=dist/index
-
-// https://stackoverflow.com/questions/58356396/how-to-save-date-as-timestamp-in-angular-firestore
-// firebase.firestore.FieldValue.serverTimestamp()
