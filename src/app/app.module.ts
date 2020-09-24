@@ -29,16 +29,8 @@ import { HeaderModule } from './header/header.module';
 export class AppModule {}
 
 // the cars are loaded on init every time
-// db read = true, write = auth?
 // preload images
 // on relload with save data the button is not active
-// loader on every page?
-// fix loading spinner
-// separated buttons
-// index title
-// directive for length check
-// ul li style
-// response after Crud
 // comment trimp space
 
 // ng build --prod --base-href "https://web-portfolio-angular.github.io"
