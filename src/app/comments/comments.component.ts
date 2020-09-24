@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import * as firebase from 'firebase/app';
 
 import { FirestoreService } from '../shared/services/firestore.service';
 import { Comment } from '../shared/models/comment.model';
 import { AuthService } from '../shared/services/auth.service';
+import { Timestamp } from 'rxjs/internal/operators/timestamp';
 
 @Component({
   selector: 'app-comments',
@@ -73,7 +75,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
       return;
     }
     const name = userAdditionalData[0].name;
-    const date = new Date().toLocaleString();
+    const date = firebase.firestore.Timestamp.now();
     const comment = postForm.value.commentArea;
     const post: Comment = {name, date, comment};
     this.firestore.createComment(post)
@@ -90,7 +92,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
     this.isReply = commentId;
   }
 
-  onReply(name: string, date: string, comment: string, id: string, replyForm){    
+  onReply(name: string, date: any, comment: string, id: string, replyForm){    
     if(!this.replyForm.valid){
       return;
     }
@@ -109,7 +111,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
       comment: comment,
       replies: [{
         name: userAdditionalData[0].name,
-        date: new Date().toLocaleString(),
+        date: firebase.firestore.Timestamp.now(),
         comment: replyForm.value.replyArea
       }],
       id: id

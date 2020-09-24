@@ -9,7 +9,7 @@
             {{ comment.name }}
           </p>
           <p class="comment-date">
-            {{ comment.date | date:'dd.MM.yyyy' }} at {{ comment.date | date:'HH:mm' }}
+            {{ comment.date.toDate() | date:'short' }}
           </p>
         </div>
         <div class="comment-content">
@@ -21,7 +21,7 @@
                   {{ reply.name }}
                 </p>
                 <p class="comment-date">
-                  {{ reply.date | date:'dd.MM.yyyy' }} at {{ reply.date | date:'HH:mm' }}
+                  <!-- {{ reply.date | date:'dd.MM.yyyy' }} at {{ reply.date | date:'HH:mm' }} -->
                 </p>
               </div>
               <div class="comment-content">
