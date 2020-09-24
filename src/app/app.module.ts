@@ -32,6 +32,7 @@ export class AppModule {}
 // preload images
 // on relload with save data the button is not active
 // comment trimp space
+// ... in longer name
 
 // ng build --prod --base-href "https://web-portfolio-angular.github.io"
 // ngh --dir=dist/index

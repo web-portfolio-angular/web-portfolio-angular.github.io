@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UserAdditionalInfo } from 'src/app/shared/models/user-additional-info.model';
 
+import { UserAdditionalInfo } from 'src/app/shared/models/user-additional-info.model';
 import { FirestoreService } from 'src/app/shared/services/firestore.service';
 
 @Component({
@@ -11,7 +11,8 @@ import { FirestoreService } from 'src/app/shared/services/firestore.service';
 })
 export class UserInfoComponent implements OnInit, OnDestroy {
   userInfo: UserAdditionalInfo [];
- 
+  showUserInfo = false;
+
   constructor(private firestore: FirestoreService) { }
 
   ngOnInit(): void {
