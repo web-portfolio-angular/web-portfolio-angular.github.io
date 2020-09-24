@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore  } from '@angular/fire/firestore';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
 
 import { UserAdditionalInfo } from '../models/user-additional-info.model';
 import { Comment } from '../models/comment.model';
