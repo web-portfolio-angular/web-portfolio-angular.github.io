@@ -86,11 +86,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
       this.errorMsg = error;
     });    
   }
-
-  reply(commentId: string){
-    this.isReply = commentId;
-  }
-
+  
   onReply(name: string, date: firebase.firestore.Timestamp, comment: string, id: string, replyForm){    
     if(!this.replyForm.valid){
       return;
