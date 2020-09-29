@@ -2,14 +2,8 @@
 
 /*  */
 
-.navigation, .categories {
+.categories {
   display: flex;
-}
-
-.navigation div {
-  padding: 5px;
-  outline: none;
-  cursor: pointer;
 }
 
 .cars {
@@ -20,6 +14,11 @@
   display: flex;
 }
 
+body {
+  padding-top: 100px !important;
+}
+
+/*  */
 
 /* default start */
 
@@ -53,7 +52,7 @@ body img {
 .container {
   max-width: 980px;
   padding: 0 5%;
-  margin: 30px auto;
+  margin: 0 auto;
 }
 
 .nav-active {
@@ -105,6 +104,76 @@ body img {
 
 
 /* default end */
+
+
+/* header start */
+
+.navigation-container {
+  background: rgba(0, 0, 0, 0.95);
+  box-shadow: 0px 5px 5px 0px rgba(181, 54, 54, 0.9);
+  height: 48px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+.navigation {
+  /* display: none; */
+}
+
+.navigation li {
+  padding: 5px;
+  outline: none;
+  cursor: pointer;
+  list-style: none;
+}
+
+.hamburger {
+  position: absolute;
+  width: 30px;
+  height: 20px;
+  margin: 14px 20px;
+  cursor: pointer;
+  top: 0;
+  right: 0;
+}
+
+.hamburger div {
+  width: 100%;
+  background: #b53636;
+  height: 4px;
+  -webkit-transition: 0.30s ease-in-out;
+  transition: 0.30s ease-in-out;
+}
+
+.hamburger div:not(:last-child) {
+  margin-bottom: 3px;
+}
+
+.hamburger-active div:nth-child(1) {
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  margin-top: 0.7em;
+}
+
+.hamburger-active div:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-active div:nth-child(3) {
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  margin-top: -1em;
+}
+
+.hamburger ul {
+  position: absolute;
+  color: #ffffff;
+}
+
+
+/* header end */
 
 
 /* home start */
@@ -236,9 +305,10 @@ body img {
   margin-right: 10px;
 }
 
-.replyForm{
+.replyForm {
   margin-top: 10px;
 }
+
 
 /* comments end */
 
