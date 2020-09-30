@@ -96,7 +96,7 @@
       <div class="password">
         <div></div>
         <input type="password" name="confirmPass" formControlName="confirmPass"
-          [className]="!signupForm.get('confirmPass').valid && signupForm.get('confirmPass').dirty ? 'invalid' : ''">
+          [ngClass]="{'invalid': !signupForm.get('confirmPass').valid && signupForm.get('confirmPass').dirty}">
       </div>
       <ul class="sign-error">
         <li *ngIf="

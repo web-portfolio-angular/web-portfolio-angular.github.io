@@ -1,21 +1,27 @@
 <div class="navigation-container">
-  <div class="hamburger">
+  <button class="hamburger"
+    [ngClass]="{'hamburger-active' : this.menuState == 'in'}"
+    (click)="switchNavMenu()"
+    [disabled]="disableNavButton">
     <div></div>
     <div></div>
     <div></div>
-  </div>
-  <ul class="navigation">
-    <li [routerLink]="['/home']" routerLinkActive="nav-active">Home</li>
-    <li *ngIf="isAuth" [routerLink]="['/products']" routerLinkActive="nav-active">Products</li>
-    <li *ngIf="isAuth" [routerLink]="['/services']" routerLinkActive="nav-active">Services</li>
-    <li *ngIf="isAuth" [routerLink]="['/gallery']" routerLinkActive="nav-active">Callery</li>
-    <li [routerLink]="['/comments']" routerLinkActive="nav-active">Comments</li>
-    <li [routerLink]="['/contacts']" routerLinkActive="nav-active">Contacts</li>
-    <li *ngIf="!isAuth" [routerLink]="['/signin']" routerLinkActive="nav-active">Signin</li>
-    <li *ngIf="!isAuth" [routerLink]="['/signup']" routerLinkActive="nav-active">Signup</li>
-    <li *ngIf="isAuth" (click)="onLogout()">Logout</li>
+  </button>
+  <ul class="navigation"
+    [@slideRightLeft]="menuState"
+    (@slideRightLeft.start)="disableNavButton = true"
+    (@slideRightLeft.done)="disableNavButton = false">
+    <li (click)="switchNavMenu()" [routerLink]="['/home']" routerLinkActive="navigation-active">Home</li>
+    <li (click)="switchNavMenu()" [routerLink]="['/products']" routerLinkActive="navigation-active" *ngIf="isAuth">Products</li>
+    <li (click)="switchNavMenu()" [routerLink]="['/services']" routerLinkActive="navigation-active" *ngIf="isAuth">Services</li>
+    <li (click)="switchNavMenu()" [routerLink]="['/gallery']" routerLinkActive="navigation-active" *ngIf="isAuth">Callery</li>
+    <li (click)="switchNavMenu()" [routerLink]="['/comments']" routerLinkActive="navigation-active">Comments</li>
+    <li (click)="switchNavMenu()" [routerLink]="['/contacts']" routerLinkActive="navigation-active">Contacts</li>
+    <li (click)="switchNavMenu()" [routerLink]="['/signin']" routerLinkActive="navigation-active" *ngIf="!isAuth">Signin</li>
+    <li (click)="switchNavMenu()" [routerLink]="['/signup']" routerLinkActive="navigation-active" *ngIf="!isAuth">Signup</li>
+    <li (click)="switchNavMenu()" (click)="onLogout()" *ngIf="isAuth">Logout</li>
   </ul>
-  <div *ngIf="isAuth">
+  <div *ngIf="isAuth" class="user-info">
     <app-user-info></app-user-info>
   </div>
 </div>
