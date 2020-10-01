@@ -36,6 +36,3 @@ export class AppModule {}
 
 // ng build --prod --base-href "https://web-portfolio-angular.github.io"
 // ngh --dir=dist/index
-
-// https://stackoverflow.com/questions/3508605/how-can-i-transition-height-0-to-height-auto-using-css
-// https://stackblitz.com/edit/angular-slide-down-kmgkbn?file=app%2Fanimations.ts
