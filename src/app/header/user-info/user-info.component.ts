@@ -2,16 +2,19 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { UserAdditionalInfo } from 'src/app/shared/models/user-additional-info.model';
 import { FirestoreService } from 'src/app/shared/services/firestore.service';
+import { Animations } from 'src/app/shared/animations';
 
 @Component({
   selector: 'app-user-info',
   templateUrl: './user-info.component.html',
-  styles: [
-  ]
+  styles: [],
+  animations: [Animations.slideLeftRight]
 })
 export class UserInfoComponent implements OnInit, OnDestroy {
   userInfo: UserAdditionalInfo [];
   showUserInfo = false;
+  menuState = 'out';
+  disableUserButton = false;  
 
   constructor(private firestore: FirestoreService) { }
 

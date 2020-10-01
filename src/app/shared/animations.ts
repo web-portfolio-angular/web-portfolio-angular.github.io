@@ -14,5 +14,19 @@ export const Animations = {
 		transition('out => in', [
 			animate('500ms ease-in-out'),
 		])
+	]),
+	slideLeftRight: trigger('slideLeftRight', [
+		state('in', style({
+			'transform': 'translateX(0)'
+		})),
+		state('out', style({
+			'transform': 'translateX(101%)'
+		})),
+		transition('in => out', [
+			animate('500ms ease-in-out'),
+		]),
+		transition('out => in', [
+			animate('500ms ease-in-out'),
+		])
 	])
 }

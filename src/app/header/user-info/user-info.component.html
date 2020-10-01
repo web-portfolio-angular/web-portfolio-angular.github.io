@@ -1,6 +1,16 @@
-<div class="namage-user-info" (click)="showUserInfo=!showUserInfo"></div>
-<div *ngIf="showUserInfo">
-  <div *ngFor="let userItem of userInfo">
+<div class="user-nav">
+  <button 
+  class="manage-user-info" 
+  (click)="this.menuState == 'in' ? this.menuState = 'out' : this.menuState = 'in'"
+  [disabled]="disableUserButton"></button>
+</div>
+<div 
+  class="user-info-content" 
+  [@slideLeftRight]="menuState"
+  (@slideLeftRight.start)="disableUserButton = true"
+  (@slideLeftRight.done)="disableUserButton = false">
+  <div
+    *ngFor="let userItem of userInfo">
     <p>
       <span>Name: </span>
       <span>{{ userItem.name }}</span>
