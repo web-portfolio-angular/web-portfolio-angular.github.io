@@ -136,7 +136,7 @@ body img {
 .user-info {
   display: flex;
   align-items: center;
-  margin-left: calc(100% - 61px);
+  margin-left: calc(100% - 48px);
 }
 
 .manage-user-info {
@@ -144,7 +144,7 @@ body img {
   background-image: url('../img/user-info.png');
   background-size: contain;
   height: 30px;
-  width: 41px;
+  width: 28px;
   cursor: pointer;
   border: none;
   outline: none;
