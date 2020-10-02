@@ -36,3 +36,23 @@ export class AppModule {}
 
 // ng build --prod --base-href "https://web-portfolio-angular.github.io"
 // ngh --dir=dist/index
+
+
+// import { Directive, HostBinding, HostListener } from '@angular/core';
+
+// @Directive({
+//   selector: '[appAnimation]'
+// })
+
+// export class appAnimationDirective {
+// 	menuState = 'out';
+// 	disableButton = true;
+	
+// 	constructor() { }
+
+// 	@HostBinding('class.hamburger-active') hamburgerActive = false;
+	
+// 	@HostListener('click') onClick(){
+// 		this.menuState == 'in' ? [this.menuState = 'out', this.hamburgerActive = false]  : [this.menuState = 'in', this.hamburgerActive = true];			
+// 	}
+// }
