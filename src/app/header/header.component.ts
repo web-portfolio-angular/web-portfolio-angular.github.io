@@ -35,6 +35,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   switchNavMenu(){
-    this.menuState == 'in' ? this.menuState = 'out' : this.menuState = 'in'
+    this.menuState == 'in' ? this.menuState = 'out' : this.menuState = 'in';
+  }
+
+  clickOutside(){
+    if (this.menuState == 'out'){
+      return
+    }
+    this.menuState = 'out';
+    this.disableNavButton = false;
   }
 }

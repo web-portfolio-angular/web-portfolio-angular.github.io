@@ -30,29 +30,10 @@ export class AppModule {}
 
 // the cars are loaded on init every time
 // preload images
-// on relload with save data the button is not active
+// on relload with saved data the button is not active
 // comment trimp space
-// ... in longer name
+// ... in longer name (comment section)
+// close directive add/remove
 
 // ng build --prod --base-href "https://web-portfolio-angular.github.io"
 // ngh --dir=dist/index
-
-
-// import { Directive, HostBinding, HostListener } from '@angular/core';
-
-// @Directive({
-//   selector: '[appAnimation]'
-// })
-
-// export class appAnimationDirective {
-// 	menuState = 'out';
-// 	disableButton = true;
-	
-// 	constructor() { }
-
-// 	@HostBinding('class.hamburger-active') hamburgerActive = false;
-	
-// 	@HostListener('click') onClick(){
-// 		this.menuState == 'in' ? [this.menuState = 'out', this.hamburgerActive = false]  : [this.menuState = 'in', this.hamburgerActive = true];			
-// 	}
-// }

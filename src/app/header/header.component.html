@@ -1,5 +1,6 @@
 <div class="navigation-container">
-  <button class="hamburger"
+  <div (appClickOutside)="clickOutside()">
+    <button class="hamburger"
     [ngClass]="{'hamburger-active' : this.menuState == 'in'}"
     (click)="switchNavMenu()"
     [disabled]="disableNavButton">
@@ -21,6 +22,7 @@
     <li (click)="switchNavMenu()" [routerLink]="['/signup']" routerLinkActive="navigation-active" *ngIf="!isAuth">Signup</li>
     <li (click)="switchNavMenu()" (click)="onLogout()" *ngIf="isAuth">Logout</li>
   </ul>
+  </div>
   <div *ngIf="isAuth" class="user-info">
     <app-user-info></app-user-info>
   </div>

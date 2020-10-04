@@ -20,7 +20,7 @@ export const Animations = {
 			'transform': 'translateX(0)'
 		})),
 		state('out', style({
-			'transform': 'translateX(101%)'
+			'transform': 'translateX(103%)'
 		})),
 		transition('in => out', [
 			animate('500ms ease-in-out'),
