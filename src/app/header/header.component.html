@@ -1,17 +1,18 @@
 <div class="navigation-container">
-  <div (appClickOutside)="clickOutside()">
     <button class="hamburger"
     [ngClass]="{'hamburger-active' : this.menuState == 'in'}"
     (click)="switchNavMenu()"
-    [disabled]="disableNavButton">
+    [disabled]="disableButton"
+    #button>
     <div></div>
     <div></div>
     <div></div>
   </button>
   <ul class="navigation"
     [@slideRightLeft]="menuState"
-    (@slideRightLeft.start)="disableNavButton = true"
-    (@slideRightLeft.done)="disableNavButton = false">
+    (@slideRightLeft.start)="disableButton = true"
+    (@slideRightLeft.done)="disableButton = false"
+    #content>
     <li (click)="switchNavMenu()" [routerLink]="['/home']" routerLinkActive="navigation-active">Home</li>
     <li (click)="switchNavMenu()" [routerLink]="['/products']" routerLinkActive="navigation-active" *ngIf="isAuth">Products</li>
     <li (click)="switchNavMenu()" [routerLink]="['/services']" routerLinkActive="navigation-active" *ngIf="isAuth">Services</li>
@@ -22,7 +23,6 @@
     <li (click)="switchNavMenu()" [routerLink]="['/signup']" routerLinkActive="navigation-active" *ngIf="!isAuth">Signup</li>
     <li (click)="switchNavMenu()" (click)="onLogout()" *ngIf="isAuth">Logout</li>
   </ul>
-  </div>
   <div *ngIf="isAuth" class="user-info">
     <app-user-info></app-user-info>
   </div>

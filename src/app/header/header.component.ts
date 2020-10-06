@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2, ViewChild, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -15,9 +15,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private subUser: Subscription;
   isAuth = false;
   menuState = 'out';
-  disableNavButton = false;
+  disableButton = false;
+  @ViewChild('button') button: ElementRef;
+  @ViewChild('content') content: ElementRef;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private renderer2: Renderer2) {
+    this.renderer2.listen('document', 'click', (e: Event) => {
+      if ((this.content && this.content.nativeElement.contains(e.target)) || (this.button && this.button.nativeElement.contains(e.target))) {
+          return
+         } else {
+          this.menuState = 'out';
+          this.disableButton = false;
+       }
+    });
+  }
 
   ngOnInit() {
     this.subUser = this.authService.user.subscribe(user => {
@@ -43,6 +54,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
       return
     }
     this.menuState = 'out';
-    this.disableNavButton = false;
+    this.disableButton = false;
   }
 }

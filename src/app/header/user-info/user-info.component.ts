@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 
 import { UserAdditionalInfo } from 'src/app/shared/models/user-additional-info.model';
 import { FirestoreService } from 'src/app/shared/services/firestore.service';
@@ -14,9 +14,20 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   userInfo: UserAdditionalInfo [];
   showUserInfo = false;
   menuState = 'out';
-  disableUserButton = false;  
+  disableButton = false;
+  @ViewChild('button') button: ElementRef;
+  @ViewChild('content') content: ElementRef;
 
-  constructor(private firestore: FirestoreService) { }
+  constructor(private firestore: FirestoreService, private renderer2: Renderer2) {
+    this.renderer2.listen('document', 'click', (e: Event) => {
+      if ((this.content && this.content.nativeElement.contains(e.target)) || (this.button && this.button.nativeElement.contains(e.target))) {
+          return
+         } else {
+          this.menuState = 'out';
+          this.disableButton = false;
+       }
+    });
+  }
 
   ngOnInit(): void {
     this.userDetails();
@@ -51,6 +62,6 @@ export class UserInfoComponent implements OnInit, OnDestroy {
       return
     }
     this.menuState = 'out';
-    this.disableUserButton = false;
+    this.disableButton = false;
   }
 }
