@@ -57,11 +57,4 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     localStorage.removeItem('userAdditionalData');
   }
-  clickOutside(){
-    if (this.menuState == 'out'){
-      return
-    }
-    this.menuState = 'out';
-    this.disableButton = false;
-  }
 }
