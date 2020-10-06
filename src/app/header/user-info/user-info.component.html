@@ -13,17 +13,21 @@
   #content>
   <div
     *ngFor="let userItem of userInfo">
-    <p>
+    <div>
       <span>Name: </span>
       <span>{{ userItem.name }}</span>
-    </p>
-    <p>
+    </div>
+    <div>
       <span>Phone: </span>
       <span>{{ userItem.phone }}</span>
-    </p>
-    <p>
+      <form [formGroup]="changeNumberForm" (ngSubmit)="onSubmit(changeNumberForm)">
+        <input type="number" name="phone" formControlName="phone">
+        <button type="submit">Edit</button>
+      </form>
+    </div>
+    <div>
       <span>Email: </span>
       <span>{{ userItem.email }}</span>
-    </p>
+    </div>
   </div>
 </div>

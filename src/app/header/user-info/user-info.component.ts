@@ -3,6 +3,7 @@ import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '
 import { UserAdditionalInfo } from 'src/app/shared/models/user-additional-info.model';
 import { FirestoreService } from 'src/app/shared/services/firestore.service';
 import { Animations } from 'src/app/shared/animations';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-info',
@@ -17,8 +18,9 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   disableButton = false;
   @ViewChild('button') button: ElementRef;
   @ViewChild('content') content: ElementRef;
+  changeNumberForm: FormGroup;
 
-  constructor(private firestore: FirestoreService, private renderer2: Renderer2) {
+  constructor(private firestore: FirestoreService, private renderer2: Renderer2, private formBuilder: FormBuilder) {
     this.renderer2.listen('document', 'click', (e: Event) => {
       if ((this.content && this.content.nativeElement.contains(e.target)) || (this.button && this.button.nativeElement.contains(e.target))) {
           return
@@ -30,7 +32,10 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.userDetails();
+    this.userDetails();    
+    this.changeNumberForm = this.formBuilder.group({
+      phone: new FormControl (null, Validators.required)
+    })
   }
 
   userDetails(){
@@ -47,14 +52,19 @@ export class UserInfoComponent implements OnInit, OnDestroy {
       this.userInfo = ressData.map(e => {
         return {
           id: e.payload.doc.id,
-          ...e.payload.doc.data() as UserAdditionalInfo
+          ...e.payload.doc.data() as UserAdditionalInfo          
         }
-      })
-      localStorage.setItem('userAdditionalData', JSON.stringify(this.userInfo))
+      })      
+      localStorage.setItem('userAdditionalData', JSON.stringify(this.userInfo));      
     })
   }
 
   ngOnDestroy(){
     localStorage.removeItem('userAdditionalData');
+  }
+
+  onSubmit(changeNumberForm){
+    const phone = changeNumberForm.value.phone;
+    console.log(phone);    
   }
 }

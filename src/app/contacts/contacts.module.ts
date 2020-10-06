@@ -3,8 +3,6 @@ import { RouterModule } from '@angular/router';
 
 import { ContactsComponent } from './contacts.component';
 
-
-
 @NgModule({
   declarations:[
     ContactsComponent
