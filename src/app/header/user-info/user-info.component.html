@@ -6,36 +6,43 @@
   #button></button>
 </div>
 <div 
-  class="user-info-content" 
+  class="user-info-container" 
   [@slideLeftRight]="menuState"
   (@slideLeftRight.start)="disableButton = true"
   (@slideLeftRight.done)="disableButton = false"
-  #content>
-  <div
-    *ngFor="let userItem of userInfo">
-    <div>
-      <span>Name: </span>
-      <span>{{ userItem.name }}</span>
+  #content
+  *ngFor="let userItem of userInfo">
+    <div class="user-name-container">
+      <div class="user-name-img">
+        <img src="../../../assets/img/sign/user.png">
+      </div>
+      <div class="user-name">{{ userItem.name }}</div>
     </div>
-    <div>
+    <div class="phone-container">
       <div class="phone-info">
         <div>
-          <span>Phone: </span>
-          <span *ngIf="!changePhoneButton">{{ userItem.phone }}</span>
+          <div class="user-phone-img">
+            <img src="../../../assets/img/sign/phone.png">
+          </div>
+          <div class="user-phone" *ngIf="!changePhoneButton">{{ userItem.phone }}</div>
         </div>
         <button class="change-phone-btn" *ngIf="!changePhoneButton" (click)="ebablePhoneChange($event)"></button>
-      </div>     
-      <form *ngIf="changePhoneButton" [formGroup]="changePhoneForm" (ngSubmit)="onSubmit(changePhoneForm)">
-        <input type="number" name="phone" formControlName="phone">
-        <button  type="submit">Apply</button><button type="button" (click)="disablePhoneChange($event)">Close</button>
-      </form>
+      </div>  
+      <div class="change-phone-form-container">
+        <form class="change-phone-form" *ngIf="changePhoneButton" [formGroup]="changePhoneForm" (ngSubmit)="onSubmit(changePhoneForm)">
+          <input class="change-phone" type="number" name="phone" formControlName="phone">
+          <button class="phone-accept-change" type="submit" [disabled]="!this.changePhoneForm.valid"></button>
+          <button class="phone-decline-change" type="button" (click)="disablePhoneChange($event)"></button>
+        </form>
+      </div>
     </div>
-    <div>
-      <span>Email: </span>
-      <span>{{ userItem.email }}</span>
+    <div class="user-email-container">
+      <div class="user-email-img">
+        <img src="../../../assets/img/sign/email.png">
+      </div>
+      <div class="user-email">{{ userItem.email }}</div>
     </div>
     <div *ngIf="errorMsg">
       <p class="error-msg">{{ errorMsg }}</p>
     </div>
-  </div>
 </div>
