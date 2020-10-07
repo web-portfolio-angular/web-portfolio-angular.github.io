@@ -150,14 +150,97 @@ body img {
   outline: none;
 }
 
+.user-name-container, .phone-info>div, .user-email-container {
+  display: flex;
+  align-items: center;
+}
+
+.user-name-img, .user-phone-img, .user-email-img {
+  width: 20px;
+  margin-right: 10px;
+}
+
+.user-name, .user-phone, .user-email {
+  line-height: 25px;
+}
+
+.user-name-img img, .user-phone-img img, .user-email-img img {
+  max-width: 100%;
+  display: block;
+}
+
+.phone-container, .change-phone-form, .change-phone-form-container, .phone-info {
+  display: flex;
+}
+
+.phone-info {
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.change-phone-form-container {
+  align-items: center;
+}
+
+.change-phone {
+  width: 200px;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  box-sizing: border-box;
+  padding: 0;
+  line-height: 28px;
+  height: 28px;
+}
+
+.change-phone-btn {
+  width: 20px;
+  height: 20px;
+  outline: none;
+  border: none;
+  background-image: url('../img/change-phone.png');
+  background-size: cover;
+  background-color: transparent;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.phone-accept-change, .phone-decline-change {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  margin-left: 10px;
+}
+
+.phone-accept-change {
+  background-image: url('../img/accept.png');
+}
+
+.phone-accept-change:disabled {
+  background-image: url('../img/accept-disabled.png');
+}
+
+.phone-decline-change {
+  background-image: url('../img/decline.png');
+}
+
 .user-nav {
   display: flex;
 }
 
-.user-info-content {
+.user-info-container {
   position: absolute;
   top: 50px;
   right: 0;
+  width: 320px;
+  box-sizing: border-box;
   padding: 10px;
   background: rgba(0, 0, 0, 0.95);
   color: #fff;
@@ -165,7 +248,7 @@ body img {
   box-shadow: -2px 2px 5px 0px rgba(181, 54, 54, 0.9);
 }
 
-.user-info-content p{
+.user-info-container>div {
   padding: 10px 0;
 }
 
@@ -326,7 +409,7 @@ body img {
   margin-bottom: 10px;
 }
 
-.reply-btn {
+.narrow-btn {
   width: auto !important;
   height: auto;
   line-height: 1.1em;
@@ -428,7 +511,7 @@ input.ng-invalid.ng-touched, .invalid {
   background-image: url("../img/sign/password.png");
 }
 
-.phone input::-webkit-outer-spin-button, .phone input::-webkit-inner-spin-button, .phone input {
+.phone input::-webkit-outer-spin-button, .phone input::-webkit-inner-spin-button, .phone input, .change-phone::-webkit-outer-spin-button, .change-phone::-webkit-inner-spin-button, .change-phone {
   -webkit-appearance: none;
   -moz-appearance: textfield;
   margin: 0;
