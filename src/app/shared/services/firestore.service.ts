@@ -46,6 +46,13 @@ export class FirestoreService {
     return this.firestore.doc('comments/' + commentId).delete();
   }
 
+  //user info
+  updatePhone(newInfo){
+    return this.firestore.doc('registrations/' + newInfo.id).update({
+      phone: newInfo.phone
+     });
+   }
+
   //products
   getLamborghiniCars() {
     return this.firestore

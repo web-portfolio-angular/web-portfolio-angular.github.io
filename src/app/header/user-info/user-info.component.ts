@@ -18,11 +18,14 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   disableButton = false;
   @ViewChild('button') button: ElementRef;
   @ViewChild('content') content: ElementRef;
-  changeNumberForm: FormGroup;
+  @ViewChild('phone') phone: ElementRef;
+  changePhoneForm: FormGroup;
+  changePhoneButton = false;
+  errorMsg = null;
 
   constructor(private firestore: FirestoreService, private renderer2: Renderer2, private formBuilder: FormBuilder) {
     this.renderer2.listen('document', 'click', (e: Event) => {
-      if ((this.content && this.content.nativeElement.contains(e.target)) || (this.button && this.button.nativeElement.contains(e.target))) {
+      if ((this.content && this.content.nativeElement.contains(e.target)) || (this.button && this.button.nativeElement.contains(e.target))) {        
           return
          } else {
           this.menuState = 'out';
@@ -33,9 +36,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userDetails();    
-    this.changeNumberForm = this.formBuilder.group({
-      phone: new FormControl (null, Validators.required)
-    })
+    this.changePhoneForm = this.formBuilder.group({});
   }
 
   userDetails(){
@@ -55,7 +56,8 @@ export class UserInfoComponent implements OnInit, OnDestroy {
           ...e.payload.doc.data() as UserAdditionalInfo          
         }
       })      
-      localStorage.setItem('userAdditionalData', JSON.stringify(this.userInfo));      
+      localStorage.setItem('userAdditionalData', JSON.stringify(this.userInfo));
+      this.changePhoneForm.addControl('phone', new FormControl(this.userInfo[0].phone, Validators.required))
     })
   }
 
@@ -63,8 +65,27 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     localStorage.removeItem('userAdditionalData');
   }
 
-  onSubmit(changeNumberForm){
-    const phone = changeNumberForm.value.phone;
-    console.log(phone);    
+  ebablePhoneChange(event){
+    event.stopPropagation();
+    this.changePhoneButton = true; 
+  }
+
+  disablePhoneChange(event){
+    event.stopPropagation();
+    this.changePhoneButton = false;  
+  }
+  
+  onSubmit(changePhoneForm){
+    const phone = changePhoneForm.value.phone;
+    const id = this.userInfo[0].id;
+    const newIfo = {phone, id};    
+    this.firestore.updatePhone(newIfo)
+    .then(() => {
+      this.userDetails();
+      this.changePhoneButton = false;
+    })
+    .catch(error => {
+      this.errorMsg = error;
+    })
   }
 }

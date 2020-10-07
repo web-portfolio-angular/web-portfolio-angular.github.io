@@ -18,16 +18,22 @@
       <span>{{ userItem.name }}</span>
     </div>
     <div>
-      <span>Phone: </span>
-      <span>{{ userItem.phone }}</span>
-      <form [formGroup]="changeNumberForm" (ngSubmit)="onSubmit(changeNumberForm)">
+      <div>
+        <span>Phone: </span>
+        <span *ngIf="!changePhoneButton">{{ userItem.phone }}</span>
+        <button *ngIf="!changePhoneButton" (click)="ebablePhoneChange($event)">Change</button>
+      </div>     
+      <form *ngIf="changePhoneButton" [formGroup]="changePhoneForm" (ngSubmit)="onSubmit(changePhoneForm)">
         <input type="number" name="phone" formControlName="phone">
-        <button type="submit">Edit</button>
+        <button  type="submit">Apply</button><button type="button" (click)="disablePhoneChange($event)">Close</button>
       </form>
     </div>
     <div>
       <span>Email: </span>
       <span>{{ userItem.email }}</span>
+    </div>
+    <div *ngIf="errorMsg">
+      <p class="error-msg">{{ errorMsg }}</p>
     </div>
   </div>
 </div>
