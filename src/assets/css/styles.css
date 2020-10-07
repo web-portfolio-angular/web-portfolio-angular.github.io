@@ -150,6 +150,24 @@ body img {
   outline: none;
 }
 
+.phone-info{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.change-phone-btn{
+  width: 20px;
+  height: 20px;
+  outline: none;
+  border: none;
+  background-image: url('../img/change-phone.png');
+  background-size: cover;
+  background-color: transparent;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
 .user-nav {
   display: flex;
 }
@@ -326,7 +344,7 @@ body img {
   margin-bottom: 10px;
 }
 
-.reply-btn {
+.narrow-btn {
   width: auto !important;
   height: auto;
   line-height: 1.1em;

@@ -31,11 +31,11 @@
           </div>
           <div>
             <button 
-            class="btn-default reply-btn" 
+            class="btn-default narrow-btn" 
             (click)="isReply = comment.id"
             *ngIf="isAuth">Reply</button>
             <button
-            class="btn-default reply-btn"
+            class="btn-default narrow-btn"
             *ngIf="isReply == comment.id"
             (click)="isReply = null">Close Reply</button>
           </div>
