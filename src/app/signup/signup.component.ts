@@ -47,17 +47,6 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  // numeric() {
-  //   const phone = this.signupForm.value.phone;
-  //   if (phone.toString().match(/^[0-9]+(\.?[0-9]+)?$/)) {
-  //     console.log('1');      
-  //    return { invalidNumber: true };
-  //   } else {
-  //     console.log('1');
-  //     return null;
-  //   }
-  // }
-
   onSubmit(signupForm){
     this.isLoading = true;
     if (!signupForm.valid){

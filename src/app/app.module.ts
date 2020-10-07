@@ -33,7 +33,7 @@ export class AppModule {}
 // on relload with saved data the button is not active
 // comment trimp space
 // ... in longer name (comment section)
-// close directive add/remove
+// phone code wiht countries
 
 // ng build --prod --base-href "https://web-portfolio-angular.github.io"
 // ngh --dir=dist/index
