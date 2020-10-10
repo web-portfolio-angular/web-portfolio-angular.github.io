@@ -13,7 +13,7 @@
           </p>
         </div>
         <div class="comment-content">
-          <p>{{ comment.comment }}</p>
+          <p class="comment-content-text">{{ comment.comment }}</p>
           <div class="comment-replies">
             <div class="reply" *ngFor="let reply of comment.replies">
               <div class="comment-header">
@@ -25,7 +25,7 @@
                 </p>
               </div>
               <div class="comment-content">
-                <p>{{ reply.comment }}</p>
+                <p class="comment-content-text">{{ reply.comment }}</p>
               </div>
             </div>
           </div>

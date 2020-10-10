@@ -1,6 +1,7 @@
 @import "colors";
 @import "themes";
 @import "hovers";
+@import "navigation";
 @import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
 
 /*  */
@@ -40,7 +41,7 @@ body {
 
 ::selection {
   background: #b53636;
-  color: $white-color-dark;
+  color: #fff;
 }
 
 img {
@@ -70,7 +71,7 @@ img {
   height: 50px;
   line-height: 50px;
   text-align: center;
-  color: $white-color-dark;
+  color: #fff;
   font-size: 1.1em;
   cursor: pointer;
   background: linear-gradient(to left, #b53636 35%, #1e1e1e 65%);
@@ -98,43 +99,8 @@ img {
   padding: 5px;
   margin-right: 10px;
 }
+// VVVV
 
-.navigation-container {
-  background: rgba(0, 0, 0, 0.95);
-  box-shadow: 0px 5px 5px 0px rgba(181, 54, 54, 0.9);
-  height: 48px;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 9999;
-}
-
-.navigation {
-  height: calc(100vh - 50px);
-  position: absolute;
-  top: 50px;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.95);
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  li {
-    padding: 10px 0;
-    outline: none;
-    cursor: pointer;
-    list-style: none;
-    color: $white-color-dark;
-    text-align: center;
-  }
-}
-
-.navigation-active {
-  color: #b53636 !important;
-  font-weight: bold;
-  background: url("../img/shared/nav-underline.png") center no-repeat;
-  background-position-y: 21px;
-}
 
 .user-info {
   display: flex;
@@ -256,7 +222,7 @@ img {
   box-sizing: border-box;
   padding: 10px;
   background: rgba(0, 0, 0, 0.95);
-  color: $white-color-dark;
+  color: #fff;
   border-bottom-left-radius: 5px;
   box-shadow: -2px 2px 5px 0px rgba(181, 54, 54, 0.9);
   >div {
@@ -284,7 +250,7 @@ img {
   }
   ul {
     position: absolute;
-    color: $text-color-dark;
+    color: $second-color-dark;
   }
 }
 
@@ -317,7 +283,7 @@ img {
   }
   p {
     padding-bottom: 15px;
-    color: var(--text-color);
+    color: var(--first-color);
   }
 }
 
@@ -371,13 +337,17 @@ img {
 .comment-date {
   font-size: 1.1em;
   text-align: right;
-  color: $white-color-dark;
+  color: var(--second-color);
 }
 
 .comment-content {
   background-color: var(--fourth-bg);
   white-space: pre-line;
   padding: 2%;
+}
+
+.comment-content-text{
+  color: var(--first-color);
 }
 
 .comments-count {
@@ -395,7 +365,7 @@ img {
 
 .hr-border {
   border-top: 1px solid #e4e4e2;
-  border-bottom: 1px solid var(--third-bg);
+  border-bottom: 1px solid #f1f0ec;
   margin: 20px 0;
 }
 
@@ -579,11 +549,11 @@ input.ng-invalid.ng-touched {
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../img/footer/footer-banner-bg.jpg") no-repeat left top;
   background-size: cover;
   align-items: center;
-  color: $text-color-dark;
+  color: $second-color-dark;
   text-align: center;
   h3 {
     padding: 20px;
-    color: $white-color-dark;
+    color: #fff;
   }
   p {
     padding: 0 20px 20px 20px;
@@ -601,7 +571,7 @@ input.ng-invalid.ng-touched {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: $white-color-dark;
+  color: #fff;
   font-size: 4em;
   transition: 0.5s;
   user-select: none;
@@ -627,7 +597,7 @@ input.ng-invalid.ng-touched {
 }
 
 .footer-title {
-  color: $white-color-dark;
+  color: #fff;
   font-weight: bold;
   font-size: 1.3em;
 }
@@ -705,7 +675,7 @@ input.ng-invalid.ng-touched {
     margin: 0 auto;
   }
   p {
-    color: $text-color-dark;
+    color: $second-color-dark;
     position: absolute;
     top: 0px;
     right: 0;
