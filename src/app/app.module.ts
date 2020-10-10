@@ -35,7 +35,5 @@ export class AppModule {}
 // ... in longer name (comment section)
 // phone code wiht countries
 
-// sled kopilaciq dali dobacq -webkit-
-
 // ng build --prod --base-href "https://web-portfolio-angular.github.io"
 // ngh --dir=dist/index

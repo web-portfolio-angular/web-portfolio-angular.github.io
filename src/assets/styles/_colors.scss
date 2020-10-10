@@ -1,0 +1,33 @@
+$first-bg-light: #fcfcfc;
+$first-bg-dark: #18191a;
+
+$csecond-bg-light: #fff;
+$csecond-bg-dark: #242526;
+
+$third-bg-light: #f1f0ec;
+$third-bg-dark: #303031;
+
+$fourth-bg-light: #f9f9f7;
+$fourth-bg-dark: #444546;
+
+$text-color-light: #000;
+$text-color-dark: #999;
+
+$white-color-light: #fff;
+$white-color-dark: #fff;
+
+
+
+
+$default-red-color: #b53636;
+$disabled-red-color: #7a2626;
+$default-btn-hover-color: #1e1e1e;
+
+$colors: (
+  --first-bg: ($first-bg-light, $first-bg-dark),
+  --csecond-bg: ($csecond-bg-light, $csecond-bg-dark),
+  --third-bg: ($third-bg-light, $third-bg-dark),
+  --fourth-bg: ($fourth-bg-light, $fourth-bg-dark),
+  --text-color: ($text-color-light, $text-color-dark),
+  --white-color: ($white-color-light, $white-color-dark),
+);

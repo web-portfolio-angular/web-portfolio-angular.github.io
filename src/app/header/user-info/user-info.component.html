@@ -42,6 +42,9 @@
       </div>
       <div class="user-email">{{ userItem.email }}</div>
     </div>
+
+    <button (click)="changeTheme()">Change Theme</button>
+
     <div *ngIf="errorMsg">
       <p class="error-msg">{{ errorMsg }}</p>
     </div>

@@ -4,6 +4,7 @@ import { UserAdditionalInfo } from 'src/app/shared/models/user-additional-info.m
 import { FirestoreService } from 'src/app/shared/services/firestore.service';
 import { Animations } from 'src/app/shared/animations';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ThemeService } from 'src/app/shared/services/theme.service';
 
 @Component({
   selector: 'app-user-info',
@@ -22,10 +23,16 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   changePhoneForm: FormGroup;
   changePhoneButton = false;
   errorMsg = null;
+  theme = localStorage.getItem('theme');
 
-  constructor(private firestore: FirestoreService, private renderer2: Renderer2, private formBuilder: FormBuilder) {
+  constructor(
+    private firestore: FirestoreService, 
+    private renderer2: Renderer2,
+    private formBuilder: FormBuilder,
+    private themeService: ThemeService) {
     this.renderer2.listen('document', 'click', (e: Event) => {
-      if ((this.content && this.content.nativeElement.contains(e.target)) || (this.button && this.button.nativeElement.contains(e.target))) {        
+      if ((this.content && this.content.nativeElement.contains(e.target)) || 
+          (this.button && this.button.nativeElement.contains(e.target))) {        
           return
          } else {
           this.menuState = 'out';
@@ -87,5 +94,11 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     .catch(error => {
       this.errorMsg = error;
     })
+  }
+
+  changeTheme(){
+    this.theme == 'theme-light' ? this.theme = 'theme-dark' : this.theme = 'theme-light';
+    localStorage.setItem('theme', this.theme);
+    this.themeService.getCurrentTheme();
   }
 }

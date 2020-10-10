@@ -1,4 +1,5 @@
-@import "config";
+@import "colors";
+@import "themes";
 @import "hovers";
 @import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
 
@@ -33,13 +34,13 @@ body {
 
 body {
   overflow-x: hidden;
-  background-color: #eae9ef;
+  background-color: var(--first-bg);
   min-width: 320px;
 }
 
 ::selection {
   background: #b53636;
-  color: #fff;
+  color: $white-color-dark;
 }
 
 img {
@@ -69,7 +70,7 @@ img {
   height: 50px;
   line-height: 50px;
   text-align: center;
-  color: #ffffff;
+  color: $white-color-dark;
   font-size: 1.1em;
   cursor: pointer;
   background: linear-gradient(to left, #b53636 35%, #1e1e1e 65%);
@@ -123,7 +124,7 @@ img {
     outline: none;
     cursor: pointer;
     list-style: none;
-    color: #fff;
+    color: $white-color-dark;
     text-align: center;
   }
 }
@@ -255,7 +256,7 @@ img {
   box-sizing: border-box;
   padding: 10px;
   background: rgba(0, 0, 0, 0.95);
-  color: #fff;
+  color: $white-color-dark;
   border-bottom-left-radius: 5px;
   box-shadow: -2px 2px 5px 0px rgba(181, 54, 54, 0.9);
   >div {
@@ -283,7 +284,7 @@ img {
   }
   ul {
     position: absolute;
-    color: #ffffff;
+    color: $text-color-dark;
   }
 }
 
@@ -304,7 +305,7 @@ img {
 }
 
 .main-container {
-  background-color: #ffffff;
+  background-color: var(--csecond-bg);
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
   padding: 20px;
   margin-bottom: 30px;
@@ -312,9 +313,11 @@ img {
   h2 {
     font-size: 1.2em;
     padding: 15px 0;
+    color: #b53636;
   }
   p {
     padding-bottom: 15px;
+    color: var(--text-color);
   }
 }
 
@@ -339,7 +342,7 @@ img {
 }
 
 .comments-container {
-  background-color: #ffffff;
+  background-color: var(--csecond-bg);
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
   padding: 5%;
 }
@@ -351,7 +354,7 @@ img {
 }
 
 .comment-header {
-  background-color: #f1f0ec;
+  background-color: var(--third-bg);
   padding: 2%;
   display: flex;
   align-items: center;
@@ -368,10 +371,11 @@ img {
 .comment-date {
   font-size: 1.1em;
   text-align: right;
+  color: $white-color-dark;
 }
 
 .comment-content {
-  background-color: #f9f9f7;
+  background-color: var(--fourth-bg);
   white-space: pre-line;
   padding: 2%;
 }
@@ -391,7 +395,7 @@ img {
 
 .hr-border {
   border-top: 1px solid #e4e4e2;
-  border-bottom: 1px solid #f1f0ec;
+  border-bottom: 1px solid var(--third-bg);
   margin: 20px 0;
 }
 
@@ -425,13 +429,13 @@ img {
 }
 
 .sign-form {
-  background-color: #ffffff;
+  background-color: var(--csecond-bg);
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
   max-width: 767px;
   padding: 20px;
   margin: 0 auto;
   position: relative;
-  * {
+  >* {
     display: block;
   }
 }
@@ -504,6 +508,10 @@ input.ng-invalid.ng-touched {
   }
 }
 
+.phone, .name, .email, .password {
+  display: flex;
+}
+
 .phone {
   div {
     background-color: #b53636;
@@ -571,10 +579,11 @@ input.ng-invalid.ng-touched {
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../img/footer/footer-banner-bg.jpg") no-repeat left top;
   background-size: cover;
   align-items: center;
-  color: #ffffff;
+  color: $text-color-dark;
   text-align: center;
   h3 {
     padding: 20px;
+    color: $white-color-dark;
   }
   p {
     padding: 0 20px 20px 20px;
@@ -592,7 +601,7 @@ input.ng-invalid.ng-touched {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #ffffff;
+  color: $white-color-dark;
   font-size: 4em;
   transition: 0.5s;
   user-select: none;
@@ -618,7 +627,7 @@ input.ng-invalid.ng-touched {
 }
 
 .footer-title {
-  color: #ffffff;
+  color: $white-color-dark;
   font-weight: bold;
   font-size: 1.3em;
 }
@@ -696,7 +705,7 @@ input.ng-invalid.ng-touched {
     margin: 0 auto;
   }
   p {
-    color: #ffffff;
+    color: $text-color-dark;
     position: absolute;
     top: 0px;
     right: 0;
@@ -708,7 +717,6 @@ input.ng-invalid.ng-touched {
     font-size: 0.9em;
   }
 }
-
 
 // TEMPORARY
 @import "media";
