@@ -24,9 +24,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/assets/css/styles.css",
-              "src/assets/css/hovers.css",
-              "src/assets/css/media.css"
+              "src/assets/styles/main.scss",
             ],
             "scripts": []
           },
@@ -126,5 +124,10 @@
   "defaultProject": "index",
   "cli": {
     "analytics": false
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
   }
 }
