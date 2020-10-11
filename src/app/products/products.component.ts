@@ -6,20 +6,22 @@ import { Router, ActivatedRoute } from '@angular/router';
   templateUrl: './products.component.html',
   styles: []
 })
-export class ProductsComponent implements OnInit {
-  lastLink = localStorage.getItem('productsLink');
-  
+export class ProductsComponent implements OnInit {  
   constructor(private router: Router, private r:ActivatedRoute) { }
 
   ngOnInit() {
-    if (this.lastLink){
-      this.router.navigate([this.lastLink])
+    const lastVisitedLink: {
+      productsLink: string
+    } = JSON.parse(localStorage.getItem('productsLink'));
+    
+    if (lastVisitedLink){
+      this.router.navigate([lastVisitedLink])
     } else{
       this.router.navigate(['products/lamborghini']) 
     }    
   }
 
   saveToLocalStore(data: string){
-    localStorage.setItem('productsLink', '/products/' + data);
+    localStorage.setItem('productsLink', JSON.stringify('/products/' + data));
   }
 }

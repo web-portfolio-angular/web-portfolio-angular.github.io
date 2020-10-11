@@ -152,17 +152,24 @@
       }
     }
     .switch-theme {
-      .theme{
-        width: 25px;
+      display: flex;
+      div:nth-child(1) {
+        margin-right: 15px;
+      }
+      .theme {
         height: 25px;
-        background-size: cover;
-      }
-      .theme-light{
-        background-image: url("../../../img/user-info/sun.png");
-      }
-      .theme-dark{
-        background-image: url("../../../img/user-info/moon.png");
+        img {
+          max-height: 100%;
+        }
       }
     }
   }
+}
+
+.mat-slide-toggle-thumb {
+  background-color: var(--mat-slider-bg) !important;
+}
+
+.mat-slide-toggle-bar {
+  background-color: var(--mat-slider-toggle-bar) !important;
 }

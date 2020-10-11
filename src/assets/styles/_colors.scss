@@ -37,6 +37,12 @@ $hr-border-color-top-dark: #18191a;
 $hr-border-color-bottom-light: #f1f0ec;
 $hr-border-color-bottom-dark: #999;
 
+$mat-slider-bg-light: #fff;
+$mat-slider-bg-dark: #b53636;
+
+$mat-slider-toggle-bar-light: #999;
+$mat-slider-toggle-bar-dark: #7a2626;
+
 $default-red-color: #b53636;
 $default-disabled-red-color: #7a2626;
 $default-btn-hover-color: #1e1e1e;
@@ -54,5 +60,7 @@ $colors: (
   --border-color: ($border-color-light, $border-color-dark),
   --form-border-color: ($form-border-color-light, $form-border-color-dark),
   --hr-border-color-top: ($hr-border-color-top-light, $hr-border-color-top-dark),
-  --hr-border-color-bottom: ($hr-border-color-bottom-light, $hr-border-color-bottom-dark)
+  --hr-border-color-bottom: ($hr-border-color-bottom-light, $hr-border-color-bottom-dark),
+  --mat-slider-bg: ($mat-slider-bg-light, $mat-slider-bg-dark),
+  --mat-slider-toggle-bar: ($mat-slider-toggle-bar-light, $mat-slider-toggle-bar-dark)
 );

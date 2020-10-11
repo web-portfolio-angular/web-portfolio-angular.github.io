@@ -23,8 +23,6 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   changePhoneForm: FormGroup;
   changePhoneButton = false;
   errorMsg = null;
-  theme = localStorage.getItem('theme');
-  switchThemeIcon = this.themeService.switchThemeIcon;
 
   constructor(
     private firestore: FirestoreService, 
@@ -97,6 +95,8 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     })
   }
 
+  theme = localStorage.getItem('theme');
+  switchThemeIcon = this.themeService.switchThemeIcon;
   changeTheme(){
     this.theme == 'theme-light' ? this.theme = 'theme-dark' : this.theme = 'theme-light';
     localStorage.setItem('theme', this.theme);
