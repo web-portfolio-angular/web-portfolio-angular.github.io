@@ -152,15 +152,16 @@
       }
     }
     .switch-theme {
-      button {
-        float: right;
-        border: none;
-        background-color: transparent;
-        outline: none;
-        background-image: url(../../../img/user-info/sun.png);
-        background-size: cover;
+      .theme{
         width: 25px;
         height: 25px;
+        background-size: cover;
+      }
+      .theme-light{
+        background-image: url("../../../img/user-info/sun.png");
+      }
+      .theme-dark{
+        background-image: url("../../../img/user-info/moon.png");
       }
     }
   }

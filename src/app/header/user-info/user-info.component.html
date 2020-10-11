@@ -45,7 +45,9 @@
         <div class="user-email">{{ userItem.email }}</div>
       </div>
       <div class="switch-theme">
-        <button (click)="changeTheme()"></button>
+        <div class="theme theme-light"></div>
+        <div><mat-slide-toggle (click)="changeTheme()"></mat-slide-toggle></div>
+        <div class="theme theme-dark"></div>          
       </div> 
       <div *ngIf="errorMsg">
         <p class="error-msg">{{ errorMsg }}</p>
