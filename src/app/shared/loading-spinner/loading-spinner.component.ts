@@ -20,7 +20,7 @@ import { Component, OnInit } from '@angular/core';
     </div>
   </div>
   `,
-  styleUrls: ['./loading-spinner.component.css']
+  styleUrls: ['./loading-spinner.component.scss']
 })
 export class LoadingSpinnerComponent implements OnInit {
 

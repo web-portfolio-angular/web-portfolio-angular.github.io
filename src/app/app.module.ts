@@ -37,6 +37,7 @@ export class AppModule {}
 
 // da opravq clasovete za sass neistvane __ --
 // temata prezapisva transitiona na drugite elementi pri hover
+// loading spinner sass
 
 // ng build --prod --base-href "https://web-portfolio-angular.github.io"
 // ngh --dir=dist/index

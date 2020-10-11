@@ -1,8 +1,8 @@
 @import "colors";
 @import "themes";
 @import "hovers";
-@import "navigation";
-@import "user-info";
+@import "pages/header/navigation";
+@import "pages/header/user-info";
 @import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
 
 /*  */
@@ -146,7 +146,7 @@ img {
 }
 
 .comment {
-  border: 1px solid #e4e4e2;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   margin-bottom: 10px;
 }
@@ -173,7 +173,7 @@ img {
 }
 
 .comment-content {
-  background-color: var(--fourth-bg);
+  background-color: var(--fourth-bg-op);
   white-space: pre-line;
   padding: 2%;
 }
@@ -196,15 +196,15 @@ img {
 }
 
 .hr-border {
-  border-top: 1px solid #e4e4e2;
-  border-bottom: 1px solid #f1f0ec;
+  border-top: 1px solid var(--hr-border-color-top);
+  border-bottom: 1px solid var(--hr-border-color-bottom);
   margin: 20px 0;
 }
 
 .comments-textarea {
   outline-color: #b53636;
   background-color: rgba(240, 240, 240, 0.5);
-  border: 1px solid #e4e4e2;
+  border: 1px solid var(--border-color);
   font-size: 1.2em;
   padding: 10px;
   resize: none;
@@ -221,7 +221,7 @@ img {
 }
 
 .reply {
-  border: 1px solid #e4e4e2;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   margin-bottom: 10px;
 }
@@ -246,7 +246,8 @@ img {
   font-size: 1.1em;
   margin: 20px 0;
   input {
-    border: 1px solid #e4e4e2;
+    border: 1px solid var(--form-border-color);
+    color: var(--second-color);
     border-radius: 0 3px 3px 0;
     box-sizing: border-box;
     padding: 7px;
@@ -258,6 +259,7 @@ img {
   label {
     margin-bottom: 5px;
     width: 100%;
+    color: var(--second-color);
   }
 }
 
@@ -274,6 +276,7 @@ input.ng-invalid.ng-touched {
     color: #b53636;
     font-size: 1.1em;
     padding: 10px 0 0 0;
+    list-style: none;
   }
 }
 
@@ -389,6 +392,7 @@ input.ng-invalid.ng-touched {
   }
   p {
     padding: 0 20px 20px 20px;
+    color: var(--third-color);
   }
 }
 

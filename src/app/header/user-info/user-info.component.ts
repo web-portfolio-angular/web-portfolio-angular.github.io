@@ -24,6 +24,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   changePhoneButton = false;
   errorMsg = null;
   theme = localStorage.getItem('theme');
+  switchThemeIcon = this.themeService.switchThemeIcon;
 
   constructor(
     private firestore: FirestoreService, 
@@ -43,7 +44,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userDetails();    
-    this.changePhoneForm = this.formBuilder.group({});
+    this.changePhoneForm = this.formBuilder.group({});    
   }
 
   userDetails(){
@@ -100,5 +101,6 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     this.theme == 'theme-light' ? this.theme = 'theme-dark' : this.theme = 'theme-light';
     localStorage.setItem('theme', this.theme);
     this.themeService.getCurrentTheme();
+    this.switchThemeIcon = this.themeService.switchThemeIcon;    
   }
 }

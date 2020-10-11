@@ -1,7 +1,7 @@
 <div class="user-info-container">
   <div class="user-info-container__user-nav">
     <button 
-      class="user-info-container__user-nav__manage-user-info" 
+      class="manage-user-info" 
       (click)="this.menuState == 'in' ? this.menuState = 'out' : this.menuState = 'in'"
       [disabled]="disableButton"
       #button>
@@ -14,13 +14,13 @@
     (@slideLeftRight.done)="disableButton = false"
     #content
     *ngFor="let userItem of userInfo">
-      <div class="user-info-container__user-info-content__user-name-container">
+      <div class="user-name-container">
         <div class="user-name-img">
           <img src="../../../assets/img/sign/user.png">
         </div>
         <div class="user-name">{{ userItem.name }}</div>
       </div>
-      <div class="user-info-container__user-info-content__phone-container">
+      <div class="phone-container">
         <div class="phone-info">
           <div>
             <div class="user-phone-img">
@@ -38,15 +38,15 @@
           </form>
         </div>
       </div>
-      <div class="user-info-container__user-info-content__user-email-container">
+      <div class="user-email-container">
         <div class="user-email-img">
           <img src="../../../assets/img/sign/email.png">
         </div>
         <div class="user-email">{{ userItem.email }}</div>
       </div>
-  
-      <button (click)="changeTheme()">Change Theme</button>
-  
+      <div class="switch-theme">
+        <button (click)="changeTheme()"></button>
+      </div> 
       <div *ngIf="errorMsg">
         <p class="error-msg">{{ errorMsg }}</p>
       </div>

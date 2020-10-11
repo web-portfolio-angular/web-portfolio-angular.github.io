@@ -17,10 +17,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    &__nav-active {
+    .nav-active {
       color: #b53636 !important;
       font-weight: bold;
-      background: url("../img/shared/nav-underline.png") center no-repeat;
+      background: url("../../../img/shared/nav-underline.png") center no-repeat;
       background-position-y: 21px;
     }
     li {
