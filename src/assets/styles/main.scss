@@ -2,6 +2,7 @@
 @import "themes";
 @import "hovers";
 @import "navigation";
+@import "user-info";
 @import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
 
 /*  */
@@ -11,10 +12,6 @@
 }
 
 .cars {
-  display: flex;
-}
-
-.navigation-container {
   display: flex;
 }
 
@@ -102,173 +99,8 @@ img {
 // VVVV
 
 
-.user-info {
-  display: flex;
-  align-items: center;
-  margin-left: calc(100% - 48px);
-}
 
-.user-name-container, .user-email-container, .change-phone-form-container {
-  display: flex;
-  align-items: center;
-}
 
-.manage-user-info {
-  background-color: transparent;
-  background-image: url("../img/shared/user-info.png");
-  background-size: contain;
-  height: 30px;
-  width: 28px;
-  cursor: pointer;
-  border: none;
-  outline: none;
-}
-
-.phone-info {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  >div {
-    display: flex;
-    align-items: center;
-  }
-}
-
-.user-name-img, .user-phone-img, .user-email-img {
-  width: 20px;
-  margin-right: 10px;
-  img {
-    max-width: 100%;
-    display: block;
-  }
-}
-
-.user-name, .user-phone, .user-email {
-  line-height: 25px;
-}
-
-.phone, .phone-container, .change-phone-form, .user-nav, .name, .email, .password {
-  display: flex;
-}
-
-.change-phone {
-  width: 200px;
-  outline: none;
-  border: none;
-  border-radius: 3px;
-  box-sizing: border-box;
-  padding: 0;
-  line-height: 28px;
-  height: 28px;
-  -webkit-appearance: none;
-  -moz-appearance: textfield;
-  margin: 0;
-  &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    -moz-appearance: textfield;
-    margin: 0;
-  }
-}
-
-.change-phone-btn {
-  width: 20px;
-  height: 20px;
-  outline: none;
-  border: none;
-  background-image: url("../img/shared/change-phone.png");
-  background-size: cover;
-  background-color: transparent;
-  cursor: pointer;
-  margin-bottom: 8px;
-}
-
-.phone-accept-change {
-  width: 25px;
-  height: 25px;
-  cursor: pointer;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-color: transparent;
-  border: none;
-  outline: none;
-  margin-left: 10px;
-  background-image: url("../img/shared/accept.png");
-  &:disabled {
-    background-image: url("../img/shared/accept-disabled.png");
-  }
-}
-
-.phone-decline-change {
-  width: 25px;
-  height: 25px;
-  cursor: pointer;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-color: transparent;
-  border: none;
-  outline: none;
-  margin-left: 10px;
-  background-image: url("../img/shared/decline.png");
-}
-
-.user-info-container {
-  position: absolute;
-  top: 50px;
-  right: 0;
-  width: 320px;
-  box-sizing: border-box;
-  padding: 10px;
-  background: rgba(0, 0, 0, 0.95);
-  color: #fff;
-  border-bottom-left-radius: 5px;
-  box-shadow: -2px 2px 5px 0px rgba(181, 54, 54, 0.9);
-  >div {
-    padding: 10px 0;
-  }
-}
-
-.hamburger {
-  position: absolute;
-  width: 30px;
-  height: 20px;
-  margin: 14px 20px;
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-  outline: none;
-  div {
-    width: 100%;
-    background: #b53636;
-    height: 4px;
-    transition: 0.30s ease-in-out;
-    &:not(:last-child) {
-      margin-bottom: 3px;
-    }
-  }
-  ul {
-    position: absolute;
-    color: $second-color-dark;
-  }
-}
-
-.hamburger-active {
-  div {
-    &:nth-child(1) {
-      transform: rotate(45deg);
-      margin-top: 0;
-    }
-    &:nth-child(2) {
-      opacity: 0;
-    }
-    &:nth-child(3) {
-      transform: rotate(-45deg);
-      margin-top: -1em;
-    }
-  }
-}
 
 .main-container {
   background-color: var(--csecond-bg);

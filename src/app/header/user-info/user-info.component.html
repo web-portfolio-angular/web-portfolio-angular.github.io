@@ -1,51 +1,54 @@
-<div class="user-nav">
-  <button 
-  class="manage-user-info" 
-  (click)="this.menuState == 'in' ? this.menuState = 'out' : this.menuState = 'in'"
-  [disabled]="disableButton"
-  #button></button>
-</div>
-<div 
-  class="user-info-container" 
-  [@slideLeftRight]="menuState"
-  (@slideLeftRight.start)="disableButton = true"
-  (@slideLeftRight.done)="disableButton = false"
-  #content
-  *ngFor="let userItem of userInfo">
-    <div class="user-name-container">
-      <div class="user-name-img">
-        <img src="../../../assets/img/sign/user.png">
-      </div>
-      <div class="user-name">{{ userItem.name }}</div>
-    </div>
-    <div class="phone-container">
-      <div class="phone-info">
-        <div>
-          <div class="user-phone-img">
-            <img src="../../../assets/img/sign/phone.png">
-          </div>
-          <div class="user-phone" *ngIf="!changePhoneButton">{{ userItem.phone }}</div>
+<div class="user-info-container">
+  <div class="user-info-container__user-nav">
+    <button 
+      class="user-info-container__user-nav__manage-user-info" 
+      (click)="this.menuState == 'in' ? this.menuState = 'out' : this.menuState = 'in'"
+      [disabled]="disableButton"
+      #button>
+    </button>
+  </div>
+  <div 
+    class="user-info-container__user-info-content" 
+    [@slideLeftRight]="menuState"
+    (@slideLeftRight.start)="disableButton = true"
+    (@slideLeftRight.done)="disableButton = false"
+    #content
+    *ngFor="let userItem of userInfo">
+      <div class="user-info-container__user-info-content__user-name-container">
+        <div class="user-name-img">
+          <img src="../../../assets/img/sign/user.png">
         </div>
-        <button class="change-phone-btn" *ngIf="!changePhoneButton" (click)="ebablePhoneChange($event)"></button>
-      </div>  
-      <div class="change-phone-form-container">
-        <form class="change-phone-form" *ngIf="changePhoneButton" [formGroup]="changePhoneForm" (ngSubmit)="onSubmit(changePhoneForm)">
-          <input class="change-phone" type="number" name="phone" formControlName="phone">
-          <button class="phone-accept-change" type="submit" [disabled]="!this.changePhoneForm.valid"></button>
-          <button class="phone-decline-change" type="button" (click)="disablePhoneChange($event)"></button>
-        </form>
+        <div class="user-name">{{ userItem.name }}</div>
       </div>
-    </div>
-    <div class="user-email-container">
-      <div class="user-email-img">
-        <img src="../../../assets/img/sign/email.png">
+      <div class="user-info-container__user-info-content__phone-container">
+        <div class="phone-info">
+          <div>
+            <div class="user-phone-img">
+              <img src="../../../assets/img/sign/phone.png">
+            </div>
+            <div class="user-phone" *ngIf="!changePhoneButton">{{ userItem.phone }}</div>
+          </div>
+          <button class="change-phone-btn" *ngIf="!changePhoneButton" (click)="ebablePhoneChange($event)"></button>
+        </div>  
+        <div class="change-phone-form-container">
+          <form class="change-phone-form" *ngIf="changePhoneButton" [formGroup]="changePhoneForm" (ngSubmit)="onSubmit(changePhoneForm)">
+            <input class="change-phone" type="number" name="phone" formControlName="phone">
+            <button class="phone-accept-change" type="submit" [disabled]="!this.changePhoneForm.valid"></button>
+            <button class="phone-decline-change" type="button" (click)="disablePhoneChange($event)"></button>
+          </form>
+        </div>
       </div>
-      <div class="user-email">{{ userItem.email }}</div>
-    </div>
-
-    <button (click)="changeTheme()">Change Theme</button>
-
-    <div *ngIf="errorMsg">
-      <p class="error-msg">{{ errorMsg }}</p>
-    </div>
+      <div class="user-info-container__user-info-content__user-email-container">
+        <div class="user-email-img">
+          <img src="../../../assets/img/sign/email.png">
+        </div>
+        <div class="user-email">{{ userItem.email }}</div>
+      </div>
+  
+      <button (click)="changeTheme()">Change Theme</button>
+  
+      <div *ngIf="errorMsg">
+        <p class="error-msg">{{ errorMsg }}</p>
+      </div>
+  </div>
 </div>

@@ -9,10 +9,3 @@
     #{$name}: nth($color, 2);
   }  
 }
-
-.theme-light, .theme-dark {
-  transition: color 1s, background-color 1s, background 1s;
-  *{
-    transition: color 1s, background-color 1s, background 1s;
-  } 
-}
