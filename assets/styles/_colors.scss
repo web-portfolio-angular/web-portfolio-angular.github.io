@@ -1,0 +1,66 @@
+$first-bg-light: #fcfcfc;
+$first-bg-dark: #18191a;
+
+$csecond-bg-light: #fff;
+$csecond-bg-dark: #242526;
+
+$third-bg-light: #f1f0ec;
+$third-bg-dark: #303031;
+
+$fourth-bg-light: #f9f9f7;
+$fourth-bg-dark: #444546;
+
+$fourth-bg-op-light: rgba(#f9f9f7, 0.80);
+$fourth-bg-op-dark: rgba(#444546, 0.80);
+
+$loading-spinner-bg-op-light: rgba(#fff, 0.50);
+$loading-spinner-bg-op-dark: rgba(#000, 0.50);
+
+$first-color-light: #000;
+$first-color-dark: #999;
+
+$second-color-light: #000;
+$second-color-dark: #fff;
+
+$third-color-light: #fff;
+$third-color-dark: #999;
+
+$border-color-light: #e4e4e2;
+$border-color-dark: #18191a;
+
+$form-border-color-light: #e4e4e2;
+$form-border-color-dark: #999;
+
+$hr-border-color-top-light: #e4e4e2;
+$hr-border-color-top-dark: #18191a;
+
+$hr-border-color-bottom-light: #f1f0ec;
+$hr-border-color-bottom-dark: #999;
+
+$mat-slider-bg-light: #fff;
+$mat-slider-bg-dark: #b53636;
+
+$mat-slider-toggle-bar-light: #999;
+$mat-slider-toggle-bar-dark: #7a2626;
+
+$default-red-color: #b53636;
+$default-disabled-red-color: #7a2626;
+$default-btn-hover-color: #1e1e1e;
+
+$colors: (
+  --first-bg: ($first-bg-light, $first-bg-dark),
+  --csecond-bg: ($csecond-bg-light, $csecond-bg-dark),
+  --third-bg: ($third-bg-light, $third-bg-dark),
+  --fourth-bg: ($fourth-bg-light, $fourth-bg-dark),
+  --fourth-bg-op: ($fourth-bg-op-light, $fourth-bg-op-dark),
+  --loading-spinner-bg-op: ($loading-spinner-bg-op-light, $loading-spinner-bg-op-dark),
+  --first-color: ($first-color-light, $first-color-dark),
+  --second-color: ($second-color-light, $second-color-dark),
+  --third-color: ($third-color-light, $third-color-dark),
+  --border-color: ($border-color-light, $border-color-dark),
+  --form-border-color: ($form-border-color-light, $form-border-color-dark),
+  --hr-border-color-top: ($hr-border-color-top-light, $hr-border-color-top-dark),
+  --hr-border-color-bottom: ($hr-border-color-bottom-light, $hr-border-color-bottom-dark),
+  --mat-slider-bg: ($mat-slider-bg-light, $mat-slider-bg-dark),
+  --mat-slider-toggle-bar: ($mat-slider-toggle-bar-light, $mat-slider-toggle-bar-dark)
+);
