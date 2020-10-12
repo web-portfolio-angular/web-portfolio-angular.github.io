@@ -13,7 +13,7 @@ import { ThemeService } from 'src/app/shared/services/theme.service';
   animations: [Animations.slideLeftRight]
 })
 export class UserInfoComponent implements OnInit, OnDestroy {
-  userInfo: UserAdditionalInfo [];
+  userInfo: UserAdditionalInfo[];
   showUserInfo = false;
   menuState = 'out';
   disableButton = false;
@@ -25,82 +25,79 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   errorMsg = null;
 
   constructor(
-    private firestore: FirestoreService, 
+    private firestore: FirestoreService,
     private renderer2: Renderer2,
     private formBuilder: FormBuilder,
     private themeService: ThemeService) {
     this.renderer2.listen('document', 'click', (e: Event) => {
-      if ((this.content && this.content.nativeElement.contains(e.target)) || 
-          (this.button && this.button.nativeElement.contains(e.target))) {        
-          return
-         } else {
-          this.menuState = 'out';
-          this.disableButton = false;
-       }
+      if ((this.content && this.content.nativeElement.contains(e.target)) ||
+        (this.button && this.button.nativeElement.contains(e.target))) {
+        return
+      } else {
+        this.menuState = 'out';
+        this.disableButton = false;
+      }
     });
   }
 
   ngOnInit(): void {
-    this.userDetails();    
-    this.changePhoneForm = this.formBuilder.group({});    
+    this.userDetails();
+    this.changePhoneForm = this.formBuilder.group({});
   }
 
-  userDetails(){
+  userDetails() {
     const userData: {
       email: string,
       id: string,
       _tokenId: string,
       _tokenExpTime: string
     } = JSON.parse(localStorage.getItem('userData'));
-    if(!userData){     
+    if (!userData) {
       return;
     }
     this.firestore.getRegistration(userData.email).subscribe(ressData => {
       this.userInfo = ressData.map(e => {
         return {
           id: e.payload.doc.id,
-          ...e.payload.doc.data() as UserAdditionalInfo          
+          ...e.payload.doc.data() as UserAdditionalInfo
         }
-      })      
+      })
       localStorage.setItem('userAdditionalData', JSON.stringify(this.userInfo));
       this.changePhoneForm.addControl('phone', new FormControl(this.userInfo[0].phone, Validators.required))
     })
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     localStorage.removeItem('userAdditionalData');
   }
 
-  ebablePhoneChange(event){
+  ebablePhoneChange(event) {
     event.stopPropagation();
-    this.changePhoneButton = true; 
+    this.changePhoneButton = true;
   }
 
-  disablePhoneChange(event){
+  disablePhoneChange(event) {
     event.stopPropagation();
-    this.changePhoneButton = false;  
+    this.changePhoneButton = false;
   }
-  
-  onSubmit(changePhoneForm){
+
+  onSubmit(changePhoneForm) {
     const phone = changePhoneForm.value.phone;
     const id = this.userInfo[0].id;
-    const newIfo = {phone, id};    
+    const newIfo = { phone, id };
     this.firestore.updatePhone(newIfo)
-    .then(() => {
-      this.userDetails();
-      this.changePhoneButton = false;
-    })
-    .catch(error => {
-      this.errorMsg = error;
-    })
+      .then(() => {
+        this.userDetails();
+        this.changePhoneButton = false;
+      })
+      .catch(error => {
+        this.errorMsg = error;
+      })
   }
 
-  theme = localStorage.getItem('theme');
-  switchThemeIcon = this.themeService.switchThemeIcon;
-  changeTheme(){
-    this.theme == 'theme-light' ? this.theme = 'theme-dark' : this.theme = 'theme-light';
-    localStorage.setItem('theme', this.theme);
-    this.themeService.getCurrentTheme();
-    this.switchThemeIcon = this.themeService.switchThemeIcon;    
+
+  changeTheme() {
+    console.log('test');   
+    JSON.parse(localStorage.getItem('theme')) == 'theme-light' ? this.themeService.setDark() : this.themeService.setLight();
   }
 }
