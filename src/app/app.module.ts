@@ -39,6 +39,7 @@ export class AppModule {}
 // temata prezapisva transitiona na drugite elementi pri hover
 // loading spinner sass
 // da opravq theme switcha i servica
+// textarea place holder color
 
 //  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
 //  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

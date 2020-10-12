@@ -18,7 +18,7 @@
     flex-direction: column;
     justify-content: center;
     .nav-active {
-      color: #b53636 !important;
+      color: $default-red-color !important;
       font-weight: bold;
       background: url("../../../img/shared/nav-underline.png") center no-repeat;
       background-position-y: 21px;
@@ -28,7 +28,7 @@
       outline: none;
       cursor: pointer;
       list-style: none;
-      color: #fff;
+      color: $third-color-light;
       text-align: center;
       user-select: none;
     }
@@ -44,7 +44,7 @@
     outline: none;
     div {
       width: 100%;
-      background: #b53636;
+      background: $default-red-color;
       height: 4px;
       transition: 0.30s ease-in-out;
       &:not(:last-child) {
