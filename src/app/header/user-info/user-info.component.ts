@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 
 import { UserAdditionalInfo } from 'src/app/shared/models/user-additional-info.model';
 import { FirestoreService } from 'src/app/shared/services/firestore.service';
@@ -23,6 +23,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   changePhoneForm: FormGroup;
   changePhoneButton = false;
   errorMsg = null;
+  isChecked: boolean;
 
   constructor(
     private firestore: FirestoreService,
@@ -43,6 +44,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.userDetails();
     this.changePhoneForm = this.formBuilder.group({});
+    this.isChecked = this.themeService.isChecked;
   }
 
   userDetails() {
@@ -95,9 +97,8 @@ export class UserInfoComponent implements OnInit, OnDestroy {
       })
   }
 
-
   changeTheme() {
-    console.log('test');   
     JSON.parse(localStorage.getItem('theme')) == 'theme-light' ? this.themeService.setDark() : this.themeService.setLight();
+    this.isChecked = this.themeService.isChecked;
   }
 }
