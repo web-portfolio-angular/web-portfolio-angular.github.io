@@ -1,0 +1,120 @@
+.sign-form {
+  background-color: var(--csecond-bg);
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
+  max-width: 767px;
+  padding: 20px;
+  margin: 0 auto;
+  position: relative;
+  >* {
+    display: block;
+  }
+  &__sign-up-header {
+    h2 {
+      color: #b53636;
+      text-align: center;
+      font-size: 1.3em;
+      padding: 5px;
+    }
+  }
+  &__sign-element {
+    font-size: 1.1em;
+    margin: 20px 0;
+    .phone, .name, .email, .password {
+      display: flex;
+    }
+    .name {
+      div {
+        background-color: #b53636;
+        background-size: contain;
+        background-position: center;
+        background-origin: content-box;
+        background-repeat: no-repeat;
+        width: 50px;
+        border-radius: 3px 0 0 3px;
+        padding: 7px;
+        box-sizing: border-box;
+        background-image: url("../../../img/sign/user.png");
+      }
+    }
+    .phone {
+      div {
+        background-color: #b53636;
+        background-size: contain;
+        background-position: center;
+        background-origin: content-box;
+        background-repeat: no-repeat;
+        width: 50px;
+        border-radius: 3px 0 0 3px;
+        padding: 7px;
+        box-sizing: border-box;
+        background-image: url("../../../img/sign/phone.png");
+      }
+      input {
+        -webkit-appearance: none;
+        -moz-appearance: textfield;
+        margin: 0;
+        &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          -moz-appearance: textfield;
+          margin: 0;
+        }
+      }
+    }
+    .email {
+      div {
+        background-color: #b53636;
+        background-size: contain;
+        background-position: center;
+        background-origin: content-box;
+        background-repeat: no-repeat;
+        width: 50px;
+        border-radius: 3px 0 0 3px;
+        box-sizing: border-box;
+        background-image: url("../../../img/sign/email.png");
+        padding: 10px;
+      }
+    }
+    .password {
+      div {
+        background-color: #b53636;
+        background-size: contain;
+        background-position: center;
+        background-origin: content-box;
+        background-repeat: no-repeat;
+        width: 50px;
+        border-radius: 3px 0 0 3px;
+        padding: 7px;
+        box-sizing: border-box;
+        background-image: url("../../../img/sign/password.png");
+      }
+    }
+    .sign-error {
+      li {
+        color: #b53636;
+        font-size: 1.1em;
+        padding: 10px 0 0 0;
+        list-style: none;
+      }
+    }
+    input {
+      width: calc(100% - 50px);
+      border: 1px solid var(--form-border-color);
+      color: var(--second-color);
+      border-radius: 0 3px 3px 0;
+      box-sizing: border-box;
+      padding: 7px;
+      font-size: 1.1em;
+      outline: none;
+      background-color: rgba(255, 255, 255, 0.5);
+      width: 100%;
+    }
+    label {
+      margin-bottom: 5px;
+      width: 100%;
+      color: var(--second-color);
+    }
+    input.ng-invalid.ng-touched, .invalid {
+      border: 2px solid #b53636;
+    }
+  }
+}

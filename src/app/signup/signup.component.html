@@ -1,11 +1,11 @@
 <div class="container">
   <form class="sign-form" [formGroup]="signupForm" (ngSubmit)="onSubmit(signupForm)">
     <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
-    <div class="sign-up-header">
+    <div class="sign-form__sign-up-header">
       <h2>Sign up</h2>
     </div>
     <hr class="hr-border">
-    <div class="sign-element">
+    <div class="sign-form__sign-element">
       <label for="name">Name</label>
       <div class="name">
         <div></div>
@@ -31,7 +31,7 @@
         </li>
       </ul>
     </div>
-    <div class="sign-element">
+    <div class="sign-form__sign-element">
       <label for="phone">Phone Number</label>
       <div class="phone">
         <div></div>
@@ -45,7 +45,7 @@
         </li>
       </ul>
     </div>
-    <div class="sign-element">
+    <div class="sign-form__sign-element">
       <label for="email">Email</label>
       <div class="email">
         <div></div>
@@ -65,7 +65,7 @@
         </li>
       </ul>
     </div>
-    <div class="sign-element">
+    <div class="sign-form__sign-element">
       <label for="password">Password</label>
       <div class="password">
         <div></div>
@@ -91,7 +91,7 @@
         </li>
       </ul>
     </div>
-    <div class="sign-element">
+    <div class="sign-form__sign-element">
       <label for="confirmPass">Confirm Password</label>
       <div class="password">
         <div></div>
@@ -106,7 +106,7 @@
         </li>
       </ul>
     </div>
-    <div class="sign-form-btn">
+    <div class="sign-form__sign-form-btn">
       <button class="btn-default" type="submit" [disabled]="!signupForm.valid">Sign up</button>
     </div>
     <p class="error-msg">{{ errorMsg }}</p>

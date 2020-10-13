@@ -1,10 +1,23 @@
-@import "colors";
-@import "themes";
-@import "hovers";
-@import "pages/header/navigation";
-@import "pages/header/user-info";
-@import "pages/footer/footer";
 @import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
+
+@import "variables/colors";
+@import "variables/themes";
+
+@import "mixins/media";
+@import "mixins/hover";
+
+@import "components/header/navigation";
+@import "components/header/user-info";
+@import "components/home/home";
+@import "components/products/products";
+@import "components/comments/comments";
+@import "components/sign/sign";
+@import "components/footer/footer";
+
+
+
+@import "hovers";
+
 
 /*  */
 
@@ -35,347 +48,65 @@ body {
   overflow-x: hidden;
   background-color: var(--first-bg);
   min-width: 320px;
-}
-
-::selection {
-  background: #b53636;
-  color: #fff;
-}
-
-img {
-  user-select: none;
-}
-
-.categories-active {
-  color: #b53636;
-  background: url("../img/shared/nav-underline.png") center no-repeat;
-  background-position-y: 100%;
-}
-
-.btn-default-center {
-  display: block;
-  margin: 0 auto;
-}
-
-.btn-default {
-  background-color: #b53636;
-  width: 100%;
-  height: 50px;
-  line-height: 50px;
-  text-align: center;
-  color: #fff;
-  font-size: 1.1em;
-  cursor: pointer;
-  background: linear-gradient(to left, #b53636 35%, #1e1e1e 65%);
-  background-size: 300% 100%;
-  background-position: right bottom;
-  transition: all 0.5s ease;
-  box-sizing: border-box;
-  border: none;
-  outline: none;
-  border-radius: 3px;
-  border-left: 5px solid #1e1e1e;
-  user-select: none;
-  &:disabled {
-    background-color: #7a2626;
-    background: linear-gradient(to left, #7a2626 35%, #7a2626 65%);
-    color: #999;
-    cursor: not-allowed;
+   ::selection {
+    background: $default-red-color;
+    color: $white;
   }
-}
-
-.narrow-btn {
-  width: auto !important;
-  height: auto;
-  line-height: 1.1em;
-  padding: 5px;
-  margin-right: 10px;
-}
-// VVVV
-
-
-
-
-
-.main-container {
-  background-color: var(--csecond-bg);
-  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
-  padding: 20px;
-  margin-bottom: 30px;
-  text-align: justify;
-  h2 {
-    font-size: 1.2em;
-    padding: 15px 0;
-    color: #b53636;
+  .container {
+    max-width: 980px;
+    padding: 0 5%;
+    margin: 0 auto;
   }
-  p {
-    padding-bottom: 15px;
-    color: var(--first-color);
-  }
-}
-
-.main-content {
   img {
+    user-select: none;
+  }
+  .btn-default-center {
     display: block;
     margin: 0 auto;
-    max-width: 100%;
-    margin-bottom: 15px;
-    border-radius: 5px;
   }
-}
-
-.main-container1 {
-  .main-content {
-    img {
-      display: block;
-      margin: 0 auto;
-      margin-top: 15px;
+  .btn-default {
+    background-color: $default-red-color;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: $white;
+    font-size: 1.1em;
+    cursor: pointer;
+    background: linear-gradient(to left, $default-red-color 35%, $default-btn-hover-color 65%);
+    background-size: 300% 100%;
+    background-position: right bottom;
+    transition: all 0.5s ease;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    border-left: 5px solid $default-btn-hover-color;
+    user-select: none;
+    &:disabled {
+      background-color: $default-disabled-red-color;
+      background: linear-gradient(to left, #7a2626 35%, #7a2626 65%);
+      color: #999;
+      cursor: not-allowed;
     }
   }
-}
-
-.comments-container {
-  background-color: var(--csecond-bg);
-  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
-  padding: 5%;
-}
-
-.comment {
-  border: 1px solid var(--border-color);
-  border-radius: 5px;
-  margin-bottom: 10px;
-}
-
-.comment-header {
-  background-color: var(--third-bg);
-  padding: 2%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-weight: bold;
-  font-style: italic;
-}
-
-.comment-name {
-  color: #b53636;
-  font-size: 1.1em;
-}
-
-.comment-date {
-  font-size: 1.1em;
-  text-align: right;
-  color: var(--second-color);
-}
-
-.comment-content {
-  background-color: var(--fourth-bg-op);
-  white-space: pre-line;
-  padding: 2%;
-}
-
-.comment-content-text{
-  color: var(--first-color);
-}
-
-.comments-count {
-  color: #b53636;
-  margin-bottom: 20px;
-  font-weight: bold;
-  font-size: 1.3em;
-}
-
-.comments-auth {
-  color: #b53636;
-  font-weight: bold;
-  text-align: center;
-}
-
-.hr-border {
-  border-top: 1px solid var(--hr-border-color-top);
-  border-bottom: 1px solid var(--hr-border-color-bottom);
-  margin: 20px 0;
-}
-
-.comments-textarea {
-  outline-color: #b53636;
-  background-color: rgba(240, 240, 240, 0.5);
-  border: 1px solid var(--border-color);
-  font-size: 1.2em;
-  padding: 10px;
-  resize: none;
-  width: 100%;
-  height: 100px;
-  margin-bottom: 20px;
-  box-sizing: border-box;
-}
-
-.comment-replies {
-  margin-top: 20px;
-  width: 90%;
-  margin-left: 10%;
-}
-
-.reply {
-  border: 1px solid var(--border-color);
-  border-radius: 5px;
-  margin-bottom: 10px;
-}
-
-.replyForm {
-  margin-top: 10px;
-}
-
-.sign-form {
-  background-color: var(--csecond-bg);
-  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
-  max-width: 767px;
-  padding: 20px;
-  margin: 0 auto;
-  position: relative;
-  >* {
-    display: block;
+  .narrow-btn {
+    width: auto !important;
+    height: auto;
+    line-height: 1.1em;
+    padding: 5px;
+    margin-right: 10px;
   }
-}
-
-.sign-element {
-  font-size: 1.1em;
-  margin: 20px 0;
-  input {
-    border: 1px solid var(--form-border-color);
-    color: var(--second-color);
-    border-radius: 0 3px 3px 0;
-    box-sizing: border-box;
-    padding: 7px;
-    font-size: 1.1em;
-    outline: none;
-    background-color: rgba(255, 255, 255, 0.5);
-    width: 100%;
+  .hr-border {
+    border-top: 1px solid var(--hr-border-color-top);
+    border-bottom: 1px solid var(--hr-border-color-bottom);
+    margin: 20px 0;
   }
-  label {
-    margin-bottom: 5px;
-    width: 100%;
-    color: var(--second-color);
-  }
-}
-
-input.ng-invalid.ng-touched {
-  border: 2px solid #b53636;
-}
-
-.invalid {
-  border: 2px solid #b53636;
-}
-
-.sign-error {
-  li {
+  .error-msg {
     color: #b53636;
     font-size: 1.1em;
     padding: 10px 0 0 0;
-    list-style: none;
   }
 }
 
-.error-msg {
-  color: #b53636;
-  font-size: 1.1em;
-  padding: 10px 0 0 0;
-}
-
-.sign-up-header {
-  h2 {
-    color: #b53636;
-    text-align: center;
-    font-size: 1.3em;
-    padding: 5px;
-  }
-}
-
-.name {
-  div {
-    background-color: #b53636;
-    background-size: contain;
-    background-position: center;
-    background-origin: content-box;
-    background-repeat: no-repeat;
-    width: 50px;
-    border-radius: 3px 0 0 3px;
-    padding: 7px;
-    box-sizing: border-box;
-    background-image: url("../img/sign/user.png");
-  }
-  input {
-    width: calc(100% - 50px);
-  }
-}
-
-.phone, .name, .email, .password {
-  display: flex;
-}
-
-.phone {
-  div {
-    background-color: #b53636;
-    background-size: contain;
-    background-position: center;
-    background-origin: content-box;
-    background-repeat: no-repeat;
-    width: 50px;
-    border-radius: 3px 0 0 3px;
-    padding: 7px;
-    box-sizing: border-box;
-    background-image: url("../img/sign/phone.png");
-  }
-  input {
-    .email {
-      input {
-        width: calc(100% - 50px);
-      }
-    }
-    -webkit-appearance: none;
-    -moz-appearance: textfield;
-    margin: 0;
-    &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      -moz-appearance: textfield;
-      margin: 0;
-    }
-  }
-}
-
-.email {
-  div {
-    background-color: #b53636;
-    background-size: contain;
-    background-position: center;
-    background-origin: content-box;
-    background-repeat: no-repeat;
-    width: 50px;
-    border-radius: 3px 0 0 3px;
-    box-sizing: border-box;
-    background-image: url("../img/sign/email.png");
-    padding: 10px;
-  }
-}
-
-.password {
-  div {
-    background-color: #b53636;
-    background-size: contain;
-    background-position: center;
-    background-origin: content-box;
-    background-repeat: no-repeat;
-    width: 50px;
-    border-radius: 3px 0 0 3px;
-    padding: 7px;
-    box-sizing: border-box;
-    background-image: url("../img/sign/password.png");
-  }
-  input {
-    width: calc(100% - 50px);
-  }
-}
-
-
-
-// TEMPORARY
 @import "media";
