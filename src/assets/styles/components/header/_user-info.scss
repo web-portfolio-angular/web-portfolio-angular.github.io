@@ -25,10 +25,10 @@
     width: 320px;
     box-sizing: border-box;
     padding: 10px;
-    background: rgba(0, 0, 0, 0.95);
-    color: $third-color-light;
+    background: rgba($black, 0.95);
+    color: $color3-light;
     border-bottom-left-radius: 5px;
-    box-shadow: -2px 2px 5px 0px rgba(181, 54, 54, 0.9);
+    box-shadow: -2px 2px 5px 0px rgba($default-red, 0.9);
     >div {
       padding: 10px 0;
     }
@@ -167,9 +167,9 @@
 }
 
 .mat-slide-toggle-thumb {
-  background-color: var(--mat-slider-bg) !important;
+  background-color: var(--color10) !important;
 }
 
 .mat-slide-toggle-bar {
-  background-color: var(--mat-slider-toggle-bar) !important;
+  background-color: var(--color11) !important;
 }

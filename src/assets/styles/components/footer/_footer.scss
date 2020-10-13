@@ -1,3 +1,9 @@
+.footer-bg {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../../../img/footer/footer-bg.jpg") no-repeat left top;
+  background-position: center;
+  background-size: cover;
+}
+
 .footer-banner {
   margin-top: 30px;
   margin-bottom: 30px;
@@ -5,39 +11,33 @@
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../../../img/footer/footer-banner-bg.jpg") no-repeat left top;
     background-size: cover;
     align-items: center;
-    color: $second-color-dark;
+    color: $white;
     text-align: center;
     h3 {
       padding: 20px;
-      color: #fff;
+      color: $white;
     }
     p {
       padding: 0 20px 20px 20px;
-      color: var(--third-color);
+      color: var(--color3);
     }
   }
   &__footer-banner-btn {
-    background-color: #b53636;
+    background-color: $default-red;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #fff;
+    color: $white;
     font-size: 4em;
     transition: 0.5s;
     user-select: none;
   }
 }
 
-.footer-bg {
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../../../img/footer/footer-bg.jpg") no-repeat left top;
-  background-position: center;
-  background-size: cover;
-}
-
 .footer-info {
   text-align: center;
-  color: #b4b4b4;
+  color: $gray;
   margin-bottom: 100px;
   padding-top: 30px;
   .footer-main {
@@ -106,7 +106,7 @@
     }
   }
   .footer-title {
-    color: #fff;
+    color: $white;
     font-weight: bold;
     font-size: 1.3em;
   }
@@ -121,7 +121,7 @@
     margin: 0 auto;
   }
   p {
-    color: $second-color-dark;
+    color: $color7-dark;
     position: absolute;
     top: 0px;
     right: 0;

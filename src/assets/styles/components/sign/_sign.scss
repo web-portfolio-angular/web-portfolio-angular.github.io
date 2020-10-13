@@ -1,5 +1,5 @@
 .sign-form {
-  background-color: var(--csecond-bg);
+  background-color: var(--color2);
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
   max-width: 767px;
   padding: 20px;
@@ -10,7 +10,7 @@
   }
   &__sign-up-header {
     h2 {
-      color: #b53636;
+      color: $default-red;
       text-align: center;
       font-size: 1.3em;
       padding: 5px;
@@ -24,7 +24,7 @@
     }
     .name {
       div {
-        background-color: #b53636;
+        background-color: $default-red;
         background-size: contain;
         background-position: center;
         background-origin: content-box;
@@ -38,7 +38,7 @@
     }
     .phone {
       div {
-        background-color: #b53636;
+        background-color: $default-red;
         background-size: contain;
         background-position: center;
         background-origin: content-box;
@@ -62,7 +62,7 @@
     }
     .email {
       div {
-        background-color: #b53636;
+        background-color: $default-red;
         background-size: contain;
         background-position: center;
         background-origin: content-box;
@@ -76,7 +76,7 @@
     }
     .password {
       div {
-        background-color: #b53636;
+        background-color: $default-red;
         background-size: contain;
         background-position: center;
         background-origin: content-box;
@@ -90,7 +90,7 @@
     }
     .sign-error {
       li {
-        color: #b53636;
+        color: $default-red;
         font-size: 1.1em;
         padding: 10px 0 0 0;
         list-style: none;
@@ -98,23 +98,22 @@
     }
     input {
       width: calc(100% - 50px);
-      border: 1px solid var(--form-border-color);
-      color: var(--second-color);
+      border: 1px solid var(--color8);
+      color: var(--color7);
       border-radius: 0 3px 3px 0;
       box-sizing: border-box;
       padding: 7px;
       font-size: 1.1em;
       outline: none;
-      background-color: rgba(255, 255, 255, 0.5);
-      width: 100%;
+      background-color: rgba($white, 0.5);
     }
     label {
       margin-bottom: 5px;
       width: 100%;
-      color: var(--second-color);
+      color: var(--color7);
     }
     input.ng-invalid.ng-touched, .invalid {
-      border: 2px solid #b53636;
+      border: 2px solid $default-red;
     }
   }
 }

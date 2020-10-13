@@ -1,7 +1,7 @@
 .nav-container {
   display: flex;
-  background: rgba(0, 0, 0, 0.95);
-  box-shadow: 0px 5px 5px 0px rgba(181, 54, 54, 0.9);
+  background: rgba($black, 0.95);
+  box-shadow: 0px 5px 5px 0px rgba($default-red, 0.9);
   height: 48px;
   position: fixed;
   top: 0;
@@ -12,13 +12,13 @@
     position: absolute;
     top: 50px;
     width: 100%;
-    background: rgba(0, 0, 0, 0.95);
+    background: rgba($black, 0.95);
     z-index: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     .nav-active {
-      color: $default-red-color !important;
+      color: $default-red !important;
       font-weight: bold;
       background: url("../../../img/shared/nav-underline.png") center no-repeat;
       background-position-y: 21px;
@@ -28,7 +28,7 @@
       outline: none;
       cursor: pointer;
       list-style: none;
-      color: $third-color-light;
+      color: $color3-light;
       text-align: center;
       user-select: none;
     }
@@ -44,7 +44,7 @@
     outline: none;
     div {
       width: 100%;
-      background: $default-red-color;
+      background: $default-red;
       height: 4px;
       transition: 0.30s ease-in-out;
       &:not(:last-child) {
@@ -53,7 +53,7 @@
     }
     ul {
       position: absolute;
-      color: $second-color-dark;
+      color: $color7-dark;
     }
   }
   &__hamburger-active {

@@ -1,17 +1,17 @@
 .main-container {
-  background-color: var(--csecond-bg);
-  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
+  background-color: var(--color2);
+  box-shadow: 0px 0px 10px 1px rgba($black, 0.75);
   padding: 20px;
   margin-bottom: 30px;
   text-align: justify;
   h2 {
     font-size: 1.2em;
     padding: 15px 0;
-    color: $default-red-color;
+    color: $default-red;
   }
   p {
     padding-bottom: 15px;
-    color: var(--first-color);
+    color: var(--color6);
   }
 }
 
