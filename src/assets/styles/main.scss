@@ -16,7 +16,7 @@
 
 
 
-@import "hovers";
+// @import "hovers";
 
 
 /*  */
@@ -88,6 +88,10 @@ body {
       background: linear-gradient(to left, $disabled-red 35%, $disabled-red 65%);
       color: #999;
       cursor: not-allowed;
+    }
+    @include hover {
+      background-position: left bottom;
+      color: $default-red;
     }
   }
   .narrow-btn {
