@@ -22,31 +22,24 @@
     .phone, .name, .email, .password {
       display: flex;
     }
+    .phone div, .name div, .email div, .password div {
+      background-color: $default-red;
+      background-size: contain;
+      background-position: center;
+      background-origin: content-box;
+      background-repeat: no-repeat;
+      width: 50px;
+      border-radius: 3px 0 0 3px;
+      padding: 7px;
+      box-sizing: border-box;
+    }
     .name {
       div {
-        background-color: $default-red;
-        background-size: contain;
-        background-position: center;
-        background-origin: content-box;
-        background-repeat: no-repeat;
-        width: 50px;
-        border-radius: 3px 0 0 3px;
-        padding: 7px;
-        box-sizing: border-box;
         background-image: url("../../../img/sign/user.png");
       }
     }
     .phone {
       div {
-        background-color: $default-red;
-        background-size: contain;
-        background-position: center;
-        background-origin: content-box;
-        background-repeat: no-repeat;
-        width: 50px;
-        border-radius: 3px 0 0 3px;
-        padding: 7px;
-        box-sizing: border-box;
         background-image: url("../../../img/sign/phone.png");
       }
       input {
@@ -62,29 +55,12 @@
     }
     .email {
       div {
-        background-color: $default-red;
-        background-size: contain;
-        background-position: center;
-        background-origin: content-box;
-        background-repeat: no-repeat;
-        width: 50px;
-        border-radius: 3px 0 0 3px;
-        box-sizing: border-box;
         background-image: url("../../../img/sign/email.png");
         padding: 10px;
       }
     }
     .password {
       div {
-        background-color: $default-red;
-        background-size: contain;
-        background-position: center;
-        background-origin: content-box;
-        background-repeat: no-repeat;
-        width: 50px;
-        border-radius: 3px 0 0 3px;
-        padding: 7px;
-        box-sizing: border-box;
         background-image: url("../../../img/sign/password.png");
       }
     }

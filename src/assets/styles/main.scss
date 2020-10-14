@@ -85,7 +85,7 @@ body {
     user-select: none;
     &:disabled {
       background-color: $disabled-red;
-      background: linear-gradient(to left, #7a2626 35%, #7a2626 65%);
+      background: linear-gradient(to left, $disabled-red 35%, $disabled-red 65%);
       color: #999;
       cursor: not-allowed;
     }
