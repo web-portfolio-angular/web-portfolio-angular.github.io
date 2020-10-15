@@ -1,0 +1,68 @@
+.main-container {
+  background-color: var(--color2);
+  box-shadow: 0px 0px 10px 1px rgba($black, 0.75);
+  padding: 20px;
+  margin-bottom: 30px;
+  text-align: justify;
+  h2 {
+    font-size: 1.2em;
+    padding: 15px 0;
+    color: $default-red;
+    @include media (larmed) {
+      padding: 0 0 15px 0;
+    }
+  }
+  p {
+    padding-bottom: 15px;
+    color: var(--color6);
+  }
+}
+
+.main-container1 {
+  .main-content {
+    img {
+      display: block;
+      margin: 0 auto;
+      margin-top: 15px;
+    }
+    @include media (larmed) {
+      width: 50%;
+    }
+  }
+  @include media (larmed) {
+    @include flexCenterH;
+  }
+}
+
+.main-container2, .main-container3 {
+  @include media (larmed) {
+    display: flex;
+  }
+}
+
+.main-container2 .main-content, .main-container3 .main-content {
+  @include media (larmed) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.main-content {
+  img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    margin-bottom: 15px;
+    border-radius: 5px;
+  }
+  .main-container-text {
+    @include media (larmed) {
+      flex: 1;
+    }
+  }
+  &:not(:last-child) {
+    @include media (larmed) {
+      padding-right: 20px;
+    }
+  }
+}

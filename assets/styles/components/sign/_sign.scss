@@ -1,0 +1,95 @@
+.sign-form {
+  background-color: var(--color2);
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
+  max-width: 767px;
+  padding: 20px;
+  margin: 0 auto;
+  position: relative;
+  >* {
+    display: block;
+  }
+  &__sign-up-header {
+    h2 {
+      color: $default-red;
+      text-align: center;
+      font-size: 1.3em;
+      padding: 5px;
+    }
+  }
+  &__sign-element {
+    font-size: 1.1em;
+    margin: 20px 0;
+    .phone, .name, .email, .password {
+      display: flex;
+    }
+    .phone div, .name div, .email div, .password div {
+      background-color: $default-red;
+      background-size: contain;
+      background-position: center;
+      background-origin: content-box;
+      background-repeat: no-repeat;
+      width: 50px;
+      border-radius: 3px 0 0 3px;
+      padding: 7px;
+      box-sizing: border-box;
+    }
+    .name {
+      div {
+        background-image: url("../../../img/sign/user.png");
+      }
+    }
+    .phone {
+      div {
+        background-image: url("../../../img/sign/phone.png");
+      }
+      input {
+        -webkit-appearance: none;
+        -moz-appearance: textfield;
+        margin: 0;
+        &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          -moz-appearance: textfield;
+          margin: 0;
+        }
+      }
+    }
+    .email {
+      div {
+        background-image: url("../../../img/sign/email.png");
+        padding: 10px;
+      }
+    }
+    .password {
+      div {
+        background-image: url("../../../img/sign/password.png");
+      }
+    }
+    .sign-error {
+      li {
+        color: $default-red;
+        font-size: 1.1em;
+        padding: 10px 0 0 0;
+        list-style: none;
+      }
+    }
+    input {
+      width: calc(100% - 50px);
+      border: 1px solid var(--color8);
+      color: var(--color7);
+      border-radius: 0 3px 3px 0;
+      box-sizing: border-box;
+      padding: 7px;
+      font-size: 1.1em;
+      outline: none;
+      background-color: rgba($white, 0.5);
+    }
+    label {
+      margin-bottom: 5px;
+      width: 100%;
+      color: var(--color7);
+    }
+    input.ng-invalid.ng-touched, .invalid {
+      border: 2px solid $default-red;
+    }
+  }
+}

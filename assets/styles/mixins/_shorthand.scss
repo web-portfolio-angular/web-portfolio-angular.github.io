@@ -1,0 +1,48 @@
+@mixin btn {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  user-select: none;
+}
+
+@mixin changePhoneBtn {
+  width: 25px;
+  height: 25px;
+	cursor: pointer;
+  border: none;
+  outline: none;
+  user-select: none;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-color: transparent;
+  margin-left: 10px;
+}
+
+@mixin flexCenterHV {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flexCenterH {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin flexCenterV {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flexCenterVSB {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flexCenterVSA {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
