@@ -89,7 +89,7 @@ body {
       color: #999;
       cursor: not-allowed;
     }
-    @include hover {
+    @include hover (normal) {
       background-position: left bottom;
       color: $default-red;
     }

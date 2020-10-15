@@ -32,7 +32,7 @@
     font-size: 4em;
     transition: 0.5s;
     user-select: none;
-    @include hover {
+    @include hover (normal) {
       color: $black;
     }
   }
@@ -50,7 +50,7 @@
           font-weight: bold;
           font-size: 1.1em;
           cursor: pointer;
-          @include hover {
+          @include hover (normal) {
             color: $default-red;
           }
         }
