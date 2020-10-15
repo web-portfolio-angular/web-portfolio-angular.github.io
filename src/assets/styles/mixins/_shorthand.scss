@@ -8,7 +8,7 @@
 @mixin changePhoneBtn {
   width: 25px;
   height: 25px;
-	cursor: pointer;
+  cursor: pointer;
   border: none;
   outline: none;
   user-select: none;
@@ -17,6 +17,14 @@
   background-position: center;
   background-color: transparent;
   margin-left: 10px;
+}
+
+@mixin placeholderColor ($color) {
+  &::placeholder {color: $color}
+  &::-webkit-input-placeholder {color: $color}
+  &:-moz-placeholder {color: $color}
+  &::-moz-placeholder {color: $color}
+  &:-ms-input-placeholder {color: $color}  
 }
 
 @mixin flexCenterHV {
