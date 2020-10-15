@@ -39,23 +39,16 @@ img {
   line-height: 50px;
   color: $white;
   font-size: 1.1em;
-  background: linear-gradient(to left, $default-red 35%, $defaut-dark 65%);
-  background-size: 300% 100%;
-  background-position: right bottom;
   transition: all 0.5s ease;
-  outline: none;
   border-radius: 3px;
-  border-left: 5px solid $defaut-dark;
   @include btn;
   &:disabled {
     background-color: $disabled-red;
-    background: linear-gradient(to left, $disabled-red 35%, $disabled-red 65%);
-    color: #999;
+    color: $gray;
     cursor: not-allowed;
   }
   @include hover (normal) {
-    background-position: left bottom;
-    color: $default-red;
+    background-color: $disabled-red;
   }
   @include media (med) {
     width: 190px;
@@ -67,7 +60,6 @@ img {
   height: auto;
   line-height: 1.1em;
   padding: 5px;
-  margin-right: 10px;
 }
 
 .hr-border {
