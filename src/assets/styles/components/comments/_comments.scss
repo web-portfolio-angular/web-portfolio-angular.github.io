@@ -15,12 +15,10 @@
     margin-bottom: 10px;
     .comment-header {
       background-color: var(--color4);
-      padding: 2%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      padding: 2%;     
       font-weight: bold;
-      font-style: italic;
+			font-style: italic;
+			@include flexCenterVSB;
     }
     .comment-name {
       color: $default-red;

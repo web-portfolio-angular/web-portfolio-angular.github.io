@@ -1,0 +1,83 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 15px;  
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  @include rubik;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: var(--color1);
+  min-width: 320px;  
+}
+
+::selection {
+  background: $default-red;
+  color: $white;
+}
+
+.container {
+  max-width: 980px;
+  padding: 0 5%;
+  margin: 0 auto;
+}
+
+img {
+  user-select: none;
+}
+
+.btn-default-center {
+  display: block;
+  margin: 0 auto;
+}
+
+.btn-default {
+  background-color: $default-red;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  color: $white;
+  font-size: 1.1em;
+  background: linear-gradient(to left, $default-red 35%, $defaut-dark 65%);
+  background-size: 300% 100%;
+  background-position: right bottom;
+  transition: all 0.5s ease;
+  outline: none;
+  border-radius: 3px;
+  border-left: 5px solid $defaut-dark;
+  @include btn;
+  &:disabled {
+    background-color: $disabled-red;
+    background: linear-gradient(to left, $disabled-red 35%, $disabled-red 65%);
+    color: #999;
+    cursor: not-allowed;
+  }
+  @include hover (normal) {
+    background-position: left bottom;
+    color: $default-red;
+  }
+  @include media (med) {
+    width: 190px;
+  }
+}
+
+.narrow-btn {
+  width: auto !important;
+  height: auto;
+  line-height: 1.1em;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.hr-border {
+  border-top: 1px solid var(--color9);
+  border-bottom: 1px solid var(--color5);
+  margin: 20px 0;
+}
+
+.error-msg {
+  color: $default-red;
+  font-size: 1.1em;
+  padding: 10px 0 0 0;
+}

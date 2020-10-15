@@ -7,6 +7,9 @@
 .footer-banner {
   margin-top: 30px;
   margin-bottom: 30px;
+  @include media (med) {
+    display: flex;
+  }
   &__footer-banner-info {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../../../img/footer/footer-banner-bg.jpg") no-repeat left top;
     background-size: cover;
@@ -20,20 +23,29 @@
     p {
       padding: 0 20px 20px 20px;
       color: var(--color3);
+      @include media (med) {
+        padding: 0 20px;
+      }
+    }
+    @include media (med) {
+      display: flex;
+      width: calc(100% - 100px);
     }
   }
   &__footer-banner-btn {
     background-color: $default-red;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flexCenterHV;
     color: $white;
     font-size: 4em;
     transition: 0.5s;
     user-select: none;
     @include hover (normal) {
       color: $black;
+    }
+    @include media (med) {
+      width: 100px;
+      height: 100px;
     }
   }
 }
@@ -56,11 +68,19 @@
         }
       }
     }
+    @include media (larmed) {
+      width: 30%;
+    }
+  }
+  .footer-about {
+    @include media (larmed) {
+      width: 60%;
+      margin-right: 4%;
+    }
   }
   .footer-social {
     .footer-follow {
-      display: flex;
-      justify-content: center;
+      @include flexCenterH;
       .f1, .f2, .f3, .f4 {
         background-size: cover;
         width: 40px;
@@ -68,7 +88,7 @@
         border-radius: 5px;
         cursor: pointer;
         margin: 5px;
-        @include hover (after){
+        @include hover (after) {
           opacity: 1;
         }
         &::after {
@@ -107,6 +127,9 @@
         }
       }
     }
+    @include media (larmed) {
+      width: 30%;
+    }
   }
   ul {
     li {
@@ -118,6 +141,10 @@
     color: $white;
     font-weight: bold;
     font-size: 1.3em;
+  }
+  @include media (larmed) {
+    display: flex;
+    text-align: left;
   }
 }
 
@@ -136,9 +163,7 @@
     right: 0;
     left: 0;
     bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flexCenterHV;
     font-size: 0.9em;
   }
 }

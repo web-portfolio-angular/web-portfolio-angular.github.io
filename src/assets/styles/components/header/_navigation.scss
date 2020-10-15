@@ -14,9 +14,8 @@
     width: 100%;
     background: rgba($black, 0.95);
     z-index: 1;
-    display: flex;
+    @include flexCenterH;
     flex-direction: column;
-    justify-content: center;
     .nav-active {
       color: $default-red !important;
       font-weight: bold;
@@ -25,12 +24,10 @@
     }
     li {
       padding: 10px 0;
-      outline: none;
-      cursor: pointer;
       list-style: none;
       color: $color3-light;
       text-align: center;
-      user-select: none;
+      @include btn;
     }
   }
   &__hamburger {
