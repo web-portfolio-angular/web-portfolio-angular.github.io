@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy, Renderer2, ViewChild, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
 
 import { AuthService } from '../shared/services/auth.service';
 import { Animations } from '../shared/animations';
@@ -19,7 +18,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @ViewChild('button') button: ElementRef;
   @ViewChild('content') content: ElementRef;
 
-  constructor(private authService: AuthService, private router: Router, private renderer2: Renderer2) {
+  constructor(
+    private authService: AuthService, 
+    private renderer2: Renderer2) {
     this.renderer2.listen('document', 'click', (e: Event) => {
       if ((this.content && this.content.nativeElement.contains(e.target)) || (this.button && this.button.nativeElement.contains(e.target))) {
           return
@@ -38,11 +39,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   
   ngOnDestroy(){
     this.subUser.unsubscribe();
-  }
-
-  onLogout(){
-    this.authService.logout();
-    this.router.navigate(['/signin']);
   }
 
   switchNavMenu(){

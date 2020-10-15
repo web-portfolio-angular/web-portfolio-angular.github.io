@@ -1,10 +1,12 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { UserAdditionalInfo } from 'src/app/shared/models/user-additional-info.model';
 import { FirestoreService } from 'src/app/shared/services/firestore.service';
 import { Animations } from 'src/app/shared/animations';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ThemeService } from 'src/app/shared/services/theme.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-user-info',
@@ -29,7 +31,9 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     private firestore: FirestoreService,
     private renderer2: Renderer2,
     private formBuilder: FormBuilder,
-    private themeService: ThemeService) {
+    private themeService: ThemeService,
+    private authService: AuthService, 
+    private router: Router,) {
     this.renderer2.listen('document', 'click', (e: Event) => {
       if ((this.content && this.content.nativeElement.contains(e.target)) ||
         (this.button && this.button.nativeElement.contains(e.target))) {
@@ -100,5 +104,10 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   changeTheme() {
     JSON.parse(localStorage.getItem('theme')) == 'theme-light' ? this.themeService.setDark() : this.themeService.setLight();
     this.isChecked = this.themeService.isChecked;
+  }
+
+  onLogout() {
+    this.authService.logout();
+    this.router.navigate(['/signin']);
   }
 }

@@ -104,11 +104,7 @@
             -webkit-appearance: none;
             -moz-appearance: textfield;
             margin: 0;
-            &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
-              -webkit-appearance: none;
-              -moz-appearance: textfield;
-              margin: 0;
-            }
+            @include inputNoArrows;
           }
           .phone-accept-change {
             @include changePhoneBtn;
@@ -135,6 +131,9 @@
           max-height: 100%;
         }
       }
+    }
+    .logout-btn{
+      float: right;
     }
   }
 }

@@ -21,7 +21,6 @@
     <li (click)="switchNavMenu()" [routerLink]="['/contacts']" routerLinkActive="nav-active">Contacts</li>
     <li (click)="switchNavMenu()" [routerLink]="['/signin']" routerLinkActive="nav-active" *ngIf="!isAuth">Signin</li>
     <li (click)="switchNavMenu()" [routerLink]="['/signup']" routerLinkActive="nav-active" *ngIf="!isAuth">Signup</li>
-    <li (click)="switchNavMenu()" (click)="onLogout()" *ngIf="isAuth">Logout</li>
   </ul>
   <div *ngIf="isAuth" class="user-info">
     <app-user-info></app-user-info>

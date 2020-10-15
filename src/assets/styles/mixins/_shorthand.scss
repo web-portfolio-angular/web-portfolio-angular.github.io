@@ -26,6 +26,13 @@
   &::-moz-placeholder {color: $color}
   &:-ms-input-placeholder {color: $color}  
 }
+@mixin inputNoArrows {
+  &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    margin: 0;
+  }
+}
 
 @mixin flexCenterHV {
   display: flex;

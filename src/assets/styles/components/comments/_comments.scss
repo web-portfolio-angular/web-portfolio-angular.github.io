@@ -46,6 +46,9 @@
 					margin-bottom: 10px;
 				}
 			}
+			.reply-btns button:first-child{
+				margin-right: 10px;
+			}
 			.replyForm {
 				margin-top: 10px;
 			}
@@ -67,6 +70,7 @@
 		height: 100px;
 		margin-bottom: 20px;
 		box-sizing: border-box;
+		color: var(--color7);
 		@include placeholderColor($default-red);
 	}
 }
