@@ -43,6 +43,7 @@ export class AppModule {}
 // change color names
 // sign autofill color
 // povtarqne na kod
+// home container1 image
 
 //  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
 //  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
