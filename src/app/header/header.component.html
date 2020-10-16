@@ -15,6 +15,7 @@
     #content>
     <li (click)="switchNavMenu()" [routerLink]="['/home']" routerLinkActive="nav-active">Home</li>
     <li (click)="switchNavMenu()" [routerLink]="['/products']" routerLinkActive="nav-active" *ngIf="isAuth">Products</li>
+    <li (click)="switchNavMenu()" [routerLink]="['/sell-car']" routerLinkActive="nav-active" *ngIf="isAuth">Sell Your Car</li>
     <li (click)="switchNavMenu()" [routerLink]="['/services']" routerLinkActive="nav-active" *ngIf="isAuth">Services</li>
     <li (click)="switchNavMenu()" [routerLink]="['/gallery']" routerLinkActive="nav-active" *ngIf="isAuth">Callery</li>
     <li (click)="switchNavMenu()" [routerLink]="['/comments']" routerLinkActive="nav-active">Comments</li>
