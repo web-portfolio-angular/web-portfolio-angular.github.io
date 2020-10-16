@@ -11,7 +11,7 @@ import { AuthService } from '../shared/services/auth.service';
 })
 export class SigninComponent implements OnInit {
   signinForm: FormGroup;
-  errorMsg = null;
+  errorMsgOnSubmit = null;
   isLoading = false;
 
   constructor(private authService: AuthService, private router: Router) {}
@@ -28,11 +28,11 @@ export class SigninComponent implements OnInit {
     const email = signinForm.value.email;
     const password =  signinForm.value.password;
     this.authService.signIn(email, password).subscribe(() => {      
-      this.errorMsg = null;
+      this.errorMsgOnSubmit = null;
       this.router.navigate(['/home']);
       this.isLoading = false;
     }, error => {      
-      this.errorMsg = error; 
+      this.errorMsgOnSubmit = error.message; 
       this.isLoading = false;
     });
   }

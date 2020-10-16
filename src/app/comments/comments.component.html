@@ -55,8 +55,8 @@
             </div>
             <div>
               <button class="btn-default btn-default-center" type="submit" [disabled]="!replyForm.valid">Add your comment</button>
-            </div>
-            <p class="error-msg">{{ errorMsg }}</p>
+              <p *ngIf="errorMsgOnReply" class="error-msg">{{ errorMsgOnReply }}</p>
+            </div>            
           </form>
         </div>
       </div>
@@ -72,8 +72,9 @@
         <div>
           <button class="btn-default btn-default-center" type="submit" [disabled]="!postForm.valid">Add your
             comment</button>
+            <p *ngIf="errorMsgOnSubmit" class="error-msg">{{ errorMsgOnSubmit }}</p>            
         </div>
-        <p class="error-msg">{{ errorMsg }}</p>
+        <p *ngIf="errorMsgOnloadComments" class="error-msg">{{ errorMsgOnloadComments }}</p>
       </form>
     </div>
   </div>

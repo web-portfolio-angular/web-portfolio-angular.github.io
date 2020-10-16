@@ -1,3 +1,14 @@
-<label for="image">Image</label>
-<input #image type="file" (change)="upload($event)" accept="*.png.jpg.jpeg.png.heic">
-<button (click)="uploadImage()">Upload Image</button>
+<!-- <label for="image">Image</label> -->
+<input #chooseImg style="display: none;" type="file" (change)="upload($event)" accept=".png,.jpg,.jpeg,.heic">
+
+<img class="img" [src]="imgLocalPath">
+
+<br>
+
+<button (click)="chooseImg.click()">Chose image</button>
+<button [disabled]="path==undefined" (click)="uploadImage()">Upload Image</button>
+
+<br>
+<!-- <progress max="100" [value]="(uploadProgress | async)"></progress> -->
+
+<p >{{error}}</p>

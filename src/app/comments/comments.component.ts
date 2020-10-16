@@ -18,9 +18,11 @@ export class CommentsComponent implements OnInit, OnDestroy {
   postForm: FormGroup;
   replyForm: FormGroup;
   comments: Comment [];
-  isLoading = false;
-  errorMsg = null;
+  isLoading = false;  
   isReply = null;
+  errorMsgOnloadComments = null;
+  errorMsgOnSubmit = null;
+  errorMsgOnReply = null;
 
   constructor(
     private firestore: FirestoreService,
@@ -42,10 +44,10 @@ export class CommentsComponent implements OnInit, OnDestroy {
         }
       })
       this.isLoading = false;
-      this.errorMsg = null;
+      this.errorMsgOnloadComments = null;
     }, error => {
       this.isLoading = false;
-      this.errorMsg = error;
+      this.errorMsgOnloadComments = error.message;
     });
 
     this.postForm = this.formBuilder.group({
@@ -80,10 +82,10 @@ export class CommentsComponent implements OnInit, OnDestroy {
     this.firestore.createComment(post)
     .then(() => {
       this.postForm.reset();
-      this.errorMsg = null;
+      this.errorMsgOnSubmit = null;
     })
     .catch(error => {
-      this.errorMsg = error;
+      this.errorMsgOnSubmit = error.message;
     });    
   }
   
@@ -115,10 +117,10 @@ export class CommentsComponent implements OnInit, OnDestroy {
     .then(() => {
       this.isReply = null;
       this.replyForm.reset();
-      this.errorMsg = null;
+      this.errorMsgOnReply = null;
     })
     .catch(error => {
-      this.errorMsg = error;
+      this.errorMsgOnReply = error.message;
     });
   }
 }

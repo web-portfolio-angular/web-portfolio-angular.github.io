@@ -13,7 +13,7 @@ import { UserAdditionalInfo } from '../shared/models/user-additional-info.model'
 })
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
-  errorMsg = null;
+  errorMsgOnSubmit = null;
   isLoading = false;
 
   constructor(
@@ -62,11 +62,11 @@ export class SignupComponent implements OnInit {
     this.authService.signUp(email, password)
     .subscribe(() => {
       this.firestore.createRegistration(user)
-      this.errorMsg = null;
+      this.errorMsgOnSubmit = null;
       this.router.navigate(['/home']);
       this.isLoading = false;
     }, error => {
-      this.errorMsg = error;
+      this.errorMsgOnSubmit = error.message;
       this.isLoading = false;
     });   
   }

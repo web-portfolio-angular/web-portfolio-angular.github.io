@@ -8,25 +8,38 @@ import { AngularFireStorage } from '@angular/fire/storage';
   ]
 })
 export class SellCarComponent implements OnInit {
-  path: string;
+  path;
   name: string;
+  defaultUploadImg = '../assets/img/cell-car/upload-img.png';
+  imgLocalPath = this.defaultUploadImg;
 
   constructor(private angularFireStorage: AngularFireStorage) { }
 
   ngOnInit(): void {
   }
 
-  upload(event){
-
-    this.path = event.target.files[0];
-    this.name = event.target.files[0].name.substr(0, event.target.files[0].name.lastIndexOf('.'));
-    if (this.name == undefined){
-      console.log('no image');
-      
-    }
+  upload(event: any){
+    this.path = event.target.files[0];  
+    if (this.path) {
+      var reader = new FileReader();
+      reader.onload = (event: any) => {
+          this.imgLocalPath = event.target.result;
+      }
+      reader.readAsDataURL(event.target.files[0]);
+      this.name = this.path.name.substr(0, this.path.name.lastIndexOf('.'));
+    } else {
+      this.imgLocalPath = this.defaultUploadImg;
+    }    
   }
-
+  error = null;
   uploadImage(){
-    this.angularFireStorage.upload("/files/cellCar/" + this.name + Math.random(), this.path);    
+    this.angularFireStorage.upload("/cellCar/" + this.name + "-" + Math.random(), this.path)
+    .then(() => {
+      console.log('test')
+    })
+    .catch(error => {
+      this.error = error.message
+      
+    });  
   }
 }
