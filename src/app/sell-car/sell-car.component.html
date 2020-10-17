@@ -6,10 +6,10 @@
 <br>
 
 <button (click)="chooseImg.click()">Chose image</button>
-<button [disabled]="imgPath==undefined" (click)="uploadImgToFirestorage()">Upload Image</button>
+<button [disabled]="file==undefined" (click)="uploadImgToFirestorage()">Upload Image</button>
 
 
-<img src="" alt="">
+<img [src]="imgURL" alt="">
 
 <br>
 <!-- <progress max="100" [value]="(uploadProgress | async)"></progress> -->
