@@ -1,14 +1,17 @@
 <!-- <label for="image">Image</label> -->
-<input #chooseImg style="display: none;" type="file" (change)="upload($event)" accept=".png,.jpg,.jpeg,.heic">
+<input #chooseImg style="display: none;" type="file" (change)="uploadImg($event)" accept=".png,.jpg,.jpeg,.svg,.heic">
 
 <img class="img" [src]="imgLocalPath">
 
 <br>
 
 <button (click)="chooseImg.click()">Chose image</button>
-<button [disabled]="path==undefined" (click)="uploadImage()">Upload Image</button>
+<button [disabled]="imgPath==undefined" (click)="uploadImgToFirestorage()">Upload Image</button>
+
+
+<img src="" alt="">
 
 <br>
 <!-- <progress max="100" [value]="(uploadProgress | async)"></progress> -->
 
-<p >{{error}}</p>
+<p *ngIf="errorMsgOnUpload" class="error-msg">{{errorMsgOnUpload}}</p>

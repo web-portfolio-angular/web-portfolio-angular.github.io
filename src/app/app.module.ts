@@ -37,15 +37,9 @@ export class AppModule {}
 // ... in longer name (comment section)
 // phone code wiht countries
 
-// da opravq clasovete za sass neistvane __ --
 // temata prezapisva transitiona na drugite elementi pri hover
 // loading spinner sass
-// da opravq theme switcha i servica
-// textarea place holder color
-// change color names
 // sign autofill color
-// povtarqne na kod
-// home container1 image
 
 //  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
 //  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

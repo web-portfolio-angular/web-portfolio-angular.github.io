@@ -19,11 +19,13 @@
 }
 
 .main-container1 {
-  .main-content {
+  .main-content1{
+    @include flexCenterV;
+  }
+  .main-content {    
     img {
       display: block;
       margin: 0 auto;
-      margin-top: 15px;
     }
     @include media (larmed) {
       width: 50%;

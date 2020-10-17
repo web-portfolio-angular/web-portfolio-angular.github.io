@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/storage';
+import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-sell-car',
@@ -8,38 +8,41 @@ import { AngularFireStorage } from '@angular/fire/storage';
   ]
 })
 export class SellCarComponent implements OnInit {
-  path;
-  name: string;
+  imgPath;
+  imgName: string;
   defaultUploadImg = '../assets/img/cell-car/upload-img.png';
   imgLocalPath = this.defaultUploadImg;
+  errorMsgOnUpload = null;
+
+  task: AngularFireUploadTask;
+  imgURL;
 
   constructor(private angularFireStorage: AngularFireStorage) { }
 
   ngOnInit(): void {
   }
 
-  upload(event: any){
-    this.path = event.target.files[0];  
-    if (this.path) {
-      var reader = new FileReader();
+  uploadImg(event: any){
+    this.imgPath = event.target.files[0];  
+    if (this.imgPath) {
+      const reader = new FileReader();
       reader.onload = (event: any) => {
           this.imgLocalPath = event.target.result;
       }
       reader.readAsDataURL(event.target.files[0]);
-      this.name = this.path.name.substr(0, this.path.name.lastIndexOf('.'));
+      this.imgName = this.imgPath.name.substr(0, this.imgPath.name.lastIndexOf('.'));
     } else {
       this.imgLocalPath = this.defaultUploadImg;
-    }    
+    }     
   }
-  error = null;
-  uploadImage(){
-    this.angularFireStorage.upload("/cellCar/" + this.name + "-" + Math.random(), this.path)
+
+  uploadImgToFirestorage(){
+    this.angularFireStorage.upload("/cellCar/" + this.imgName + "-" + Math.random(), this.imgPath)
     .then(() => {
-      console.log('test')
+      this.errorMsgOnUpload = null;    
     })
     .catch(error => {
-      this.error = error.message
-      
-    });  
+      this.errorMsgOnUpload = error.message      
+    });    
   }
 }
