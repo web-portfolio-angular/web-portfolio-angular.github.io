@@ -1,12 +1,13 @@
 import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { UserAdditionalInfo } from 'src/app/shared/models/user-additional-info.model';
-import { FirestoreService } from 'src/app/shared/services/firestore.service';
-import { Animations } from 'src/app/shared/animations';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ThemeService } from 'src/app/shared/services/theme.service';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { UserAdditionalInfo } from '../../shared/models/user-additional-info.model';
+import { FirestoreService } from '../../shared/services/firestore.service';
+import { Animations } from '../../shared/animations';
+import { ThemeService } from '../../shared/services/theme.service';
+import { AuthService } from '../../shared/services/auth.service';
+import { PhoneCodes } from '../../shared/models/phone-codes.model'
 
 @Component({
   selector: 'app-user-info',
@@ -24,13 +25,10 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   @ViewChild('phone') phone: ElementRef;
   changePhoneForm: FormGroup;
   changePhoneButton = false;
-  errorMsgOnPhoneChange = null;
   isChecked: boolean;
-
-  phoneCodes = [
-    {img: 'img1', code: 359},
-    {img: 'img2', code: 44}
-  ];
+  phoneCodes: PhoneCodes[];
+  errorMsgOnPhoneChange = null
+  errorMsgOnloadPhoneCodes = null;
 
   constructor(
     private firestore: FirestoreService,
@@ -50,10 +48,22 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.userDetails();
     this.changePhoneForm = this.formBuilder.group({});
     this.isChecked = this.themeService.isChecked;
+
+    this.firestore.getPhoneCodes().subscribe(data => {
+      this.phoneCodes = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data() as PhoneCodes
+        }        
+      })
+      this.errorMsgOnloadPhoneCodes = null;
+    }, error => {
+      this.errorMsgOnloadPhoneCodes = error.message;
+    });
   }
 
   userDetails() {
@@ -117,5 +127,16 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   onLogout() {
     this.authService.logout();
     this.router.navigate(['/signin']);
+  }
+
+
+  //stupid fix
+  test2;test4;
+  test(){
+    this.test2 = document.getElementById('mat-select-0-panel').addEventListener("click", this.test3);
+    this.test4 = document.getElementsByClassName('cdk-overlay-backdrop')[0].addEventListener("click", this.test3);
+  }
+  test3(event){
+    event.stopPropagation(); 
   }
 }

@@ -32,17 +32,16 @@ export class SignupComponent implements OnInit {
         return {
           id: e.payload.doc.id,
           ...e.payload.doc.data() as PhoneCodes
-        }
+        }        
       })
       this.errorMsgOnloadPhoneCodes = null;
-      console.log(this.phoneCodes);
     }, error => {
       this.errorMsgOnloadPhoneCodes = error.message;
     });
 
     this.signupForm = this.formBuilder.group({
       name: new FormControl (null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]),
-      phoneCode: new FormControl (null, Validators.required),
+      phoneCode: new FormControl (359, Validators.required),
       phone: new FormControl (null, Validators.required),
       email: new FormControl (null, [Validators.required, Validators.email]),
       password: new FormControl (null, [Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
