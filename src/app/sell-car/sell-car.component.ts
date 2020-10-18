@@ -39,7 +39,6 @@ export class SellCarComponent implements OnInit {
     .then(uploadTask => {
       uploadTask.ref.getDownloadURL().then(url => {
         this.imgURL = url;
-        console.log(url);        
       })      
       this.errorMsgOnUpload = null;    
     })

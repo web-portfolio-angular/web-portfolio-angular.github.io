@@ -32,7 +32,7 @@ export class SigninComponent implements OnInit {
       this.router.navigate(['/home']);
       this.isLoading = false;
     }, error => {      
-      this.errorMsgOnSubmit = error.message; 
+      this.errorMsgOnSubmit = error; 
       this.isLoading = false;
     });
   }

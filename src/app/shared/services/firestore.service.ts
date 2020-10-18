@@ -10,6 +10,13 @@ import { Comment } from '../models/comment.model';
 export class FirestoreService {
   constructor(private firestore: AngularFirestore) {}
 
+  // phone codes
+  getPhoneCodes() {
+    return this.firestore
+    .collection('phoneCodes', data => data.orderBy('abbreviation', 'asc'))
+    .snapshotChanges();
+  }
+
   //registrations
   createRegistration(user: UserAdditionalInfo){
     return this.firestore.collection('registrations').add(user);
@@ -49,6 +56,7 @@ export class FirestoreService {
   //user info
   updatePhone(newInfo){
     return this.firestore.doc('registrations/' + newInfo.id).update({
+      phoneCode: newInfo.phoneCode,
       phone: newInfo.phone
      });
    }

@@ -1,5 +1,3 @@
-import * as firebase from 'firebase/app';
-
 export class Comment{
   constructor(
     public name: string,

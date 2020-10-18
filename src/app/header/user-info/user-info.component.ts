@@ -24,8 +24,13 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   @ViewChild('phone') phone: ElementRef;
   changePhoneForm: FormGroup;
   changePhoneButton = false;
-  errorMsg = null;
+  errorMsgOnPhoneChange = null;
   isChecked: boolean;
+
+  phoneCodes = [
+    {img: 'img1', code: 359},
+    {img: 'img2', code: 44}
+  ];
 
   constructor(
     private firestore: FirestoreService,
@@ -69,7 +74,8 @@ export class UserInfoComponent implements OnInit, OnDestroy {
         }
       })
       localStorage.setItem('userAdditionalData', JSON.stringify(this.userInfo));
-      this.changePhoneForm.addControl('phone', new FormControl(this.userInfo[0].phone, Validators.required))
+      this.changePhoneForm.addControl('phone', new FormControl(this.userInfo[0].phone, Validators.required));
+      this.changePhoneForm.addControl('phoneCode', new FormControl(this.userInfo[0].phoneCode, Validators.required));
     })
   }
 
@@ -88,16 +94,18 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(changePhoneForm) {
+    const phoneCode = changePhoneForm.value.phoneCode;
     const phone = changePhoneForm.value.phone;
     const id = this.userInfo[0].id;
-    const newIfo = { phone, id };
+    const newIfo = { phoneCode, phone, id };
     this.firestore.updatePhone(newIfo)
       .then(() => {
         this.userDetails();
         this.changePhoneButton = false;
+        this.errorMsgOnPhoneChange = null;
       })
       .catch(error => {
-        this.errorMsg = error;
+        this.errorMsgOnPhoneChange = error.message;
       })
   }
 

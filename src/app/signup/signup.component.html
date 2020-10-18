@@ -8,7 +8,7 @@
     <div class="sign-form__sign-element">
       <label for="name">Name</label>
       <div class="name">
-        <div></div>
+        <div class="name-img"></div>
         <input type="text" name="name" formControlName="name">
       </div>
       <ul class="sign-error">
@@ -34,7 +34,21 @@
     <div class="sign-form__sign-element">
       <label for="phone">Phone Number</label>
       <div class="phone">
-        <div></div>
+        <div class="phone-img"></div>
+
+       <div>
+        <mat-form-field appearance="fill">
+          <!-- <mat-label>Dial Code</mat-label> -->
+          <mat-select formControlName="phoneCode">
+            <mat-option *ngFor="let phoneCode of phoneCodes" [value]="phoneCode.phoneCode">
+              <img [src]="phoneCode.img">
+              +{{phoneCode.phoneCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+       </div>
+
+
         <input type="number" name="phone" formControlName="phone">
       </div>
       <ul class="sign-error">
@@ -48,7 +62,7 @@
     <div class="sign-form__sign-element">
       <label for="email">Email</label>
       <div class="email">
-        <div></div>
+        <div class="email-img"></div>
         <input type="text" name="email" formControlName="email">
       </div>
       <ul class="sign-error">
@@ -68,7 +82,7 @@
     <div class="sign-form__sign-element">
       <label for="password">Password</label>
       <div class="password">
-        <div></div>
+        <div class="password-img"></div>
         <input type="password" name="password" formControlName="password">
       </div>
       <ul class="sign-error">
@@ -94,7 +108,7 @@
     <div class="sign-form__sign-element">
       <label for="confirmPass">Confirm Password</label>
       <div class="password">
-        <div></div>
+        <div class="password-img"></div>
         <input type="password" name="confirmPass" formControlName="confirmPass"
           [ngClass]="{'invalid': !signupForm.get('confirmPass').valid && signupForm.get('confirmPass').dirty}">
       </div>

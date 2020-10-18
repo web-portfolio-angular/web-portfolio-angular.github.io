@@ -22,24 +22,15 @@
     .phone, .name, .email, .password {
       display: flex;
     }
-    .phone div, .name div, .email div, .password div {
-      background-color: $default-red;
-      background-size: contain;
-      background-position: center;
-      background-origin: content-box;
-      background-repeat: no-repeat;
-      width: 50px;
-      border-radius: 3px 0 0 3px;
-      padding: 7px;
-      box-sizing: border-box;
-    }
     .name {
-      div {
+      .name-img {
+        @include signFormBackround;
         background-image: url("../../../img/sign/user.png");
       }
     }
     .phone {
-      div {
+      .phone-img {
+        @include signFormBackround;
         background-image: url("../../../img/sign/phone.png");
       }
       input {
@@ -50,13 +41,15 @@
       }
     }
     .email {
-      div {
+      .email-img {
+        @include signFormBackround;
         background-image: url("../../../img/sign/email.png");
         padding: 10px;
       }
     }
     .password {
-      div {
+      .password-img {
+        @include signFormBackround;
         background-image: url("../../../img/sign/password.png");
       }
     }
@@ -88,4 +81,8 @@
       border: 2px solid $default-red;
     }
   }
+}
+
+select{
+  appearance:none;
 }

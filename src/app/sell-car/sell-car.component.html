@@ -8,10 +8,4 @@
 <button (click)="chooseImg.click()">Chose image</button>
 <button [disabled]="file==undefined" (click)="uploadImgToFirestorage()">Upload Image</button>
 
-
-<img [src]="imgURL" alt="">
-
-<br>
-<!-- <progress max="100" [value]="(uploadProgress | async)"></progress> -->
-
 <p *ngIf="errorMsgOnUpload" class="error-msg">{{errorMsgOnUpload}}</p>

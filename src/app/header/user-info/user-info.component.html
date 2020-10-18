@@ -18,7 +18,7 @@
         <div class="user-name-img">
           <img src="../../../assets/img/sign/user.png">
         </div>
-        <div class="user-name">{{ userItem.name }}</div>
+        <div>{{ userItem.name }}</div>
       </div>
       <div class="phone-container">
         <div class="phone-info">
@@ -26,12 +26,18 @@
             <div class="user-phone-img">
               <img src="../../../assets/img/sign/phone.png">
             </div>
-            <div class="user-phone" *ngIf="!changePhoneButton">{{ userItem.phone }}</div>
+            <div *ngIf="!changePhoneButton">+{{ userItem.phoneCode }}</div>
+            <div *ngIf="!changePhoneButton">{{ userItem.phone }}</div>
           </div>
           <button class="change-phone-btn" *ngIf="!changePhoneButton" (click)="ebablePhoneChange($event)"></button>
         </div>  
         <div class="change-phone-form-container">
           <form class="change-phone-form" *ngIf="changePhoneButton" [formGroup]="changePhoneForm" (ngSubmit)="onSubmit(changePhoneForm)">
+            <select formControlName="phoneCode">
+              <option *ngFor="let phoneCode of phoneCodes" [ngValue]="phoneCode.code">
+                +{{phoneCode.code}}
+              </option>
+           </select>
             <input class="change-phone" type="number" name="phone" formControlName="phone">
             <button class="phone-accept-change" type="submit" [disabled]="!this.changePhoneForm.valid"></button>
             <button class="phone-decline-change" type="button" (click)="disablePhoneChange($event)"></button>
@@ -42,7 +48,7 @@
         <div class="user-email-img">
           <img src="../../../assets/img/sign/email.png">
         </div>
-        <div class="user-email">{{ userItem.email }}</div>
+        <div>{{ userItem.email }}</div>
       </div>
       <div class="switch-theme">
         <div class="theme">
@@ -58,8 +64,6 @@
       <button class="logout-btn btn-default narrow-btn" (click)="onLogout()">
         Logout
       </button>
-      <div *ngIf="errorMsg">
-        <p class="error-msg">{{ errorMsg }}</p>
-      </div>
+      <p *ngIf="errorMsgOnPhoneChange" class="error-msg">{{ errorMsgOnPhoneChange }}</p>
   </div>
 </div>
