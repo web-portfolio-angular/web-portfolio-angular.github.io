@@ -41,7 +41,7 @@ export class AppModule {}
 // loading spinner sass
 // sign autofill color
 
-// klikaneto na 2te menuta
+// klikaneto na 2te menuta ili s overlay - kato se natisne da iz4ezva
 
 //  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
 //  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
