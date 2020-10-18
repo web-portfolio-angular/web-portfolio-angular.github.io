@@ -36,20 +36,24 @@
       <div class="phone">
         <div class="phone-img"></div>
 
-       <div>
-        <mat-form-field appearance="fill">
-          <!-- <mat-label>Dial Code</mat-label> -->
+
+        <mat-form-field>
+          <mat-label>Dial code</mat-label>
           <mat-select formControlName="phoneCode">
             <mat-option *ngFor="let phoneCode of phoneCodes" [value]="phoneCode.phoneCode">
               <img [src]="phoneCode.img">
               +{{phoneCode.phoneCode}}
             </mat-option>
           </mat-select>
+        </mat-form-field>         
+        <mat-form-field class="example-full-width">
+          <mat-label>Phone number</mat-label>
+          <input matInput placeholder="Ex. Pizza" value="Sushi"
+          type="number" name="phone" formControlName="phone">
         </mat-form-field>
-       </div>
 
 
-        <input type="number" name="phone" formControlName="phone">
+        <!-- <input type="number" name="phone" formControlName="phone"> -->
       </div>
       <ul class="sign-error">
         <li *ngIf="
@@ -123,6 +127,25 @@
     <div class="sign-form__sign-form-btn">
       <button class="btn-default" type="submit" [disabled]="!signupForm.valid">Sign up</button>
       <p *ngIf="errorMsgOnSubmit" class="error-msg">{{ errorMsgOnSubmit }}</p>
-    </div>    
+    </div>
+
+
+
+    <div>
+      <mat-form-field>
+        <mat-label>Dial code</mat-label>
+        <mat-select formControlName="phoneCode">
+          <mat-option *ngFor="let phoneCode of phoneCodes" [value]="phoneCode.phoneCode">
+            <img [src]="phoneCode.img">
+            +{{phoneCode.phoneCode}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>         
+      <mat-form-field class="example-full-width">
+        <mat-label>Phone number</mat-label>
+        <input matInput placeholder="Ex. Pizza" value="Sushi"
+        type="number" name="phone" formControlName="phone">
+      </mat-form-field>
+    </div>
   </form>
 </div>
