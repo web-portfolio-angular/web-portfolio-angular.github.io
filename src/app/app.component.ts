@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { AuthService } from './shared/services/auth.service';
+import { OverlayService } from './shared/services/overlay.service';
 import { ThemeService } from './shared/services/theme.service';
 
 @Component({
@@ -9,14 +11,24 @@ import { ThemeService } from './shared/services/theme.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-  title = 'Motors';  
+  title = 'Motors';
+  overlaySub: Subscription;
+	isOverlayShown: boolean;
 
   constructor(
     private authService: AuthService,
-    private themeService: ThemeService){}
+    private themeService: ThemeService,
+    private overlayService: OverlayService){}
 
   ngOnInit(){
     this.authService.autoLogin();
     this.themeService.getCurrentTheme();
+    this.overlaySub = this.overlayService.overlaySubject.subscribe(boolean => {
+      this.isOverlayShown = boolean;    
+    })
+  }
+
+  overlayClick() {
+    this.overlayService.overlayClick();    
   }
 }

@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 
 import { AuthService } from '../shared/services/auth.service';
 import { Animations } from '../shared/animations';
+import { OverlayService } from '../shared/services/overlay.service';
 
 @Component({
   selector: 'app-header',
@@ -13,35 +14,30 @@ import { Animations } from '../shared/animations';
 export class HeaderComponent implements OnInit, OnDestroy {
   private subUser: Subscription;
   isAuth = false;
-  menuState = 'out';
   disableButton = false;
-  @ViewChild('button') button: ElementRef;
-  @ViewChild('content') content: ElementRef;
+  navigationMenuSub: Subscription;
+  navigationMenuState: string;
+
 
   constructor(
-    private authService: AuthService, 
-    private renderer2: Renderer2) {
-    this.renderer2.listen('document', 'click', (e: Event) => {
-      if ((this.content && this.content.nativeElement.contains(e.target)) || (this.button && this.button.nativeElement.contains(e.target))) {
-          return
-         } else {
-          this.menuState = 'out';
-          this.disableButton = false;
-       }
-    });
-  }
+    private authService: AuthService,
+    private overlayService: OverlayService) {}
 
   ngOnInit() {
     this.subUser = this.authService.user.subscribe(user => {
      this.isAuth = !user ? false : true;
     })
+
+    this.navigationMenuSub = this.overlayService.navigationMenuStateSubject.subscribe(string => {
+      this.navigationMenuState = string;    
+    })
+  }
+
+  navigationInfoState(){
+    this.overlayService.navigationInfoState();
   }
   
   ngOnDestroy(){
     this.subUser.unsubscribe();
-  }
-
-  switchNavMenu(){
-    this.menuState == 'in' ? this.menuState = 'out' : this.menuState = 'in';
   }
 }

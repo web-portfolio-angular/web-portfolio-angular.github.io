@@ -2,14 +2,13 @@
   <div class="user-info-container__user-nav">
     <button 
       class="manage-user-info" 
-      (click)="this.menuState == 'in' ? this.menuState = 'out' : this.menuState = 'in'"
       [disabled]="disableButton"
-      #button>
+      (click)="swithcUserInfoState()">
     </button>
   </div>
   <div 
     class="user-info-container__user-info-content" 
-    [@slideLeftRight]="menuState"
+    [@slideLeftRight]="userInfoMenuState"
     (@slideLeftRight.start)="disableButton = true"
     (@slideLeftRight.done)="disableButton = false"
     #content
@@ -29,11 +28,11 @@
             <div *ngIf="!changePhoneButton">+{{ userItem.phoneCode }}</div>
             <div *ngIf="!changePhoneButton">{{ userItem.phone }}</div>
           </div>
-          <button class="change-phone-btn" *ngIf="!changePhoneButton" (click)="ebablePhoneChange($event)"></button>
+          <button class="change-phone-btn" *ngIf="!changePhoneButton" (click)="changePhoneButton = true"></button>
         </div>  
         <div class="change-phone-form-container">
           <form class="change-phone-form" *ngIf="changePhoneButton" [formGroup]="changePhoneForm" (ngSubmit)="onSubmit(changePhoneForm)">
-            <mat-form-field (click)=test()>
+            <mat-form-field>
               <mat-select formControlName="phoneCode">
                 <mat-option *ngFor="let phoneCode of phoneCodes" [value]="phoneCode.phoneCode">
                   <img [src]="phoneCode.img">
@@ -43,7 +42,7 @@
             </mat-form-field>
             <input class="change-phone" type="number" name="phone" formControlName="phone">
             <button class="phone-accept-change" type="submit" [disabled]="!this.changePhoneForm.valid"></button>
-            <button class="phone-decline-change" type="button" (click)="disablePhoneChange($event)"></button>
+            <button class="phone-decline-change" type="button" (click)="changePhoneButton = false"></button>
           </form>
           <p *ngIf="errorMsgOnPhoneChange" class="error-msg">{{ errorMsgOnPhoneChange }}</p>
           <p *ngIf="errorMsgOnloadPhoneCodes" class="error-msg">{{ errorMsgOnloadPhoneCodes }}</p>

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,9 @@ import { FirestoreService } from '../../shared/services/firestore.service';
 import { Animations } from '../../shared/animations';
 import { ThemeService } from '../../shared/services/theme.service';
 import { AuthService } from '../../shared/services/auth.service';
-import { PhoneCodes } from '../../shared/models/phone-codes.model'
+import { PhoneCodes } from '../../shared/models/phone-codes.model';
+import { OverlayService } from '../../shared/services/overlay.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-info',
@@ -17,36 +19,23 @@ import { PhoneCodes } from '../../shared/models/phone-codes.model'
 })
 export class UserInfoComponent implements OnInit, OnDestroy {
   userInfo: UserAdditionalInfo[];
-  showUserInfo = false;
-  menuState = 'out';
   disableButton = false;
-  @ViewChild('button') button: ElementRef;
-  @ViewChild('content') content: ElementRef;
-  @ViewChild('phone') phone: ElementRef;
   changePhoneForm: FormGroup;
   changePhoneButton = false;
   isChecked: boolean;
   phoneCodes: PhoneCodes[];
   errorMsgOnPhoneChange = null
   errorMsgOnloadPhoneCodes = null;
+  userInfoMenuStateSub: Subscription;
+  userInfoMenuState: string;
 
   constructor(
     private firestore: FirestoreService,
-    private renderer2: Renderer2,
     private formBuilder: FormBuilder,
     private themeService: ThemeService,
     private authService: AuthService, 
-    private router: Router,) {
-    this.renderer2.listen('document', 'click', (e: Event) => {
-      if ((this.content && this.content.nativeElement.contains(e.target)) ||
-        (this.button && this.button.nativeElement.contains(e.target))) {
-        return
-      } else {
-        this.menuState = 'out';
-        this.disableButton = false;
-      }
-    });
-  }
+    private router: Router,
+    private overlayService: OverlayService) {}
 
   ngOnInit() {
     this.userDetails();
@@ -64,6 +53,10 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     }, error => {
       this.errorMsgOnloadPhoneCodes = error.message;
     });
+
+    this.userInfoMenuStateSub = this.overlayService.userInfoMenuStateSubject.subscribe(string => {
+      this.userInfoMenuState = string;      
+    })
   }
 
   userDetails() {
@@ -93,16 +86,6 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     localStorage.removeItem('userAdditionalData');
   }
 
-  ebablePhoneChange(event) {
-    event.stopPropagation();
-    this.changePhoneButton = true;
-  }
-
-  disablePhoneChange(event) {
-    event.stopPropagation();
-    this.changePhoneButton = false;
-  }
-
   onSubmit(changePhoneForm) {
     const phoneCode = changePhoneForm.value.phoneCode;
     const phone = changePhoneForm.value.phone;
@@ -129,14 +112,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     this.router.navigate(['/signin']);
   }
 
-
-  //stupid fix
-  test2;test4;
-  test(){
-    this.test2 = document.getElementById('mat-select-0-panel').addEventListener("click", this.test3);
-    this.test4 = document.getElementsByClassName('cdk-overlay-backdrop')[0].addEventListener("click", this.test3);
-  }
-  test3(event){
-    event.stopPropagation(); 
+  swithcUserInfoState(){
+    this.overlayService.swithcUserInfoState();    
   }
 }
