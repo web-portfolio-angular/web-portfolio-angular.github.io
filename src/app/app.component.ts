@@ -12,7 +12,7 @@ import { ThemeService } from './shared/services/theme.service';
 })
 export class AppComponent implements OnInit{
   title = 'Motors';
-  overlaySub: Subscription;
+  private overlaySub: Subscription;
 	isOverlayShown: boolean;
 
   constructor(

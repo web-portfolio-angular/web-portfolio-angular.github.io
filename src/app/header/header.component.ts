@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private subUser: Subscription;
   isAuth = false;
   disableButton = false;
-  navigationMenuSub: Subscription;
+  private navigationMenuSub: Subscription;
   navigationMenuState: string;
 
 

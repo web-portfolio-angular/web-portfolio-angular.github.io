@@ -8,6 +8,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { AppRoutingModule } from '../app-routing.module';
 import { HeaderComponent } from './header.component';
 import { UserInfoComponent } from './user-info/user-info.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { UserInfoComponent } from './user-info/user-info.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MatSlideToggleModule,
-    MatSelectModule
+    MatSelectModule,
+    SharedModule
   ],
   exports: [
     HeaderComponent

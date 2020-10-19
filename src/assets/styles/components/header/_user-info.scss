@@ -31,6 +31,9 @@
     }
     .user-image-container {
       position: relative;
+      .user-loading-spinner .loading-spinner {
+        background-color: rgba($black, 0.5);
+      }
       .user-avatar {
         border-radius: 50%;
         border: 3px solid $default-red;

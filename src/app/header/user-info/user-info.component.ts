@@ -27,7 +27,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   phoneCodes: PhoneCodes[];
   errorMsgOnPhoneChange: string = null
   errorMsgOnloadPhoneCodes: string = null;
-  userInfoMenuStateSub: Subscription;
+  private userInfoMenuStateSub: Subscription;
   userInfoMenuState: string;
   isInChangeImgMode: boolean = false;
   file: any;
@@ -35,6 +35,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   imgLocalPath: string;
   imgName: string;
   errorMsgOnAvatarUpload: string;
+  isLoading = false;
 
   constructor(
     private firestore: FirestoreService,
@@ -140,6 +141,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   }
 
   uploadAvatarToFirestorage() {
+    this.isLoading = true;
     this.angularFireStorage.upload("/userImages/" + this.imgName + "-" + Math.random().toString(36).substring(2), this.file)
     .then(uploadTask => {
       uploadTask.ref.getDownloadURL().then(url => {
@@ -155,10 +157,12 @@ export class UserInfoComponent implements OnInit, OnDestroy {
           this.errorMsgOnAvatarUpload = error.message;
         })
       })      
-      this.errorMsgOnAvatarUpload = null;    
+      this.errorMsgOnAvatarUpload = null;
+      this.isLoading = false; 
     })
     .catch(error => {
-      this.errorMsgOnAvatarUpload = error.message      
+      this.errorMsgOnAvatarUpload = error.message;
+      this.isLoading = false;  
     });
   }
 }
