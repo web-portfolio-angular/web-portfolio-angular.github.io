@@ -11,10 +11,13 @@ import { AuthService } from '../shared/services/auth.service';
 })
 export class SigninComponent implements OnInit {
   signinForm: FormGroup;
-  errorMsgOnSubmit = null;
-  isLoading = false;
+  errorMsgOnSubmit: string = null;
+  isLoading: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService, 
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.signinForm = new FormGroup({

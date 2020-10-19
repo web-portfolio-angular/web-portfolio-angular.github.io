@@ -14,15 +14,15 @@ import { AuthService } from '../shared/services/auth.service';
 })
 export class CommentsComponent implements OnInit, OnDestroy {
   private subUser: Subscription;
-  isAuth = false;
+  isAuth: boolean = false;
   postForm: FormGroup;
   replyForm: FormGroup;
   comments: Comment [];
-  isLoading = false;  
-  isReply = null;
-  errorMsgOnloadComments = null;
-  errorMsgOnSubmit = null;
-  errorMsgOnReply = null;
+  isLoading: boolean = false;  
+  isReply: string = null;
+  errorMsgOnloadComments: string = null;
+  errorMsgOnSubmit: string = null;
+  errorMsgOnReply: string = null;
 
   constructor(
     private firestore: FirestoreService,

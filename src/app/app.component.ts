@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from './shared/services/auth.service';
@@ -10,7 +10,7 @@ import { ThemeService } from './shared/services/theme.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, OnDestroy{
   title = 'Motors';
   private overlaySub: Subscription;
 	isOverlayShown: boolean;
@@ -18,9 +18,10 @@ export class AppComponent implements OnInit{
   constructor(
     private authService: AuthService,
     private themeService: ThemeService,
-    private overlayService: OverlayService){}
+    private overlayService: OverlayService
+  ){}
 
-  ngOnInit(){
+  ngOnInit() {
     this.authService.autoLogin();
     this.themeService.getCurrentTheme();
     this.overlaySub = this.overlayService.overlaySubject.subscribe(boolean => {
@@ -28,7 +29,11 @@ export class AppComponent implements OnInit{
     })
   }
 
+  ngOnDestroy() {
+    this.overlaySub.unsubscribe();  
+  }
+
   overlayClick() {
-    this.overlayService.overlayClick();    
+    this.overlayService.overlayClick();
   }
 }

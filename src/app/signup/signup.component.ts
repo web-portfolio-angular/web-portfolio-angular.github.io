@@ -14,11 +14,11 @@ import { PhoneCodes } from '../shared/models/phone-codes.model';
 })
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
-  errorMsgOnSubmit = null;
-  isLoading = false;
+  errorMsgOnSubmit: string = null;
+  isLoading: boolean = false;
   phoneCodes: PhoneCodes[];
-  errorMsgOnloadPhoneCodes = null;
-  defaultUserImg = 'https://firebasestorage.googleapis.com/v0/b/portfolio-e1ec5.appspot.com/o/userImages%2Funnamed.jpg?alt=media&token=9d3991e6-2098-4f81-92e6-69c31195d1c2';
+  errorMsgOnloadPhoneCodes: string = null;
+  defaultUserImg: string = 'https://firebasestorage.googleapis.com/v0/b/portfolio-e1ec5.appspot.com/o/userImages%2Funnamed.jpg?alt=media&token=9d3991e6-2098-4f81-92e6-69c31195d1c2';
 
   constructor(
     private authService: AuthService, 

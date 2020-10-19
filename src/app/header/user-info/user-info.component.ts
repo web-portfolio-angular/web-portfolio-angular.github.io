@@ -19,6 +19,7 @@ import { Subscription } from 'rxjs';
   animations: [Animations.slideLeftRight]
 })
 export class UserInfoComponent implements OnInit, OnDestroy {
+  private userInfoMenuStateSub: Subscription;
   userInfo: UserAdditionalInfo[];
   disableButton: boolean = false;
   changePhoneForm: FormGroup;
@@ -27,7 +28,6 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   phoneCodes: PhoneCodes[];
   errorMsgOnPhoneChange: string = null
   errorMsgOnloadPhoneCodes: string = null;
-  private userInfoMenuStateSub: Subscription;
   userInfoMenuState: string;
   isInChangeImgMode: boolean = false;
   file: any;
@@ -44,7 +44,8 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     private authService: AuthService, 
     private router: Router,
     private overlayService: OverlayService,
-    private angularFireStorage: AngularFireStorage) {}
+    private angularFireStorage: AngularFireStorage
+  ) {}
 
   ngOnInit() {
     this.userDetails();
@@ -66,6 +67,11 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     this.userInfoMenuStateSub = this.overlayService.userInfoMenuStateSubject.subscribe(string => {
       this.userInfoMenuState = string;       
     })
+  }
+
+  ngOnDestroy() {
+    localStorage.removeItem('userAdditionalData');
+    this.userInfoMenuStateSub.unsubscribe();
   }
 
   userDetails() {
@@ -93,9 +99,6 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     })
   }
 
-  ngOnDestroy() {
-    localStorage.removeItem('userAdditionalData');
-  }
 
   onSubmit(changePhoneForm) {
     const phoneCode = changePhoneForm.value.phoneCode;

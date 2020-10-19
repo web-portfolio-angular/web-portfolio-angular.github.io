@@ -7,7 +7,10 @@ import { Router, ActivatedRoute } from '@angular/router';
   styles: []
 })
 export class ProductsComponent implements OnInit {  
-  constructor(private router: Router, private r:ActivatedRoute) { }
+  constructor(
+    private router: Router, 
+    private r:ActivatedRoute
+  ) { }
 
   ngOnInit() {
     const lastVisitedLink: {

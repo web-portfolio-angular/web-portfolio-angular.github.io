@@ -12,8 +12,8 @@ export class SellCarComponent implements OnInit {
   imgName: string;
   defaultUploadImg: string = '../assets/img/cell-car/upload-img.png';
   imgLocalPath: string = this.defaultUploadImg;
-  imgURL:string = null;
-  errorMsgOnUpload = null;  
+  imgURL: string = null;
+  errorMsgOnUpload: string = null;  
 
   constructor(private angularFireStorage: AngularFireStorage) { }
 

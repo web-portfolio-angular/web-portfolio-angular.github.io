@@ -13,9 +13,9 @@ import { OverlayService } from '../shared/services/overlay.service';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   private subUser: Subscription;
-  isAuth = false;
-  disableButton = false;
   private navigationMenuSub: Subscription;
+  isAuth: boolean = false;
+  disableButton: boolean = false;
   navigationMenuState: string;
 
 
@@ -33,11 +33,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
     })
   }
 
+  ngOnDestroy(){
+    this.subUser.unsubscribe();
+    this.navigationMenuSub.unsubscribe();
+  }
+
   navigationInfoState(){
     this.overlayService.navigationInfoState();
   }
   
-  ngOnDestroy(){
-    this.subUser.unsubscribe();
-  }
 }
