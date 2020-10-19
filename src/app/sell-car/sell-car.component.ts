@@ -8,10 +8,10 @@ import { AngularFireStorage } from '@angular/fire/storage';
   ]
 })
 export class SellCarComponent implements OnInit {
-  file;
+  file: any;
   imgName: string;
-  defaultUploadImg:string = '../assets/img/cell-car/upload-img.png';
-  imgLocalPath:string = this.defaultUploadImg;
+  defaultUploadImg: string = '../assets/img/cell-car/upload-img.png';
+  imgLocalPath: string = this.defaultUploadImg;
   imgURL:string = null;
   errorMsgOnUpload = null;  
 
@@ -25,7 +25,7 @@ export class SellCarComponent implements OnInit {
     if (this.file) {
       const reader = new FileReader();
       reader.onload = (event: any) => {
-          this.imgLocalPath = event.target.result;
+        this.imgLocalPath = event.target.result;
       }
       reader.readAsDataURL(event.target.files[0]);
       this.imgName = this.file.name.substr(0, this.file.name.lastIndexOf('.'));

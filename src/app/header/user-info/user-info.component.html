@@ -13,6 +13,26 @@
     (@slideLeftRight.done)="disableButton = false"
     #content
     *ngFor="let userItem of userInfo">
+      <div class="user-image-container">
+        <div 
+          class="user-avatar" 
+          [ngStyle]="{'background-image': 'url('+imgLocalPath+')'}">
+        </div>
+        <div *ngIf="isInChangeImgMode" class="change-user-img">
+          <input 
+            #chooseImg style="display: none;" 
+            type="file" 
+            (change)="uploadAvatar($event)" 
+            accept=".png,.jpg,.jpeg,.svg,.heic">
+          <button class="btn-default narrow-btn ng-star-inserted" (click)="chooseImg.click()">Chose image</button>
+          <button class="btn-default narrow-btn ng-star-inserted" [disabled]="file==undefined" (click)="uploadAvatarToFirestorage()">Upload Image</button>
+          <p *ngIf="errorMsgOnAvatarUpload" class="error-msg">{{errorMsgOnAvatarUpload}}</p>
+        </div>
+        <button 
+          class="change-user-image-btn"
+          (click)="isInChangeImgMode=!isInChangeImgMode">
+        </button>
+      </div>
       <div class="user-name-container">
         <div class="user-name-img">
           <img src="../../../assets/img/sign/user.png">

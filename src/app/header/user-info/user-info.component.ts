@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { Router } from '@angular/router';
 
 import { UserAdditionalInfo } from '../../shared/models/user-additional-info.model';
@@ -19,15 +20,21 @@ import { Subscription } from 'rxjs';
 })
 export class UserInfoComponent implements OnInit, OnDestroy {
   userInfo: UserAdditionalInfo[];
-  disableButton = false;
+  disableButton: boolean = false;
   changePhoneForm: FormGroup;
-  changePhoneButton = false;
+  changePhoneButton: boolean = false;
   isChecked: boolean;
   phoneCodes: PhoneCodes[];
-  errorMsgOnPhoneChange = null
-  errorMsgOnloadPhoneCodes = null;
+  errorMsgOnPhoneChange: string = null
+  errorMsgOnloadPhoneCodes: string = null;
   userInfoMenuStateSub: Subscription;
   userInfoMenuState: string;
+  isInChangeImgMode: boolean = false;
+  file: any;
+  defaultImg: string;
+  imgLocalPath: string;
+  imgName: string;
+  errorMsgOnAvatarUpload: string;
 
   constructor(
     private firestore: FirestoreService,
@@ -35,7 +42,8 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     private themeService: ThemeService,
     private authService: AuthService, 
     private router: Router,
-    private overlayService: OverlayService) {}
+    private overlayService: OverlayService,
+    private angularFireStorage: AngularFireStorage) {}
 
   ngOnInit() {
     this.userDetails();
@@ -55,7 +63,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     });
 
     this.userInfoMenuStateSub = this.overlayService.userInfoMenuStateSubject.subscribe(string => {
-      this.userInfoMenuState = string;      
+      this.userInfoMenuState = string;       
     })
   }
 
@@ -79,6 +87,8 @@ export class UserInfoComponent implements OnInit, OnDestroy {
       localStorage.setItem('userAdditionalData', JSON.stringify(this.userInfo));
       this.changePhoneForm.addControl('phone', new FormControl(this.userInfo[0].phone, Validators.required));
       this.changePhoneForm.addControl('phoneCode', new FormControl(this.userInfo[0].phoneCode, Validators.required));
+      this.defaultImg = this.userInfo[0].userImg;
+      this.imgLocalPath = this.defaultImg;
     })
   }
 
@@ -93,7 +103,6 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     const newIfo = { phoneCode, phone, id };
     this.firestore.updatePhone(newIfo)
       .then(() => {
-        this.userDetails();
         this.changePhoneButton = false;
         this.errorMsgOnPhoneChange = null;
       })
@@ -112,7 +121,44 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     this.router.navigate(['/signin']);
   }
 
-  swithcUserInfoState(){
+  swithcUserInfoState() {
     this.overlayService.swithcUserInfoState();    
+  }
+
+  uploadAvatar(event) {
+    this.file = event.target.files[0];  
+    if (this.file) {
+      const reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.imgLocalPath = event.target.result;
+      }
+      reader.readAsDataURL(event.target.files[0]);
+      this.imgName = this.file.name.substr(0, this.file.name.lastIndexOf('.'));
+    } else {
+      this.imgLocalPath = this.defaultImg;
+    }  
+  }
+
+  uploadAvatarToFirestorage() {
+    this.angularFireStorage.upload("/userImages/" + this.imgName + "-" + Math.random().toString(36).substring(2), this.file)
+    .then(uploadTask => {
+      uploadTask.ref.getDownloadURL().then(url => {
+        const userImg = url;
+        const id = this.userInfo[0].id;
+        const newIfo = { userImg, id };
+        this.firestore.updateUserImg(newIfo)
+        .then(() => {
+          this.isInChangeImgMode = false;
+          this.errorMsgOnAvatarUpload = null;
+        })
+        .catch(error => {
+          this.errorMsgOnAvatarUpload = error.message;
+        })
+      })      
+      this.errorMsgOnAvatarUpload = null;    
+    })
+    .catch(error => {
+      this.errorMsgOnAvatarUpload = error.message      
+    });
   }
 }

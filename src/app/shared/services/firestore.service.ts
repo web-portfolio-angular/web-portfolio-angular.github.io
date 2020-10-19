@@ -22,6 +22,19 @@ export class FirestoreService {
     return this.firestore.collection('registrations').add(user);
   }
 
+  updatePhone(newInfo){
+    return this.firestore.doc('registrations/' + newInfo.id).update({
+      phoneCode: newInfo.phoneCode,
+      phone: newInfo.phone
+     });
+   }
+
+   updateUserImg(newInfo){
+    return this.firestore.doc('registrations/' + newInfo.id).update({
+      userImg: newInfo.userImg
+     });
+   }
+
   getRegistration(email: string) {
     return this.firestore
     .collection('registrations', data => data.where('email', '==', email))
@@ -52,14 +65,6 @@ export class FirestoreService {
   deleteComment(commentId: string){
     return this.firestore.doc('comments/' + commentId).delete();
   }
-
-  //user info
-  updatePhone(newInfo){
-    return this.firestore.doc('registrations/' + newInfo.id).update({
-      phoneCode: newInfo.phoneCode,
-      phone: newInfo.phone
-     });
-   }
 
   //products
   getLamborghiniCars() {

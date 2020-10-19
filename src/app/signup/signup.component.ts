@@ -18,6 +18,7 @@ export class SignupComponent implements OnInit {
   isLoading = false;
   phoneCodes: PhoneCodes[];
   errorMsgOnloadPhoneCodes = null;
+  defaultUserImg = 'https://firebasestorage.googleapis.com/v0/b/portfolio-e1ec5.appspot.com/o/userImages%2Funnamed.jpg?alt=media&token=9d3991e6-2098-4f81-92e6-69c31195d1c2';
 
   constructor(
     private authService: AuthService, 
@@ -75,7 +76,8 @@ export class SignupComponent implements OnInit {
     const phone = signupForm.value.phone;
     const email = signupForm.value.email;
     const password =  signupForm.value.password;
-    const user: UserAdditionalInfo = {name, phoneCode, phone, email};    
+    const userImg = this.defaultUserImg;
+    const user: UserAdditionalInfo = {name, phoneCode, phone, email, userImg};    
     this.authService.signUp(email, password)
     .subscribe(() => {
       this.firestore.createRegistration(user)
