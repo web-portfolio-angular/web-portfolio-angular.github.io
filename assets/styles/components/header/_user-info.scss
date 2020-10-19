@@ -29,6 +29,38 @@
     >div {
       padding: 10px 0;
     }
+    .user-image-container {
+      position: relative;
+      .user-loading-spinner .loading-spinner {
+        background-color: rgba($black, 0.5);
+      }
+      .user-avatar {
+        border-radius: 50%;
+        border: 3px solid $default-red;
+        width: 125px;
+        height: 125px;
+        box-sizing: border-box;
+        margin: 0 auto;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      .change-user-img {
+        @include flexCenterVSA;
+        margin-top: 10px;
+      }
+      .change-user-image-btn {
+        @include btn;
+        width: 20px;
+        height: 20px;
+        background-color: transparent;
+        background-image: url("../../../img/user-info/edit.png");
+        background-size: cover;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+    }
     .user-name-container {
       @include flexCenterV;
       .user-name {
@@ -81,7 +113,7 @@
           height: 20px;
           outline: none;
           border: none;
-          background-image: url("../../../img/user-info/change-phone.png");
+          background-image: url("../../../img/user-info/edit.png");
           background-size: cover;
           background-color: transparent;
           cursor: pointer;
@@ -132,7 +164,7 @@
         }
       }
     }
-    .logout-btn{
+    .logout-btn {
       float: right;
     }
   }
