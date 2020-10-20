@@ -30,12 +30,10 @@ import { HeaderModule } from './header/header.module';
 })
 export class AppModule {}
 
-// the cars are loaded on init every time
 // preload images
 // on relload with saved data the button is not active
 // comment trimp space
 // ... in longer name (comment section)
-// phone code wiht countries
 
 // temata prezapisva transitiona na drugite elementi pri hover
 // loading spinner sass
