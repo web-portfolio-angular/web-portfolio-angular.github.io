@@ -47,3 +47,40 @@ export class AppModule {}
 
 // ng build --prod --base-href "https://web-portfolio-angular.github.io"
 // ngh --dir=dist/index
+
+
+// import { Injectable } from '@angular/core';
+// import { BehaviorSubject } from 'rxjs';
+
+// import { FirestoreService } from '../../shared/services/firestore.service';
+// import { UserAdditionalData } from '../models/user-additional-data.model';
+
+// @Injectable({providedIn: 'root'})
+// export class AdditionUserInfoService {
+//   userAdditionalDataSubject = new BehaviorSubject<any>(null);
+//   userAdditionalData: UserAdditionalInfo[];
+
+//   constructor( private firestore: FirestoreService){}
+
+// 	getUserAdditionalData(){    
+//     const userData: {
+//       name: string,
+//       phone: number,
+//       email: string,
+//       id: string
+//     } = JSON.parse(localStorage.getItem('userData'));
+//     if (!userData){
+//       return
+//     }
+
+//     this.firestore.getRegistration(userData.email).subscribe(ressData => {
+//       this.userAdditionalData = ressData.map(e => {
+//         return {
+//           id: e.payload.doc.id,
+//           ...e.payload.doc.data() as UserAdditionalInfo
+//         }
+//       })
+//       this.userAdditionalDataSubject.next(this.userAdditionalData);
+//     })
+//   }
+// }
