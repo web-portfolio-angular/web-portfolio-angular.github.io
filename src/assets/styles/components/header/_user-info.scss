@@ -123,12 +123,13 @@
       .change-phone-form-container {
         @include flexCenterV;
         .change-phone-form {
-          display: flex;
+          @include flexCenterV;
           .change-phone {
-            width: 165px;
+            width: 131px;
             outline: none;
             border: none;
-            border-radius: 3px;
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
             box-sizing: border-box;
             padding: 0;
             line-height: 28px;
@@ -170,10 +171,41 @@
   }
 }
 
+//mat slide button
 .mat-slide-toggle-thumb {
   background-color: var(--color10) !important;
 }
 
 .mat-slide-toggle-bar {
   background-color: var(--color11) !important;
+}
+
+//mat select
+.change-phone-select {
+  .mat-form-field {
+    * {
+      padding: 0 !important;
+    }
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    background-color: $white;
+    width: 65px;
+    padding: 0 7px;
+    .mat-form-field-infix {
+      border: none;
+      height: 28px !important;
+      display: flex !important;
+      align-items: center;
+      .ng-star-inserted {
+        @include rubik;
+        color: $black;
+      }
+      .mat-select-arrow {
+        color: $black;
+      }
+    }
+    .mat-form-field-underline {
+      display: none;
+    }
+  }
 }

@@ -53,14 +53,16 @@
         </div>  
         <div class="change-phone-form-container">
           <form class="change-phone-form" *ngIf="changePhoneButton" [formGroup]="changePhoneForm" (ngSubmit)="onSubmit(changePhoneForm)">
-            <mat-form-field>
-              <mat-select formControlName="phoneCode">
-                <mat-option *ngFor="let phoneCode of phoneCodes" [value]="phoneCode.phoneCode">
-                  <img [src]="phoneCode.img">
-                  +{{phoneCode.phoneCode}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+            <div class="change-phone-select">
+              <mat-form-field>
+                <mat-select formControlName="phoneCode">
+                  <mat-option *ngFor="let phoneCode of phoneCodes" [value]="phoneCode.phoneCode">
+                    <img [src]="phoneCode.img">
+                    +{{phoneCode.phoneCode}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
             <input class="change-phone" type="number" name="phone" formControlName="phone">
             <button class="phone-accept-change" type="submit" [disabled]="!this.changePhoneForm.valid"></button>
             <button class="phone-decline-change" type="button" (click)="changePhoneButton = false"></button>

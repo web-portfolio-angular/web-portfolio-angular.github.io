@@ -35,14 +35,16 @@
       <label for="phone">Phone Number</label>
       <div class="phone">
         <div class="phone-img"></div>
-        <mat-form-field [ngClass]="{'invalid':!signupForm.get('phone').valid && signupForm.get('phone').touched}">
-          <mat-select formControlName="phoneCode">
-            <mat-option *ngFor="let phoneCode of phoneCodes" [value]="phoneCode.phoneCode">
-              <img [src]="phoneCode.img">
-              +{{phoneCode.phoneCode}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+        <div class="sign-select">
+          <mat-form-field [ngClass]="{'invalid':!signupForm.get('phone').valid && signupForm.get('phone').touched}">
+            <mat-select formControlName="phoneCode">
+              <mat-option *ngFor="let phoneCode of phoneCodes" [value]="phoneCode.phoneCode">
+                <img [src]="phoneCode.img">
+                +{{phoneCode.phoneCode}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
         <input type="number" name="phone" formControlName="phone">
       </div>
       <ul class="sign-error">
