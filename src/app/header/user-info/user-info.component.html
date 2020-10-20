@@ -11,7 +11,6 @@
     [@slideLeftRight]="userInfoMenuState"
     (@slideLeftRight.start)="disableButton = true"
     (@slideLeftRight.done)="disableButton = false"
-    #content
     *ngFor="let userItem of userInfo">
       <div class="user-image-container">
         <app-loading-spinner class="user-loading-spinner" *ngIf="isLoading"></app-loading-spinner>

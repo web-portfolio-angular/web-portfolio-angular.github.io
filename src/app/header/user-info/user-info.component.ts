@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { UserAdditionalInfo } from '../../shared/models/user-additional-info.model';
 import { FirestoreService } from '../../shared/services/firestore.service';
@@ -10,7 +11,6 @@ import { ThemeService } from '../../shared/services/theme.service';
 import { AuthService } from '../../shared/services/auth.service';
 import { PhoneCodes } from '../../shared/models/phone-codes.model';
 import { OverlayService } from '../../shared/services/overlay.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-info',
