@@ -18,7 +18,7 @@ export class SignupComponent implements OnInit {
   isLoading: boolean = false;
   phoneCodes: PhoneCodes[];
   errorMsgOnloadPhoneCodes: string = null;
-  defaultUserImg: string = 'https://firebasestorage.googleapis.com/v0/b/portfolio-e1ec5.appspot.com/o/userImages%2Funnamed.jpg?alt=media&token=9d3991e6-2098-4f81-92e6-69c31195d1c2';
+  defaultUserImg: string = 'https://firebasestorage.googleapis.com/v0/b/portfolio-e1ec5.appspot.com/o/userImages%2Fdefault-user.jpg?alt=media&token=7487f1ec-16b1-4814-9943-cb30c8ce1eab';  
 
   constructor(
     private authService: AuthService, 
