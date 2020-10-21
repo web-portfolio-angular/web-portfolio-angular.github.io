@@ -40,6 +40,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
       this.isAuth = !user ? false : true;
     })
 
+    this.additionUserInfoService.getUserAdditionalData();
     this.userAdditionalDataSub = this.additionUserInfoService.userAdditionalDataSubject.subscribe(userData => {
       this.userAdditionalData = userData;
     })
@@ -89,23 +90,18 @@ export class CommentsComponent implements OnInit, OnDestroy {
       this.errorMsgOnSubmit = error.message;
     });    
   }
-  
-  onReply(name: string, date: firebase.firestore.Timestamp, comment: string, id: string, replyForm) {
+
+  onReply(orgCommentId: string, replyForm) {
     if(!this.replyForm.valid){
       return;
     }
-    const orgComment: Comment = {
-      name: name,
-      date: date,
-      comment: comment,
-      replies: [{
-        name: this.userAdditionalData[0].name,
-        date: firebase.firestore.Timestamp.now(),
-        comment: replyForm.value.replyArea
-      }],
-      id: id
-    }
-    this.firestore.updateComment(orgComment)
+
+    const name = this.userAdditionalData[0].name;
+    const date = firebase.firestore.Timestamp.now();
+    const comment = replyForm.value.replyArea;
+    const id = orgCommentId;
+    const post: Comment = {name, date, comment, id};
+    this.firestore.updateComment(post)
     .then(() => {
       this.isReply = null;
       this.replyForm.reset();

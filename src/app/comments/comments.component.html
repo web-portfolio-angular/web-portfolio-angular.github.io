@@ -43,12 +43,7 @@
           class="replyForm" 
           *ngIf="isReply == comment.id" 
           [formGroup]="replyForm" 
-          (ngSubmit)="onReply(
-            comment.name,
-            comment.date, 
-            comment.comment,
-            comment.id,
-            replyForm)">
+          (ngSubmit)="onReply(comment.id, replyForm)">
             <div>
               <textarea class="comments-textarea" placeholder="Type your reply..."
                 formControlName="replyArea"></textarea>

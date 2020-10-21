@@ -52,12 +52,12 @@ export class FirestoreService {
     .snapshotChanges();
   }
 
-  updateComment(orgComment: Comment){
-   return this.firestore.doc('comments/' + orgComment.id).update({
+  updateComment(post: Comment){
+   return this.firestore.doc('comments/' + post.id).update({
       replies: firebase.firestore.FieldValue.arrayUnion({
-        name: orgComment.replies[0].name,
-        date: orgComment.replies[0].date,
-        comment: orgComment.replies[0].comment
+        name: post.name,
+        date: post.date,
+        comment: post.comment
       })
     });
   }
