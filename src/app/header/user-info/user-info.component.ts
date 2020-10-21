@@ -11,6 +11,7 @@ import { ThemeService } from '../../shared/services/theme.service';
 import { AuthService } from '../../shared/services/auth.service';
 import { PhoneCodes } from '../../shared/models/phone-codes.model';
 import { OverlayService } from '../../shared/services/overlay.service';
+import { AdditionUserInfoService } from '../../shared/services/user-additional-info.service';
 
 @Component({
   selector: 'app-user-info',
@@ -20,11 +21,12 @@ import { OverlayService } from '../../shared/services/overlay.service';
 })
 export class UserInfoComponent implements OnInit, OnDestroy {
   private userInfoMenuStateSub: Subscription;
-  userInfo: UserAdditionalInfo[];
+  private UserAdditionalInfoSub: Subscription;
+  userAdditionalData: UserAdditionalInfo[];
   disableButton: boolean = false;
   changePhoneForm: FormGroup;
   changePhoneButton: boolean = false;
-  isChecked: boolean;
+  darkMode: boolean;
   phoneCodes: PhoneCodes[];
   errorMsgOnPhoneChange: string = null
   errorMsgOnloadPhoneCodes: string = null;
@@ -37,6 +39,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   errorMsgOnAvatarUpload: string;
   isLoading = false;
 
+
   constructor(
     private firestore: FirestoreService,
     private formBuilder: FormBuilder,
@@ -44,13 +47,29 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     private authService: AuthService, 
     private router: Router,
     private overlayService: OverlayService,
-    private angularFireStorage: AngularFireStorage
+    private angularFireStorage: AngularFireStorage,
+    private additionUserInfoService: AdditionUserInfoService
   ) {}
 
   ngOnInit() {
-    this.userDetails();
-    this.changePhoneForm = this.formBuilder.group({});
-    this.isChecked = this.themeService.isChecked;
+    this.additionUserInfoService.getUserAdditionalData();
+    this.userInfoMenuStateSub = this.additionUserInfoService.userAdditionalDataSubject.subscribe(userData => {
+      this.userAdditionalData = userData;
+
+      if(!this.userAdditionalData){
+        return
+      }
+
+      this.changePhoneForm = this.formBuilder.group({
+        phone: new FormControl(this.userAdditionalData[0].phone, Validators.required),
+        phoneCode: new FormControl(this.userAdditionalData[0].phoneCode, Validators.required)  
+      });
+
+      this.defaultImg = this.userAdditionalData[0].userImg;
+      this.imgLocalPath = this.defaultImg;
+    })
+
+    this.darkMode = this.themeService.darkMode;
 
     this.firestore.getPhoneCodes().subscribe(data => {
       this.phoneCodes = data.map(e => {
@@ -70,40 +89,14 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    localStorage.removeItem('userAdditionalData');
     this.userInfoMenuStateSub.unsubscribe();
+    this.UserAdditionalInfoSub.unsubscribe();
   }
-
-  userDetails() {
-    const userData: {
-      email: string,
-      id: string,
-      _tokenId: string,
-      _tokenExpTime: string
-    } = JSON.parse(localStorage.getItem('userData'));
-    if (!userData) {
-      return;
-    }
-    this.firestore.getRegistration(userData.email).subscribe(ressData => {
-      this.userInfo = ressData.map(e => {
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data() as UserAdditionalInfo
-        }
-      })
-      localStorage.setItem('userAdditionalData', JSON.stringify(this.userInfo));
-      this.changePhoneForm.addControl('phone', new FormControl(this.userInfo[0].phone, Validators.required));
-      this.changePhoneForm.addControl('phoneCode', new FormControl(this.userInfo[0].phoneCode, Validators.required));
-      this.defaultImg = this.userInfo[0].userImg;
-      this.imgLocalPath = this.defaultImg;
-    })
-  }
-
 
   onSubmit(changePhoneForm) {
     const phoneCode = changePhoneForm.value.phoneCode;
     const phone = changePhoneForm.value.phone;
-    const id = this.userInfo[0].id;
+    const id = this.userAdditionalData[0].id;
     const newIfo = { phoneCode, phone, id };
     this.firestore.updatePhone(newIfo)
       .then(() => {
@@ -117,7 +110,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
 
   changeTheme() {
     JSON.parse(localStorage.getItem('theme')) == 'theme-light' ? this.themeService.setDark() : this.themeService.setLight();
-    this.isChecked = this.themeService.isChecked;
+    this.darkMode = this.themeService.darkMode;
   }
 
   onLogout() {
@@ -149,7 +142,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     .then(uploadTask => {
       uploadTask.ref.getDownloadURL().then(url => {
         const userImg = url;
-        const id = this.userInfo[0].id;
+        const id = this.userAdditionalData[0].id;
         const newIfo = { userImg, id };
         this.firestore.updateUserImg(newIfo)
         .then(() => {

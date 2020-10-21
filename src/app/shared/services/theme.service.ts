@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 
 export class ThemeService {
-  isChecked: boolean;
+  darkMode: boolean;
 
   constructor() { }
 
@@ -13,11 +13,11 @@ export class ThemeService {
     if (!currentTheme) {
       localStorage.setItem('theme', JSON.stringify('theme-light'));      
       document.body.classList.add('theme-light');
-      this.isChecked = false;   
+      this.darkMode = false;   
     } else {
       document.body.classList.remove('theme-light', 'theme-dark');
       document.body.classList.add(currentTheme);
-      currentTheme == 'theme-light' ? this.isChecked = false : this.isChecked = true;      
+      currentTheme == 'theme-light' ? this.darkMode = false : this.darkMode = true;      
     }
   }
 

@@ -11,7 +11,7 @@
     [@slideLeftRight]="userInfoMenuState"
     (@slideLeftRight.start)="disableButton = true"
     (@slideLeftRight.done)="disableButton = false"
-    *ngFor="let userItem of userInfo">
+    *ngIf="userAdditionalData">
       <div class="user-image-container">
         <app-loading-spinner class="user-loading-spinner" *ngIf="isLoading"></app-loading-spinner>
         <div 
@@ -37,7 +37,7 @@
         <div class="user-name-img">
           <img src="../../../assets/img/sign/user.png">
         </div>
-        <div>{{ userItem.name }}</div>
+        <div>{{ userAdditionalData[0].name }}</div>
       </div>
       <div class="phone-container">
         <div class="phone-info">
@@ -45,8 +45,8 @@
             <div class="user-phone-img">
               <img src="../../../assets/img/sign/phone.png">
             </div>
-            <div *ngIf="!changePhoneButton">+{{ userItem.phoneCode }}</div>
-            <div *ngIf="!changePhoneButton">{{ userItem.phone }}</div>
+              <div *ngIf="!changePhoneButton">+{{ userAdditionalData[0].phoneCode }}</div>
+              <div *ngIf="!changePhoneButton">{{ userAdditionalData[0].phone }}</div>
           </div>
           <button class="change-phone-btn" *ngIf="!changePhoneButton" (click)="changePhoneButton = true"></button>
         </div>  
@@ -74,14 +74,14 @@
         <div class="user-email-img">
           <img src="../../../assets/img/sign/email.png">
         </div>
-        <div>{{ userItem.email }}</div>
+        <div>{{ userAdditionalData[0].email }}</div>
       </div>
       <div class="switch-theme">
         <div class="theme">
           <img src="../../../assets/img/user-info/sun.png">
         </div>
         <div>
-          <mat-slide-toggle (change)="changeTheme()" [checked]="isChecked"></mat-slide-toggle>
+          <mat-slide-toggle (change)="changeTheme()" [checked]="darkMode"></mat-slide-toggle>
         </div>
         <div class="theme">
           <img src="../../../assets/img/user-info/moon.png">
