@@ -6,6 +6,8 @@ import * as firebase from 'firebase/app';
 import { FirestoreService } from '../shared/services/firestore.service';
 import { Comment } from '../shared/models/comment.model';
 import { AuthService } from '../shared/services/auth.service';
+import { AdditionUserInfoService } from '../shared/services/user-additional-info.service';
+import { UserAdditionalInfo } from '../shared/models/user-additional-info.model';
 
 @Component({
   selector: 'app-comments',
@@ -14,6 +16,8 @@ import { AuthService } from '../shared/services/auth.service';
 })
 export class CommentsComponent implements OnInit, OnDestroy {
   private subUser: Subscription;
+  private userAdditionalDataSub: Subscription;
+  userAdditionalData: UserAdditionalInfo[];
   isAuth: boolean = false;
   postForm: FormGroup;
   replyForm: FormGroup;
@@ -27,12 +31,17 @@ export class CommentsComponent implements OnInit, OnDestroy {
   constructor(
     private firestore: FirestoreService,
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private additionUserInfoService: AdditionUserInfoService
   ) {}
 
   ngOnInit() {
     this.subUser = this.authService.user.subscribe(user => {
       this.isAuth = !user ? false : true;
+    })
+
+    this.userAdditionalDataSub = this.additionUserInfoService.userAdditionalDataSubject.subscribe(userData => {
+      this.userAdditionalData = userData;
     })
 
     this.isLoading = true;
@@ -60,22 +69,14 @@ export class CommentsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     this.subUser.unsubscribe();
+    this.userAdditionalDataSub.unsubscribe();
   }
 
   onSubmit(postForm){
     if(!this.postForm.valid){
       return;
     }
-    const userAdditionalData: {
-      name: string,
-      phone: number,
-      email: string,
-      id: string
-    } = JSON.parse(localStorage.getItem('userAdditionalData'))
-    if(!userAdditionalData){
-      return;
-    }
-    const name = userAdditionalData[0].name;
+    const name = this.userAdditionalData[0].name;
     const date = firebase.firestore.Timestamp.now();
     const comment = postForm.value.commentArea;
     const post: Comment = {name, date, comment};
@@ -89,17 +90,8 @@ export class CommentsComponent implements OnInit, OnDestroy {
     });    
   }
   
-  onReply(name: string, date: firebase.firestore.Timestamp, comment: string, id: string, replyForm){    
+  onReply(name: string, date: firebase.firestore.Timestamp, comment: string, id: string, replyForm) {
     if(!this.replyForm.valid){
-      return;
-    }
-    const userAdditionalData: {
-      name: string,
-      phone: number,
-      email: string,
-      id: string
-    } = JSON.parse(localStorage.getItem('userAdditionalData'))
-    if(!userAdditionalData){
       return;
     }
     const orgComment: Comment = {
@@ -107,7 +99,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
       date: date,
       comment: comment,
       replies: [{
-        name: userAdditionalData[0].name,
+        name: this.userAdditionalData[0].name,
         date: firebase.firestore.Timestamp.now(),
         comment: replyForm.value.replyArea
       }],
@@ -122,5 +114,10 @@ export class CommentsComponent implements OnInit, OnDestroy {
     .catch(error => {
       this.errorMsgOnReply = error.message;
     });
+  }
+
+  closeReplay() {
+    this.isReply = null;
+    this.replyForm.reset()
   }
 }
