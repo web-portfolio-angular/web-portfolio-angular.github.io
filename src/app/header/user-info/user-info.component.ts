@@ -17,11 +17,13 @@ import { AdditionUserInfoService } from '../../shared/services/user-additional-i
   selector: 'app-user-info',
   templateUrl: './user-info.component.html',
   styles: [],
-  animations: [Animations.slideLeftRight]
+  animations: [
+    Animations.slideLeftRight
+  ]
 })
 export class UserInfoComponent implements OnInit, OnDestroy {
   private userInfoMenuStateSub: Subscription;
-  private UserAdditionalInfoSub: Subscription;
+  private userAdditionalInfoSub: Subscription;
   userAdditionalData: UserAdditionalInfo[];
   disableButton: boolean = false;
   changePhoneForm: FormGroup;
@@ -51,12 +53,12 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     private additionUserInfoService: AdditionUserInfoService
   ) {}
 
-  ngOnInit() {
+  ngOnInit() {    
     this.additionUserInfoService.getUserAdditionalData();
-    this.userInfoMenuStateSub = this.additionUserInfoService.userAdditionalDataSubject.subscribe(userData => {
+    this.userAdditionalInfoSub = this.additionUserInfoService.userAdditionalDataSubject.subscribe(userData => {
       this.userAdditionalData = userData;
 
-      if(!this.userAdditionalData){
+      if(!this.userAdditionalData) {
         return
       }
 
@@ -90,9 +92,9 @@ export class UserInfoComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.userInfoMenuStateSub.unsubscribe();
-    this.UserAdditionalInfoSub.unsubscribe();
+    this.userAdditionalInfoSub.unsubscribe();
   }
-
+  
   onSubmit(changePhoneForm) {
     const phoneCode = changePhoneForm.value.phoneCode;
     const phone = changePhoneForm.value.phone;
@@ -122,6 +124,16 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     this.overlayService.swithcUserInfoState();    
   }
 
+  changeImgMode() {
+    this.isInChangeImgMode = !this.isInChangeImgMode;
+    if (!this.isInChangeImgMode) {
+      this.imgLocalPath = this.defaultImg;
+      this.file = undefined;
+      console.log('test');
+      
+    }    
+  }
+
   uploadAvatar(event) {
     this.file = event.target.files[0];  
     if (this.file) {
@@ -148,13 +160,15 @@ export class UserInfoComponent implements OnInit, OnDestroy {
         .then(() => {
           this.isInChangeImgMode = false;
           this.errorMsgOnAvatarUpload = null;
+          this.defaultImg = url;
         })
         .catch(error => {
           this.errorMsgOnAvatarUpload = error.message;
         })
       })      
       this.errorMsgOnAvatarUpload = null;
-      this.isLoading = false; 
+      this.isLoading = false;
+      this.file = undefined;
     })
     .catch(error => {
       this.errorMsgOnAvatarUpload = error.message;

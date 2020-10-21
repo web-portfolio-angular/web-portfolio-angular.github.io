@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 import { FirestoreService } from '../../shared/services/firestore.service';
 import { UserAdditionalInfo } from '../models/user-additional-info.model';
 
 @Injectable({providedIn: 'root'})
 export class AdditionUserInfoService {
-  userAdditionalDataSubject = new BehaviorSubject<any>(null);
+  userAdditionalDataSubject = new Subject<any>();
   userAdditionalData: UserAdditionalInfo[];
 
   constructor( private firestore: FirestoreService){}
