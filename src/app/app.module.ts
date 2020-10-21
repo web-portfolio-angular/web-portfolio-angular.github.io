@@ -40,9 +40,10 @@ export class AppModule {}
 // sign autofill color
 
 // userAditional info v service
+// close img button da vrushta starata snimka
 
-//  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
-//  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+// <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+// <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 // mat-typography
 
 // ng build --prod --base-href "https://web-portfolio-angular.github.io"
