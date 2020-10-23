@@ -24,7 +24,7 @@
     padding: 10px;
     background: rgba($black, 0.95);
     color: $color3-light;
-    border-bottom-left-radius: 5px;
+    border-bottom-left-radius: 3px;
     box-shadow: -2px 2px 5px 0px rgba($default-red, 0.9);
     >div {
       padding: 10px 0;
@@ -107,6 +107,9 @@
               line-height: 25px;
             }
           }
+        }
+        .phone-code {
+          margin-right: 5px;
         }
         .change-phone-btn {
           width: 20px;
