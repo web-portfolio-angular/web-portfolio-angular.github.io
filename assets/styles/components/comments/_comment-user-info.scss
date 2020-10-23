@@ -18,7 +18,9 @@
     padding: 20px;
     z-index: 500;
     &__avatar {
-      display: block;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
       border: 3px solid $default-red;
       border-radius: 50%;
       margin: 0 auto;
