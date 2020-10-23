@@ -5,10 +5,12 @@
     <div>
       <div class="comment" *ngFor="let comment of comments">
         <div class="comment-header">
-          <img [src]="comment.email | getImage | async">
-          <p class="comment-name">
-            {{ comment.name }}
-          </p>
+          <div class="comment-header-left">
+            <img class="comment-img" [src]="comment.email | getImage | async">
+            <p class="comment-name">
+              {{ comment.name }}
+            </p>
+          </div>
           <p class="comment-date">
             {{ comment.date.toDate() | date:'dd.MM.yyyy' }} at {{ comment.date.toDate() | date:'HH:mm' }}
           </p>
@@ -18,9 +20,12 @@
           <div class="comment-replies">
             <div class="reply" *ngFor="let reply of comment.replies">
               <div class="comment-header">
-                <p class="comment-name">
-                  {{ reply.name }}
-                </p>
+                <div class="comment-header-left">
+                  <img class="comment-img" [src]="reply.email | getImage | async">
+                  <p class="comment-name">
+                    {{ reply.name }}
+                  </p>
+                </div>
                 <p class="comment-date">
                   {{ reply.date.toDate() | date:'dd.MM.yyyy' }} at {{ reply.date.toDate() | date:'HH:mm' }}
                 </p>
