@@ -5,7 +5,7 @@
     <div>
       <div class="comment" *ngFor="let comment of comments">
         <div class="comment-header">
-          <div class="comment-header-left">
+          <div class="comment-header-left" (click)="onShowUserInfo(comment.email, comment.id)">
             <img class="comment-img" [src]="comment.email | getImage | async" onerror="this.src='../../assets/img/shared/default-user.jpg'">
             <p class="comment-name">
               {{ comment.name }}
@@ -14,6 +14,10 @@
           <p class="comment-date">
             {{ comment.date.toDate() | date:'dd.MM.yyyy' }} at {{ comment.date.toDate() | date:'HH:mm' }}
           </p>
+          <div *ngIf="commentId == comment.id && showUserInfo" class="comment-user-info-container" (click)="commentId = null && showUserInfo = false">
+            <!-- <app-comment-user-info></app-comment-user-info> -->
+            <p>TEST</p>
+          </div>          
         </div>
         <div class="comment-content">
           <p class="comment-content-text">{{ comment.comment }}</p>

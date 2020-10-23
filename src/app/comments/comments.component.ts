@@ -27,6 +27,8 @@ export class CommentsComponent implements OnInit, OnDestroy {
   errorMsgOnloadComments: string = null;
   errorMsgOnSubmit: string = null;
   errorMsgOnReply: string = null;
+  showUserInfo: boolean = false;
+  commentId: string = null;
 
   constructor(
     private firestore: FirestoreService,
@@ -117,5 +119,10 @@ export class CommentsComponent implements OnInit, OnDestroy {
   closeReplay() {
     this.isReply = null;
     this.replyForm.reset()
+  }
+
+  onShowUserInfo(email: string, id: string) {
+    this.commentId = id;
+    this.showUserInfo = !this.showUserInfo;
   }
 }
