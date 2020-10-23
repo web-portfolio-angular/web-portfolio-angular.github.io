@@ -5,6 +5,7 @@ import * as firebase from 'firebase/app';
 
 import { FirestoreService } from '../shared/services/firestore.service';
 import { Comment } from '../shared/models/comment.model';
+import { CommentReply } from '../shared/models/comment-reply.model';
 import { AuthService } from '../shared/services/auth.service';
 import { AdditionUserInfoService } from '../shared/services/user-additional-info.service';
 import { UserAdditionalInfo } from '../shared/models/user-additional-info.model';
@@ -103,8 +104,9 @@ export class CommentsComponent implements OnInit, OnDestroy {
     const email = this.userAdditionalData[0].email;
     const date = firebase.firestore.Timestamp.now();
     const comment = replyForm.value.replyArea;
-    const id = orgCommentId;
-    const post: Comment = {name, email, date, comment, id};
+    const id = this.generateReplayId();
+    const commentId = orgCommentId;
+    const post: CommentReply = {name, email, date, comment, id, commentId};
     this.firestore.updateComment(post)
     .then(() => {
       this.isReply = null;
@@ -116,13 +118,28 @@ export class CommentsComponent implements OnInit, OnDestroy {
     });
   }
 
+  generateReplayId() {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for ( var i = 0; i < 20; i++ ) {
+       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+ }
+
   closeReplay() {
     this.isReply = null;
     this.replyForm.reset()
   }
 
-  onShowUserInfo(email: string, id: string) {
+  onShowUserInfo(id: any) {
     this.commentId = id;
-    this.showUserInfo = !this.showUserInfo;
+    this.showUserInfo = true;    
+  }
+
+  closeUserInfo() {
+    this.commentId = null;
+    this.showUserInfo = false;
   }
 }

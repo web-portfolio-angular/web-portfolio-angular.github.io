@@ -41,6 +41,9 @@ export class AppModule {}
 
 // userAditional info v service
 // comment user status
+// bug pri burz klik na navigaciite
+// klient da si zibra kakvo info da se vijda za nego
+// da premetstq overlayeq na navovete
 
 // <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
 // <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

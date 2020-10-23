@@ -45,7 +45,7 @@
             <div class="user-phone-img">
               <img src="../../../assets/img/sign/phone.png">
             </div>
-              <div *ngIf="!changePhoneButton">+{{ userAdditionalData[0].phoneCode }}</div>
+              <div class="phone-code" *ngIf="!changePhoneButton">+{{ userAdditionalData[0].phoneCode }}</div>
               <div *ngIf="!changePhoneButton">{{ userAdditionalData[0].phone }}</div>
           </div>
           <button class="change-phone-btn" *ngIf="!changePhoneButton" (click)="changePhoneButton = true"></button>

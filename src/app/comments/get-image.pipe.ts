@@ -9,7 +9,7 @@ export class GetImagePipe implements PipeTransform {
 
   constructor(private firestore: FirestoreService) { }
 
-  transform(value: string) {
+  transform(value: string, exponent: string) {
     return this.firestore.getRegistration(value).pipe(map(ressData => {
       const userAdditionalData = ressData.map(e => {
         return {
@@ -17,7 +17,12 @@ export class GetImagePipe implements PipeTransform {
           ...e.payload.doc.data() as UserAdditionalInfo
         }
       })
-      return userAdditionalData[0].userImg;
+      switch (exponent) {
+        case 'name': return userAdditionalData[0].name;
+        case 'phoneCode': return userAdditionalData[0].phoneCode;
+        case 'phone': return userAdditionalData[0].phone;
+        case 'userImg': return userAdditionalData[0].userImg;
+      }
     }))
   }
 }

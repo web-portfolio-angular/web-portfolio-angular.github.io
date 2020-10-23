@@ -5,8 +5,10 @@
     <div>
       <div class="comment" *ngFor="let comment of comments">
         <div class="comment-header">
-          <div class="comment-header-left" (click)="onShowUserInfo(comment.email, comment.id)">
-            <img class="comment-img" [src]="comment.email | getImage | async" onerror="this.src='../../assets/img/shared/default-user.jpg'">
+          <div class="comment-header-left" (click)="onShowUserInfo(comment.id)">
+            <img class="comment-img" 
+              [src]="comment.email | getImage: 'userImg' | async" 
+              onerror="this.src='../../assets/img/shared/default-user.jpg'">
             <p class="comment-name">
               {{ comment.name }}
             </p>
@@ -14,18 +16,57 @@
           <p class="comment-date">
             {{ comment.date.toDate() | date:'dd.MM.yyyy' }} at {{ comment.date.toDate() | date:'HH:mm' }}
           </p>
-          <div *ngIf="commentId == comment.id && showUserInfo" class="comment-user-info-container" (click)="commentId = null && showUserInfo = false">
-            <!-- <app-comment-user-info></app-comment-user-info> -->
-            <p>TEST</p>
+          <div 
+            *ngIf="commentId == comment.id && showUserInfo"            
+            class="comment-user-info-container">
+            <div class="comment-user-info">
+              <div class="comment-user-info__close-btn" (click)="closeUserInfo()">X</div>
+              <img class="comment-user-info__avatar"
+                [src]="comment.email | getImage: 'userImg' | async" 
+                nerror="this.src='../../assets/img/shared/default-user.jpg'"
+              >
+              <div class="comment-user-info__element">
+                <div class="comment-info-img">
+                  <img src="../../assets//img/sign/user.png">
+                </div>
+                <div>
+                  {{ comment.email | getImage: 'name' | async }}
+                </div>
+              </div>
+              <div class="comment-user-info__element">
+                <div class="comment-info-img">
+                  <img src="../../assets//img/sign/phone.png">
+                </div>
+                <div>
+                  <span>
+                    +{{ comment.email | getImage: 'phoneCode' | async }}                    
+                  </span>
+                  <span>
+                    {{ comment.email | getImage: 'phone' | async }}
+                  </span>
+                </div>
+              </div>
+              <div class="comment-user-info__element">
+                <div class="comment-info-img">
+                  <img src="../../assets//img/sign/email.png">
+                </div>
+                <div>
+                  <a href="mailto:{{ comment.email }}">{{ comment.email }}</a>              
+                </div>
+              </div>
+            </div>
+            <div (click)="closeUserInfo()" class="comment-user-overlay"></div>
           </div>          
         </div>
         <div class="comment-content">
           <p class="comment-content-text">{{ comment.comment }}</p>
           <div class="comment-replies">
-            <div class="reply" *ngFor="let reply of comment.replies">
+            <div class="reply" *ngFor="let reply of comment.replies; let i = index">
               <div class="comment-header">
-                <div class="comment-header-left">
-                  <img class="comment-img" [src]="reply.email | getImage | async" onerror="this.src='../../assets/img/shared/default-user.jpg'">
+                <div class="comment-header-left" (click)="onShowUserInfo(reply.id)">
+                  <img class="comment-img" 
+                    [src]="reply.email | getImage: 'userImg' | async" 
+                    onerror="this.src='../../assets/img/shared/default-user.jpg'">
                   <p class="comment-name">
                     {{ reply.name }}
                   </p>
@@ -33,6 +74,47 @@
                 <p class="comment-date">
                   {{ reply.date.toDate() | date:'dd.MM.yyyy' }} at {{ reply.date.toDate() | date:'HH:mm' }}
                 </p>
+                <div
+                *ngIf="commentId == reply.id && showUserInfo"            
+                class="comment-user-info-container">
+                <div class="comment-user-info">
+                  <div class="comment-user-info__close-btn" (click)="closeUserInfo()">X</div>
+                  <img class="comment-user-info__avatar"
+                    [src]="reply.email | getImage: 'userImg' | async" 
+                    nerror="this.src='../../assets/img/shared/default-user.jpg'"
+                  >
+                  <div class="comment-user-info__element">
+                    <div class="comment-info-img">
+                      <img src="../../assets//img/sign/user.png">
+                    </div>
+                    <div>
+                      {{ reply.email | getImage: 'name' | async }}
+                    </div>
+                  </div>
+                  <div class="comment-user-info__element">
+                    <div class="comment-info-img">
+                      <img src="../../assets//img/sign/phone.png">
+                    </div>
+                    <div>
+                      <span>
+                        +{{ reply.email | getImage: 'phoneCode' | async }}                    
+                      </span>
+                      <span>
+                        {{ reply.email | getImage: 'phone' | async }}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="comment-user-info__element">
+                    <div class="comment-info-img">
+                      <img src="../../assets//img/sign/email.png">
+                    </div>
+                    <div>
+                      <a href="mailto:{{ reply.email }}">{{ reply.email }}</a>              
+                    </div>
+                  </div>
+                </div>
+                <div (click)="closeUserInfo()" class="comment-user-overlay"></div>
+              </div>  
               </div>
               <div class="comment-content">
                 <p class="comment-content-text">{{ reply.comment }}</p>

@@ -4,6 +4,7 @@ import * as firebase from 'firebase/app';
 
 import { UserAdditionalInfo } from '../models/user-additional-info.model';
 import { Comment } from '../models/comment.model';
+import { CommentReply } from '../models/comment-reply.model';
 
 
 @Injectable({providedIn: 'root'})
@@ -52,12 +53,14 @@ export class FirestoreService {
     .snapshotChanges();
   }
 
-  updateComment(post: Comment){
-   return this.firestore.doc('comments/' + post.id).update({
+  updateComment(post: CommentReply){
+   return this.firestore.doc('comments/' + post.commentId).update({
       replies: firebase.firestore.FieldValue.arrayUnion({
         name: post.name,
+        email: post.email,
         date: post.date,
-        comment: post.comment
+        comment: post.comment,
+        id: post.id
       })
     });
   }
