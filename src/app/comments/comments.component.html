@@ -6,7 +6,7 @@
       <div class="comment" *ngFor="let comment of comments">
         <div class="comment-header">
           <div class="comment-header-left">
-            <img class="comment-img" [src]="comment.email | getImage | async">
+            <img class="comment-img" [src]="comment.email | getImage | async" onerror="this.src='../../assets/img/shared/default-user.jpg'">
             <p class="comment-name">
               {{ comment.name }}
             </p>
@@ -21,7 +21,7 @@
             <div class="reply" *ngFor="let reply of comment.replies">
               <div class="comment-header">
                 <div class="comment-header-left">
-                  <img class="comment-img" [src]="reply.email | getImage | async">
+                  <img class="comment-img" [src]="reply.email | getImage | async" onerror="this.src='../../assets/img/shared/default-user.jpg'">
                   <p class="comment-name">
                     {{ reply.name }}
                   </p>
