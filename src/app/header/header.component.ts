@@ -48,6 +48,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subUser.unsubscribe();
     this.navigationMenuSub.unsubscribe();
     this.overlaySub.unsubscribe();
+    this.disableButtonSub.unsubscribe();
   }
 
   navigationInfoState(){

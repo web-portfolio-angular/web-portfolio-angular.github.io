@@ -96,6 +96,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.userInfoMenuStateSub.unsubscribe();
+    this.disableButtonSub.unsubscribe();
     this.userAdditionalInfoSub.unsubscribe();
   }
  
