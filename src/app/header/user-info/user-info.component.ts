@@ -23,9 +23,10 @@ import { AdditionUserInfoService } from '../../shared/services/user-additional-i
 })
 export class UserInfoComponent implements OnInit, OnDestroy {
   private userInfoMenuStateSub: Subscription;
+  private disableButtonSub: Subscription;
   private userAdditionalInfoSub: Subscription;
   userAdditionalData: UserAdditionalInfo[];
-  disableButton: boolean = false;
+  disableButton: boolean;
   changePhoneForm: FormGroup;
   changePhoneButton: boolean = false;
   darkMode: boolean;
@@ -86,6 +87,10 @@ export class UserInfoComponent implements OnInit, OnDestroy {
 
     this.userInfoMenuStateSub = this.overlayService.userInfoMenuStateSubject.subscribe(string => {
       this.userInfoMenuState = string;       
+    })
+    
+    this.disableButtonSub = this.overlayService.disableButtonSubject.subscribe(booloean => {
+      this.disableButton = booloean;       
     })
   }
 
@@ -172,4 +177,12 @@ export class UserInfoComponent implements OnInit, OnDestroy {
       this.isLoading = false;  
     });
   }
+
+  onDisableButton() {
+		this.overlayService.onDisableButton();
+	}
+
+	onEnableButton() {
+		this.overlayService.onEnableButton();
+	}
 }

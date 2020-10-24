@@ -12,6 +12,9 @@ export class OverlayService {
 	overlaySubject = new BehaviorSubject <boolean>(null);
 	isOverlayShown: boolean = false;
 
+	disableButtonSubject = new BehaviorSubject <boolean>(null);
+	disableButton: boolean = false;
+
 	constructor() {
 		this.userInfoMenuStateSubject.next(this.userInfoMenuState);
 		this.navigationMenuStateSubject.next(this.navigationMenuState);
@@ -54,5 +57,15 @@ export class OverlayService {
 		this.navigationMenuStateSubject.next(this.navigationMenuState);
 		this.userInfoMenuStateSubject.next(this.userInfoMenuState);
 		this.overlaySubject.next(this.isOverlayShown);
+	}
+
+	onDisableButton() {
+		this.disableButton = true;
+		this.disableButtonSubject.next(this.disableButton);
+	}
+
+	onEnableButton() {
+		this.disableButton = false;
+		this.disableButtonSubject.next(this.disableButton);
 	}
 }

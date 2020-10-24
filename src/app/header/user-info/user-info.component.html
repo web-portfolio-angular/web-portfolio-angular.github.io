@@ -9,8 +9,8 @@
   <div 
     class="user-info-container__user-info-content" 
     [@slideLeftRight]="userInfoMenuState"
-    (@slideLeftRight.start)="disableButton = true"
-    (@slideLeftRight.done)="disableButton = false"
+    (@slideLeftRight.start)="onDisableButton()"
+    (@slideLeftRight.done)="onEnableButton()"
     *ngIf="userAdditionalData">
       <div class="user-image-container">
         <app-loading-spinner class="user-loading-spinner" *ngIf="isLoading"></app-loading-spinner>

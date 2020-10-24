@@ -15,8 +15,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private subUser: Subscription;
   private navigationMenuSub: Subscription;
   private overlaySub: Subscription;
+  private disableButtonSub: Subscription;
   isAuth: boolean = false;
-  disableButton: boolean = false;
+  disableButton: boolean;
   navigationMenuState: string;
   isOverlayShown: boolean;
 
@@ -37,6 +38,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.navigationMenuSub = this.overlayService.navigationMenuStateSubject.subscribe(string => {
       this.navigationMenuState = string;
     })
+
+    this.disableButtonSub = this.overlayService.disableButtonSubject.subscribe(booloean => {
+      this.disableButton = booloean;       
+    })
   }
 
   ngOnDestroy(){
@@ -52,4 +57,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   overlayClick() {
     this.overlayService.overlayClick();
   }
+
+  onDisableButton() {
+		this.overlayService.onDisableButton();
+	}
+
+	onEnableButton() {
+		this.overlayService.onEnableButton();
+	}
 }
