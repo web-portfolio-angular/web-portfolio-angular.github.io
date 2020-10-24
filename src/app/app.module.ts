@@ -39,8 +39,6 @@ export class AppModule {}
 // loading spinner sass
 // sign autofill color
 
-// userAditional info v service
-// comment user status
 // bug pri burz klik na navigaciite
 // klient da si zibra kakvo info da se vijda za nego
 // da premetstq overlayeq na navovete
