@@ -14,9 +14,11 @@ import { OverlayService } from '../shared/services/overlay.service';
 export class HeaderComponent implements OnInit, OnDestroy {
   private subUser: Subscription;
   private navigationMenuSub: Subscription;
+  private overlaySub: Subscription;
   isAuth: boolean = false;
   disableButton: boolean = false;
   navigationMenuState: string;
+  isOverlayShown: boolean;
 
 
   constructor(
@@ -28,18 +30,26 @@ export class HeaderComponent implements OnInit, OnDestroy {
      this.isAuth = !user ? false : true;
     })
 
+    this.overlaySub = this.overlayService.overlaySubject.subscribe(boolean => {
+      this.isOverlayShown = boolean;    
+    })
+
     this.navigationMenuSub = this.overlayService.navigationMenuStateSubject.subscribe(string => {
-      this.navigationMenuState = string;    
+      this.navigationMenuState = string;
     })
   }
 
   ngOnDestroy(){
     this.subUser.unsubscribe();
     this.navigationMenuSub.unsubscribe();
+    this.overlaySub.unsubscribe();
   }
 
   navigationInfoState(){
     this.overlayService.navigationInfoState();
   }
   
+  overlayClick() {
+    this.overlayService.overlayClick();
+  }
 }
