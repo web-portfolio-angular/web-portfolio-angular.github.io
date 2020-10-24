@@ -7,7 +7,7 @@
         <div class="comment-header">
           <div class="comment-header-left" (click)="onShowUserInfo(comment.id)">
             <div class="comment-img"
-             [ngStyle]="{'background-image': 'url(' + (comment.email | getImage:'userImg' | async) + ')'}">
+             [ngStyle]="{'background-image': 'url(' + (comment.email | getUserInfo:'userImg' | async) + ')'}">
             </div>
             <p class="comment-name">
               {{ comment.name }}
@@ -22,14 +22,14 @@
             <div class="comment-user-info">
               <div class="comment-user-info__close-btn" (click)="closeUserInfo()">X</div>
               <div class="comment-user-info__avatar"
-                [ngStyle]="{'background-image': 'url(' + (comment.email | getImage:'userImg' | async) + ')'}">
+                [ngStyle]="{'background-image': 'url(' + (comment.email | getUserInfo:'userImg' | async) + ')'}">
               </div>
               <div class="comment-user-info__element">
                 <div class="comment-info-img">
                   <img src="../../assets//img/sign/user.png">
                 </div>
                 <div>
-                  {{ comment.email | getImage: 'name' | async }}
+                  {{ comment.email | getUserInfo: 'name' | async }}
                 </div>
               </div>
               <div class="comment-user-info__element">
@@ -38,10 +38,10 @@
                 </div>
                 <div>
                   <span>
-                    +{{ comment.email | getImage: 'phoneCode' | async }}                    
+                    +{{ comment.email | getUserInfo: 'phoneCode' | async }}                    
                   </span>
                   <span>
-                    {{ comment.email | getImage: 'phone' | async }}
+                    {{ comment.email | getUserInfo: 'phone' | async }}
                   </span>
                 </div>
               </div>
@@ -64,7 +64,7 @@
               <div class="comment-header">
                 <div class="comment-header-left" (click)="onShowUserInfo(reply.id)">
                   <div class="comment-img"
-                    [ngStyle]="{'background-image': 'url(' + (reply.email | getImage:'userImg' | async) + ')'}">
+                    [ngStyle]="{'background-image': 'url(' + (reply.email | getUserInfo:'userImg' | async) + ')'}">
                   </div>
                   <p class="comment-name">
                     {{ reply.name }}
@@ -79,14 +79,14 @@
                 <div class="comment-user-info">
                   <div class="comment-user-info__close-btn" (click)="closeUserInfo()">X</div>
                   <div class="comment-user-info__avatar"
-                   [ngStyle]="{'background-image': 'url(' + (reply.email | getImage:'userImg' | async) + ')'}">
+                   [ngStyle]="{'background-image': 'url(' + (reply.email | getUserInfo:'userImg' | async) + ')'}">
                   </div>
                   <div class="comment-user-info__element">
                     <div class="comment-info-img">
                       <img src="../../assets//img/sign/user.png">
                     </div>
                     <div>
-                      {{ reply.email | getImage: 'name' | async }}
+                      {{ reply.email | getUserInfo: 'name' | async }}
                     </div>
                   </div>
                   <div class="comment-user-info__element">
@@ -95,10 +95,10 @@
                     </div>
                     <div>
                       <span>
-                        +{{ reply.email | getImage: 'phoneCode' | async }}                    
+                        +{{ reply.email | getUserInfo: 'phoneCode' | async }}                    
                       </span>
                       <span>
-                        {{ reply.email | getImage: 'phone' | async }}
+                        {{ reply.email | getUserInfo: 'phone' | async }}
                       </span>
                     </div>
                   </div>

@@ -4,13 +4,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { CommentsComponent } from './comments.component';
-import { GetImagePipe } from './get-image.pipe';
+import { GetUserInfoPipe } from './get-user-info.pipe';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
 	declarations: [
 		CommentsComponent,
-		GetImagePipe
+		GetUserInfoPipe
 	],
 	imports: [
 		CommonModule,

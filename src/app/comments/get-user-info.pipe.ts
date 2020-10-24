@@ -4,8 +4,8 @@ import { map } from 'rxjs/operators';
 import { FirestoreService } from '../shared/services/firestore.service';
 import { UserAdditionalInfo } from '../shared/models/user-additional-info.model';
 
-@Pipe({ name: 'getImage' })
-export class GetImagePipe implements PipeTransform {
+@Pipe({ name: 'getUserInfo' })
+export class GetUserInfoPipe implements PipeTransform {
 
   constructor(private firestore: FirestoreService) { }
 

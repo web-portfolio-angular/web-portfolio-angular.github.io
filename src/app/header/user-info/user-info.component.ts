@@ -41,7 +41,6 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   errorMsgOnAvatarUpload: string;
   isLoading = false;
 
-
   constructor(
     private firestore: FirestoreService,
     private formBuilder: FormBuilder,
@@ -94,7 +93,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     this.userInfoMenuStateSub.unsubscribe();
     this.userAdditionalInfoSub.unsubscribe();
   }
-  
+ 
   onSubmit(changePhoneForm) {
     const phoneCode = changePhoneForm.value.phoneCode;
     const phone = changePhoneForm.value.phone;
@@ -129,8 +128,6 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     if (!this.isInChangeImgMode) {
       this.imgLocalPath = this.defaultImg;
       this.file = undefined;
-      console.log('test');
-      
     }    
   }
 
