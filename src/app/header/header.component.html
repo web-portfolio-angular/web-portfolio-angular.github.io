@@ -24,4 +24,4 @@
     <app-user-info></app-user-info>
   </div>
 </div>
-<div (click)="overlayClick()" [ngClass]="{'overlay-active' : isOverlayShown}"></div>
+<div (click)="overlayClick()" [ngClass]="{'overlay-active' : isOverlayShown, 'disabled-pointer-events' : disableButton}"></div>
