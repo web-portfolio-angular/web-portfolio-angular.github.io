@@ -22,8 +22,7 @@
             (click)="closeReplay()">Close Reply
           </button>
         </div>
-        <form 
-        class="replyForm" 
+        <form class="replyForm" 
         *ngIf="isReply == comment.id" 
         [formGroup]="replyForm" 
         (ngSubmit)="onReply(comment.id, replyForm)">
