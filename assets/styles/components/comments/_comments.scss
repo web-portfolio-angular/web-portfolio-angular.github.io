@@ -1,72 +1,13 @@
-.comments-count {
-  color: $default-red;
-  margin-bottom: 20px;
-  font-weight: bold;
-  font-size: 1.3em;
-}
-
 .comments-container {
+  position: relative;
   background-color: var(--color2);
   box-shadow: 0px 0px 10px 1px rgba($black, 0.75);
   padding: 5%;
-  .comment {
-    border: 1px solid var(--color9);
-    border-radius: 5px;
-    margin-bottom: 10px;
-    .comment-header {
-      background-color: var(--color4);
-      padding: 2%;
-      font-weight: bold;
-      font-style: italic;
-      @include flexCenterVSB;
-      .comment-header-left {
-        cursor: pointer;
-        @include flexCenterV;
-      }
-      .comment-img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        border: 2px solid $default-red;
-				background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-        margin-right: 5px;
-      }
-    }
-    .comment-name {
-      color: $default-red;
-      font-size: 1.1em;
-    }
-    .comment-date {
-      font-size: 1.1em;
-      text-align: right;
-      color: var(--color7);
-    }
-    .comment-content {
-      background-color: var(--color12);
-      white-space: pre-line;
-      padding: 2%;
-      .comment-content-text {
-        color: var(--color6);
-      }
-      .comment-replies {
-        margin-top: 20px;
-        width: 90%;
-        margin-left: 10%;
-        .reply {
-          border: 1px solid var(--color9);
-          border-radius: 5px;
-          margin-bottom: 10px;
-        }
-      }
-      .reply-btns button:first-child {
-        margin-right: 10px;
-      }
-      .replyForm {
-        margin-top: 10px;
-      }
-    }
+  .comments-count {
+    color: $default-red;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 1.3em;
   }
   .comments-auth {
     color: $default-red;
@@ -77,6 +18,7 @@
     outline-color: $default-red;
     background-color: var(--color12);
     border: 1px solid var(--color9);
+    border-radius: 5px;
     font-size: 1.2em;
     padding: 10px;
     resize: none;
