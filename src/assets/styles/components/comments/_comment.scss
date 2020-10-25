@@ -8,10 +8,18 @@
     padding: 2%;
     font-weight: bold;
     font-style: italic;
+    flex-direction: column;
+    @include media (med) {
+      flex-direction: row;
+    }
     @include flexCenterVSB;
     .comment-header-left {
       cursor: pointer;
+      margin-bottom: 1%;
       @include flexCenterV;
+      @include media (med) {
+        fmargin-bottom: 0;
+      }
     }
     .comment-img {
       width: 50px;
