@@ -1,6 +1,6 @@
 <div class="nav-container">
   <button class="nav-container__hamburger"
-    (click)="navigationInfoState()"
+    (click)="swithcNavigationMenuState()"
     [disabled]="disableButton">
     <div></div>
     <div></div>
@@ -10,52 +10,52 @@
     [@slideRightLeft]="navigationMenuState"
     (@slideRightLeft.start)="onDisableButton()"
     (@slideRightLeft.done)="onEnableButton()">
-    <li (click)="navigationInfoState()"
+    <li (click)="swithcNavigationMenuState()"
       [ngClass]="{'disabled-pointer-events' : disableButton}" 
       [routerLink]="['/home']" 
       routerLinkActive="nav-active">Home
     </li>
-    <li (click)="navigationInfoState()"
+    <li (click)="swithcNavigationMenuState()"
       [ngClass]="{'disabled-pointer-events' : disableButton}"
       [routerLink]="['/products']" 
       routerLinkActive="nav-active" 
       *ngIf="isAuth">Products
     </li>
-    <li (click)="navigationInfoState()"
+    <li (click)="swithcNavigationMenuState()"
       [ngClass]="{'disabled-pointer-events' : disableButton}"
       [routerLink]="['/sell-car']" 
       routerLinkActive="nav-active" 
       *ngIf="isAuth">Sell Your Car
     </li>
-    <li (click)="navigationInfoState()"
+    <li (click)="swithcNavigationMenuState()"
       [ngClass]="{'disabled-pointer-events' : disableButton}"
       [routerLink]="['/services']" 
       routerLinkActive="nav-active" 
       *ngIf="isAuth">Services
     </li>
-    <li (click)="navigationInfoState()"
+    <li (click)="swithcNavigationMenuState()"
       [ngClass]="{'disabled-pointer-events' : disableButton}"
       [routerLink]="['/gallery']" 
       routerLinkActive="nav-active" 
       *ngIf="isAuth">Callery
     </li>
-    <li (click)="navigationInfoState()"
+    <li (click)="swithcNavigationMenuState()"
       [ngClass]="{'disabled-pointer-events' : disableButton}"
       [routerLink]="['/comments']" 
       routerLinkActive="nav-active">Comments
     </li>
-    <li (click)="navigationInfoState()"
+    <li (click)="swithcNavigationMenuState()"
       [ngClass]="{'disabled-pointer-events' : disableButton}"
       [routerLink]="['/contacts']" 
       routerLinkActive="nav-active">Contacts
     </li>
-    <li (click)="navigationInfoState()"
+    <li (click)="swithcNavigationMenuState()"
       [ngClass]="{'disabled-pointer-events' : disableButton}"
       [routerLink]="['/signin']" 
       routerLinkActive="nav-active" 
       *ngIf="!isAuth">Sign in
     </li>
-    <li (click)="navigationInfoState()"
+    <li (click)="swithcNavigationMenuState()"
       [ngClass]="{'disabled-pointer-events' : disableButton}"
       [routerLink]="['/signup']" 
       routerLinkActive="nav-active" 

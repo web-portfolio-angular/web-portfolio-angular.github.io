@@ -51,8 +51,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.disableButtonSub.unsubscribe();
   }
 
-  navigationInfoState(){
-    this.subjectsService.navigationInfoState();
+  swithcNavigationMenuState(){
+    this.subjectsService.swithcNavigationMenuState();
   }
   
   overlayClick() {

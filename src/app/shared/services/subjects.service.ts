@@ -33,7 +33,7 @@ export class SubjectsService {
 		if (this.navigationMenuState == 'in') {
 			this.navigationMenuState = 'out';			
 		}
-		if (this.showUserInfo){
+		if (this.showUserInfo) {
 			this.showUserInfo = false;
 		}
 
@@ -47,11 +47,11 @@ export class SubjectsService {
 		this.showUserInfoSubject.next(this.showUserInfo);
 	}
 
-	navigationInfoState() {
+	swithcNavigationMenuState() {
 		if (this.userInfoMenuState == 'in') {
 			this.userInfoMenuState = 'out';
 		}
-		if (this.showUserInfo){
+		if (this.showUserInfo) {
 			this.showUserInfo = false;
 		}
 
@@ -63,6 +63,16 @@ export class SubjectsService {
 		this.navigationMenuStateSubject.next(this.navigationMenuState);
 		this.overlaySubject.next(this.isOverlayShown);
 		this.showUserInfoSubject.next(this.showUserInfo);
+	}
+
+	onShowUserInfo(email: string) {
+		this.showUserInfo = true;
+		this.shownUser = email;
+		this.isOverlayShown = true
+
+		this.showUserInfoSubject.next(this.showUserInfo);
+		this.shownUserSubject.next(this.shownUser);
+		this.overlaySubject.next(this.isOverlayShown);
 	}
 
 	overlayClick() {
@@ -87,15 +97,5 @@ export class SubjectsService {
 	onEnableButton() {
 		this.disableButton = false;
 		this.disableButtonSubject.next(this.disableButton);
-	}
-
-	onShowUserInfo(email: string) {
-		this.showUserInfo = true;
-		this.shownUser = email;
-		this.isOverlayShown = true
-
-		this.showUserInfoSubject.next(this.showUserInfo);
-		this.shownUserSubject.next(this.shownUser);
-		this.overlaySubject.next(this.isOverlayShown);
 	}
 }
