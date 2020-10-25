@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { OverlayService } from '../../shared/services/overlay.service';
+import { SubjectsService } from '../../shared/services/subjects.service';
 import { Comment } from '../../shared/models/comment.model';
 
 @Component({
@@ -17,11 +17,11 @@ export class CommentComponent implements OnInit, OnDestroy {
   shownUser: string;
 
   constructor(
-    private overlayService: OverlayService
+    private subjectsService: SubjectsService
   ) {}
 
   ngOnInit(): void {
-    this.shownUserSub = this.overlayService.shownUserSubject.subscribe(userEmail => {
+    this.shownUserSub = this.subjectsService.shownUserSubject.subscribe(userEmail => {
       this.shownUser = userEmail;
     })
   }
@@ -31,6 +31,6 @@ export class CommentComponent implements OnInit, OnDestroy {
   }
 
   onShowUserInfo(email: string) {
-    this.overlayService.onShowUserInfo(email);
+    this.subjectsService.onShowUserInfo(email);
   }
 }

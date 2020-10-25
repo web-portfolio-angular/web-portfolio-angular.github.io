@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { OverlayService } from '../../shared/services/overlay.service';
+import { SubjectsService } from '../../shared/services/subjects.service';
 
 @Component({
   selector: 'app-comment-user-info',
@@ -12,13 +12,13 @@ export class CommentUserInfoComponent implements OnInit {
   @Input() email: string;
 
   constructor(
-    private overlayService: OverlayService
+    private subjectsService: SubjectsService
   ) { }
 
   ngOnInit(): void {
   }
 
   closeUserInfo() {
-    this.overlayService.overlayClick();
+    this.subjectsService.overlayClick();
   }
 }

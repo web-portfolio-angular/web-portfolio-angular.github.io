@@ -9,7 +9,7 @@ import { CommentReply } from '../shared/models/comment-reply.model';
 import { AuthService } from '../shared/services/auth.service';
 import { AdditionUserInfoService } from '../shared/services/user-additional-info.service';
 import { UserAdditionalInfo } from '../shared/models/user-additional-info.model';
-import { OverlayService } from '../shared/services/overlay.service';
+import { SubjectsService } from '../shared/services/subjects.service';
 
 @Component({
   selector: 'app-comments',
@@ -39,7 +39,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private additionUserInfoService: AdditionUserInfoService,
-    private overlayService: OverlayService
+    private subjectsService: SubjectsService
   ) {}
 
   ngOnInit() {
@@ -74,10 +74,10 @@ export class CommentsComponent implements OnInit, OnDestroy {
       replyArea: new FormControl(null, Validators.required)
     });
     
-    this.shownUserSub = this.overlayService.shownUserSubject.subscribe(userEmail => {
+    this.shownUserSub = this.subjectsService.shownUserSubject.subscribe(userEmail => {
       this.shownUser = userEmail;
     })
-    this.showUserInfoSub = this.overlayService.showUserInfoSubject.subscribe(boolean => {
+    this.showUserInfoSub = this.subjectsService.showUserInfoSubject.subscribe(boolean => {
       this.showUserInfo = boolean;
     })
   }

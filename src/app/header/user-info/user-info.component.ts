@@ -10,7 +10,7 @@ import { Animations } from '../../shared/animations';
 import { ThemeService } from '../../shared/services/theme.service';
 import { AuthService } from '../../shared/services/auth.service';
 import { PhoneCodes } from '../../shared/models/phone-codes.model';
-import { OverlayService } from '../../shared/services/overlay.service';
+import { SubjectsService } from '../../shared/services/subjects.service';
 import { AdditionUserInfoService } from '../../shared/services/user-additional-info.service';
 
 @Component({
@@ -48,7 +48,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     private themeService: ThemeService,
     private authService: AuthService, 
     private router: Router,
-    private overlayService: OverlayService,
+    private subjectsService: SubjectsService,
     private angularFireStorage: AngularFireStorage,
     private additionUserInfoService: AdditionUserInfoService
   ) {}
@@ -85,11 +85,11 @@ export class UserInfoComponent implements OnInit, OnDestroy {
       this.errorMsgOnloadPhoneCodes = error.message;
     });
 
-    this.userInfoMenuStateSub = this.overlayService.userInfoMenuStateSubject.subscribe(string => {
+    this.userInfoMenuStateSub = this.subjectsService.userInfoMenuStateSubject.subscribe(string => {
       this.userInfoMenuState = string;       
     })
     
-    this.disableButtonSub = this.overlayService.disableButtonSubject.subscribe(booloean => {
+    this.disableButtonSub = this.subjectsService.disableButtonSubject.subscribe(booloean => {
       this.disableButton = booloean;       
     })
   }
@@ -126,7 +126,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   }
 
   swithcUserInfoState() {
-    this.overlayService.swithcUserInfoState();    
+    this.subjectsService.swithcUserInfoState();    
   }
 
   changeImgMode() {
@@ -180,10 +180,10 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   }
 
   onDisableButton() {
-		this.overlayService.onDisableButton();
+		this.subjectsService.onDisableButton();
 	}
 
 	onEnableButton() {
-		this.overlayService.onEnableButton();
+		this.subjectsService.onEnableButton();
 	}
 }

@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 
 import { AuthService } from '../shared/services/auth.service';
 import { Animations } from '../shared/animations';
-import { OverlayService } from '../shared/services/overlay.service';
+import { SubjectsService } from '../shared/services/subjects.service';
 
 @Component({
   selector: 'app-header',
@@ -24,22 +24,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private overlayService: OverlayService) {}
+    private subjectsService: SubjectsService) {}
 
   ngOnInit() {
     this.subUser = this.authService.user.subscribe(user => {
      this.isAuth = !user ? false : true;
     })
 
-    this.overlaySub = this.overlayService.overlaySubject.subscribe(boolean => {
+    this.overlaySub = this.subjectsService.overlaySubject.subscribe(boolean => {
       this.isOverlayShown = boolean;    
     })
 
-    this.navigationMenuSub = this.overlayService.navigationMenuStateSubject.subscribe(string => {
+    this.navigationMenuSub = this.subjectsService.navigationMenuStateSubject.subscribe(string => {
       this.navigationMenuState = string;
     })
 
-    this.disableButtonSub = this.overlayService.disableButtonSubject.subscribe(booloean => {
+    this.disableButtonSub = this.subjectsService.disableButtonSubject.subscribe(booloean => {
       this.disableButton = booloean;       
     })
   }
@@ -52,18 +52,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   navigationInfoState(){
-    this.overlayService.navigationInfoState();
+    this.subjectsService.navigationInfoState();
   }
   
   overlayClick() {
-    this.overlayService.overlayClick();
+    this.subjectsService.overlayClick();
   }
 
   onDisableButton() {
-		this.overlayService.onDisableButton();
+		this.subjectsService.onDisableButton();
 	}
 
 	onEnableButton() {
-		this.overlayService.onEnableButton();
+		this.subjectsService.onEnableButton();
 	}
 }
