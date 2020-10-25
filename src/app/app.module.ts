@@ -33,15 +33,12 @@ export class AppModule {}
 // preload images
 // on relload with saved data the button is not active
 // comment trimp space
-// ... in longer name (comment section)
 
 // temata prezapisva transitiona na drugite elementi pri hover
 // loading spinner sass
 // sign autofill color
 
-// bug pri burz klik na navigaciite
 // klient da si zibra kakvo info da se vijda za nego
-// da premetstq overlayeq na navovete
 
 // <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
 // <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
