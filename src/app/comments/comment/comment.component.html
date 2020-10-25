@@ -1,7 +1,7 @@
 <div class="comment-header">
   <div class="comment-header-left" (click)="onShowUserInfo(comment.email)">    
     <div class="comment-img"
-      [ngStyle]="{'background-image': 'url(' + (comment.email | getUserInfo:'userImg' | async) + ')'}">
+      [ngStyle]="{'background-image': (comment.email | getUserInfo:'userImg' | async)}">
     </div>
     <p class="comment-name">
       {{ comment.name }}

@@ -21,7 +21,7 @@ export class GetUserInfoPipe implements PipeTransform {
         case 'name': return userAdditionalData[0].name;
         case 'phoneCode': return userAdditionalData[0].phoneCode;
         case 'phone': return userAdditionalData[0].phone;
-        case 'userImg': return userAdditionalData[0].userImg;
+        case 'userImg': return 'url(' + userAdditionalData[0].userImg + ')';
       }
     }))
   }

@@ -2,7 +2,7 @@
   <div class="comment-user-info">
     <div class="comment-user-info__close-btn" (click)="closeUserInfo()">X</div>
     <div class="comment-user-info__avatar"
-      [ngStyle]="{'background-image': 'url(' + (email | getUserInfo:'userImg' | async) + ')'}">
+      [ngStyle]="{'background-image': (email | getUserInfo:'userImg' | async)}">
     </div>
     <div class="comment-user-info__element">
       <div class="comment-info-img">
