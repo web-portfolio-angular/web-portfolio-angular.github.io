@@ -16,7 +16,7 @@ export class GetUserInfoPipe implements PipeTransform {
           id: e.payload.doc.id,
           ...e.payload.doc.data() as UserAdditionalInfo
         }
-      })
+      })   
       switch (exponent) {
         case 'name': return userAdditionalData[0].name;
         case 'phoneCode': return userAdditionalData[0].phoneCode;

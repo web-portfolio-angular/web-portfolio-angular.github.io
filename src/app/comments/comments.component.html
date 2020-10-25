@@ -1,165 +1,61 @@
 <div class="container">
-  <div style="position: relative;" class="comments-container">
+  <div class="comments-container">
     <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
     <p class="comments-count">Comments</p>
     <div>
       <div class="comment" *ngFor="let comment of comments">
-        <div class="comment-header">
-          <div class="comment-header-left" (click)="onShowUserInfo(comment.id)">
-            <div class="comment-img"
-             [ngStyle]="{'background-image': 'url(' + (comment.email | getUserInfo:'userImg' | async) + ')'}">
-            </div>
-            <p class="comment-name">
-              {{ comment.name }}
-            </p>
-          </div>
-          <p class="comment-date">
-            {{ comment.date.toDate() | date:'dd.MM.yyyy' }} at {{ comment.date.toDate() | date:'HH:mm' }}
-          </p>
-          <div 
-            *ngIf="commentId == comment.id && showUserInfo"            
-            class="comment-user-info-container">
-            <div class="comment-user-info">
-              <div class="comment-user-info__close-btn" (click)="closeUserInfo()">X</div>
-              <div class="comment-user-info__avatar"
-                [ngStyle]="{'background-image': 'url(' + (comment.email | getUserInfo:'userImg' | async) + ')'}">
-              </div>
-              <div class="comment-user-info__element">
-                <div class="comment-info-img">
-                  <img src="../../assets//img/sign/user.png">
-                </div>
-                <div>
-                  {{ comment.email | getUserInfo: 'name' | async }}
-                </div>
-              </div>
-              <div class="comment-user-info__element">
-                <div class="comment-info-img">
-                  <img src="../../assets//img/sign/phone.png">
-                </div>
-                <div>
-                  <span>
-                    +{{ comment.email | getUserInfo: 'phoneCode' | async }}                    
-                  </span>
-                  <span>
-                    {{ comment.email | getUserInfo: 'phone' | async }}
-                  </span>
-                </div>
-              </div>
-              <div class="comment-user-info__element">
-                <div class="comment-info-img">
-                  <img src="../../assets//img/sign/email.png">
-                </div>
-                <div>
-                  <a href="mailto:{{ comment.email }}">{{ comment.email }}</a>              
-                </div>
-              </div>
-            </div>
-            <div (click)="closeUserInfo()" class="comment-user-overlay"></div>
-          </div>          
+        <app-comment [comment]="comment"></app-comment>
+        <div class="comment-replies">
+          <div class="reply" *ngFor="let reply of comment.replies">
+            <app-comment  [comment]="reply"></app-comment>
+          </div>            
         </div>
-        <div class="comment-content">
-          <p class="comment-content-text">{{ comment.comment }}</p>
-          <div class="comment-replies">
-            <div class="reply" *ngFor="let reply of comment.replies; let i = index">
-              <div class="comment-header">
-                <div class="comment-header-left" (click)="onShowUserInfo(reply.id)">
-                  <div class="comment-img"
-                    [ngStyle]="{'background-image': 'url(' + (reply.email | getUserInfo:'userImg' | async) + ')'}">
-                  </div>
-                  <p class="comment-name">
-                    {{ reply.name }}
-                  </p>
-                </div>
-                <p class="comment-date">
-                  {{ reply.date.toDate() | date:'dd.MM.yyyy' }} at {{ reply.date.toDate() | date:'HH:mm' }}
-                </p>
-                <div
-                *ngIf="commentId == reply.id && showUserInfo"            
-                class="comment-user-info-container">
-                <div class="comment-user-info">
-                  <div class="comment-user-info__close-btn" (click)="closeUserInfo()">X</div>
-                  <div class="comment-user-info__avatar"
-                   [ngStyle]="{'background-image': 'url(' + (reply.email | getUserInfo:'userImg' | async) + ')'}">
-                  </div>
-                  <div class="comment-user-info__element">
-                    <div class="comment-info-img">
-                      <img src="../../assets//img/sign/user.png">
-                    </div>
-                    <div>
-                      {{ reply.email | getUserInfo: 'name' | async }}
-                    </div>
-                  </div>
-                  <div class="comment-user-info__element">
-                    <div class="comment-info-img">
-                      <img src="../../assets//img/sign/phone.png">
-                    </div>
-                    <div>
-                      <span>
-                        +{{ reply.email | getUserInfo: 'phoneCode' | async }}                    
-                      </span>
-                      <span>
-                        {{ reply.email | getUserInfo: 'phone' | async }}
-                      </span>
-                    </div>
-                  </div>
-                  <div class="comment-user-info__element">
-                    <div class="comment-info-img">
-                      <img src="../../assets//img/sign/email.png">
-                    </div>
-                    <div>
-                      <a href="mailto:{{ reply.email }}">{{ reply.email }}</a>              
-                    </div>
-                  </div>
-                </div>
-                <div (click)="closeUserInfo()" class="comment-user-overlay"></div>
-              </div>  
-              </div>
-              <div class="comment-content">
-                <p class="comment-content-text">{{ reply.comment }}</p>
-              </div>
-            </div>
-          </div>
-          <div class="reply-btns">
-            <button 
+        <div class="reply-btns">
+          <button 
             class="btn-default narrow-btn" 
             (click)="isReply = comment.id"
-            *ngIf="isAuth">Reply</button>
-            <button
+            *ngIf="isAuth">Reply
+          </button>
+          <button
             class="btn-default narrow-btn"
             *ngIf="isReply == comment.id"
-            (click)="closeReplay()">Close Reply</button>
+            (click)="closeReplay()">Close Reply
+          </button>
+        </div>
+        <form 
+        class="replyForm" 
+        *ngIf="isReply == comment.id" 
+        [formGroup]="replyForm" 
+        (ngSubmit)="onReply(comment.id, replyForm)">
+          <div>
+            <textarea class="comments-textarea" 
+              placeholder="Type your reply..."
+              formControlName="replyArea">
+            </textarea>
           </div>
-          <form 
-          class="replyForm" 
-          *ngIf="isReply == comment.id" 
-          [formGroup]="replyForm" 
-          (ngSubmit)="onReply(comment.id, replyForm)">
-            <div>
-              <textarea class="comments-textarea" placeholder="Type your reply..."
-                formControlName="replyArea"></textarea>
-            </div>
-            <div>
-              <button class="btn-default btn-default-center" type="submit" [disabled]="!replyForm.valid">Add your comment</button>
-              <p *ngIf="errorMsgOnReply" class="error-msg">{{ errorMsgOnReply }}</p>
-            </div>            
-          </form>
-        </div>
+          <div>
+            <button class="btn-default btn-default-center" type="submit" [disabled]="!replyForm.valid">Add your comment</button>
+            <p *ngIf="errorMsgOnReply" class="error-msg">{{ errorMsgOnReply }}</p>
+          </div>            
+        </form>
       </div>
-      <hr class="hr-border">
-      <div *ngIf="!isAuth" class="comments-auth">
-        <p>Please Sign in to add your comment!</p>
-      </div>
-      <form *ngIf="isAuth && isReply==null" [formGroup]="postForm" (ngSubmit)="onSubmit(postForm)">
-        <div>
-          <textarea class="comments-textarea" placeholder="Type your comment..."
-            formControlName="commentArea"></textarea>
-        </div>
-        <div>
-          <button class="btn-default btn-default-center" type="submit" [disabled]="!postForm.valid">Add your
-            comment</button>
-            <p *ngIf="errorMsgOnSubmit" class="error-msg">{{ errorMsgOnSubmit }}</p>            
-        </div>
-        <p *ngIf="errorMsgOnloadComments" class="error-msg">{{ errorMsgOnloadComments }}</p>
-      </form>
+      <app-comment-user-info *ngIf="showUserInfo" [email]="shownUser"></app-comment-user-info>
     </div>
+    <hr class="hr-border">
+    <div *ngIf="!isAuth" class="comments-auth">
+      <p>Please Sign in to add your comment!</p>
+    </div>
+    <form *ngIf="isAuth && isReply==null" [formGroup]="postForm" (ngSubmit)="onSubmit(postForm)">
+      <div>
+        <textarea class="comments-textarea" placeholder="Type your comment..."
+          formControlName="commentArea"></textarea>
+      </div>
+      <div>
+        <button class="btn-default btn-default-center" type="submit" [disabled]="!postForm.valid">Add your
+          comment</button>
+          <p *ngIf="errorMsgOnSubmit" class="error-msg">{{ errorMsgOnSubmit }}</p>            
+      </div>
+      <p *ngIf="errorMsgOnloadComments" class="error-msg">{{ errorMsgOnloadComments }}</p>
+    </form>
   </div>
+</div>

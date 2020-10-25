@@ -15,10 +15,18 @@ export class OverlayService {
 	disableButtonSubject = new BehaviorSubject <boolean>(null);
 	disableButton: boolean = false;
 
+	showUserInfoSubject = new BehaviorSubject <boolean>(null);
+	showUserInfo: boolean = false;
+
+	shownUserSubject = new BehaviorSubject <string>(null);
+	shownUser: string = null;
+
 	constructor() {
 		this.userInfoMenuStateSubject.next(this.userInfoMenuState);
 		this.navigationMenuStateSubject.next(this.navigationMenuState);
 		this.overlaySubject.next(this.isOverlayShown);
+		this.showUserInfoSubject.next(this.showUserInfo);
+		this.shownUserSubject.next(this.shownUser);
 	}
 
 	swithcUserInfoState() {
@@ -52,10 +60,14 @@ export class OverlayService {
 	overlayClick() {
 		this.userInfoMenuState = 'out';
 		this.navigationMenuState = 'out';
-		this.isOverlayShown = false;
+		this.showUserInfo = false;
+		this.shownUser = null;
+		this.isOverlayShown = false
 
 		this.navigationMenuStateSubject.next(this.navigationMenuState);
 		this.userInfoMenuStateSubject.next(this.userInfoMenuState);
+		this.showUserInfoSubject.next(this.showUserInfo);
+		this.shownUserSubject.next(this.shownUser);
 		this.overlaySubject.next(this.isOverlayShown);
 	}
 
@@ -67,5 +79,15 @@ export class OverlayService {
 	onEnableButton() {
 		this.disableButton = false;
 		this.disableButtonSubject.next(this.disableButton);
+	}
+
+	onShowUserInfo(email: string) {
+		this.showUserInfo = true;
+		this.shownUser = email;
+		this.isOverlayShown = true
+
+		this.showUserInfoSubject.next(this.showUserInfo);
+		this.shownUserSubject.next(this.shownUser);
+		this.overlaySubject.next(this.isOverlayShown);
 	}
 }

@@ -9,6 +9,7 @@ import { CommentReply } from '../shared/models/comment-reply.model';
 import { AuthService } from '../shared/services/auth.service';
 import { AdditionUserInfoService } from '../shared/services/user-additional-info.service';
 import { UserAdditionalInfo } from '../shared/models/user-additional-info.model';
+import { OverlayService } from '../shared/services/overlay.service';
 
 @Component({
   selector: 'app-comments',
@@ -18,6 +19,8 @@ import { UserAdditionalInfo } from '../shared/models/user-additional-info.model'
 export class CommentsComponent implements OnInit, OnDestroy {
   private subUser: Subscription;
   private userAdditionalDataSub: Subscription;
+  private showUserInfoSub: Subscription;
+  private shownUserSub: Subscription;
   userAdditionalData: UserAdditionalInfo[];
   isAuth: boolean = false;
   postForm: FormGroup;
@@ -27,15 +30,16 @@ export class CommentsComponent implements OnInit, OnDestroy {
   isReply: string = null;
   errorMsgOnloadComments: string = null;
   errorMsgOnSubmit: string = null;
-  errorMsgOnReply: string = null;
-  showUserInfo: boolean = false;
-  commentId: string = null;
+  errorMsgOnReply: string = null;  
+  shownUser: string;
+  showUserInfo: boolean;
 
   constructor(
     private firestore: FirestoreService,
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private additionUserInfoService: AdditionUserInfoService
+    private additionUserInfoService: AdditionUserInfoService,
+    private overlayService: OverlayService
   ) {}
 
   ngOnInit() {
@@ -68,12 +72,21 @@ export class CommentsComponent implements OnInit, OnDestroy {
     });
     this.replyForm = this.formBuilder.group({
       replyArea: new FormControl(null, Validators.required)
-    });         
+    });
+    
+    this.shownUserSub = this.overlayService.shownUserSubject.subscribe(userEmail => {
+      this.shownUser = userEmail;
+    })
+    this.showUserInfoSub = this.overlayService.showUserInfoSubject.subscribe(boolean => {
+      this.showUserInfo = boolean;
+    })
   }
 
   ngOnDestroy(){
     this.subUser.unsubscribe();
     this.userAdditionalDataSub.unsubscribe();
+    this.showUserInfoSub.unsubscribe();
+    this.shownUserSub.unsubscribe();
   }
 
   onSubmit(postForm){
@@ -131,15 +144,5 @@ export class CommentsComponent implements OnInit, OnDestroy {
   closeReplay() {
     this.isReply = null;
     this.replyForm.reset()
-  }
-
-  onShowUserInfo(id: any) {
-    this.commentId = id;
-    this.showUserInfo = true;    
-  }
-
-  closeUserInfo() {
-    this.commentId = null;
-    this.showUserInfo = false;
   }
 }

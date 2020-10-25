@@ -1,0 +1,16 @@
+<div class="comment-header">
+  <div class="comment-header-left" (click)="onShowUserInfo(comment.email)">    
+    <div class="comment-img"
+      [ngStyle]="{'background-image': 'url(' + (comment.email | getUserInfo:'userImg' | async) + ')'}">
+    </div>
+    <p class="comment-name">
+      {{ comment.name }}
+    </p>
+  </div>
+  <p class="comment-date">
+    {{ comment.date.toDate() | date:'dd.MM.yyyy' }} at {{ comment.date.toDate() | date:'HH:mm' }}
+  </p>        
+</div>
+<div class="comment-content">
+  <p class="comment-content-text">{{ comment.comment }}</p>
+</div>

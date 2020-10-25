@@ -1,12 +1,15 @@
 .comment-user-info-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba($black, 0.5);
-  z-index: 500;
-  @include flexCenterHV;
+  // position: fixed;
+  // top: 0;
+  // left: 0;
+  // width: 100vw;
+  // height: 100vh;
+  // background-color: rgba($black, 0.5);
+  // z-index: 500;
+  // @include flexCenterHV;
+  position: absolute;
+  margin: 0 auto;
+  border: 3px solid green;
   .comment-user-info {
     position: relative;
     margin-top: 50px;
