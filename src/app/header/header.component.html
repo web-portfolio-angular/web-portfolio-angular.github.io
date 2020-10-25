@@ -1,7 +1,8 @@
 <div class="nav-container">
   <button class="nav-container__hamburger"
     (click)="swithcNavigationMenuState()"
-    [disabled]="disableButton">
+    [disabled]="disableButton"
+    [ngClass]="{'nav-container__hamburger-active' : navigationMenuState == 'in'}">
     <div></div>
     <div></div>
     <div></div>
@@ -58,7 +59,7 @@
     <li (click)="swithcNavigationMenuState()"
       [ngClass]="{'disabled-pointer-events' : disableButton}"
       [routerLink]="['/signup']" 
-      routerLinkActive="nav-active" 
+      routerLinkActive="nav-active"
       *ngIf="!isAuth">Sign up
     </li>
   </ul>
