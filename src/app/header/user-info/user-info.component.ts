@@ -123,6 +123,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   onLogout() {
     this.authService.logout();
     this.router.navigate(['/signin']);
+    this.subjectsService.overlayClick();
   }
 
   swithcUserInfoState() {

@@ -31,7 +31,10 @@ export class SubjectsService {
 
 	swithcUserInfoState() {
 		if (this.navigationMenuState == 'in') {
-			this.navigationMenuState = 'out';
+			this.navigationMenuState = 'out';			
+		}
+		if (this.showUserInfo){
+			this.showUserInfo = false;
 		}
 
 		this.userInfoMenuState == 'out' ? 
@@ -41,11 +44,15 @@ export class SubjectsService {
 		this.navigationMenuStateSubject.next(this.navigationMenuState);
 		this.userInfoMenuStateSubject.next(this.userInfoMenuState);
 		this.overlaySubject.next(this.isOverlayShown);
+		this.showUserInfoSubject.next(this.showUserInfo);
 	}
 
 	navigationInfoState() {
 		if (this.userInfoMenuState == 'in') {
 			this.userInfoMenuState = 'out';
+		}
+		if (this.showUserInfo){
+			this.showUserInfo = false;
 		}
 
 		this.navigationMenuState == 'out' ? 
@@ -55,6 +62,7 @@ export class SubjectsService {
 		this.userInfoMenuStateSubject.next(this.userInfoMenuState);
 		this.navigationMenuStateSubject.next(this.navigationMenuState);
 		this.overlaySubject.next(this.isOverlayShown);
+		this.showUserInfoSubject.next(this.showUserInfo);
 	}
 
 	overlayClick() {

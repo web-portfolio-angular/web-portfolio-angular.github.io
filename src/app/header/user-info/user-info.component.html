@@ -1,21 +1,18 @@
 <div class="user-info-container">
   <div class="user-info-container__user-nav">
-    <button 
-      class="manage-user-info" 
+    <button class="manage-user-info" 
       [disabled]="disableButton"
       (click)="swithcUserInfoState()">
     </button>
   </div>
-  <div 
-    class="user-info-container__user-info-content" 
+  <div class="user-info-container__user-info-content" 
     [@slideLeftRight]="userInfoMenuState"
     (@slideLeftRight.start)="onDisableButton()"
     (@slideLeftRight.done)="onEnableButton()"
     *ngIf="userAdditionalData">
       <div class="user-image-container">
         <app-loading-spinner class="user-loading-spinner" *ngIf="isLoading"></app-loading-spinner>
-        <div 
-          class="user-avatar" 
+        <div class="user-avatar" 
           [ngStyle]="{'background-image': 'url('+imgLocalPath+')'}">
         </div>
         <div *ngIf="isInChangeImgMode" class="change-user-img">
