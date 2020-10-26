@@ -91,3 +91,10 @@
   background: url("../../img/shared/nav-underline.png") center no-repeat;
   background-position-y: 21px;
 }
+
+@mixin categories-active {
+  color: $default-red !important;
+  font-weight: bold;
+  background: url("../../img/shared/nav-underline.png") center no-repeat;
+  background-position-y: 27px;
+}
