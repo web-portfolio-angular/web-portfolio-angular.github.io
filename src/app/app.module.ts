@@ -10,11 +10,13 @@ import { AppRoutingModule} from './app-routing.module';
 import { FooterComponent } from './footer/footer.component';
 import { environment } from '../environments/environment';
 import { HeaderModule } from './header/header.module';
+import { ScrollTopComponent } from './scroll-top/scroll-top.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent
+    FooterComponent,
+    ScrollTopComponent
   ],
   imports: [
     HeaderModule,
