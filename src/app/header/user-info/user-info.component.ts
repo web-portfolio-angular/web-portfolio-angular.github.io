@@ -4,14 +4,15 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { UserAdditionalInfo } from '../../shared/models/user-additional-info.model';
-import { FirestoreService } from '../../shared/services/firestore.service';
 import { Animations } from '../../shared/animations';
+import { UserAdditionalInfo } from '../../shared/models/user-additional-info.model';
+import { PhoneCodes } from '../../shared/models/phone-codes.model';
+import { FirestoreService } from '../../shared/services/firestore.service';
 import { ThemeService } from '../../shared/services/theme.service';
 import { AuthService } from '../../shared/services/auth.service';
-import { PhoneCodes } from '../../shared/models/phone-codes.model';
 import { SubjectsService } from '../../shared/services/subjects.service';
 import { AdditionUserInfoService } from '../../shared/services/user-additional-info.service';
+import { GenerateIdService } from '../../shared/services/generateId.service';
 
 @Component({
   selector: 'app-user-info',
@@ -50,7 +51,8 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     private router: Router,
     private subjectsService: SubjectsService,
     private angularFireStorage: AngularFireStorage,
-    private additionUserInfoService: AdditionUserInfoService
+    private additionUserInfoService: AdditionUserInfoService,
+    private generateIdService: GenerateIdService
   ) {}
 
   ngOnInit() {    
@@ -154,7 +156,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
 
   uploadAvatarToFirestorage() {
     this.isLoading = true;
-    this.angularFireStorage.upload("/userImages/" + this.imgName + "-" + Math.random().toString(36).substring(2), this.file)
+    this.angularFireStorage.upload("/userImages/" + this.imgName + "-" + this.generateIdService.generateId(), this.file)
     .then(uploadTask => {
       uploadTask.ref.getDownloadURL().then(url => {
         const userImg = url;

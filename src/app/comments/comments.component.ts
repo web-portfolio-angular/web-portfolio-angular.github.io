@@ -3,13 +3,14 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Subscription } from 'rxjs';
 import * as firebase from 'firebase/app';
 
-import { FirestoreService } from '../shared/services/firestore.service';
-import { Comment } from '../shared/models/comment.model';
-import { CommentReply } from '../shared/models/comment-reply.model';
-import { AuthService } from '../shared/services/auth.service';
-import { AdditionUserInfoService } from '../shared/services/user-additional-info.service';
 import { UserAdditionalInfo } from '../shared/models/user-additional-info.model';
+import { CommentReply } from '../shared/models/comment-reply.model';
+import { Comment } from '../shared/models/comment.model';
+import { AdditionUserInfoService } from '../shared/services/user-additional-info.service';
+import { GenerateIdService } from '../shared/services/generateId.service';
+import { FirestoreService } from '../shared/services/firestore.service';
 import { SubjectsService } from '../shared/services/subjects.service';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-comments',
@@ -39,7 +40,8 @@ export class CommentsComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private additionUserInfoService: AdditionUserInfoService,
-    private subjectsService: SubjectsService
+    private subjectsService: SubjectsService,
+    private generateIdService: GenerateIdService
   ) {}
 
   ngOnInit() {
@@ -117,7 +119,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
     const email = this.userAdditionalData[0].email;
     const date = firebase.firestore.Timestamp.now();
     const comment = replyForm.value.replyArea;
-    const id = this.generateReplayId();
+    const id = this.generateIdService.generateId();
     const commentId = orgCommentId;
     const post: CommentReply = {name, email, date, comment, id, commentId};
     this.firestore.updateComment(post)
@@ -130,16 +132,6 @@ export class CommentsComponent implements OnInit, OnDestroy {
       this.errorMsgOnReply = error.message;
     });
   }
-
-  generateReplayId() {
-    let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    for ( var i = 0; i < 20; i++ ) {
-       result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
- }
 
   closeReplay() {
     this.isReply = null;
