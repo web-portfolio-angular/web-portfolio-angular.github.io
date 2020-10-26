@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class SubjectsService {
@@ -21,12 +21,22 @@ export class SubjectsService {
 	shownUserSubject = new BehaviorSubject <string>(null);
 	shownUser: string = null;
 
+	windowWidthSubject = new BehaviorSubject <number>(null);
+	windowWidthSub: Subscription;
+	windowWidth: number = null;
+
 	constructor() {
 		this.userInfoMenuStateSubject.next(this.userInfoMenuState);
 		this.navigationMenuStateSubject.next(this.navigationMenuState);
 		this.overlaySubject.next(this.isOverlayShown);
 		this.showUserInfoSubject.next(this.showUserInfo);
 		this.shownUserSubject.next(this.shownUser);
+
+		this.windowWidth = window.innerWidth;
+		this.windowWidthSubject.next(this.windowWidth);
+		this.windowWidthSub = this.windowWidthSubject.subscribe(windowWidth => {
+			this.windowWidth = windowWidth;
+		})
 	}
 
 	swithcUserInfoState() {
@@ -53,6 +63,14 @@ export class SubjectsService {
 		}
 		if (this.showUserInfo) {
 			this.showUserInfo = false;
+		}
+		if (this.windowWidth > 767){
+			this.isOverlayShown = false
+
+			this.userInfoMenuStateSubject.next(this.userInfoMenuState);
+			this.showUserInfoSubject.next(this.showUserInfo);
+			this.overlaySubject.next(this.isOverlayShown);
+			return			
 		}
 
 		this.navigationMenuState == 'out' ? 

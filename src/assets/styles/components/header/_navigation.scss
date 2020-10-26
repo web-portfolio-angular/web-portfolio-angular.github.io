@@ -14,20 +14,33 @@
     width: 100%;
     background: rgba($black, 0.95);
     z-index: 1;
-    @include flexCenterH;
     flex-direction: column;
-    .nav-active {
-      color: $default-red !important;
-      font-weight: bold;
-      background: url("../../../img/shared/nav-underline.png") center no-repeat;
-      background-position-y: 21px;
+    @include flexCenterH;
+    @include media (larmed) {
+      height: auto;
+      position: static;
+      background: none;
+      flex-direction: row;
+      align-items: center;
+      justify-content: normal;
+      width: calc(100% - 48px);
+      padding-left: 10px;
     }
+    .nav-active {
+      @include nav-active;
+    }    
     li {
       padding: 10px 0;
       list-style: none;
       color: $color3-light;
       text-align: center;
       @include btn;
+      @include hover (normal) {
+        @include nav-active;
+      }
+      @include media (larmed) {
+        padding: 10px;
+      }
     }
   }
   &__hamburger {
@@ -39,6 +52,9 @@
     background-color: transparent;
     border: none;
     outline: none;
+    @include media(larmed) {
+      display: none;
+    }
     div {
       width: 100%;
       background: $default-red;

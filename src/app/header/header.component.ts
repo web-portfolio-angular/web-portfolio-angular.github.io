@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Renderer2, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from '../shared/services/auth.service';
@@ -22,6 +22,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isOverlayShown: boolean;
 
 
+	windowWidthSub: Subscription;
+	windowWidth: number;
+
+
   constructor(
     private authService: AuthService,
     private subjectsService: SubjectsService) {}
@@ -42,6 +46,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.disableButtonSub = this.subjectsService.disableButtonSubject.subscribe(booloean => {
       this.disableButton = booloean;       
     })
+
+    this.windowWidthSub = this.subjectsService.windowWidthSubject.subscribe(windowWidth => {
+      this.windowWidth = windowWidth;    
+    })
   }
 
   ngOnDestroy(){
@@ -49,6 +57,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.navigationMenuSub.unsubscribe();
     this.overlaySub.unsubscribe();
     this.disableButtonSub.unsubscribe();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.windowWidth = event.target.innerWidth;    
+    this.subjectsService.windowWidthSubject.next(this.windowWidth);
   }
 
   swithcNavigationMenuState(){
