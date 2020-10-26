@@ -9,11 +9,13 @@ import { FirestoreService } from 'src/app/shared/services/firestore.service';
   styles: []
 })
 export class PorscheComponent implements OnInit {
-  isLoading = false;
+  isLoading: boolean = false;
   porshceCars: Car[];
-  errorMsg = null;
+  errorMsg: string = null;
 
-  constructor(private firestore: FirestoreService) { }
+  constructor(
+    private firestore: FirestoreService
+  ) {}
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -25,8 +27,7 @@ export class PorscheComponent implements OnInit {
         }
       })
       this.isLoading = false;
-      this.errorMsg = null;
-      
+      this.errorMsg = null;      
     }, error => {
       this.isLoading = false;
       this.errorMsg = error;
