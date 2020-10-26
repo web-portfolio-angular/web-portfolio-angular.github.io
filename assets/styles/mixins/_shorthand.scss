@@ -20,12 +20,23 @@
 }
 
 @mixin placeholderColor ($color) {
-  &::placeholder {color: $color}
-  &::-webkit-input-placeholder {color: $color}
-  &:-moz-placeholder {color: $color}
-  &::-moz-placeholder {color: $color}
-  &:-ms-input-placeholder {color: $color}  
+  &::placeholder {
+    color: $color
+  }
+  &::-webkit-input-placeholder {
+    color: $color
+  }
+  &:-moz-placeholder {
+    color: $color
+  }
+  &::-moz-placeholder {
+    color: $color
+  }
+  &:-ms-input-placeholder {
+    color: $color
+  }
 }
+
 @mixin inputNoArrows {
   &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -72,4 +83,11 @@
   border-radius: 3px 0 0 3px;
   padding: 7px;
   box-sizing: border-box;
+}
+
+@mixin nav-active {
+  color: $default-red !important;
+  font-weight: bold;
+  background: url("../../img/shared/nav-underline.png") center no-repeat;
+  background-position-y: 21px;
 }

@@ -1,5 +1,4 @@
-.nav-container {
-  display: flex;
+.nav-outer-container {
   background: rgba($black, 0.95);
   box-shadow: 0px 5px 5px 0px rgba($default-red, 0.9);
   height: 48px;
@@ -7,64 +6,93 @@
   top: 0;
   width: 100%;
   z-index: 999;
-  &__nav {
-    height: calc(100vh - 50px);
-    position: absolute;
-    top: 50px;
-    width: 100%;
-    background: rgba($black, 0.95);
-    z-index: 1;
-    @include flexCenterH;
-    flex-direction: column;
-    .nav-active {
-      color: $default-red !important;
-      font-weight: bold;
-      background: url("../../../img/shared/nav-underline.png") center no-repeat;
-      background-position-y: 21px;
-    }
-    li {
-      padding: 10px 0;
-      list-style: none;
-      color: $color3-light;
-      text-align: center;
-      @include btn;
-    }
-  }
-  &__hamburger {
-    position: absolute;
-    width: 30px;
-    height: 20px;
-    margin: 14px 20px;
-    cursor: pointer;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    div {
-      width: 100%;
-      background: $default-red;
-      height: 4px;
-      transition: 0.30s ease-in-out;
-      &:not(:last-child) {
-        margin-bottom: 3px;
-      }
-    }
-    ul {
+  .nav-container {
+    @include flexCenterVSB;
+    height: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 10px;
+    &__nav {
+      height: calc(100vh - 50px);
       position: absolute;
-      color: $color7-dark;
+      top: 50px;
+      width: 100%;
+      background: rgba($black, 0.95);
+      z-index: 1;
+      flex-direction: column;
+      @include flexCenterH;
+      @include media (larmed) {
+        width: auto;
+        height: auto;
+        position: static;
+        background: none;
+        flex-direction: row;
+        justify-content: normal;
+      }
+      .nav-active {
+        @include nav-active;
+      }
+      li {
+        padding: 10px 0;
+        list-style: none;
+        color: $color3-light;
+        text-align: center;
+        @include btn;
+        @include hover (normal) {
+          @include nav-active;
+        }
+        @include media (larmed) {
+          padding: 10px;
+        }
+      }
     }
-  }
-  &__hamburger-active {
-    div {
-      &:nth-child(1) {
-        transform: rotate(45deg);
-        margin-top: 0;
+    &__hamburger {
+      width: 30px;
+      height: 20px;
+      cursor: pointer;
+      background-color: transparent;
+      border: none;
+      outline: none;
+      @include media(larmed) {
+        display: none;
       }
-      &:nth-child(2) {
-        opacity: 0;
+      div {
+        width: 100%;
+        background: $default-red;
+        height: 4px;
+        transition: 0.30s ease-in-out;
+        &:not(:last-child) {
+          margin-bottom: 3px;
+        }
       }
-      &:nth-child(3) {
-        transform: rotate(-45deg);
-        margin-top: -1em;
+      ul {
+        position: absolute;
+        color: $color7-dark;
+      }
+    }
+    &__hamburger-active {
+      div {
+        &:nth-child(1) {
+          transform: rotate(45deg);
+          margin-top: 0;
+        }
+        &:nth-child(2) {
+          opacity: 0;
+        }
+        &:nth-child(3) {
+          transform: rotate(-45deg);
+          margin-top: -1em;
+        }
+      }
+    }
+    &__sign-btns {
+      @include flexCenterHV;
+      .nav-active-btn {
+        background-color: $disabled-red;
+        color: $gray;
+      }
+      button:first-child {
+        margin-right: 10px;
       }
     }
   }
