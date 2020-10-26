@@ -16,15 +16,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private navigationMenuSub: Subscription;
   private overlaySub: Subscription;
   private disableButtonSub: Subscription;
+	private windowWidthSub: Subscription;
   isAuth: boolean = false;
   disableButton: boolean;
   navigationMenuState: string;
   isOverlayShown: boolean;
-
-
-	windowWidthSub: Subscription;
 	windowWidth: number;
-
 
   constructor(
     private authService: AuthService,
@@ -57,12 +54,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.navigationMenuSub.unsubscribe();
     this.overlaySub.unsubscribe();
     this.disableButtonSub.unsubscribe();
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.windowWidth = event.target.innerWidth;    
-    this.subjectsService.windowWidthSubject.next(this.windowWidth);
+    this. windowWidthSub.unsubscribe()
   }
 
   swithcNavigationMenuState(){
@@ -79,5 +71,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 	onEnableButton() {
 		this.subjectsService.onEnableButton();
-	}
+  }
+  
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.windowWidth = event.target.innerWidth;
+    if (this.windowWidth >= 767) {      
+      this.subjectsService.overlayClick();
+    }   
+    this.subjectsService.windowWidthSubject.next(this.windowWidth);
+  }
 }

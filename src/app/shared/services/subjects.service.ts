@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class SubjectsService {
+export class SubjectsService implements OnDestroy {
 	userInfoMenuStateSubject = new BehaviorSubject <string>(null);
 	userInfoMenuState: string = 'out';
 
@@ -22,7 +22,7 @@ export class SubjectsService {
 	shownUser: string = null;
 
 	windowWidthSubject = new BehaviorSubject <number>(null);
-	windowWidthSub: Subscription;
+	private windowWidthSub: Subscription;
 	windowWidth: number = null;
 
 	constructor() {
@@ -37,6 +37,10 @@ export class SubjectsService {
 		this.windowWidthSub = this.windowWidthSubject.subscribe(windowWidth => {
 			this.windowWidth = windowWidth;
 		})
+	}
+
+	ngOnDestroy(): void {
+		this.windowWidthSub.unsubscribe();
 	}
 
 	swithcUserInfoState() {
@@ -64,7 +68,7 @@ export class SubjectsService {
 		if (this.showUserInfo) {
 			this.showUserInfo = false;
 		}
-		if (this.windowWidth > 767){
+		if (this.windowWidth >= 767){
 			this.isOverlayShown = false
 
 			this.userInfoMenuStateSubject.next(this.userInfoMenuState);
