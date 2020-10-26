@@ -1,11 +1,3 @@
-.user-info {
-  @include flexCenterV;
-  margin-left: calc(100% - 48px);
-  @include media (larmed) {
-    margin-left: 0;
-  }
-}
-
 .user-info-container {
   &__user-nav {
     display: flex;

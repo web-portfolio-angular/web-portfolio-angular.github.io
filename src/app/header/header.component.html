@@ -1,4 +1,5 @@
-<div class="nav-container">
+<div class="nav-outer-container">
+  <div class="nav-container">
   <button class="nav-container__hamburger"
     (click)="swithcNavigationMenuState()"
     [disabled]="disableButton"
@@ -50,21 +51,22 @@
       [routerLink]="['/contacts']" 
       routerLinkActive="nav-active">Contacts
     </li>
-    <li (click)="swithcNavigationMenuState()"
-      [ngClass]="{'disabled-pointer-events' : disableButton}"
-      [routerLink]="['/signin']" 
-      routerLinkActive="nav-active" 
-      *ngIf="!isAuth">Sign in
-    </li>
-    <li (click)="swithcNavigationMenuState()"
-      [ngClass]="{'disabled-pointer-events' : disableButton}"
-      [routerLink]="['/signup']" 
-      routerLinkActive="nav-active"
-      *ngIf="!isAuth">Sign up
-    </li>
   </ul>
+  <div class="nav-container__sign-btns">
+    <button class="btn-default narrow-btn"
+      [routerLink]="['/signin']" 
+      routerLinkActive="nav-active-btn" 
+      *ngIf="!isAuth">Sign in
+    </button>
+    <button class="btn-default narrow-btn"
+      [routerLink]="['/signup']" 
+      routerLinkActive="nav-active-btn"
+      *ngIf="!isAuth">Sign up
+    </button>
+  </div>
   <div *ngIf="isAuth" class="user-info">
     <app-user-info></app-user-info>
+  </div>
   </div>
 </div>
 <div (click)="overlayClick()" [ngClass]="{'overlay-active' : isOverlayShown, 'disabled-pointer-events' : disableButton}"></div>
