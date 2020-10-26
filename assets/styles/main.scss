@@ -17,16 +17,7 @@
 @import "components/comments/_comment";
 @import "components/sign/sign";
 @import "components/footer/footer";
-
-
-
-.categories {
-  display: flex;
-}
-
-.cars {
-  display: flex;
-}
+@import "components/scroll-top";
 
 body {
   padding-top: 100px !important;

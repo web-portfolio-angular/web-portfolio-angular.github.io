@@ -13,3 +13,9 @@
     }
   }
 }
+
+@mixin hoverStyleNextEl ($nextEl) {
+  @media not all and (pointer: coarse) {
+    &:hover~#{$nextEl} { @content; }    
+  }
+}
