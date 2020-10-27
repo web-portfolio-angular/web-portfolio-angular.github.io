@@ -39,6 +39,8 @@ export class AppModule {}
 // temata prezapisva transitiona na drugite elementi pri hover
 // loading spinner sass
 // sign autofill color
+// min width naproducts
+// scroll to top symbol
 
 // klient da si zibra kakvo info da se vijda za nego
 
