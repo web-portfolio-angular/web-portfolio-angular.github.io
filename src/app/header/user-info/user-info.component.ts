@@ -156,7 +156,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
 
   uploadAvatarToFirestorage() {
     this.isLoading = true;
-    this.angularFireStorage.upload("/userImages/" + this.imgName + "-" + this.generateIdService.generateId(), this.file)
+    this.angularFireStorage.upload("/userImages/" + this.userAdditionalData[0].email+'/' + this.imgName + "-" + this.generateIdService.generateId(), this.file)
     .then(uploadTask => {
       uploadTask.ref.getDownloadURL().then(url => {
         const userImg = url;

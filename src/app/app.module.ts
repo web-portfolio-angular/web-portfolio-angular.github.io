@@ -41,6 +41,7 @@ export class AppModule {}
 // sign autofill color
 // min width naproducts
 // scroll to top symbol
+// da opravq errorite, moje samo s 1
 
 // klient da si zibra kakvo info da se vijda za nego
 
