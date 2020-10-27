@@ -1,0 +1,29 @@
+.car-item {
+  padding: 10px;
+  border-radius: 3px;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 5px 1px rgba($black, 0.75);
+  width: 31%;
+  // display: inline-block;
+  // margin-bottom: 10px;
+  // background-color: #ffffff;
+  &__img {
+    box-shadow: 0px 0px 5px 1px rgba($black, 0.75);
+    border-radius: 3px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  &__hr{
+    margin: 15px 0px;
+    border-top: 1px solid $default-red;
+  }
+  &__info {
+    text-align: center;
+    //color za temata
+  }
+  &__prise {
+    @include flexCenterVSB;
+    font-weight: bold;
+  }
+}

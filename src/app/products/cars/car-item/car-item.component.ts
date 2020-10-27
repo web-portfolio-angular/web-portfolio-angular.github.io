@@ -9,6 +9,7 @@ import { Car } from 'src/app/shared/models/car.model';
 })
 export class CarItemComponent implements OnInit {
   @Input() car: Car;
+  carCurrentImage: string;
 
   constructor() { }
 
