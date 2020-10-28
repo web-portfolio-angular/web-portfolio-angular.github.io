@@ -7,6 +7,10 @@ import { Comment } from '../models/comment.model';
 import { CommentReply } from '../models/comment-reply.model';
 
 
+// 
+import { Car } from '../models/car.model';
+
+
 @Injectable({providedIn: 'root'})
 export class FirestoreService {
   constructor(private firestore: AngularFirestore) {}
@@ -72,13 +76,22 @@ export class FirestoreService {
   //products
   getLamborghiniCars() {
     return this.firestore
-    .collection('lamborghiniCars', data => data.orderBy('carPrice', 'asc'))
+    .collection('lamborghiniCars', data => data.orderBy('dateCreation', 'desc'))
     .snapshotChanges();
   }
   
   getPorscheCars() {
     return this.firestore
-    .collection('porscheCars', data => data.orderBy('carPrice', 'asc'))
+    .collection('porscheCars', data => data.orderBy('dateCreation', 'desc'))
     .snapshotChanges();
+  }
+
+  // temporary
+  setLamborghiniCars(car: Car){
+    return this.firestore.collection('lamborghiniCars').add(car);
+  }
+
+  setPorscheCars(car: Car){
+    return this.firestore.collection('porscheCars').add(car);
   }
 }

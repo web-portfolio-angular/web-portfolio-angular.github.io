@@ -43,6 +43,9 @@
 }
 
 .categories {
+  @include media (lar) {
+    display: flex;
+  }
   &__content {
     p {
       background-color: $default-red;
@@ -61,7 +64,6 @@
       height: 50px;
       display: flex;
       overflow: scroll;
-      margin-bottom: 30px;
       background-color: $black;
       border-bottom-left-radius: 3px;
       border-bottom-right-radius: 3px;
@@ -76,13 +78,43 @@
         @include hover (normal) {
           @include categories-active;
         }
+        @include media (lar) {
+          text-align: center;
+        }
       }
       .categories-active {
         @include categories-active;
+      }
+      @include media (lar) {
+        height: auto;
+        overflow: auto;
+        display: block;
       }
     }
     .call-us {
       display: none;
     }
+    @include media (lar) {
+      width: 220px;
+      margin-right: 10px;
+    }
+  }
+  &__router {
+    padding: 10px;
+    background-color: var(--color2);
+    box-shadow: 0px 0px 10px 1px rgba($black, 0.75);
+    border-radius: 3px;
+    @include media (lar) {
+      width: calc(100% - 220px);
+      box-sizing: border-box;
+    }
+  }
+}
+
+.cars-container {
+  position: relative;
+  min-height: 80px;
+  .cars {
+    text-align: center;
   }
 }

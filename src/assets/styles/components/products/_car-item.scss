@@ -1,12 +1,17 @@
 .car-item {
-  padding: 10px;
+  padding: 5px;
+  margin: 5px;
   border-radius: 3px;
   box-sizing: border-box;
   box-shadow: 0px 0px 5px 1px rgba($black, 0.75);
-  width: 31%;
-  // display: inline-block;
-  // margin-bottom: 10px;
-  // background-color: #ffffff;
+  width: 46%;
+  background-color: var(--color12);
+  border: 1px solid var(--color9);
+  color: var(--color6);
+  display: inline-block;
+  @include media (larmed) {
+    width: 31%;
+  }
   &__img {
     box-shadow: 0px 0px 5px 1px rgba($black, 0.75);
     border-radius: 3px;
@@ -14,8 +19,9 @@
     width: 100%;
     margin-bottom: 10px;
   }
-  &__hr{
+  &__hr {
     margin: 15px 0px;
+    border: none;
     border-top: 1px solid $default-red;
   }
   &__info {
@@ -23,7 +29,31 @@
     //color za temata
   }
   &__prise {
-    @include flexCenterVSB;
-    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-weight: bold;    
+    .add-to-cart {
+      margin: 0 auto;
+      width: 106px;
+      box-sizing: border-box;
+      color: $gray;
+      cursor: pointer;
+      margin-top: 10px;
+      padding-right: 20px;
+      background-image: url("../../../img/products/plus.png");
+      background-repeat: no-repeat;
+      background-position: right;
+      @include hover (normal) {
+        color: $default-red;
+      }
+      @include media (med) {
+        margin: 0;
+      }
+    }
+    @include media (med) {
+      flex-direction: row;
+      justify-content: space-between;      
+    }
   }
 }
