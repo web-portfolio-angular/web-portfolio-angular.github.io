@@ -1,14 +1,13 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { SubjectsService } from '../../shared/services/subjects.service';
 import { Comment } from '../../shared/models/comment.model';
+import { SubjectsService } from '../../shared/services/subjects.service';
 
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
-  styles: [
-  ]
+  styles: []
 })
 export class CommentComponent implements OnInit, OnDestroy {
   @Input() comment: Comment;

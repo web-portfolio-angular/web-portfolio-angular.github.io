@@ -22,9 +22,10 @@
             (change)="uploadAvatar($event)" 
             accept=".png,.jpg,.jpeg,.svg,.heic">
           <button class="btn-default narrow-btn ng-star-inserted" (click)="chooseImg.click()">Chose image</button>
-          <button class="btn-default narrow-btn ng-star-inserted" [disabled]="file==undefined" (click)="uploadAvatarToFirestorage()">Upload Image</button>
-          <p *ngIf="errorMsgOnAvatarUpload" class="error-msg">{{errorMsgOnAvatarUpload}}</p>
+          <button class="btn-default narrow-btn ng-star-inserted" [disabled]="file==undefined" (click)="uploadAvatarToFirestorage()">Upload Image</button>          
         </div>
+        <p *ngIf="errorMsgOnAvatarUpload" class="error-msg">{{ errorMsgOnAvatarUpload }}</p>
+        <p *ngIf="errorMsgOnAvatarWrite" class="error-msg">{{ errorMsgOnAvatarWrite }}</p>
         <button 
           class="change-user-image-btn"
           (click)="changeImgMode()">

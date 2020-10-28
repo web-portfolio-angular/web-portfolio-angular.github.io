@@ -41,6 +41,7 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   imgLocalPath: string;
   imgName: string;
   errorMsgOnAvatarUpload: string;
+  errorMsgOnAvatarWrite: string;
   isLoading = false;
 
   constructor(
@@ -165,11 +166,11 @@ export class UserInfoComponent implements OnInit, OnDestroy {
         this.firestore.updateUserImg(newIfo)
         .then(() => {
           this.isInChangeImgMode = false;
-          this.errorMsgOnAvatarUpload = null;
+          this.errorMsgOnAvatarWrite = null;
           this.defaultImg = url;
         })
         .catch(error => {
-          this.errorMsgOnAvatarUpload = error.message;
+          this.errorMsgOnAvatarWrite = error.message;
         })
       })      
       this.errorMsgOnAvatarUpload = null;

@@ -34,7 +34,7 @@
           </div>
           <div>
             <button class="btn-default btn-default-center" type="submit" [disabled]="!replyForm.valid">Add your comment</button>
-            <p *ngIf="errorMsgOnReply" class="error-msg">{{ errorMsgOnReply }}</p>
+            <p *ngIf="errorMsgOnReply && isReply == comment.id" class="error-msg">{{ errorMsgOnReply }}</p>
           </div>            
         </form>
       </div>
