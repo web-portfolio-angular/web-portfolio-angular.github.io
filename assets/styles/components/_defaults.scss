@@ -9,7 +9,8 @@
 body {
   overflow-x: hidden;
   background-color: var(--color1);
-  min-width: 320px;  
+  min-width: 320px; 
+  @include scrollbar (body);
 }
 
 ::selection {
