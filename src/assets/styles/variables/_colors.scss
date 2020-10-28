@@ -43,6 +43,12 @@ $color12-dark: #444546;
 $color13-light: rgba(#fff, 0.50);
 $color13-dark: rgba(#000, 0.50);
 
+$color14-light: #444546;
+$color14-dark: #7a2626;
+
+$color15-light: #999;
+$color15-dark: #444546;
+
 $colors: (
   --color1: ($color1-light, $color1-dark),
   --color2: ($color2-light, $color2-dark),
@@ -56,5 +62,7 @@ $colors: (
   --color10: ($color10-light, $color10-dark),
   --color11: ($color11-light, $color11-dark),
   --color12: ($color12-light, $color12-dark),
-  --color13: ($color13-light, $color13-dark)
+  --color13: ($color13-light, $color13-dark),
+  --color14: ($color14-light, $color14-dark),
+  --color15: ($color15-light, $color15-dark),
 );

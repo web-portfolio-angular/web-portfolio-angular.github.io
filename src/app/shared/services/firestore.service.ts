@@ -6,11 +6,6 @@ import { UserAdditionalInfo } from '../models/user-additional-info.model';
 import { Comment } from '../models/comment.model';
 import { CommentReply } from '../models/comment-reply.model';
 
-
-// 
-import { Car } from '../models/car.model';
-
-
 @Injectable({providedIn: 'root'})
 export class FirestoreService {
   constructor(private firestore: AngularFirestore) {}
@@ -84,14 +79,5 @@ export class FirestoreService {
     return this.firestore
     .collection('porscheCars', data => data.orderBy('dateCreation', 'desc'))
     .snapshotChanges();
-  }
-
-  // temporary
-  setLamborghiniCars(car: Car){
-    return this.firestore.collection('lamborghiniCars').add(car);
-  }
-
-  setPorscheCars(car: Car){
-    return this.firestore.collection('porscheCars').add(car);
   }
 }

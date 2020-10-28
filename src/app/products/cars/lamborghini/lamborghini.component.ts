@@ -26,7 +26,7 @@ export class LamborghiniComponent implements OnInit {
           ...e.payload.doc.data() as Car
         }
       })
-      // this.isLoading = false;
+      this.isLoading = false;
       this.errorMsg = null;      
     }, error => {
       this.isLoading = false;
