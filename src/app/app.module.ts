@@ -31,16 +31,3 @@ import { ScrollTopComponent } from './scroll-top/scroll-top.component';
   bootstrap: [AppComponent]
 })
 export class AppModule {}
-
-// preload images
-// on relload with saved data the button is not active
-// comment trimp space
-
-// temata prezapisva transitiona na drugite elementi pri hover
-// loading spinner sass
-// sign autofill color
-
-// klient da si zibra kakvo info da se vijda za nego
-
-// ng build --prod --base-href "https://web-portfolio-angular.github.io"
-// ngh --dir=dist/index
