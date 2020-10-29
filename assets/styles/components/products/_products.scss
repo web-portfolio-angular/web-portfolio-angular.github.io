@@ -25,12 +25,12 @@
       cursor: pointer;
       position: relative;
       width: 25%;
+      @include hoverStyleCustom ('.top-cars-hover') {
+        display: block
+      }    
       img {
         width: 100%;
-        display: block;
-        @include hoverStyleNextEl('.top-cars-hover') {
-          display: block
-        }
+        display: block;    
       }
       .top-cars-hover {
         display: none;
