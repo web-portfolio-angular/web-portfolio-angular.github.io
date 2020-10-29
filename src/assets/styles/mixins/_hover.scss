@@ -14,8 +14,8 @@
   }
 }
 
-@mixin hoverStyleNextEl ($nextEl) {
+@mixin hoverStyleCustom ($customEl) {
   @media not all and (pointer: coarse) {
-    &:hover~#{$nextEl} { @content; }    
+    &:hover #{$customEl} { @content; }    
   }
 }
