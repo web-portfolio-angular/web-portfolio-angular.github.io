@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { CarImagesComponent } from './car-images/car-images.component';
 
 @NgModule({
 	declarations: [
-		LoadingSpinnerComponent
+		LoadingSpinnerComponent,
+		CarImagesComponent
 	],
 	exports: [
-		LoadingSpinnerComponent
+		LoadingSpinnerComponent,
+		CarImagesComponent
 	]
 })
 export class SharedModule{}
