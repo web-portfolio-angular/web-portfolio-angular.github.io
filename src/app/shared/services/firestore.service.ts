@@ -22,14 +22,14 @@ export class FirestoreService {
     return this.firestore.collection('registrations').add(user);
   }
 
-  updatePhone(newInfo: UserAdditionalInfo){
+  updatePhone(newInfo){
     return this.firestore.doc('registrations/' + newInfo.id).update({
       phoneCode: newInfo.phoneCode,
       phone: newInfo.phone
      });
    }
 
-   updateUserImg(newInfo: UserAdditionalInfo){
+   updateUserImg(newInfo){
     return this.firestore.doc('registrations/' + newInfo.id).update({
       userImg: newInfo.userImg
      });
