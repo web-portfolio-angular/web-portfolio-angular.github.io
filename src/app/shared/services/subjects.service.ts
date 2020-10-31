@@ -64,6 +64,7 @@ export class SubjectsService implements OnDestroy {
 			[this.userInfoMenuState = 'in', this.isOverlayShown = true] :	
 			[this.userInfoMenuState = 'out', this.isOverlayShown = false];
 		
+		this.onHideCarImages();
 		this.navigationMenuStateSubject.next(this.navigationMenuState);
 		this.userInfoMenuStateSubject.next(this.userInfoMenuState);
 		this.overlaySubject.next(this.isOverlayShown);
@@ -83,6 +84,7 @@ export class SubjectsService implements OnDestroy {
 			this.userInfoMenuStateSubject.next(this.userInfoMenuState);
 			this.showUserInfoSubject.next(this.showUserInfo);
 			this.overlaySubject.next(this.isOverlayShown);
+			this.onHideCarImages();
 			return			
 		}
 
@@ -90,6 +92,7 @@ export class SubjectsService implements OnDestroy {
 			[this.navigationMenuState = 'in', this.isOverlayShown = true] :	
 			[this.navigationMenuState = 'out', this.isOverlayShown = false];
 
+		this.onHideCarImages();
 		this.userInfoMenuStateSubject.next(this.userInfoMenuState);
 		this.navigationMenuStateSubject.next(this.navigationMenuState);
 		this.overlaySubject.next(this.isOverlayShown);
