@@ -14,6 +14,8 @@ export class CarImagesComponent implements OnInit {
   private carIdSub: Subscription;
   carShowImages: boolean;
   carId: string;
+  currentImgUrl: string;
+  currentImgIndex: number = 0;
 
   constructor(
     private subjectService: SubjectsService
@@ -26,6 +28,8 @@ export class CarImagesComponent implements OnInit {
     this.carIdSub = this.subjectService.carIdSubject.subscribe(string => {
       this.carId = string;
     });
+
+    this.currentImgUrl = this.carImgs[0];
   }
 
   ngOnDestroy(): void {
@@ -35,5 +39,10 @@ export class CarImagesComponent implements OnInit {
 
   onHideCarImages() {
     this.subjectService.onHideCarImages();
+  }
+
+  changeImg(imgUrl: string, index: number) {
+    this.currentImgUrl = imgUrl;
+    this.currentImgIndex= index;
   }
 }

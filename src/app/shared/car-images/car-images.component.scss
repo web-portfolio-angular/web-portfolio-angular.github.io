@@ -6,4 +6,19 @@
   left: 0;
   z-index: 300;
   background-color: rgba(0, 0, 0, 0.5);
+  .car-images {
+    &__current-image {
+      
+    }
+    &__images {
+      .active-image {
+        border: 1px solid red;
+      }
+    }
+  }
+}
+
+
+img {
+  width: 100px;
 }
