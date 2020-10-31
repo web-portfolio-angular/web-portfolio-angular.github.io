@@ -14,8 +14,8 @@
   font-size: 2em;
   transition: opacity 0.5s ease-in-out;
   @include flexCenterHV;
-  @media only screen and (min-width: 1980px){
-    right: calc((100vw - 1980px)/2 + 10px);
+  @media only screen and (min-width: 980px){
+    right: calc((100vw - 980px)/2 + 10px);
   }
 }
 
