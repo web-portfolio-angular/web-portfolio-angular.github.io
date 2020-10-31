@@ -7,15 +7,15 @@
   position: fixed;
   bottom: 10px;
   right: 10px;
-  z-index: 1000;
+  z-index: 499;
   user-select: none;
   opacity: 0;
   transform: rotate(-90deg);
   font-size: 2em;
   transition: opacity 0.5s ease-in-out;
   @include flexCenterHV;
-  @media only screen and (min-width: 1980px){
-    right: calc((100vw - 1980px)/2 + 10px);
+  @media only screen and (min-width: 980px){
+    right: calc((100vw - 980px)/2 + 10px);
   }
 }
 
