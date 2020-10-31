@@ -1,0 +1,49 @@
+.car-images-container {
+  position: fixed;
+  width: 100%;
+  height: calc(100vh - 50px);
+  top: 50px;
+  left: 0;
+  z-index: 300;
+  background-color: rgba($black, 0.5);
+  @include flexCenterH;
+  .car-images {
+    width: 100%;
+    max-width: 1920px;
+    height: 100%;
+    position: relative;
+    &__current-image {
+      img {
+        border-radius: 3px;
+        border: 3px solid $default-red;
+      }      
+    }
+    &__images {
+      
+      
+      img {
+        margin: 3px;
+      }
+      // 
+      .active-image {
+        border-radius: 3px;
+        border: 3px solid $default-red;
+      }
+    }
+    &__close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+  }
+
+
+
+
+// 
+  img {
+    width: 100px;
+  }
+}
+
+

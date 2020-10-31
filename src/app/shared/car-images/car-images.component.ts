@@ -6,7 +6,7 @@ import { SubjectsService } from 'src/app/shared/services/subjects.service';
 @Component({
   selector: 'app-car-images',
   templateUrl: './car-images.component.html',
-  styleUrls: ['./car-images.component.scss']
+  styleUrls: []
 })
 export class CarImagesComponent implements OnInit {
   @Input() carImgs;
@@ -34,7 +34,7 @@ export class CarImagesComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.carShowImagesSub.unsubscribe();    
-    this.carIdSub.unsubscribe();    
+    this.carIdSub.unsubscribe();   
   }
 
   onHideCarImages() {
