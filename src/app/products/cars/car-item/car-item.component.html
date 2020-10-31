@@ -11,5 +11,9 @@
     <div class="add-to-cart">
       <p>Add to Cart</p>
     </div>
-  </div> 
+  </div>
+  <div class="car-item__images">
+    <button class="btn-default narrow-btn" (click)="onShowCarImages(car.id)">Show Images</button>
+    <app-car-images *ngIf="carShowImages && carId==car.id" [carImgs]="car.carImgs"></app-car-images>
+  </div>
 </div>

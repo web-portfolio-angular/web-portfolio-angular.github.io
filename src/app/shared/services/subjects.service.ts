@@ -25,6 +25,12 @@ export class SubjectsService implements OnDestroy {
 	private windowWidthSub: Subscription;
 	windowWidth: number = null;
 
+	carShowImagesSubject = new BehaviorSubject <boolean>(null);
+	carShowImages: boolean = false;
+
+	carIdSubject = new BehaviorSubject <string>(null);
+	carId: string = null;
+
 	constructor() {
 		this.userInfoMenuStateSubject.next(this.userInfoMenuState);
 		this.navigationMenuStateSubject.next(this.navigationMenuState);
@@ -37,6 +43,9 @@ export class SubjectsService implements OnDestroy {
 		this.windowWidthSub = this.windowWidthSubject.subscribe(windowWidth => {
 			this.windowWidth = windowWidth;
 		})
+
+		this.carShowImagesSubject.next(this.carShowImages);
+		this.carIdSubject.next(this.carId);
 	}
 
 	ngOnDestroy(): void {
@@ -119,5 +128,21 @@ export class SubjectsService implements OnDestroy {
 	onEnableButton() {
 		this.disableButton = false;
 		this.disableButtonSubject.next(this.disableButton);
+	}
+
+	onShowCarImages(carId) {
+		this.carShowImages = true;
+		this.carId = carId;
+
+		this.carShowImagesSubject.next(this.carShowImages);
+		this.carIdSubject.next(this.carId);
+	}
+
+	onHideCarImages() {
+		this.carShowImages = false;
+		this.carId = null;
+
+		this.carShowImagesSubject.next(this.carShowImages);
+		this.carIdSubject.next(this.carId);
 	}
 }

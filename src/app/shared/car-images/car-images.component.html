@@ -1,6 +1,15 @@
-<div>
-  some txt
-
-  <button>car-images works!</button>
-
+<div class="car-images-container">
+  <div class="car-images">
+    <div class="car-images__current-image">
+      <img style="width: 100px;" class="" [src]="carImgs[0]">
+    </div>
+    <div class="car-images__images">
+      <img style="width: 100px;" *ngFor="let image of carImgs" [src]="image">
+    </div>
+  
+  
+  
+  
+    <button (click)="onHideCarImages()">Close</button>
+  </div>
 </div>

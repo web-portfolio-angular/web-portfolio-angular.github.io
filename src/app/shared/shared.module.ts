@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { CarImagesComponent } from './car-images/car-images.component';
@@ -8,6 +9,7 @@ import { CarImagesComponent } from './car-images/car-images.component';
 		LoadingSpinnerComponent,
 		CarImagesComponent
 	],
+	imports: [CommonModule],
 	exports: [
 		LoadingSpinnerComponent,
 		CarImagesComponent
