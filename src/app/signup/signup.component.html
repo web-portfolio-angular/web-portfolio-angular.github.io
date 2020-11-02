@@ -36,7 +36,7 @@
       <div class="phone">
         <div class="phone-img"></div>
         <div class="sign-select">
-          <mat-form-field [ngClass]="{'invalid':!signupForm.get('phone').valid && signupForm.get('phone').touched}">
+          <mat-form-field [ngClass]="{'if-phone-invalid':!signupForm.get('phone').valid && signupForm.get('phone').touched}">
             <mat-select formControlName="phoneCode">
               <mat-option *ngFor="let phoneCode of phoneCodes" [value]="phoneCode.phoneCode">
                 <img [src]="phoneCode.img">
