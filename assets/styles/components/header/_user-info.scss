@@ -136,6 +136,13 @@
             -moz-appearance: textfield;
             margin: 0;
             @include inputNoArrows;
+            filter: none;
+            &:-webkit-autofill, &:-webkit-autofill:hover, &:-webkit-autofill:focus {
+              border: none;
+              -webkit-text-fill-color: $black;
+              -webkit-box-shadow: none;
+              transition: background-color 5000s ease-in-out 0s;
+            }
           }
           .phone-accept-change {
             @include changePhoneBtn;
