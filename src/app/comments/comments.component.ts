@@ -98,8 +98,12 @@ export class CommentsComponent implements OnInit, OnDestroy {
     const name = this.userAdditionalData[0].name;
     const email = this.userAdditionalData[0].email;
     const date = firebase.firestore.Timestamp.now();
-    const comment = postForm.value.commentArea;
+    const comment = postForm.value.commentArea.trim();
     const post: Comment = {name, email, date, comment};
+    if (comment == '') {
+      this.postForm.reset();
+      return
+    }
     this.firestore.createComment(post)
     .then(() => {
       this.postForm.reset();
@@ -114,14 +118,17 @@ export class CommentsComponent implements OnInit, OnDestroy {
     if(!this.replyForm.valid){
       return;
     }
-
     const name = this.userAdditionalData[0].name;
     const email = this.userAdditionalData[0].email;
     const date = firebase.firestore.Timestamp.now();
-    const comment = replyForm.value.replyArea;
+    const comment = replyForm.value.replyArea.trim();
     const id = this.generateIdService.generateId();
     const commentId = orgCommentId;
     const post: CommentReply = {name, email, date, comment, id, commentId};
+    if (comment == '') {
+      this.replyForm.reset();
+      return
+    }
     this.firestore.updateComment(post)
     .then(() => {
       this.isReply = null;
