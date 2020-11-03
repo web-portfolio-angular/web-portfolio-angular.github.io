@@ -15,12 +15,18 @@ export class ProductsComponent implements OnInit {
     const lastVisitedLink: {
       productsLink: string
     } = JSON.parse(localStorage.getItem('productsLink'));
-    
-    if (lastVisitedLink){
-      this.router.navigate([lastVisitedLink])
-    } else{
-      this.router.navigate(['products/lamborghini']) 
-    }    
+
+    if (this.router.url.includes('/products/')) {
+      this.router.navigate([this.router.url]);
+      localStorage.setItem('productsLink', JSON.stringify(this.router.url));
+    } else {
+      if (lastVisitedLink) {
+        this.router.navigate([lastVisitedLink]);
+      } else {
+        this.router.navigate([this.router.url]);
+        localStorage.setItem('productsLink', JSON.stringify(this.router.url));
+      }      
+    }  
   }
 
   saveToLocalStore(data: string){
