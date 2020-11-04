@@ -62,6 +62,57 @@ export class CommentsComponent implements OnInit, OnDestroy {
           ...e.payload.doc.data() as Comment
         }
       })
+      for (let i = 0; i < this.comments.length; i++) {
+        this.firestore.getRegistration(this.comments[i].email).subscribe(reg => {
+          const registration = reg.map(e => {
+            return {
+              id: e.payload.doc.id,
+              ...e.payload.doc.data() as UserAdditionalInfo
+            }
+          })
+          const userImg = 'url(' + registration[0].userImg + ')';
+          const id = this.comments[i].id;
+          const newInfo = {userImg, id};
+          this.firestore.updateCommentImg(newInfo)
+          if (this.comments[i].replies) {
+            for (let j = 0; j < this.comments[i].replies.length; j++) {
+              this.firestore.getRegistration(this.comments[i].replies[j].email).subscribe(reg => {
+                const registration = reg.map(e => {
+                  return {
+                    id: e.payload.doc.id,
+                    ...e.payload.doc.data() as UserAdditionalInfo
+                  }
+                })
+                const userImg = 'url(' + registration[0].userImg + ')';
+                const commentId = this.comments[i].id;
+                const replayId = this.comments[i].replies[j].id;
+                const replayEl = j;
+                const newInfo = {userImg, commentId, replayEl};
+                this.firestore.updateReplyImg(newInfo)              
+              })             
+            }
+          }
+        })
+      }
+
+      // if (this.comments[i].replies) {
+      //   for (let i = 0; i < this.comments[i].replies.length; i++) {
+      //     this.firestore.getRegistration(this.comments[i].replies[i].email).subscribe(reg => {
+      //       const registration = reg.map(e => {
+      //         return {
+      //           id: e.payload.doc.id,
+      //           ...e.payload.doc.data() as UserAdditionalInfo
+      //         }
+      //       })
+      //       const userImg = 'url(' + registration[0].userImg + ')';
+      //       const id = this.comments[i].id;
+      //       const newInfo = {userImg, id};
+      //       this.firestore.updateReply(newInfo)
+      //       this.comments[i].img = registration[0].userImg;
+      //     })
+      //   }
+      // }
+
       this.isLoading = false;
       this.errorMsgOnloadComments = null;
     }, error => {
