@@ -16,10 +16,10 @@
     }    
     .comment-header-left {
       cursor: pointer;
-      margin-bottom: 1%;
+      margin-bottom: 10px;
       @include flexCenterV;
       @include media (med) {
-        fmargin-bottom: 0;
+        margin-bottom: 0;
       }
     }
     .comment-img {
@@ -44,7 +44,7 @@
   }
   .comment-content {    
     white-space: pre-line;
-    padding: 2%;
+    padding: 10px;
     .comment-content-text {
       color: var(--color6);
     }
