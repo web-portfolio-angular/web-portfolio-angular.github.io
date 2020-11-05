@@ -64,10 +64,6 @@ export class FirestoreService {
     });
   }
 
-  deleteComment(commentId: string){
-    return this.firestore.doc('comments/' + commentId).delete();
-  }
-
   //products
   getLamborghiniCars() {
     return this.firestore
