@@ -6,7 +6,6 @@ export class Comment {
     public email: string,
     public date: firebase.firestore.Timestamp,
     public comment: string,
-    public img?: string,
     public replies?: CommentReply [],
     public id?: string
   ){}

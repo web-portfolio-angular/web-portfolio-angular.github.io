@@ -64,25 +64,6 @@ export class FirestoreService {
     });
   }
 
-  updateCommentImg(newInfo){
-    return this.firestore.doc('comments/' + newInfo.id).update({
-        img: newInfo.userImg
-     });
-   }
-
-   updateReplyImg(newInfo){
-    return this.firestore.doc('comments/' + newInfo.commentId).update({
-        // img: newInfo.userImg
-
-        // replies: firebase.firestore.FieldValue.arrayUnion({
-        //   img: newInfo.userImg
-        // })
-     });
-
-     console.log(this.firestore.doc('comments/' + newInfo.commentId + '/replies/' + 0));
-     
-   }
-
   deleteComment(commentId: string){
     return this.firestore.doc('comments/' + commentId).delete();
   }
