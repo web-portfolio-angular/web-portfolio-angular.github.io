@@ -24,7 +24,7 @@ import { SharedModule } from '../shared/shared.module';
         children:[
           {path: 'lamborghini', component: LamborghiniComponent},
           {path: 'porsche', component: PorscheComponent},
-          {path: '**', redirectTo: ''}
+          {path: '**', redirectTo: 'lamborghini'}
         ]
       }
     ])

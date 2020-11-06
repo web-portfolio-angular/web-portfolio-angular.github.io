@@ -9,27 +9,19 @@ import { Router } from '@angular/router';
 export class ProductsComponent implements OnInit {
   constructor(
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     const lastVisitedLink: {
       productsLink: string
     } = JSON.parse(localStorage.getItem('productsLink'));
 
-    if (this.router.url.includes('/products/')) {
-      this.router.navigate([this.router.url]);
-      localStorage.setItem('productsLink', JSON.stringify(this.router.url));
-    } else {
-      if (lastVisitedLink) {
-        this.router.navigate([lastVisitedLink]);
-      } else {
-        this.router.navigate([this.router.url]);
-        localStorage.setItem('productsLink', JSON.stringify(this.router.url));
-      }      
-    }  
+    if (lastVisitedLink) {
+      this.router.navigate([lastVisitedLink]);
+    }
   }
 
-  saveToLocalStore(data: string){
+  saveToLocalStore(data: string) {
     localStorage.setItem('productsLink', JSON.stringify('/products/' + data));
   }
 }
