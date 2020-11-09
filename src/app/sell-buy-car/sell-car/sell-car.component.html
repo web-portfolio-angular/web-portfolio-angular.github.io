@@ -1,0 +1,35 @@
+<div>
+	<form [formGroup]="sellCarForm" (ngSubmit)="onSubmit(sellCarForm)">
+		<div>
+			<mat-form-field>
+				<mat-select>
+					<mat-option>
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+
+			<mat-form-field>
+				<mat-select>
+					<mat-option>
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+
+		<div>
+      <button type="submit" [disabled]="!sellCarForm.valid">add</button>
+    </div>
+	</form>
+</div>
+
+<!-- 
+	model
+	year
+	img
+	description
+	amount
+	imgs?
+
+	email === edit
+	
+ -->

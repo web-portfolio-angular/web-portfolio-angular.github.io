@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
-  selector: 'app-sell-car',
-  templateUrl: './sell-car.component.html',
+  selector: 'app-sell-buy-car',
+  templateUrl: './sell-buy-car.component.html',
   styles: [
   ]
 })
-export class SellCarComponent implements OnInit {
+export class SellBuyCarComponent implements OnInit {
   file: any;
   imgName: string;
   defaultUploadImg: string = '../assets/img/cell-car/upload-img.png';

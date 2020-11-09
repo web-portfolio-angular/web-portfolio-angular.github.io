@@ -5,7 +5,7 @@ const routes: Routes = [
   {path: '', redirectTo: '/signin', pathMatch: 'full'},
   {path: 'home', loadChildren: () => import ('./home/home.module').then(m => m.HomeModule)},
   {path: 'products', loadChildren: () => import ('./products/products.module').then(m => m.ProductsModule)},
-  {path: 'sell-car', loadChildren: () => import ('./sell-car/sell-car.module').then(m => m.SellCarModule)},
+  {path: 'sell-buy-car', loadChildren: () => import ('./sell-buy-car/sell-buy-car.module').then(m => m.SellBuyCarModule)},
   {path: 'services', loadChildren: () => import ('./services/services.module').then(m => m.ServicesModule)},
   {path: 'gallery', loadChildren: () => import ('./gallery/gallery.module').then(m => m.GalleryModule)},
   {path: 'comments', loadChildren: () => import ('./comments/comments.module').then(m => m.CommentsModule)},

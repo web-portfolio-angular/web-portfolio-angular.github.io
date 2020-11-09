@@ -4,8 +4,8 @@ import { RouterModule } from '@angular/router';
 
 import { ProductsComponent } from './products.component';
 import { AuthGuardIn } from '../shared/services/authIn.guard.service';
-import { LamborghiniComponent } from './cars/lamborghini/lamborghini.component';
-import { PorscheComponent } from './cars/porsche/porsche.component';
+import { LamborghiniComponent } from './cars/car-pages/lamborghini/lamborghini.component';
+import { PorscheComponent } from './cars/car-pages/porsche/porsche.component';
 import { CarItemComponent } from './cars/car-item/car-item.component';
 import { SharedModule } from '../shared/shared.module';
 
