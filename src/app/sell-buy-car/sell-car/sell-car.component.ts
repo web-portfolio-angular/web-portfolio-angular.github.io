@@ -1,12 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { Subscription } from 'rxjs';
 
 import { CarModel } from '../../shared/models/car-model.model';
 import { CarManufactureYear } from '../../shared/models/car-manufacture-year.model';
 import { UserAdditionalInfo } from '../../shared/models/user-additional-info.model';
 import { FirestoreService } from '../../shared/services/firestore.service';
 import { AdditionUserInfoService } from '../../shared/services/user-additional-info.service';
-import { Subscription } from 'rxjs';
+import { GenerateIdService } from '../../shared/services/generateId.service';
+import { SellBuyCar } from 'src/app/shared/models/sell-buy-car.model';
 
 @Component({
   selector: 'app-sell-car',
@@ -20,6 +23,7 @@ export class SellCarComponent implements OnInit, OnDestroy {
   carDefaultImg: string = '../../../assets/img/cell-car/upload-img.png';
   carImgLocalPath: string = this.carDefaultImg;
   carImgName: string;
+  carImgURL: string;
   carModels: CarModel[] = [];
   carManufactureYears: CarManufactureYear[] = [];
   userAdditionalData: UserAdditionalInfo[];
@@ -28,6 +32,8 @@ export class SellCarComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private firestore: FirestoreService,
     private additionUserInfoService: AdditionUserInfoService,
+    private angularFireStorage: AngularFireStorage,
+    private generateIdService: GenerateIdService
   ) { }
 
   ngOnInit(): void {
@@ -72,6 +78,7 @@ export class SellCarComponent implements OnInit, OnDestroy {
         return
       }
     })
+    this.onSum();
   }
 
   ngOnDestroy() {
@@ -83,8 +90,54 @@ export class SellCarComponent implements OnInit, OnDestroy {
       return
     }
 
+    const id = this.generateIdService.generateId();
+
+    let asd = false;
+    let img;
+
+    this.angularFireStorage.upload(
+      "/sellBuyCar/" + 
+      this.userAdditionalData[0].email + '/' + 
+      id + '/' + 
+      this.carImgName + "-" + 
+      this.generateIdService.generateId(), this.carFile)
+    .then(uploadTask => {
+      uploadTask.ref.getDownloadURL()
+      .then(url => {
+        const model = this.sellCarForm.value.model;
+        const year = this.sellCarForm.value.year;
+        const carImg = url;
+        const description = this.sellCarForm.value.description.trim();
+        const price = this.sellCarForm.value.price;
+        const userEmail = this.userAdditionalData[0].email;
+        const carImages = ['link1', 'link2'];
+        const car = { model, year, carImg, description, price, userEmail, id, carImages };
+        
+        this.firestore.sellBuyCar(car);
+
+        asd = true;
+        img = url;
+      })
+      // this.errorMsgOnAvatarUpload = null;
+      // this.isLoading = false;
+      // this.file = undefined;
+    })
+    .catch(error => {
+      // this.errorMsgOnAvatarUpload = error.message;
+      // this.isLoading = false;  
+    });
+
+
+    if (asd) {
+      console.log(img);
+      
+    }
+
+
+    
     //upload img
-    console.log(sellCarForm);
+    
+
   }
 
   onChooseCarImg(event) {
@@ -102,6 +155,24 @@ export class SellCarComponent implements OnInit, OnDestroy {
   }
 
   onUploadCarImgToFirestore() {
-    console.log(this.carImgName);
+    this.angularFireStorage.upload(
+      "/sellBuyCar/" + 
+      this.userAdditionalData[0].email + '/' + 
+      this.carImgName + "-" + 
+      this.generateIdService.generateId(), this.carFile)
+    .then(uploadTask => {
+      uploadTask.ref.getDownloadURL()
+      .then(url => {
+        return url;
+           
+      })      
+      // this.errorMsgOnAvatarUpload = null;
+      // this.isLoading = false;
+      // this.file = undefined;
+    })
+    .catch(error => {
+      // this.errorMsgOnAvatarUpload = error.message;
+      // this.isLoading = false;  
+    });
   }
 }

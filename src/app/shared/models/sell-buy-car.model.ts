@@ -6,6 +6,7 @@ export class SellBuyCar {
 		public description: string,
 		public price: string,
 		public userEmail: string,
-		public carImages?: string
+		public id: string,
+		public carImages?: any [],
 	) {}
 }

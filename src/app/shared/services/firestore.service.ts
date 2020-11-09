@@ -92,6 +92,6 @@ export class FirestoreService {
   }
 
   sellBuyCar(car: SellBuyCar) {
-    return this.firestore.collection('sellBuyCar').add(car);
+    return this.firestore.collection('sellBuyCars/').doc(car.id).set(car);
   }
 }
