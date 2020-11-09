@@ -1,4 +1,4 @@
-export class SellCar {
+export class SellBuyCar {
 	constructor(
 		public model: string,
 		public year: number,

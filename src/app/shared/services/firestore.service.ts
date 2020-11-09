@@ -5,6 +5,7 @@ import * as firebase from 'firebase/app';
 import { UserAdditionalInfo } from '../models/user-additional-info.model';
 import { Comment } from '../models/comment.model';
 import { CommentReply } from '../models/comment-reply.model';
+import { SellBuyCar } from '../models/sell-buy-car.model';
 
 @Injectable({providedIn: 'root'})
 export class FirestoreService {
@@ -75,5 +76,22 @@ export class FirestoreService {
     return this.firestore
     .collection('porscheCars', data => data.orderBy('dateCreation', 'desc'))
     .snapshotChanges();
+  }
+
+  //buy/sell a car
+  getCarModels() {
+    return this.firestore
+    .collection('carModels', data => data.orderBy('car', 'asc'))
+    .snapshotChanges();
+  }
+
+  getCarManufactureYear() {
+    return this.firestore
+    .collection('carManufactureYear', data => data.orderBy('year', 'desc'))
+    .snapshotChanges();
+  }
+
+  sellBuyCar(car: SellBuyCar) {
+    return this.firestore.collection('sellBuyCar').add(car);
   }
 }

@@ -2,18 +2,42 @@
 	<form [formGroup]="sellCarForm" (ngSubmit)="onSubmit(sellCarForm)">
 		<div>
 			<mat-form-field>
-				<mat-select>
-					<mat-option>
+				<mat-select formControlName="model">
+					<mat-option *ngFor="let carModel of carModels" [value]="carModel.car">
+						{{ carModel.car }}
 					</mat-option>
 				</mat-select>
 			</mat-form-field>
 
 			<mat-form-field>
-				<mat-select>
-					<mat-option>
+				<mat-select formControlName="year">
+					<mat-option *ngFor="let carManufactureYear of carManufactureYears" [value]="carManufactureYear.year">
+						{{ carManufactureYear.year }}
 					</mat-option>
 				</mat-select>
 			</mat-form-field>
+		</div>
+
+		<div>
+			<div class="test" [ngStyle]="{'background-image': 'url('+carImgLocalPath+')'}"></div>
+			<input formControlName="carImg"
+			#chooseCarImg style="display: none;"
+			type="file" 
+			(change)="onChooseCarImg($event)" 
+			accept=".png,.jpg,.jpeg,.svg,.heic">
+		<button type="button" class="btn-default narrow-btn ng-star-inserted" (click)="chooseCarImg.click()">Chоose Image</button>
+		</div>
+
+		<div>
+			<textarea placeholder="..." formControlName="description"></textarea>
+		</div>
+
+		<div>
+			<input type="number" name="price" formControlName="price">
+		</div>
+
+		<div>
+			<!-- imgs -->
 		</div>
 
 		<div>
@@ -22,14 +46,10 @@
 	</form>
 </div>
 
-<!-- 
-	model
-	year
-	img
-	description
-	amount
-	imgs?
 
-	email === edit
-	
- -->
+<style>
+	.test {
+		width: 200px;
+		height: 200px;
+	}
+</style>
