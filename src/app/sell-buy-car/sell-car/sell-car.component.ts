@@ -78,7 +78,6 @@ export class SellCarComponent implements OnInit, OnDestroy {
         return
       }
     })
-    this.onSum();
   }
 
   ngOnDestroy() {
