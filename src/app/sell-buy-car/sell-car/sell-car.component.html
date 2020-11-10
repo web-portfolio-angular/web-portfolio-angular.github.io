@@ -19,13 +19,16 @@
 		</div>
 
 		<div>
-			<div class="test" [ngStyle]="{'background-image': 'url('+carImgLocalPath+')'}"></div>
+			<div [ngStyle]="{'background-image': 'url('+carImgLocalPath+')'}">
+				<!-- ######## -->
+				<img style="width: 200px;" [src]="carImgLocalPath">
+			</div>
 			<input formControlName="carImg"
 			#chooseCarImg style="display: none;"
 			type="file" 
 			(change)="onChooseCarImg($event)" 
 			accept=".png,.jpg,.jpeg,.svg,.heic">
-		<button type="button" class="btn-default narrow-btn ng-star-inserted" (click)="chooseCarImg.click()">Chоose Image</button>
+			<button type="button" class="btn-default narrow-btn ng-star-inserted" (click)="chooseCarImg.click()">Chоose Image</button>
 		</div>
 
 		<div>
@@ -37,7 +40,19 @@
 		</div>
 
 		<div>
-			<!-- imgs -->
+			<div *ngIf="carImgLocalPaths.length == 0">DEFAUT IMG</div>
+			<div *ngIf="carImgLocalPaths.length > 0">
+				<div *ngFor="let carImgLocalPath of carImgLocalPaths">
+					<img style="width: 200px;" [src]="carImgLocalPath">
+				</div>
+			</div>
+			<input formControlName="carImgs"
+			#chooseCarImgs style="display: none;"
+			type="file" 
+			(change)="onChooseCarImgs($event)" 
+			accept=".png,.jpg,.jpeg,.svg,.heic"
+			multiple="multiple">
+			<button type="button" class="btn-default narrow-btn ng-star-inserted" (click)="chooseCarImgs.click()">Chоose Images</button>
 		</div>
 
 		<div>
