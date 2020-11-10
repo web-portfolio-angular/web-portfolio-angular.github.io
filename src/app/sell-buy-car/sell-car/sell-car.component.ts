@@ -78,6 +78,8 @@ export class SellCarComponent implements OnInit, OnDestroy {
         return
       }
     })
+
+    this.test();
   }
 
   ngOnDestroy() {
@@ -85,57 +87,26 @@ export class SellCarComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(sellCarForm) {
-    if (!this.sellCarForm.valid) {
+    if (!sellCarForm.valid) {
       return
     }
 
     const id = this.generateIdService.generateId();
 
-    let asd = false;
-    let img;
-
-    this.angularFireStorage.upload(
-      "/sellBuyCar/" + 
-      this.userAdditionalData[0].email + '/' + 
-      id + '/' + 
-      this.carImgName + "-" + 
-      this.generateIdService.generateId(), this.carFile)
-    .then(uploadTask => {
-      uploadTask.ref.getDownloadURL()
-      .then(url => {
-        const model = this.sellCarForm.value.model;
-        const year = this.sellCarForm.value.year;
-        const carImg = url;
-        const description = this.sellCarForm.value.description.trim();
-        const price = this.sellCarForm.value.price;
+    this.onUploadCarImgToFirestore(id).then(() => {
+        const model = sellCarForm.value.model;
+        const year = sellCarForm.value.year;
+        const carImg = this.sellCarForm.value.carImg;
+        const description = sellCarForm.value.description.trim();
+        const price = sellCarForm.value.price;
         const userEmail = this.userAdditionalData[0].email;
         const carImages = ['link1', 'link2'];
         const car = { model, year, carImg, description, price, userEmail, id, carImages };
         
-        this.firestore.sellBuyCar(car);
-
-        asd = true;
-        img = url;
-      })
-      // this.errorMsgOnAvatarUpload = null;
-      // this.isLoading = false;
-      // this.file = undefined;
+        // console.log(car);      
+      this.firestore.sellBuyCar(car);
     })
-    .catch(error => {
-      // this.errorMsgOnAvatarUpload = error.message;
-      // this.isLoading = false;  
-    });
 
-
-    if (asd) {
-      console.log(img);
-      
-    }
-
-
-    
-    //upload img
-    
 
   }
 
@@ -153,25 +124,49 @@ export class SellCarComponent implements OnInit, OnDestroy {
     }     
   }
 
-  onUploadCarImgToFirestore() {
-    this.angularFireStorage.upload(
-      "/sellBuyCar/" + 
-      this.userAdditionalData[0].email + '/' + 
-      this.carImgName + "-" + 
-      this.generateIdService.generateId(), this.carFile)
-    .then(uploadTask => {
-      uploadTask.ref.getDownloadURL()
-      .then(url => {
-        return url;
-           
-      })      
-      // this.errorMsgOnAvatarUpload = null;
-      // this.isLoading = false;
-      // this.file = undefined;
+  onUploadCarImgToFirestore(id) {
+    return new Promise((resolve) => {
+      this.angularFireStorage.upload(
+        "/sellBuyCar/" + 
+        this.userAdditionalData[0].email + '/' + 
+        id + '/' + 
+        this.carImgName + "-" + 
+        this.generateIdService.generateId(), this.carFile)
+      .then(uploadTask => {
+        uploadTask.ref.getDownloadURL()
+        .then(url => {
+          this.sellCarForm.value.carImg = url;
+          resolve();
+        })      
+        // this.errorMsgOnAvatarUpload = null;
+        // this.isLoading = false;
+        // this.file = undefined;        
+      })
+      .catch(error => {
+        // this.errorMsgOnAvatarUpload = error.message;
+        // this.isLoading = false;
+      });
     })
-    .catch(error => {
-      // this.errorMsgOnAvatarUpload = error.message;
-      // this.isLoading = false;  
-    });
+  }
+
+  //#########
+  x;y;z;
+  test() {
+    this.test1().then(() => {
+      this.test2()
+    })
+  }
+
+  test1(){
+    return new Promise ((resolve, reject) => {
+      setTimeout(() => {
+        console.log('1');
+         resolve();
+      }, 2000);     
+    })
+  }
+
+  test2(){
+    console.log('2');    
   }
 }
