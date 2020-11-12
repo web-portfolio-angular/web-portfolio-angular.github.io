@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 import { FirestoreService } from '../../shared/services/firestore.service';
-import { UserAdditionalInfo } from '../models/user-additional-info.model';
+import { UserAdditionalInfo } from '../models/user.model';
 
 @Injectable({providedIn: 'root'})
 export class AdditionUserInfoService {

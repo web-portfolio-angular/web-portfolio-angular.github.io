@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore  } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 
-import { UserAdditionalInfo } from '../models/user-additional-info.model';
-import { Comment } from '../models/comment.model';
-import { CommentReply } from '../models/comment-reply.model';
-import { SellBuyCar } from '../models/sell-buy-car.model';
+import { UserAdditionalInfo } from '../models/user.model';
+import { Comment, CommentReply } from '../models/comment.model';
+import { SellBuyCar } from '../models/car.model';
 
 @Injectable({providedIn: 'root'})
 export class FirestoreService {

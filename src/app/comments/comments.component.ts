@@ -3,9 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Subscription } from 'rxjs';
 import * as firebase from 'firebase/app';
 
-import { UserAdditionalInfo } from '../shared/models/user-additional-info.model';
-import { CommentReply } from '../shared/models/comment-reply.model';
-import { Comment } from '../shared/models/comment.model';
+import { UserAdditionalInfo } from '../shared/models/user.model';
+import { Comment, CommentReply } from '../shared/models/comment.model';
 import { AdditionUserInfoService } from '../shared/services/user-additional-info.service';
 import { GenerateIdService } from '../shared/services/generateId.service';
 import { FirestoreService } from '../shared/services/firestore.service';

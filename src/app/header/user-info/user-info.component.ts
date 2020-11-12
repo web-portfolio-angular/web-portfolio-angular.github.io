@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { Animations } from '../../shared/animations';
-import { UserAdditionalInfo } from '../../shared/models/user-additional-info.model';
+import { UserAdditionalInfo } from '../../shared/models/user.model';
 import { PhoneCodes } from '../../shared/models/phone-codes.model';
 import { FirestoreService } from '../../shared/services/firestore.service';
 import { ThemeService } from '../../shared/services/theme.service';

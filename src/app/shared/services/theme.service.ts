@@ -1,22 +1,25 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable({ providedIn: 'root' })
 
 export class ThemeService {
   darkMode: boolean;
 
-  constructor() { }
+  constructor(
+    @Inject(DOCUMENT) private document: Document
+  ) {}
 
   getCurrentTheme() {
     const currentTheme = JSON.parse(localStorage.getItem('theme'));
 
     if (!currentTheme) {
       localStorage.setItem('theme', JSON.stringify('theme-light'));      
-      document.body.classList.add('theme-light');
+      document.documentElement.classList.add('theme-light');
       this.darkMode = false;   
     } else {
-      document.body.classList.remove('theme-light', 'theme-dark');
-      document.body.classList.add(currentTheme);
+      document.documentElement.classList.remove('theme-light', 'theme-dark');
+      document.documentElement.classList.add(currentTheme);
       currentTheme == 'theme-light' ? this.darkMode = false : this.darkMode = true;      
     }
   }

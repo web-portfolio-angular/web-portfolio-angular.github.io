@@ -14,3 +14,12 @@ export class User{
     }
   }
 }
+
+export class UserAdditionalInfo {
+  name: string;
+  phoneCode: number;
+  phone: number;
+  email: string;
+  userImg: string;
+  id?: string;
+}

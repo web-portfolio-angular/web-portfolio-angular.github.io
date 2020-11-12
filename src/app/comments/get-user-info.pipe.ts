@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { map } from 'rxjs/operators';
 
 import { FirestoreService } from '../shared/services/firestore.service';
-import { UserAdditionalInfo } from '../shared/models/user-additional-info.model';
+import { UserAdditionalInfo } from '../shared/models/user.model';
 
 @Pipe({ name: 'getUserInfo' })
 export class GetUserInfoPipe implements PipeTransform {

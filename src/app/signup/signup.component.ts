@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../shared/services/auth.service';
 import { FirestoreService} from '../shared/services/firestore.service';
-import { UserAdditionalInfo } from '../shared/models/user-additional-info.model';
+import { UserAdditionalInfo } from '../shared/models/user.model';
 import { PhoneCodes } from '../shared/models/phone-codes.model';
 
 @Component({

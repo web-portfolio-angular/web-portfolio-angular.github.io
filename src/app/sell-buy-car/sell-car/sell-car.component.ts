@@ -3,13 +3,11 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Subscription } from 'rxjs';
 
-import { CarModel } from '../../shared/models/car-model.model';
-import { CarManufactureYear } from '../../shared/models/car-manufacture-year.model';
-import { UserAdditionalInfo } from '../../shared/models/user-additional-info.model';
+import { CarManufactureYear, SellBuyCar, CarModel } from '../../shared/models/car.model';
+import { UserAdditionalInfo } from '../../shared/models/user.model';
 import { FirestoreService } from '../../shared/services/firestore.service';
 import { AdditionUserInfoService } from '../../shared/services/user-additional-info.service';
 import { GenerateIdService } from '../../shared/services/generateId.service';
-import { SellBuyCar } from 'src/app/shared/models/sell-buy-car.model';
 
 @Component({
   selector: 'app-sell-car',
