@@ -109,6 +109,10 @@ export class SellCarComponent implements OnInit, OnDestroy {
         
         // console.log(car);      
       this.firestore.sellBuyCar(car);
+      this.sellCarForm.reset();
+      this.carImgNames = [];
+      this.carImgLocalPaths = [];
+      this.carImgURLs = [];
       })
     })
   }
@@ -185,10 +189,10 @@ export class SellCarComponent implements OnInit, OnDestroy {
           .then(url => {
             this.carImgURLs.push(url);
             this.sellCarForm.value.carImgs = this.carImgURLs;
-            console.log( this.carImgURLs);          
-            console.log( this.sellCarForm.value.carImgs);
-            // resolve();        
-          })      
+            if (i == this.carImgNames.length - 1) {
+              resolve();
+            }
+          })
           // this.errorMsgOnAvatarUpload = null;
           // this.isLoading = false;
           // this.file = undefined;        
