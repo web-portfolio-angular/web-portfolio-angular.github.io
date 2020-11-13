@@ -80,7 +80,7 @@ export class SignupComponent implements OnInit {
     const user: UserAdditionalInfo = {name, phoneCode, phone, email, userImg};    
     this.authService.signUp(email, password)
     .subscribe(() => {
-      this.firestore.createRegistration(user)
+      this.firestore.createRegistration(user);
       this.errorMsgOnSubmit = null;
       this.router.navigate(['/home']);
       this.isLoading = false;

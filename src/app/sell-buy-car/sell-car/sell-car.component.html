@@ -41,9 +41,12 @@
 
 		<div>
 			<div *ngIf="carImgLocalPaths.length == 0">DEFAUT IMG</div>
+			<button type="button" class="btn-default narrow-btn ng-star-inserted" (click)="chooseCarImgs.click()">Chоose Images</button>
 			<div *ngIf="carImgLocalPaths.length > 0">
-				<div *ngFor="let carImgLocalPath of carImgLocalPaths">
+				<div *ngFor="let carImgLocalPath of carImgLocalPaths; let i = index">
+						<!-- ######## -->
 					<img style="width: 200px;" [src]="carImgLocalPath">
+					<button (click)="removeCarImg(i)">Remove</button>
 				</div>
 			</div>
 			<input formControlName="carImgs"
@@ -51,8 +54,7 @@
 			type="file" 
 			(change)="onChooseCarImgs($event)" 
 			accept=".png,.jpg,.jpeg,.svg,.heic"
-			multiple="multiple">
-			<button type="button" class="btn-default narrow-btn ng-star-inserted" (click)="chooseCarImgs.click()">Chоose Images</button>
+			multiple="multiple">			
 		</div>
 
 		<div>

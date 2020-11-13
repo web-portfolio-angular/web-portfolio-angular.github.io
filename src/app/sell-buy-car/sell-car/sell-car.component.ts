@@ -104,13 +104,18 @@ export class SellCarComponent implements OnInit, OnDestroy {
         const userEmail = this.userAdditionalData[0].email;
         const carImages = this.sellCarForm.value.carImgs;
         const car = { model, year, carImg, description, price, userEmail, id, carImages };
-        
-        // console.log(car);      
-      this.firestore.sellBuyCar(car);
-      this.sellCarForm.reset();
-      this.carImgNames = [];
-      this.carImgLocalPaths = [];
-      this.carImgURLs = [];
+     
+        this.firestore.sellBuyCar(car)
+        .then(() => {
+          this.sellCarForm.reset();
+          this.carImgNames = [];
+          this.carImgLocalPaths = [];
+          this.carImgURLs = [];
+          this.carImgLocalPath = this.carDefaultImg;
+        })
+        .catch(error => {
+
+        });
       })
     })
   }
@@ -127,24 +132,6 @@ export class SellCarComponent implements OnInit, OnDestroy {
     } else {
       this.carImgLocalPath = this.carDefaultImg;
     }     
-  }
-
-  onChooseCarImgs(event) {
-    this.carFiles = event.target.files;
-    if (this.carFiles) {
-      for (let i = 0; i < this.carFiles.length; i++){
-        const reader = new FileReader();
-        reader.onload = (event: any) => {
-          this.carImgLocalPaths.push(event.target.result);
-        }
-        reader.readAsDataURL(event.target.files[i]);
-        this.carImgNames.push(this.carFiles[i].name.substr(0, this.carFiles[i].name.lastIndexOf('.')));
-      }
-    } else {
-      // this.carImgLocalPaths = [];
-      // console.log('else: ' + this.carImgLocalPaths);
-      // console.log('else'); 
-    }
   }
 
   onUploadCarImgToFirestore(id) {
@@ -172,6 +159,20 @@ export class SellCarComponent implements OnInit, OnDestroy {
     })
   }
 
+  onChooseCarImgs(event) {
+    this.carFiles = event.target.files;
+    if (this.carFiles) {
+      for (let i = 0; i < this.carFiles.length; i++){
+        const reader = new FileReader();
+        reader.onload = (event: any) => {
+          this.carImgLocalPaths.push(event.target.result);
+        }
+        reader.readAsDataURL(event.target.files[i]);
+        this.carImgNames.push(this.carFiles[i].name.substr(0, this.carFiles[i].name.lastIndexOf('.')));
+      }
+    }
+  }
+
   onUploadCarImagesToFirestore(id) {
     return new Promise((resolve) => {
       for (let i = 0; i < this.carImgNames.length; i++) {
@@ -185,9 +186,9 @@ export class SellCarComponent implements OnInit, OnDestroy {
         .then(uploadTask => {
           uploadTask.ref.getDownloadURL()
           .then(url => {
-            this.carImgURLs.push(url);
-            this.sellCarForm.value.carImgs = this.carImgURLs;
-            if (i == this.carImgNames.length - 1) {
+            this.carImgURLs.push(url);            
+            if (this.carImgURLs.length == this.carImgNames.length) {
+              this.sellCarForm.value.carImgs = this.carImgURLs;
               resolve();
             }
           })
@@ -201,5 +202,10 @@ export class SellCarComponent implements OnInit, OnDestroy {
         });
       }      
     })
+  }
+
+  removeCarImg(index) {
+    this.carImgLocalPaths.splice(index, 1);
+    this.carImgNames.splice(index, 1);
   }
 }
