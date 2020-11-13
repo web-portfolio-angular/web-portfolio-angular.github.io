@@ -8,7 +8,6 @@
 					</mat-option>
 				</mat-select>
 			</mat-form-field>
-
 			<mat-form-field>
 				<mat-select formControlName="year">
 					<mat-option *ngFor="let carManufactureYear of carManufactureYears" [value]="carManufactureYear.year">
@@ -17,11 +16,9 @@
 				</mat-select>
 			</mat-form-field>
 		</div>
-
 		<div>
-			<div [ngStyle]="{'background-image': 'url('+carImgLocalPath+')'}">
-				<!-- ######## -->
-				<img style="width: 200px;" [src]="carImgLocalPath">
+			<div>
+				<img [src]="carImgLocalPath">
 			</div>
 			<input formControlName="carImg"
 			#chooseCarImg style="display: none;"
@@ -30,23 +27,21 @@
 			accept=".png,.jpg,.jpeg,.svg,.heic">
 			<button type="button" class="btn-default narrow-btn ng-star-inserted" (click)="chooseCarImg.click()">Chоose Image</button>
 		</div>
-
 		<div>
 			<textarea placeholder="Description..." formControlName="description"></textarea>
 		</div>
-
 		<div>
 			<input type="number" name="price" formControlName="price">
 		</div>
-
 		<div>
-			<div *ngIf="carImgLocalPaths.length == 0">DEFAUT IMG</div>
+			<div *ngIf="carImgLocalPaths.length == 0">
+				<img src="../../../assets/img/cell-car/upload-img.png">
+			</div>
 			<button type="button" class="btn-default narrow-btn ng-star-inserted" (click)="chooseCarImgs.click()">Chоose Images</button>
 			<div *ngIf="carImgLocalPaths.length > 0">
 				<div *ngFor="let carImgLocalPath of carImgLocalPaths; let i = index">
-						<!-- ######## -->
-					<img style="width: 200px;" [src]="carImgLocalPath">
-					<button (click)="removeCarImg(i)">Remove</button>
+					<img [src]="carImgLocalPath">
+					<div (click)="removeCarImg(i)">X</div>
 				</div>
 			</div>
 			<input formControlName="carImgs"
@@ -56,17 +51,8 @@
 			accept=".png,.jpg,.jpeg,.svg,.heic"
 			multiple="multiple">			
 		</div>
-
 		<div>
-      <button type="submit" [disabled]="!sellCarForm.valid">add</button>
+      <button type="submit" [disabled]="!sellCarForm.valid">Add to the Shop</button>
     </div>
 	</form>
 </div>
-
-
-<style>
-	.test {
-		width: 200px;
-		height: 200px;
-	}
-</style>

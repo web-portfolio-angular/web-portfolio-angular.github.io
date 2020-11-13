@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Subscription } from 'rxjs';
 
-import { CarManufactureYear, SellBuyCar, CarModel } from '../../shared/models/car.model';
+import { CarManufactureYear, CarModel } from '../../shared/models/car.model';
 import { UserAdditionalInfo } from '../../shared/models/user.model';
 import { FirestoreService } from '../../shared/services/firestore.service';
 import { AdditionUserInfoService } from '../../shared/services/user-additional-info.service';
@@ -29,6 +29,13 @@ export class SellCarComponent implements OnInit, OnDestroy {
   carModels: CarModel[] = [];
   carManufactureYears: CarManufactureYear[] = [];
   userAdditionalData: UserAdditionalInfo[];
+  getCarModelsError: string = null;
+  getCarManufactureYearError: string = null;
+  sellBuyCarError: string = null;
+  uploadCarImgToFirestoreError: string = null;
+  uploadCarImagesToFirestoreError: string = null;
+  getCarImgURLError: string = null;
+  getcarImgURLsError: string = null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -55,9 +62,9 @@ export class SellCarComponent implements OnInit, OnDestroy {
           ...e.payload.doc.data() as CarModel
         }
       })
-      
+      this.getCarModelsError = null
     }, error => {
-      
+      this.getCarModelsError = error.message;
     });
 
     this.firestore.getCarManufactureYear().subscribe(data => {
@@ -67,16 +74,14 @@ export class SellCarComponent implements OnInit, OnDestroy {
           ...e.payload.doc.data() as CarManufactureYear
         }
       })
-      
-      
+      this.getCarManufactureYearError = null;      
     }, error => {
-      
+      this.getCarManufactureYearError = error.message;     
     });
 
     this.additionUserInfoService.getUserAdditionalData();
     this.userAdditionalInfoSub = this.additionUserInfoService.userAdditionalDataSubject.subscribe(userData => {
       this.userAdditionalData = userData;
-
       if(!this.userAdditionalData) {
         return
       }
@@ -103,8 +108,7 @@ export class SellCarComponent implements OnInit, OnDestroy {
         const price = sellCarForm.value.price;
         const userEmail = this.userAdditionalData[0].email;
         const carImages = this.sellCarForm.value.carImgs;
-        const car = { model, year, carImg, description, price, userEmail, id, carImages };
-     
+        const car = { model, year, carImg, description, price, userEmail, id, carImages };     
         this.firestore.sellBuyCar(car)
         .then(() => {
           this.sellCarForm.reset();
@@ -112,9 +116,10 @@ export class SellCarComponent implements OnInit, OnDestroy {
           this.carImgLocalPaths = [];
           this.carImgURLs = [];
           this.carImgLocalPath = this.carDefaultImg;
+          this.sellBuyCarError = null;
         })
         .catch(error => {
-
+          this.sellBuyCarError = error.message;
         });
       })
     })
@@ -146,15 +151,16 @@ export class SellCarComponent implements OnInit, OnDestroy {
         uploadTask.ref.getDownloadURL()
         .then(url => {
           this.sellCarForm.value.carImg = url;
+          this.getCarImgURLError = null;          
           resolve();
-        })      
-        // this.errorMsgOnAvatarUpload = null;
-        // this.isLoading = false;
-        // this.file = undefined;        
+        })
+        .catch( error => {
+          this.getCarImgURLError = error; 
+        })
+        this.uploadCarImgToFirestoreError = null;
       })
       .catch(error => {
-        // this.errorMsgOnAvatarUpload = error.message;
-        // this.isLoading = false;
+        this.uploadCarImgToFirestoreError = error.message;
       });
     })
   }
@@ -189,16 +195,17 @@ export class SellCarComponent implements OnInit, OnDestroy {
             this.carImgURLs.push(url);            
             if (this.carImgURLs.length == this.carImgNames.length) {
               this.sellCarForm.value.carImgs = this.carImgURLs;
+              this.getcarImgURLsError = null;
               resolve();
             }
           })
-          // this.errorMsgOnAvatarUpload = null;
-          // this.isLoading = false;
-          // this.file = undefined;        
+          .catch(error => {
+            this.getcarImgURLsError = error.message;
+          })
+          this.uploadCarImagesToFirestoreError = null;
         })
         .catch(error => {
-          // this.errorMsgOnAvatarUpload = error.message;
-          // this.isLoading = false;
+          this.uploadCarImagesToFirestoreError = error.message;
         });
       }      
     })
