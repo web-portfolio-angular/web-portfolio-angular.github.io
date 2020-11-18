@@ -102,7 +102,7 @@ export class FirestoreService {
 
   getSecondHandCars() {
     return this.firestore
-    .collection('sellBuyCars', data => data.orderBy('date', 'desc'))
+    .collection('sellBuyCarLinks', data => data.orderBy('date', 'asc'))
     .snapshotChanges();
   }
 }

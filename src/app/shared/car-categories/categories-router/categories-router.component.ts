@@ -10,11 +10,11 @@ import { SubjectsService } from '../../services/subjects.service';
   ]
 })
 export class CategoriesRouterComponent implements OnInit, OnDestroy {
-  @Input() productLinks;
+  @Input() carLinks;
   private isLoadingSub: Subscription;
-  private getProductLinksErrorMsgSub: Subscription;
+  private getCarLinksErrorMsgSub: Subscription;
   isLoading: boolean;
-  getProductLinksErrorMsg: string;
+  getCarLinksErrorMsg: string;
 
   constructor(
     private subjectsService: SubjectsService
@@ -24,14 +24,14 @@ export class CategoriesRouterComponent implements OnInit, OnDestroy {
     this.isLoadingSub = this.subjectsService.isLoadingSubject.subscribe(boolean => {
       this.isLoading = boolean;
     })
-    this.getProductLinksErrorMsgSub = this.subjectsService.getProductLinksErrorMsgSubject.subscribe(error => {
-      this.getProductLinksErrorMsg = error;
+    this.getCarLinksErrorMsgSub = this.subjectsService.getCarLinksErrorMsgSubject.subscribe(error => {
+      this.getCarLinksErrorMsg = error;
     })
   }
 
   ngOnDestroy() {
     this.isLoadingSub.unsubscribe()
-    this.getProductLinksErrorMsgSub.unsubscribe()
+    this.getCarLinksErrorMsgSub.unsubscribe()
   }
 
   saveProductLinksToLocalStore(data: string) {

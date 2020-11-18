@@ -3,12 +3,12 @@
     <p>Categories</p>      
       <ul>
         <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
-        <p *ngIf="getProductLinksErrorMsg" class="error-msg">{{ getProductLinksErrorMsg }}</p>
-        <li *ngFor="let productLink of productLinks" 
-          [routerLink]="[productLink.link]" 
+        <p *ngIf="getCarLinksErrorMsg" class="error-msg">{{ getCarLinksErrorMsg }}</p>
+        <li *ngFor="let carLink of carLinks" 
+          [routerLink]="[carLink.link]" 
           routerLinkActive="categories-active"
-          (click)="saveProductLinksToLocalStore(productLink.link)">
-            {{ productLink.name }}
+          (click)="saveProductLinksToLocalStore(carLink.link)">
+            {{ carLink.name }}
         </li>
       </ul>
     <div class="call-us">
