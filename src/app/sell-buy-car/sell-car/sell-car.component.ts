@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Subscription } from 'rxjs';
+import * as firebase from 'firebase/app';
 
 import { CarManufactureYear, CarModel } from '../../shared/models/car.model';
 import { UserAdditionalInfo } from '../../shared/models/user.model';
@@ -107,8 +108,9 @@ export class SellCarComponent implements OnInit, OnDestroy {
         const description = sellCarForm.value.description.trim();
         const price = sellCarForm.value.price;
         const userEmail = this.userAdditionalData[0].email;
+        const date = firebase.firestore.Timestamp.now();
         const carImages = this.sellCarForm.value.carImgs;
-        const car = { model, year, carImg, description, price, userEmail, id, carImages };     
+        const car = { model, year, carImg, description, price, userEmail, id, date, carImages };     
         this.firestore.sellBuyCar(car)
         .then(() => {
           this.sellCarForm.reset();

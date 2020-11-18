@@ -1,4 +1,4 @@
-export class Car{
+export class Car {
   carImg: string;
   carHoverImg: string;
   carInfo: string;
@@ -16,6 +16,7 @@ export class SellBuyCar {
   price: string;
   userEmail: string;
   id: string;
+  date: firebase.firestore.Timestamp;
   carImages?: any [];
 }
 
@@ -25,4 +26,10 @@ export class CarModel {
 
 export class CarManufactureYear {
 	year: number;
+}
+
+export class ProductLink {
+  name: string;
+  link: string;
+  date: firebase.firestore.Timestamp;
 }

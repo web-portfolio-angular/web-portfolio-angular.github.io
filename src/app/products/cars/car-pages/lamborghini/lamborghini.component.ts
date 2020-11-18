@@ -9,7 +9,7 @@ import { FirestoreService } from 'src/app/shared/services/firestore.service';
   styles: []
 })
 export class LamborghiniComponent implements OnInit {
-  isLoading: boolean = false;
+  isLoading: boolean = true;
   lamborghiniCars: Car[];
   errorMsg: string = null;
 
@@ -18,7 +18,6 @@ export class LamborghiniComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isLoading = true;
     this.firestore.getLamborghiniCars().subscribe(data => {
       this.lamborghiniCars = data.map(e => {
         return {
@@ -30,7 +29,7 @@ export class LamborghiniComponent implements OnInit {
       this.errorMsg = null;      
     }, error => {
       this.isLoading = false;
-      this.errorMsg = error;
+      this.errorMsg = error.message;
     });
   }
 }

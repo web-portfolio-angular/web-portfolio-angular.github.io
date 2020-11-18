@@ -16,7 +16,6 @@ export class SellBuyCarComponent implements OnInit {
   errorMsgOnUpload: string = null;  
 
   constructor(private angularFireStorage: AngularFireStorage) { }
-
   ngOnInit(): void {
   }
 

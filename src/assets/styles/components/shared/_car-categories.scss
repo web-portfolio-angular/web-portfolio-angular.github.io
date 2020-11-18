@@ -82,7 +82,9 @@
       overflow: auto;
       @include scrollbar (normal);
       @include media (lar) {
-        max-height: 528px;
+        height: 528px;
+        overflow: auto;
+        display: block;
       }
       li {
         padding: 15px;
@@ -98,11 +100,6 @@
       }
       .categories-active {
         @include categories-active;
-      }
-      @include media (lar) {
-        height: auto;
-        overflow: auto;
-        display: block;
       }
     }
     .call-us {

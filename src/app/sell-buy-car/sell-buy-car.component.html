@@ -1,22 +1,10 @@
-<!-- <label for="image">Image</label> -->
-<!-- <input #chooseImg style="display: none;" type="file" (change)="uploadImg($event)" accept=".png,.jpg,.jpeg,.svg,.heic">
-
-<img class="img" [src]="imgLocalPath">
-
-<br>
-
-<button (click)="chooseImg.click()">Chose image</button>
-<button [disabled]="file==undefined" (click)="uploadImgToFirestorage()">Upload Image</button>
-
-<p *ngIf="errorMsgOnUpload" class="error-msg">{{errorMsgOnUpload}}</p> -->
-
-
-
-
-<div>
-	<ul>
-		<li [routerLink]="['buy']" routerLinkActive="categories-active">Buy a Car</li>
-		<li [routerLink]="['sell']" routerLinkActive="categories-active">Sell a Car</li>
-	</ul>
-	<router-outlet></router-outlet>
+<div class="container">
+	<app-categories-info></app-categories-info>
+	<div>
+		<ul>
+			<li [routerLink]="['buy']" routerLinkActive="categories-active">Buy Second Hand Car</li>
+			<li [routerLink]="['sell']" routerLinkActive="categories-active">Sell Your Car</li>
+		</ul>
+		<router-outlet></router-outlet>
+	</div>
 </div>

@@ -1,0 +1,29 @@
+<div class="categories">
+  <div class="categories__content">
+    <p>Categories</p>      
+      <ul>
+        <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+        <p *ngIf="getProductLinksErrorMsg" class="error-msg">{{ getProductLinksErrorMsg }}</p>
+        <li *ngFor="let productLink of productLinks" 
+          [routerLink]="[productLink.link]" 
+          routerLinkActive="categories-active"
+          (click)="saveProductLinksToLocalStore(productLink.link)">
+            {{ productLink.name }}
+        </li>
+      </ul>
+    <div class="call-us">
+      <ng-container [ngTemplateOutlet]="callUs"></ng-container>
+    </div>
+  </div>
+  <div class="categories__router">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<div class="call-us-mob">
+  <ng-container [ngTemplateOutlet]="callUs"></ng-container>
+</div>
+
+<ng-template #callUs>
+  <h3>CALL US</h3>
+  <a href="tel:+359123456789">+359 123 456 789</a>
+</ng-template>

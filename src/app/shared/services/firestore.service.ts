@@ -65,6 +65,12 @@ export class FirestoreService {
   }
 
   //products
+  getProductLinks() {
+    return this.firestore
+    .collection('productLinks', data => data.orderBy('date', 'asc'))
+    .snapshotChanges();
+  }
+
   getLamborghiniCars() {
     return this.firestore
     .collection('lamborghiniCars', data => data.orderBy('dateCreation', 'desc'))
@@ -92,5 +98,11 @@ export class FirestoreService {
 
   sellBuyCar(car: SellBuyCar) {
     return this.firestore.collection('sellBuyCars/').doc(car.id).set(car);
+  }
+
+  getSecondHandCars() {
+    return this.firestore
+    .collection('sellBuyCars', data => data.orderBy('date', 'desc'))
+    .snapshotChanges();
   }
 }
