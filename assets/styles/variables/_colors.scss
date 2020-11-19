@@ -46,6 +46,9 @@ $color13-dark: rgba(#000, 0.50);
 $color14-light: #444546;
 $color14-dark: #7a2626;
 
+$color16-light: lighten($color14-light, 10%);
+$color16-dark: lighten($color14-dark, 10%);
+
 $color15-light: #999;
 $color15-dark: #444546;
 
@@ -65,4 +68,5 @@ $colors: (
   --color13: ($color13-light, $color13-dark),
   --color14: ($color14-light, $color14-dark),
   --color15: ($color15-light, $color15-dark),
+  --color16: ($color16-light, $color16-dark)
 );
