@@ -164,6 +164,7 @@ export class SellCarComponent implements OnInit, OnDestroy {
     return new Promise((resolve) => {
       this.angularFireStorage.upload(
         "/carsForSell/" + 
+        this.sellCarForm.value.model + '/' +
         this.userAdditionalData[0].email + '/' + 
         id + '/' + 
         this.carImgName + "-" + 
@@ -202,9 +203,13 @@ export class SellCarComponent implements OnInit, OnDestroy {
 
   onUploadCarImagesToFirestore(id) {
     return new Promise((resolve) => {
+      if(this.carImgNames.length == 0) {
+        resolve();
+      }
       for (let i = 0; i < this.carImgNames.length; i++) {
         this.angularFireStorage.upload(
-          "/carsForSell/" + 
+          "/carsForSell/" +
+          this.sellCarForm.value.model + '/' +
           this.userAdditionalData[0].email + '/' + 
           id + '/' +
           "/carImages/" +
@@ -235,5 +240,8 @@ export class SellCarComponent implements OnInit, OnDestroy {
   removeCarImg(index) {
     this.carImgLocalPaths.splice(index, 1);
     this.carImgNames.splice(index, 1);
+    if(this.carImgLocalPaths == 0 && this.carImgNames == 0) {
+      this.sellCarForm.value.carImgs = null;
+    }
   }
 }
