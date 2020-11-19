@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { ProductLink } from 'src/app/shared/models/car.model';
@@ -20,7 +21,8 @@ export class BuyCarComponent implements OnInit, OnDestroy {
 
   constructor(
     private firestore: FirestoreService,
-    private subjectsService: SubjectsService
+    private subjectsService: SubjectsService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -44,6 +46,14 @@ export class BuyCarComponent implements OnInit, OnDestroy {
       this.subjectsService.loaded();
       this.subjectsService.onGetProductLinksError(error);
     });
+
+    const lastVisitedLink: {
+      lastVisitedLink: string
+    } = JSON.parse(localStorage.getItem('sell-buy-car/buy-LastVisitedLink'));
+
+    if (lastVisitedLink) {
+      this.router.navigate([lastVisitedLink]);      
+    }  
   }
 
   ngOnDestroy() {

@@ -8,7 +8,7 @@ export class Car {
   id?: string;
 }
 
-export class SellBuyCar {
+export class CarsForSell {
   model: string;
   year: number;
   carImg: string;

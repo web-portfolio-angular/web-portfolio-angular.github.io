@@ -11,6 +11,7 @@ import { BmwComponent } from './buy-car/buy-car-pages/bmw/bmw.component';
 import { SellCarComponent } from './sell-car/sell-car.component';
 import { BuyCarComponent } from './buy-car/buy-car.component';
 import { SharedModule } from '../shared/shared.module';
+import { BuyCarItemComponent } from './buy-car-item/buy-car-item.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SharedModule } from '../shared/shared.module';
     AudiComponent,
     BmwComponent,
     SellCarComponent,
-    BuyCarComponent    
+    BuyCarComponent,
+    BuyCarItemComponent    
   ],
   imports: [ 
     CommonModule,
@@ -28,7 +30,12 @@ import { SharedModule } from '../shared/shared.module';
     RouterModule.forChild([
       {path: '', component: SellBuyCarComponent, canActivate: [AuthGuardIn],
       children: [
-        {path: 'buy', component: BuyCarComponent},
+        {path: 'buy', component: BuyCarComponent,
+          children: [
+            {path: 'audi', component: AudiComponent},
+            {path: 'bmw', component: BmwComponent},
+            {path: '**', redirectTo: 'audi'}
+          ]},
         {path: 'sell', component: SellCarComponent},
         {path: '**', redirectTo: 'buy'}
       ]

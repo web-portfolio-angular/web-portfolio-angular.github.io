@@ -4,7 +4,7 @@ import * as firebase from 'firebase/app';
 
 import { UserAdditionalInfo } from '../models/user.model';
 import { Comment, CommentReply } from '../models/comment.model';
-import { SellBuyCar } from '../models/car.model';
+import { CarsForSell } from '../models/car.model';
 
 @Injectable({providedIn: 'root'})
 export class FirestoreService {
@@ -96,13 +96,18 @@ export class FirestoreService {
     .snapshotChanges();
   }
 
-  sellBuyCar(car: SellBuyCar) {
-    return this.firestore.collection('sellBuyCars/').doc(car.id).set(car);
+  secondHandAudi(car: CarsForSell) {
+    return this.firestore.collection('secondHandAudi/').doc(car.id).set(car);
   }
-
+  
+  secondHandBmw(car: CarsForSell) {
+    return this.firestore.collection('secondHandBmw/').doc(car.id).set(car);
+  }
+  
+  //
   getSecondHandCars() {
     return this.firestore
-    .collection('sellBuyCarLinks', data => data.orderBy('date', 'asc'))
+    .collection('buyCarLinks', data => data.orderBy('date', 'asc'))
     .snapshotChanges();
   }
 }

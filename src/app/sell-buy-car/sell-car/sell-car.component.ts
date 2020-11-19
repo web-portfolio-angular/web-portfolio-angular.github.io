@@ -32,7 +32,7 @@ export class SellCarComponent implements OnInit, OnDestroy {
   userAdditionalData: UserAdditionalInfo[];
   getCarModelsError: string = null;
   getCarManufactureYearError: string = null;
-  sellBuyCarError: string = null;
+  sellCarError: string = null;
   uploadCarImgToFirestoreError: string = null;
   uploadCarImagesToFirestoreError: string = null;
   getCarImgURLError: string = null;
@@ -104,27 +104,46 @@ export class SellCarComponent implements OnInit, OnDestroy {
       this.onUploadCarImagesToFirestore(id).then(() => {
         const model = sellCarForm.value.model;
         const year = sellCarForm.value.year;
-        const carImg = this.sellCarForm.value.carImg;
+        const carImg = sellCarForm.value.carImg;
         const description = sellCarForm.value.description.trim();
         const price = sellCarForm.value.price;
         const userEmail = this.userAdditionalData[0].email;
         const date = firebase.firestore.Timestamp.now();
-        const carImages = this.sellCarForm.value.carImgs;
-        const car = { model, year, carImg, description, price, userEmail, id, date, carImages };     
-        this.firestore.sellBuyCar(car)
-        .then(() => {
-          this.sellCarForm.reset();
-          this.carImgNames = [];
-          this.carImgLocalPaths = [];
-          this.carImgURLs = [];
-          this.carImgLocalPath = this.carDefaultImg;
-          this.sellBuyCarError = null;
-        })
-        .catch(error => {
-          this.sellBuyCarError = error.message;
-        });
+        const carImages = sellCarForm.value.carImgs;
+        const car = { model, year, carImg, description, price, userEmail, id, date, carImages };        
+        switch (model) {
+          case 'Audi': this.firestore.secondHandAudi(car)
+              .then(() => {
+                this.onSuccessfulSetCarForSell();
+              })
+              .catch(error => {
+                this.onErroSetCarForSell(error);
+              });          
+            break;
+          case 'BWM': this.firestore.secondHandBmw(car)
+              .then(() => {
+                this.onSuccessfulSetCarForSell();
+              })
+              .catch(error => {
+                this.onErroSetCarForSell(error);
+              }); 
+            break;
+        }
       })
     })
+  }
+
+  onSuccessfulSetCarForSell() {
+    this.sellCarForm.reset();
+    this.carImgNames = [];
+    this.carImgLocalPaths = [];
+    this.carImgURLs = [];
+    this.carImgLocalPath = this.carDefaultImg;
+    this.sellCarError = null;
+  }
+
+  onErroSetCarForSell(error) {
+    this.sellCarError = error.message;
   }
 
   onChooseCarImg(event) {
@@ -144,7 +163,7 @@ export class SellCarComponent implements OnInit, OnDestroy {
   onUploadCarImgToFirestore(id) {
     return new Promise((resolve) => {
       this.angularFireStorage.upload(
-        "/sellBuyCar/" + 
+        "/carsForSell/" + 
         this.userAdditionalData[0].email + '/' + 
         id + '/' + 
         this.carImgName + "-" + 
@@ -185,7 +204,7 @@ export class SellCarComponent implements OnInit, OnDestroy {
     return new Promise((resolve) => {
       for (let i = 0; i < this.carImgNames.length; i++) {
         this.angularFireStorage.upload(
-          "/sellBuyCar/" + 
+          "/carsForSell/" + 
           this.userAdditionalData[0].email + '/' + 
           id + '/' +
           "/carImages/" +
