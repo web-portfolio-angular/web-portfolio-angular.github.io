@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sell-buy-car',
@@ -15,8 +16,19 @@ export class SellBuyCarComponent implements OnInit {
   imgURL: string = null;
   errorMsgOnUpload: string = null;  
 
-  constructor(private angularFireStorage: AngularFireStorage) { }
+  constructor(
+    private angularFireStorage: AngularFireStorage,
+    private router: Router,
+  ) { }
+
   ngOnInit(): void {
+    const lastVisitedLink: {
+      lastVisitedLink: string
+    } = JSON.parse(localStorage.getItem('sell-buy-car-LastVisitedLink'));
+
+    if (lastVisitedLink) {
+      this.router.navigate([lastVisitedLink]);
+    }    
   }
 
   uploadImg(event: any){
@@ -44,5 +56,9 @@ export class SellBuyCarComponent implements OnInit {
     .catch(error => {
       this.errorMsgOnUpload = error.message      
     });    
+  }
+
+  saveLastVisitedLinkToLocalStore(link: string) {
+    localStorage.setItem('sell-buy-car-LastVisitedLink', JSON.stringify('/sell-buy-car/' + link));
   }
 }

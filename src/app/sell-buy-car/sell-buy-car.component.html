@@ -2,8 +2,8 @@
 	<app-categories-info></app-categories-info>
 	<div>
 		<ul>
-			<li [routerLink]="['buy']" routerLinkActive="categories-active">Buy Second Hand Car</li>
-			<li [routerLink]="['sell']" routerLinkActive="categories-active">Sell Your Car</li>
+			<li [routerLink]="['buy']" routerLinkActive="categories-active" (click)="saveLastVisitedLinkToLocalStore('buy')">Buy Second Hand Car</li>
+			<li [routerLink]="['sell']" routerLinkActive="categories-active" (click)="saveLastVisitedLinkToLocalStore('sell')"> Sell Your Car</li>
 		</ul>
 		<router-outlet></router-outlet>
 	</div>

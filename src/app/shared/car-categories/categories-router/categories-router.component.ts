@@ -11,6 +11,7 @@ import { SubjectsService } from '../../services/subjects.service';
 })
 export class CategoriesRouterComponent implements OnInit, OnDestroy {
   @Input() carLinks;
+  @Input() currentLink;
   private isLoadingSub: Subscription;
   private getCarLinksErrorMsgSub: Subscription;
   isLoading: boolean;
@@ -34,7 +35,7 @@ export class CategoriesRouterComponent implements OnInit, OnDestroy {
     this.getCarLinksErrorMsgSub.unsubscribe()
   }
 
-  saveProductLinksToLocalStore(data: string) {
-    localStorage.setItem('productsLink', JSON.stringify('/products/' + data));
+  saveLastVisitedLinkToLocalStore(link: string) {
+    localStorage.setItem(this.currentLink + '-LastVisitedLink', JSON.stringify('/' + this.currentLink + '/' + link));
   }
 }

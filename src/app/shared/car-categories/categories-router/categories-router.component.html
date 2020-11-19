@@ -7,7 +7,7 @@
         <li *ngFor="let carLink of carLinks" 
           [routerLink]="[carLink.link]" 
           routerLinkActive="categories-active"
-          (click)="saveProductLinksToLocalStore(carLink.link)">
+          (click)="saveLastVisitedLinkToLocalStore(carLink.link)">
             {{ carLink.name }}
         </li>
       </ul>

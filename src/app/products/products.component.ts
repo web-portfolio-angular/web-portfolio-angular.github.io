@@ -47,12 +47,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
     });
 
     const lastVisitedLink: {
-      productsLink: string
-    } = JSON.parse(localStorage.getItem('productsLink'));
+      lastVisitedLink: string
+    } = JSON.parse(localStorage.getItem('products-LastVisitedLink'));
 
     if (lastVisitedLink) {
       this.router.navigate([lastVisitedLink]);
-    }
+    }    
   }
 
   ngOnDestroy() {
