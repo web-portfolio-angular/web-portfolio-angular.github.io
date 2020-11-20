@@ -4,7 +4,7 @@ export class Car {
   carInfo: string;
   carPrice: number;
   dateCreation: firebase.firestore.Timestamp;
-  carImgs?: any;
+  carImgs?: any [];
   id?: string;
 }
 

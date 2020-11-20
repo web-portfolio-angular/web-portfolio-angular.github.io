@@ -7,8 +7,7 @@ import { SubjectsService } from 'src/app/shared/services/subjects.service';
 @Component({
   selector: 'app-car-item',
   templateUrl: './car-item.component.html',
-  styles: [
-  ]
+  styles: []
 })
 export class CarItemComponent implements OnInit, OnDestroy {
   @Input() car: Car;

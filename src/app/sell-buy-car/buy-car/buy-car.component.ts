@@ -33,7 +33,7 @@ export class BuyCarComponent implements OnInit, OnDestroy {
       this.getCarLinksErrorMsg = error;
     })
 
-    this.firestore.getSecondHandCars().subscribe(data => {
+    this.firestore.getSecondHandCarsLink().subscribe(data => {
       this.carLinks = data.map(e => {
         return {
           id: e.payload.doc.id,

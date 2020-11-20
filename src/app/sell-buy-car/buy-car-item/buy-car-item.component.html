@@ -1,3 +1,20 @@
 <div>
-  
+  <img [src]="car.carImg">
+
+  <p>{{ car.model }}</p>
+  <p>{{ car.year }}</p>
+
+  <p>{{ car.description }}</p>
+
+  <p>{{ car.price }}</p>  
+
+  <p>{{ car.date.toDate() | date:'dd.MM.yyyy' }}</p>
+
+  <div>
+    <div *ngIf="car.carImages" class="car-item__images">
+      <button class="btn-default narrow-btn" (click)="onShowCarImages(car.id)">View Images</button>
+      <app-car-images *ngIf="carShowImages && carId==car.id" [carImgs]="car.carImages"></app-car-images>
+    </div>
+    <p *ngIf="!car.carImages">There are no images uploaded</p>
+  </div>
 </div>

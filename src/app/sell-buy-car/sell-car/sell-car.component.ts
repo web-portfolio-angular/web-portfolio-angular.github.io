@@ -112,7 +112,7 @@ export class SellCarComponent implements OnInit, OnDestroy {
         const carImages = sellCarForm.value.carImgs;
         const car = { model, year, carImg, description, price, userEmail, id, date, carImages };        
         switch (model) {
-          case 'Audi': this.firestore.secondHandAudi(car)
+          case 'Audi': this.firestore.setSecondHandAudi(car)
               .then(() => {
                 this.onSuccessfulSetCarForSell();
               })
@@ -120,7 +120,7 @@ export class SellCarComponent implements OnInit, OnDestroy {
                 this.onErroSetCarForSell(error);
               });          
             break;
-          case 'BWM': this.firestore.secondHandBmw(car)
+          case 'BWM': this.firestore.setSecondHandBmw(car)
               .then(() => {
                 this.onSuccessfulSetCarForSell();
               })

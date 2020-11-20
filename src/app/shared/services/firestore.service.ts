@@ -84,6 +84,12 @@ export class FirestoreService {
   }
 
   //buy/sell a car
+  getSecondHandCarsLink() {
+    return this.firestore
+    .collection('buyCarLinks', data => data.orderBy('date', 'asc'))
+    .snapshotChanges();
+  }
+
   getCarModels() {
     return this.firestore
     .collection('carModels', data => data.orderBy('car', 'asc'))
@@ -96,18 +102,23 @@ export class FirestoreService {
     .snapshotChanges();
   }
 
-  secondHandAudi(car: CarsForSell) {
+  setSecondHandAudi(car: CarsForSell) {
     return this.firestore.collection('secondHandAudi/').doc(car.id).set(car);
   }
-  
-  secondHandBmw(car: CarsForSell) {
-    return this.firestore.collection('secondHandBmw/').doc(car.id).set(car);
+
+  getSecondHandAudi() {
+    return this.firestore
+    .collection('secondHandAudi', data => data.orderBy('date', 'desc'))
+    .snapshotChanges();
   }
   
-  //
-  getSecondHandCars() {
+  setSecondHandBmw(car: CarsForSell) {
+    return this.firestore.collection('secondHandBmw/').doc(car.id).set(car);
+  }
+
+  getSecondHandBmw() {
     return this.firestore
-    .collection('buyCarLinks', data => data.orderBy('date', 'asc'))
+    .collection('secondHandBmw', data => data.orderBy('date', 'desc'))
     .snapshotChanges();
   }
 }
