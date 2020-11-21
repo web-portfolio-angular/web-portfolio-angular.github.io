@@ -38,7 +38,7 @@
           </div>            
         </form>
       </div>
-      <app-comment-user-info *ngIf="showUserInfo" [email]="shownUser"></app-comment-user-info>
+      <app-comment-user-info *ngIf="showUserInfo" [shownUser]="shownUser"></app-comment-user-info>
     </div>
     <hr class="hr-border">
     <div *ngIf="!isAuth" class="comments-auth">

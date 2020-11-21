@@ -6,11 +6,12 @@
     <p class="comment-name">
       {{ comment.name }}
     </p>
-  </div>
+  </div>  
   <p class="comment-date">
     {{ comment.date.toDate() | date:'dd.MM.yyyy' }} at {{ comment.date.toDate() | date:'HH:mm' }}
   </p>        
 </div>
+<p *ngIf="errorMsgOnGetUser" class="error-msg">{{ errorMsgOnGetUser }}</p>
 <div class="comment-content">
   <p class="comment-content-text">{{ comment.comment }}</p>
 </div>

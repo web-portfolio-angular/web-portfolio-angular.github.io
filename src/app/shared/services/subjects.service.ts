@@ -1,6 +1,8 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
+import { UserAdditionalInfo } from '../models/user.model';
+
 @Injectable({ providedIn: 'root' })
 export class SubjectsService implements OnDestroy {
 	userInfoMenuStateSubject = new BehaviorSubject <string>(null);
@@ -18,8 +20,8 @@ export class SubjectsService implements OnDestroy {
 	showUserInfoSubject = new BehaviorSubject <boolean>(null);
 	showUserInfo: boolean = false;
 
-	shownUserSubject = new BehaviorSubject <string>(null);
-	shownUser: string = null;
+	shownUserSubject = new BehaviorSubject <any>(null);
+	shownUser: UserAdditionalInfo;
 
 	windowWidthSubject = new BehaviorSubject <number>(null);
 	private windowWidthSub: Subscription;
@@ -108,10 +110,10 @@ export class SubjectsService implements OnDestroy {
 		this.showUserInfoSubject.next(this.showUserInfo);
 	}
 
-	onShowUserInfo(email: string) {
+	onShowUserInfo(shownUser: UserAdditionalInfo) {
 		this.showUserInfo = true;
-		this.shownUser = email;
-		this.isOverlayShown = true
+		this.shownUser = shownUser;
+		this.isOverlayShown = true		
 
 		this.showUserInfoSubject.next(this.showUserInfo);
 		this.shownUserSubject.next(this.shownUser);

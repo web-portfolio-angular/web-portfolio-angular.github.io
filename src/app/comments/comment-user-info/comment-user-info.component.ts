@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+import { UserAdditionalInfo } from 'src/app/shared/models/user.model';
 import { SubjectsService } from '../../shared/services/subjects.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { SubjectsService } from '../../shared/services/subjects.service';
   ]
 })
 export class CommentUserInfoComponent implements OnInit {
-  @Input() email: string;
+  @Input() shownUser: UserAdditionalInfo;
 
   constructor(
     private subjectsService: SubjectsService

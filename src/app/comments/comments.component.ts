@@ -31,7 +31,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
   errorMsgOnloadComments: string = null;
   errorMsgOnSubmit: string = null;
   errorMsgOnReply: string = null;  
-  shownUser: string;
+  shownUser: UserAdditionalInfo;
   showUserInfo: boolean;
 
   constructor(

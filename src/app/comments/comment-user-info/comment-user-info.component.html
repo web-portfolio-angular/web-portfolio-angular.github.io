@@ -2,14 +2,14 @@
   <div class="comment-user-info">
     <div class="comment-user-info__close-btn" (click)="closeUserInfo()">X</div>
     <div class="comment-user-info__avatar"
-      [ngStyle]="{'background-image': (email | getUserInfo:'userImg' | async)}">
+      [ngStyle]="{'background-image': 'url(' + shownUser.userImg + ')'}">
     </div>
     <div class="comment-user-info__element">
       <div class="comment-info-img">
         <img src="../../assets//img/sign/user.png">
       </div>
       <div>
-       {{ email | getUserInfo: 'name' | async }}
+       {{ shownUser.name }}
       </div>
     </div>
     <div class="comment-user-info__element">
@@ -18,10 +18,10 @@
       </div>
       <div>
         <span>
-          +{{ email | getUserInfo: 'phoneCode' | async }}                    
+          +{{ shownUser.phoneCode }}                    
         </span>
         <span>
-          {{ email | getUserInfo: 'phone' | async }}
+          {{ shownUser.phone }}
         </span>
       </div>
     </div>
@@ -30,7 +30,7 @@
         <img src="../../assets//img/sign/email.png">
       </div>
       <div>
-        <a href="mailto:{{ email }}">{{ email }}</a>              
+        <a href="mailto:{{ shownUser.email }}">{{ shownUser.email }}</a>              
       </div>
     </div>
   </div>
