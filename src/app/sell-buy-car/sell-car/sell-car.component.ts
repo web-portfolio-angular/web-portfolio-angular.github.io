@@ -107,10 +107,10 @@ export class SellCarComponent implements OnInit, OnDestroy {
         const carImg = sellCarForm.value.carImg;
         const description = sellCarForm.value.description.trim();
         const price = sellCarForm.value.price;
-        const userEmail = this.userAdditionalData[0].email;
+        const owner = this.userAdditionalData[0].email;
         const date = firebase.firestore.Timestamp.now();
         const carImages = sellCarForm.value.carImgs;
-        const car = { model, year, carImg, description, price, userEmail, id, date, carImages };        
+        const car = { model, year, carImg, description, price, owner, id, date, carImages };        
         switch (model) {
           case 'Audi': this.firestore.setSecondHandAudi(car)
               .then(() => {

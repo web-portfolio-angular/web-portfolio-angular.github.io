@@ -14,7 +14,7 @@ export class CarsForSell {
   carImg: string;
   description: string;
   price: string;
-  userEmail: string;
+  owner: string;
   id: string;
   date: firebase.firestore.Timestamp;
   carImages?: any [];
