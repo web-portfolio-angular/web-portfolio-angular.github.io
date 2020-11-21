@@ -28,8 +28,7 @@ export class AudiComponent implements OnInit {
         }
       })
       this.isLoading = false;
-      this.errorMsg = null;
-      console.log(this.audiCars);          
+      this.errorMsg = null;       
     }, error => {
       this.isLoading = false;
       this.errorMsg = error.message;

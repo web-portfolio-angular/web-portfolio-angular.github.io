@@ -1,18 +1,33 @@
 <div  class="car-item">
   <img class="car-item__img" [src]="car.carImg">
 
-  <p>{{ car.model }}</p>
-  <p>{{ car.year }}</p>
+  <div>
+    <p>{{ car.model }}</p>
+    <p>{{ car.year }}</p>
+  
+    <p>{{ car.description }}</p>
+  
+    <p>{{ car.price }}</p>
+  </div>
 
-  <p>{{ car.description }}</p>
 
-  <p>{{ car.price }}</p>  
+  <div *ngIf="ownerEmail == car.owner">
+    <button type="button" (click)="onEdit()">Edit</button>
+  </div>
+
 
   <p>{{ car.date.toDate() | date:'dd.MM.yyyy' }}</p>
 
   <div>
-    <div></div>
-    <div></div>
+    <div class="comment-img"
+      [ngStyle]="{'background-image': (car.owner | getUserInfo:'userImg' | async)}">
+    </div>
+    <div>
+      {{car.owner | getUserInfo:'name' | async}}
+      {{car.owner | getUserInfo:'phoneCode' | async}}
+      {{car.owner | getUserInfo:'phone' | async}}
+      {{car.owner}}
+    </div>    
   </div>
 
   <div>
@@ -22,23 +37,71 @@
     </div>
     <p *ngIf="!car.carImages">There are no images uploaded</p>
   </div>
+
+  <!-- FIXED -->
+
+  <div class="test" *ngIf="isInEditMode">
+    <form [formGroup]="changeCarDetailsForm" (ngSubmit)="submitCarDetailChanges(changeCarDetailsForm)">
+      <div>
+        <mat-form-field>
+          <mat-select formControlName="model">
+            <mat-option *ngFor="let carModel of carModels" [value]="carModel.car">
+              {{ carModel.car }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select formControlName="year">
+            <mat-option *ngFor="let carManufactureYear of carManufactureYears" [value]="carManufactureYear.year">
+              {{ carManufactureYear.year }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <textarea formControlName="description"></textarea>
+      </div>
+      <div>
+        <input type="number" name="price" formControlName="price">
+      </div>
+      <div>
+        <div>
+          <div *ngIf="carImgLocalPaths">
+            <div *ngFor="let carImage of carImgLocalPaths let i = index">
+              <img [src]="carImage">
+              <div (click)="removeCarImg(i)">X</div>
+            </div>
+          </div>
+          <div *ngIf="!car.carImages">
+            <p>There are no images uploaded</p>
+          </div>
+        </div>
+        <div>
+          <input formControlName="carImgs"
+          #chooseCarImgs style="display: none;"
+          type="file" 
+          (change)="onChooseCarImgs($event)" 
+          accept=".png,.jpg,.jpeg,.svg,.heic"
+          multiple="multiple">
+          <button type="button" class="btn-default narrow-btn ng-star-inserted" (click)="chooseCarImgs.click()">Upload Images</button>
+        </div>
+      </div>
+      <div>
+        <button type="submit">Apply Changes</button>
+        <button type="button" (click)="onCancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
 </div>
 
-
-<!-- <div class="car-item">
-  
-  <p class="car-item__info">{{ car.carInfo }}</p>
-  <hr class="car-item__hr">
-  <div class="car-item__prise">
-    <div>
-      <p> &#36; {{ car.carPrice }}</p>
-    </div>
-    <div class="add-to-cart">
-      <p>Add to Cart</p>
-    </div>
-  </div>
-  <div class="car-item__images">
-    <button class="btn-default narrow-btn" (click)="onShowCarImages(car.id)">View Images</button>
-    <app-car-images *ngIf="carShowImages && carId==car.id" [carImgs]="car.carImgs"></app-car-images>
-  </div>
-</div> -->
+<!--  -->
+<style>
+  .test{
+    position: fixed;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+</style>

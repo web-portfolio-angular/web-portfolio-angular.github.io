@@ -4,7 +4,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { CommentsComponent } from './comments.component';
-import { GetUserInfoPipe } from './get-user-info.pipe';
 import { SharedModule } from '../shared/shared.module';
 import { CommentUserInfoComponent } from './comment-user-info/comment-user-info.component';
 import { CommentComponent } from './comment/comment.component';
@@ -12,7 +11,6 @@ import { CommentComponent } from './comment/comment.component';
 @NgModule({
 	declarations: [
 		CommentsComponent,
-		GetUserInfoPipe,
 		CommentUserInfoComponent,
 		CommentComponent
 	],

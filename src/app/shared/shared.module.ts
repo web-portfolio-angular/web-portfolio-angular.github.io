@@ -6,13 +6,15 @@ import { CarImagesComponent } from './car-images/car-images.component';
 import { RouterModule } from '@angular/router';
 import { CategoriesInfoComponent } from './car-categories/categories-info/categories-info.component';
 import { CategoriesRouterComponent } from './car-categories/categories-router/categories-router.component';
+import { GetUserInfoPipe } from './pipes/get-user-info.pipe';
 
 @NgModule({
 	declarations: [
 		LoadingSpinnerComponent,
 		CarImagesComponent,
 		CategoriesInfoComponent,
-		CategoriesRouterComponent
+		CategoriesRouterComponent,
+		GetUserInfoPipe
 	],
 	imports: [
 		CommonModule, 
@@ -22,7 +24,8 @@ import { CategoriesRouterComponent } from './car-categories/categories-router/ca
 		LoadingSpinnerComponent,
 		CarImagesComponent,
 		CategoriesInfoComponent,
-		CategoriesRouterComponent
+		CategoriesRouterComponent,
+		GetUserInfoPipe
 	]
 })
 export class SharedModule{}
