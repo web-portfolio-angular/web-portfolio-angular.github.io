@@ -36,8 +36,6 @@ export class SubjectsService implements OnDestroy {
 	isLoadingSubject = new BehaviorSubject<boolean>(null);
 	isLoading: boolean = true;
 	
-	getCarLinksErrorMsgSubject = new BehaviorSubject<string>(null);
-	getCarLinksErrorMsg: string = null;
 
 	constructor() {
 		this.userInfoMenuStateSubject.next(this.userInfoMenuState);
@@ -56,7 +54,6 @@ export class SubjectsService implements OnDestroy {
 		this.carIdSubject.next(this.carId);
 
 		this.isLoadingSubject.next(this.isLoading);
-		this.getCarLinksErrorMsgSubject.next(this.getCarLinksErrorMsg);
 	}
 
 	ngOnDestroy(): void {
@@ -163,15 +160,5 @@ export class SubjectsService implements OnDestroy {
 	loaded() {
 		this.isLoading = false;
 		this.isLoadingSubject.next(this.isLoading);
-	}
-
-	onGetProductLinksError(error) {
-		this.getCarLinksErrorMsg = error.message;
-		this.getCarLinksErrorMsgSubject.next(this.getCarLinksErrorMsg);
-	}
-
-	clearGetProductLinksError() {
-		this.getCarLinksErrorMsg = null;
-		this.getCarLinksErrorMsgSubject.next(this.getCarLinksErrorMsg);
 	}
 }

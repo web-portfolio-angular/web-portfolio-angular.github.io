@@ -13,7 +13,6 @@ import { SubjectsService } from '../shared/services/subjects.service';
 })
 export class ProductsComponent implements OnInit, OnDestroy {
   private isLoadingSub: Subscription;
-  private getCarLinksErrorMsgSub: Subscription;
   isLoading: boolean;
   getCarLinksErrorMsg: string;
   carLinks: ProductLink[] = [];
@@ -28,9 +27,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.isLoadingSub = this.subjectsService.isLoadingSubject.subscribe(boolean => {
       this.isLoading = boolean;
     })
-    this.getCarLinksErrorMsgSub = this.subjectsService.getCarLinksErrorMsgSubject.subscribe(error => {
-      this.getCarLinksErrorMsg = error;
-    })
 
     this.firestore.getProductLinks().subscribe(data => {
       this.carLinks = data.map(e => {
@@ -40,10 +36,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
         }
       })
       this.subjectsService.loaded();
-      this.subjectsService.clearGetProductLinksError();
+      this.getCarLinksErrorMsg = null;
     }, error => {
       this.subjectsService.loaded();
-      this.subjectsService.onGetProductLinksError(error);
+      this.getCarLinksErrorMsg = error.message;
     });
 
     const lastVisitedLink: {
@@ -57,6 +53,5 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.isLoadingSub.unsubscribe();
-    this.getCarLinksErrorMsgSub.unsubscribe();
   }
 }

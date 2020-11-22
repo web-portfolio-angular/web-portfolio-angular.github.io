@@ -1,4 +1,9 @@
 <div>
+	<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+	<div>
+		<p *ngIf="getCarModelsError" class="error-msg">{{ getCarModelsError }}</p>
+		<p *ngIf="getCarManufactureYearError" class="error-msg">{{ getCarManufactureYearError }}</p>
+	</div>
 	<form [formGroup]="sellCarForm" (ngSubmit)="onSubmit(sellCarForm)">
 		<div>
 			<mat-form-field>
@@ -53,6 +58,13 @@
 		</div>
 		<div>
       <button type="submit" [disabled]="!sellCarForm.valid">Add to the Shop</button>
-    </div>
+		</div>
+		<div>
+			<p *ngIf="sellCarError" class="error-msg">{{ sellCarError }}</p>
+			<p *ngIf="uploadCarImgToFirestoreError" class="error-msg">{{ uploadCarImgToFirestoreError }}</p>
+			<p *ngIf="uploadCarImagesToFirestoreError" class="error-msg">{{ uploadCarImagesToFirestoreError }}</p>
+			<p *ngIf="getCarImgURLError" class="error-msg">{{ getCarImgURLError }}</p>
+			<p *ngIf="getcarImgURLsError" class="error-msg">{{ getcarImgURLsError }}</p>
+		</div>
 	</form>
 </div>

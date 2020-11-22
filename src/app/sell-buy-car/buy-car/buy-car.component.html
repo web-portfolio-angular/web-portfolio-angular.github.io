@@ -1,1 +1,4 @@
-<app-categories-router [carLinks]="carLinks" [currentLink]="'sell-buy-car/buy'"></app-categories-router>
+<div>
+  <p *ngIf="getCarLinksErrorMsg" class="error-msg">{{ getCarLinksErrorMsg }}</p>
+  <app-categories-router [carLinks]="carLinks" [currentLink]="'sell-buy-car/buy'"></app-categories-router>
+</div>

@@ -34,6 +34,9 @@ export class BuyCarItemComponent implements OnInit {
   carImgLocalPaths: any = [];
   carImgURLs: any = [];
   currentCarImages: any = [];
+  uploadCarImagesToFirestoreError: string = null;
+  updateSecondHandCarError: string = null;
+  setcarImgURLsError: string = null;
 
   constructor(
     private subjectService: SubjectsService,
@@ -98,9 +101,9 @@ export class BuyCarItemComponent implements OnInit {
       const newInfo = {description, price, id, doc};
       this.firestore.updateSecondHandCar(newInfo)
       .then(() => {
-  
+        this.updateSecondHandCarError = null;
       }, error => {
-        
+        this.updateSecondHandCarError = error.message;
       });
     })    
   }
@@ -144,17 +147,17 @@ export class BuyCarItemComponent implements OnInit {
             this.carImgURLs.push(url);            
             if (this.carImgURLs.length == this.carImgNames.length) {
               this.changeCarDetailsForm.value.carImgs = this.carImgURLs;
-              // this.getcarImgURLsError = null;
+              this.setcarImgURLsError = null;
               resolve();
             }
           })
           .catch(error => {
-            // this.getcarImgURLsError = error.message;
+            this.setcarImgURLsError = error.message;
           })
-          // this.uploadCarImagesToFirestoreError = null;
+          this.uploadCarImagesToFirestoreError = null;
         })
         .catch(error => {
-          // this.uploadCarImagesToFirestoreError = error.message;
+          this.uploadCarImagesToFirestoreError = error.message;
         });
       }      
     })

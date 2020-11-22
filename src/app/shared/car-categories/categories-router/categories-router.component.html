@@ -3,7 +3,6 @@
     <p>Categories</p>      
       <ul>
         <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
-        <p *ngIf="getCarLinksErrorMsg" class="error-msg">{{ getCarLinksErrorMsg }}</p>
         <li *ngFor="let carLink of carLinks" 
           [routerLink]="[carLink.link]" 
           routerLinkActive="categories-active"

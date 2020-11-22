@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import * as firebase from 'firebase/app';
 
@@ -37,13 +38,15 @@ export class SellCarComponent implements OnInit, OnDestroy {
   uploadCarImagesToFirestoreError: string = null;
   getCarImgURLError: string = null;
   getcarImgURLsError: string = null;
+  isLoading: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private firestore: FirestoreService,
     private additionUserInfoService: AdditionUserInfoService,
     private angularFireStorage: AngularFireStorage,
-    private generateIdService: GenerateIdService
+    private generateIdService: GenerateIdService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -98,6 +101,7 @@ export class SellCarComponent implements OnInit, OnDestroy {
       return
     }
 
+    this.isLoading = true;
     const id = this.generateIdService.generateId();
 
     this.onUploadCarImgToFirestore(id).then(() => {
@@ -113,7 +117,10 @@ export class SellCarComponent implements OnInit, OnDestroy {
         const car = { model, year, carImg, description, price, owner, id, date, carImages };
         this.firestore.setSecondHandCar(car)
         .then(() => {
+          this.isLoading = false;
           this.sellCarForm.reset();
+          localStorage.setItem('sell-buy-car/buy-LastVisitedLink', JSON.stringify('/sell-buy-car/buy/' + model.toLowerCase()));
+          this.router.navigate(['/sell-buy-car/buy/' + model.toLowerCase()]);
           this.carImgNames = [];
           this.carImgLocalPaths = [];
           this.carImgURLs = [];

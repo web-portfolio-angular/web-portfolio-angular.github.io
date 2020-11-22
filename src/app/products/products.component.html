@@ -1,4 +1,5 @@
 <div class="container">
   <app-categories-info></app-categories-info>
+  <p *ngIf="getCarLinksErrorMsg" class="error-msg">{{ getCarLinksErrorMsg }}</p>
   <app-categories-router [carLinks]="carLinks" [currentLink]="'products'"></app-categories-router>
 </div>

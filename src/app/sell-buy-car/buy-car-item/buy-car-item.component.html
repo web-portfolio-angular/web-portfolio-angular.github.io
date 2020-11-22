@@ -86,6 +86,11 @@
         <button type="submit">Apply Changes</button>
         <button type="button" (click)="onCancel()">Cancel</button>
       </div>
+      <div>
+        <p *ngIf="uploadCarImagesToFirestoreError" class="error-msg">{{ uploadCarImagesToFirestoreError }}</p>
+        <p *ngIf="updateSecondHandCarError" class="error-msg">{{ updateSecondHandCarError }}</p>
+        <p *ngIf="setcarImgURLsError" class="error-msg">{{ setcarImgURLsError }}</p>
+      </div>
     </form>
   </div>
 </div>
