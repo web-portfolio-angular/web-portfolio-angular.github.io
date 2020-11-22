@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 
-import { CarManufactureYear, ProductLink, CarsForSell } from 'src/app/shared/models/car.model';
+import { CarsForSell } from 'src/app/shared/models/car.model';
 import { SubjectsService } from 'src/app/shared/services/subjects.service';
 import { FirestoreService } from 'src/app/shared/services/firestore.service';
 import { AdditionUserInfoService } from 'src/app/shared/services/user-additional-info.service';
@@ -37,6 +37,7 @@ export class BuyCarItemComponent implements OnInit {
   uploadCarImagesToFirestoreError: string = null;
   updateSecondHandCarError: string = null;
   setcarImgURLsError: string = null;
+  isLoading: boolean = false;
 
   constructor(
     private subjectService: SubjectsService,
@@ -85,8 +86,10 @@ export class BuyCarItemComponent implements OnInit {
       return
     }
 
+    this.isLoading = true;
+
     const id = this.car.id;
-    const doc = 'secondHandAudi';
+    const doc = this.car.model;
 
     this.onUploadCarImagesToFirestore(id).then(() => {
       if (this.carImgNames.length > 0) {
@@ -101,6 +104,7 @@ export class BuyCarItemComponent implements OnInit {
       const newInfo = {description, price, id, doc};
       this.firestore.updateSecondHandCar(newInfo)
       .then(() => {
+        this.isLoading = false;
         this.updateSecondHandCarError = null;
       }, error => {
         this.updateSecondHandCarError = error.message;
@@ -144,7 +148,7 @@ export class BuyCarItemComponent implements OnInit {
         .then(uploadTask => {
           uploadTask.ref.getDownloadURL()
           .then(url => {
-            this.carImgURLs.push(url);            
+            this.carImgURLs.push(url);
             if (this.carImgURLs.length == this.carImgNames.length) {
               this.changeCarDetailsForm.value.carImgs = this.carImgURLs;
               this.setcarImgURLsError = null;
