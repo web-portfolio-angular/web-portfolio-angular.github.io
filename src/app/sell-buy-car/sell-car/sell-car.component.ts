@@ -110,40 +110,21 @@ export class SellCarComponent implements OnInit, OnDestroy {
         const owner = this.userAdditionalData[0].email;
         const date = firebase.firestore.Timestamp.now();
         const carImages = sellCarForm.value.carImgs;
-        const car = { model, year, carImg, description, price, owner, id, date, carImages };        
-        switch (model) {
-          case 'Audi': this.firestore.setSecondHandAudi(car)
-              .then(() => {
-                this.onSuccessfulSetCarForSell();
-              })
-              .catch(error => {
-                this.onErroSetCarForSell(error);
-              });          
-            break;
-          case 'BWM': this.firestore.setSecondHandBmw(car)
-              .then(() => {
-                this.onSuccessfulSetCarForSell();
-              })
-              .catch(error => {
-                this.onErroSetCarForSell(error);
-              }); 
-            break;
-        }
+        const car = { model, year, carImg, description, price, owner, id, date, carImages };
+        this.firestore.setSecondHandCar(car)
+        .then(() => {
+          this.sellCarForm.reset();
+          this.carImgNames = [];
+          this.carImgLocalPaths = [];
+          this.carImgURLs = [];
+          this.carImgLocalPath = this.carDefaultImg;
+          this.sellCarError = null;
+        })
+        .catch(error => {
+          this.sellCarError = error.message;
+        });
       })
     })
-  }
-
-  onSuccessfulSetCarForSell() {
-    this.sellCarForm.reset();
-    this.carImgNames = [];
-    this.carImgLocalPaths = [];
-    this.carImgURLs = [];
-    this.carImgLocalPath = this.carDefaultImg;
-    this.sellCarError = null;
-  }
-
-  onErroSetCarForSell(error) {
-    this.sellCarError = error.message;
   }
 
   onChooseCarImg(event) {
@@ -189,13 +170,19 @@ export class SellCarComponent implements OnInit, OnDestroy {
 
   onChooseCarImgs(event) {
     this.carFiles = event.target.files;    
-    for (let i = 0; i < this.carFiles.length; i++){
-      const reader = new FileReader();
-      reader.onload = (event: any) => {
-        this.carImgLocalPaths.push(event.target.result);
+    if(this.carFiles.length > 0) {
+      for (let i = 0; i < this.carFiles.length; i++){
+        const reader = new FileReader();
+        reader.onload = (event: any) => {
+          this.carImgLocalPaths.push(event.target.result);
+        }
+        reader.readAsDataURL(event.target.files[i]);
+        this.carImgNames.push(this.carFiles[i].name.substr(0, this.carFiles[i].name.lastIndexOf('.')));
       }
-      reader.readAsDataURL(event.target.files[i]);
-      this.carImgNames.push(this.carFiles[i].name.substr(0, this.carFiles[i].name.lastIndexOf('.')));
+    } else {
+      this.carFiles = null;
+      this.carImgLocalPaths = [];
+      this.carImgNames = [];
     }
   }
 

@@ -83,36 +83,44 @@ export class BuyCarItemComponent implements OnInit {
     }
 
     const id = this.car.id;
+    const doc = 'secondHandAudi';
 
     this.onUploadCarImagesToFirestore(id).then(() => {
       if (this.carImgNames.length > 0) {
         for (let i = 0; i < this.carImgNames.length; i++) {
           const img = changeCarDetailsForm.value.carImgs[i];
-          const newImgInfo = {id, img}
-          this.firestore.updateSecondHanImagesdAudi(newImgInfo)
+          const newImgInfo = {id, img, doc}
+          this.firestore.updateSecondHanImagesCar(newImgInfo)
         }
       }
       const description = changeCarDetailsForm.value.description;
-      const price = changeCarDetailsForm.value.price;
-      const newInfo = {description, price, id};
-      this.firestore.updateSecondHandAudi(newInfo)
+      const price = changeCarDetailsForm.value.price;      
+      const newInfo = {description, price, id, doc};
+      this.firestore.updateSecondHandCar(newInfo)
       .then(() => {
   
       }, error => {
         
       });
-    })
+    })    
   }
 
   onChooseCarImgs(event) {
-    this.carFiles = event.target.files;    
-    for (let i = 0; i < this.carFiles.length; i++){
-      const reader = new FileReader();
-      reader.onload = (event: any) => {
-        this.carImgLocalPaths.push(event.target.result);
+    this.carFiles = event.target.files;
+    if(this.carFiles.length > 0) {
+      for (let i = 0; i < this.carFiles.length; i++){
+        const reader = new FileReader();
+        reader.onload = (event: any) => {
+          this.carImgLocalPaths.push(event.target.result);
+        }
+        reader.readAsDataURL(event.target.files[i]);
+        this.carImgNames.push(this.carFiles[i].name.substr(0, this.carFiles[i].name.lastIndexOf('.')));
       }
-      reader.readAsDataURL(event.target.files[i]);
-      this.carImgNames.push(this.carFiles[i].name.substr(0, this.carFiles[i].name.lastIndexOf('.')));
+    } else {
+      this.carFiles = null;
+      this.carImgLocalPaths = [];
+      this.carImgNames = [];
+      this.changeCarDetailsForm.controls['carImgs'].setValue('');
     }
   }
 
@@ -170,7 +178,7 @@ export class BuyCarItemComponent implements OnInit {
     this.carFiles = null;
     this.carImgLocalPaths = [];
     this.carImgNames = [];
-    this.changeCarDetailsForm.value.carImgs = null;
+    this.changeCarDetailsForm.controls['carImgs'].setValue('');
     this.isInEditMode = false;    
   }
 }

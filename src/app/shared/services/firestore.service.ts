@@ -96,48 +96,31 @@ export class FirestoreService {
     .snapshotChanges();
   }
 
-  setSecondHandAudi(car: CarsForSell) {
-    return this.firestore.collection('secondHandAudi/').doc(car.id).set(car);
+  setSecondHandCar(car: CarsForSell) {
+    return this.firestore.collection(car.model + '/').doc(car.id).set(car);
   }
 
   getSecondHandAudi() {
     return this.firestore
-    .collection('secondHandAudi', data => data.orderBy('date', 'desc'))
+    .collection('Audi', data => data.orderBy('date', 'desc'))
     .snapshotChanges();
   }
 
-  updateSecondHandAudi(newInfo){
-    return this.firestore.doc('secondHandAudi/' + newInfo.id).update({
+  getSecondHandBMW() {
+    return this.firestore
+    .collection('BMW', data => data.orderBy('date', 'desc'))
+    .snapshotChanges();
+  }
+
+  updateSecondHandCar(newInfo){
+    return this.firestore.doc(newInfo.doc + '/' + newInfo.id).update({
       description: newInfo.description,
       price: newInfo.price     
      })
   }
 
-  updateSecondHanImagesdAudi(img){
-    return this.firestore.doc('secondHandAudi/' + img.id).update({
-      carImages: firebase.firestore.FieldValue.arrayUnion(img.img)
-    });
-  }
-  
-  setSecondHandBmw(car: CarsForSell) {
-    return this.firestore.collection('secondHandBmw/').doc(car.id).set(car);
-  }
-
-  getSecondHandBmw() {
-    return this.firestore
-    .collection('secondHandBmw', data => data.orderBy('date', 'desc'))
-    .snapshotChanges();
-  }
-
-  updateSecondHandBmw(newInfo){
-    return this.firestore.doc('secondHandBmw/' + newInfo.id).update({
-      description: newInfo.description,
-      price: newInfo.price
-     });
-  }
-
-  updateSecondHanImagesdBmw(img){
-    return this.firestore.doc('secondHandAudi/' + img.id).update({
+  updateSecondHanImagesCar(img){
+    return this.firestore.doc(img.doc + '/' + img.id).update({
       carImages: firebase.firestore.FieldValue.arrayUnion(img.img)
     });
   }
