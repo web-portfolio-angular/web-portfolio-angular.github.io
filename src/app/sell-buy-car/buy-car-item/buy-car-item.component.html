@@ -43,22 +43,6 @@
   <div class="test" *ngIf="isInEditMode">
     <form [formGroup]="changeCarDetailsForm" (ngSubmit)="submitCarDetailChanges(changeCarDetailsForm)">
       <div>
-        <mat-form-field>
-          <mat-select formControlName="model">
-            <mat-option *ngFor="let carModel of carModels" [value]="carModel.car">
-              {{ carModel.car }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-select formControlName="year">
-            <mat-option *ngFor="let carManufactureYear of carManufactureYears" [value]="carManufactureYear.year">
-              {{ carManufactureYear.year }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div>
         <textarea formControlName="description"></textarea>
       </div>
       <div>
@@ -66,10 +50,19 @@
       </div>
       <div>
         <div>
-          <div *ngIf="carImgLocalPaths">
-            <div *ngFor="let carImage of carImgLocalPaths let i = index">
+          <div *ngIf="currentCarImages">
+            <p>Current Images</p>
+            <div *ngFor="let carImage of currentCarImages">
               <img [src]="carImage">
-              <div (click)="removeCarImg(i)">X</div>
+            </div>            
+          </div>
+          <div *ngIf="carImgLocalPaths.length > 0">
+            <p>New Images</p>
+            <div>
+              <div *ngFor="let carImage of carImgLocalPaths let i = index">
+                <img [src]="carImage">
+                <div (click)="removeCarImg(i)">X</div>
+              </div>
             </div>
           </div>
           <div *ngIf="!car.carImages">
@@ -83,7 +76,10 @@
           (change)="onChooseCarImgs($event)" 
           accept=".png,.jpg,.jpeg,.svg,.heic"
           multiple="multiple">
-          <button type="button" class="btn-default narrow-btn ng-star-inserted" (click)="chooseCarImgs.click()">Upload Images</button>
+          <button type="button" class="btn-default narrow-btn ng-star-inserted" (click)="chooseCarImgs.click()">
+            <p *ngIf="!currentCarImages">Upload Images</p>
+            <p *ngIf="currentCarImages">Upload More Images</p>
+          </button>
         </div>
       </div>
       <div>
@@ -103,5 +99,9 @@
     width: 100%;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  img {
+    width: 100px;
   }
 </style>

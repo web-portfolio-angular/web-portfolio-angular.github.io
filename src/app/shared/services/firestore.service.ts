@@ -90,12 +90,6 @@ export class FirestoreService {
     .snapshotChanges();
   }
 
-  getCarModels() {
-    return this.firestore
-    .collection('carModels', data => data.orderBy('car', 'asc'))
-    .snapshotChanges();
-  }
-
   getCarManufactureYear() {
     return this.firestore
     .collection('carManufactureYear', data => data.orderBy('year', 'desc'))
@@ -114,12 +108,16 @@ export class FirestoreService {
 
   updateSecondHandAudi(newInfo){
     return this.firestore.doc('secondHandAudi/' + newInfo.id).update({
-      model: newInfo.model,
-      year: newInfo.year,
       description: newInfo.description,
-      price: newInfo.price
-     });
-   }
+      price: newInfo.price     
+     })
+  }
+
+  updateSecondHanImagesdAudi(img){
+    return this.firestore.doc('secondHandAudi/' + img.id).update({
+      carImages: firebase.firestore.FieldValue.arrayUnion(img.img)
+    });
+  }
   
   setSecondHandBmw(car: CarsForSell) {
     return this.firestore.collection('secondHandBmw/').doc(car.id).set(car);
@@ -133,10 +131,14 @@ export class FirestoreService {
 
   updateSecondHandBmw(newInfo){
     return this.firestore.doc('secondHandBmw/' + newInfo.id).update({
-      model: newInfo.model,
-      year: newInfo.year,
       description: newInfo.description,
       price: newInfo.price
      });
-   }
+  }
+
+  updateSecondHanImagesdBmw(img){
+    return this.firestore.doc('secondHandAudi/' + img.id).update({
+      carImages: firebase.firestore.FieldValue.arrayUnion(img.img)
+    });
+  }
 }

@@ -4,7 +4,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { Subscription } from 'rxjs';
 import * as firebase from 'firebase/app';
 
-import { CarManufactureYear, CarModel } from '../../shared/models/car.model';
+import { CarManufactureYear, ProductLink } from '../../shared/models/car.model';
 import { UserAdditionalInfo } from '../../shared/models/user.model';
 import { FirestoreService } from '../../shared/services/firestore.service';
 import { AdditionUserInfoService } from '../../shared/services/user-additional-info.service';
@@ -27,7 +27,7 @@ export class SellCarComponent implements OnInit, OnDestroy {
   carImgNames: any = [];
   carImgLocalPaths: any = [];
   carImgURLs: any = [];
-  carModels: CarModel[] = [];
+  carModels: ProductLink[] = [];
   carManufactureYears: CarManufactureYear[] = [];
   userAdditionalData: UserAdditionalInfo[];
   getCarModelsError: string = null;
@@ -56,11 +56,11 @@ export class SellCarComponent implements OnInit, OnDestroy {
       carImgs: new FormControl(null)
     });
 
-    this.firestore.getCarModels().subscribe(data => {
+    this.firestore.getSecondHandCarsLink().subscribe(data => {
       this.carModels = data.map(e => {
         return {
           id: e.payload.doc.id,
-          ...e.payload.doc.data() as CarModel
+          ...e.payload.doc.data() as ProductLink
         }
       })
       this.getCarModelsError = null
@@ -188,16 +188,14 @@ export class SellCarComponent implements OnInit, OnDestroy {
   }
 
   onChooseCarImgs(event) {
-    this.carFiles = event.target.files;
-    if (this.carFiles) {
-      for (let i = 0; i < this.carFiles.length; i++){
-        const reader = new FileReader();
-        reader.onload = (event: any) => {
-          this.carImgLocalPaths.push(event.target.result);
-        }
-        reader.readAsDataURL(event.target.files[i]);
-        this.carImgNames.push(this.carFiles[i].name.substr(0, this.carFiles[i].name.lastIndexOf('.')));
+    this.carFiles = event.target.files;    
+    for (let i = 0; i < this.carFiles.length; i++){
+      const reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.carImgLocalPaths.push(event.target.result);
       }
+      reader.readAsDataURL(event.target.files[i]);
+      this.carImgNames.push(this.carFiles[i].name.substr(0, this.carFiles[i].name.lastIndexOf('.')));
     }
   }
 
@@ -214,7 +212,7 @@ export class SellCarComponent implements OnInit, OnDestroy {
           id + '/' +
           "/carImages/" +
           this.carImgNames[i] + "-" + 
-          this.generateIdService.generateId(), this.carFile)
+          this.generateIdService.generateId(), this.carFiles[i])
         .then(uploadTask => {
           uploadTask.ref.getDownloadURL()
           .then(url => {

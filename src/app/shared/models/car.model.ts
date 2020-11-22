@@ -20,10 +20,6 @@ export class CarsForSell {
   carImages?: any [];
 }
 
-export class CarModel {
-	car: string;
-}
-
 export class CarManufactureYear {
 	year: number;
 }
