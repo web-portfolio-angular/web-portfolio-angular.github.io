@@ -1,12 +1,13 @@
-<div>
+<div class="sell-car-container">
 	<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
 	<div>
 		<p *ngIf="getCarModelsError" class="error-msg">{{ getCarModelsError }}</p>
 		<p *ngIf="getCarManufactureYearError" class="error-msg">{{ getCarManufactureYearError }}</p>
 	</div>
-	<form [formGroup]="sellCarForm" (ngSubmit)="onSubmit(sellCarForm)">
+	<form class="sell-car-container__form" [formGroup]="sellCarForm" (ngSubmit)="onSubmit(sellCarForm)">
 		<div>
 			<mat-form-field>
+				<mat-label>Model</mat-label>
 				<mat-select formControlName="model">
 					<mat-option *ngFor="let carModel of carModels" [value]="carModel.name">
 						{{ carModel.name }}
@@ -14,6 +15,7 @@
 				</mat-select>
 			</mat-form-field>
 			<mat-form-field>
+				<mat-label>Year</mat-label>
 				<mat-select formControlName="year">
 					<mat-option *ngFor="let carManufactureYear of carManufactureYears" [value]="carManufactureYear.year">
 						{{ carManufactureYear.year }}
@@ -22,7 +24,7 @@
 			</mat-form-field>
 		</div>
 		<div>
-			<div>
+			<div class="sell-car-container__img">
 				<img [src]="carImgLocalPath">
 			</div>
 			<input formControlName="carImg"
@@ -40,7 +42,7 @@
 		</div>
 		<div>
 			<div *ngIf="carImgLocalPaths.length == 0">
-				<img src="../../../assets/img/cell-car/upload-img.png">
+				<img [src]="carDefaultImg">
 			</div>
 			<button type="button" class="btn-default narrow-btn ng-star-inserted" (click)="chooseCarImgs.click()">Chоose Images</button>
 			<div *ngIf="carImgLocalPaths.length > 0">

@@ -20,7 +20,7 @@ export class SellCarComponent implements OnInit, OnDestroy {
   private userAdditionalInfoSub: Subscription;
   sellCarForm: FormGroup;
   carFile: any;  
-  carDefaultImg: string = '../../../assets/img/cell-car/upload-img.png';
+  carDefaultImg: string = '../../../assets/img/cell-buy-car/upload-img.png';
   carImgLocalPath: string = this.carDefaultImg;
   carImgName: string;
   carImgURL: string;
