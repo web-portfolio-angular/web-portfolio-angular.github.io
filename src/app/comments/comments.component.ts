@@ -20,6 +20,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
   private subUser: Subscription;
   private showUserInfoSub: Subscription;
   private shownUserSub: Subscription;
+  private userAdditionalInfoSub: Subscription;
   userAdditionalData: UserAdditionalInfo[];
   isAuth: boolean = false;
   postForm: FormGroup;
@@ -47,7 +48,10 @@ export class CommentsComponent implements OnInit, OnDestroy {
       this.isAuth = !user ? false : true;
     })
 
-    this.userAdditionalData = this.additionUserInfoService.userAdditionalData;
+    this.userAdditionalInfoSub = this.additionUserInfoService.userAdditionalDataSubject.subscribe(userData => {
+      this.userAdditionalData = userData;      
+    })
+
 
     this.isLoading = true;
     this.firestore.getComments().subscribe(data => {
@@ -83,6 +87,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
     this.subUser.unsubscribe();
     this.showUserInfoSub.unsubscribe();
     this.shownUserSub.unsubscribe();
+    this.userAdditionalInfoSub.unsubscribe();
   }
 
   onSubmit(postForm){

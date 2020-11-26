@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import * as firebase from 'firebase/app';
 
 import { CarManufactureYear, ProductLink } from '../../shared/models/car.model';
@@ -15,12 +16,13 @@ import { GenerateIdService } from '../../shared/services/generateId.service';
   templateUrl: './sell-car.component.html',
   styles: []
 })
-export class SellCarComponent implements OnInit {
+export class SellCarComponent implements OnInit, OnDestroy {
+  private userAdditionalInfoSub: Subscription;
+  userAdditionalData: UserAdditionalInfo[];
   sellCarForm: FormGroup;
   carFile: any;  
   carDefaultImg: string = '../../../assets/img/cell-buy-car/upload-img.png';
   carImgLocalPath: string = this.carDefaultImg;
-  carImgName: string;
   carImgURL: string;
   carFiles: any;  
   carImgNames: any = [];
@@ -28,7 +30,6 @@ export class SellCarComponent implements OnInit {
   carImgURLs: any = [];
   carModels: ProductLink[] = [];
   carManufactureYears: CarManufactureYear[] = [];
-  userAdditionalData: UserAdditionalInfo[];
   getCarModelsError: string = null;
   getCarManufactureYearError: string = null;
   sellCarError: string = null;
@@ -48,6 +49,10 @@ export class SellCarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.userAdditionalInfoSub = this.additionUserInfoService.userAdditionalDataSubject.subscribe(userData => {
+      this.userAdditionalData = userData;
+    })
+
     this.sellCarForm = this.formBuilder.group({
       model: new FormControl(null, Validators.required),
       year: new FormControl(null, Validators.required),
@@ -79,9 +84,11 @@ export class SellCarComponent implements OnInit {
       this.getCarManufactureYearError = null;      
     }, error => {
       this.getCarManufactureYearError = error.message;     
-    });
+    });    
+  }
 
-    this.userAdditionalData = this.additionUserInfoService.userAdditionalData;
+  ngOnDestroy() {
+    this.userAdditionalInfoSub.unsubscribe();
   }
 
   onSubmit(sellCarForm) {
@@ -130,7 +137,6 @@ export class SellCarComponent implements OnInit {
         this.carImgLocalPath = event.target.result;
       }
       reader.readAsDataURL(event.target.files[0]);
-      this.carImgName = this.carFile.name.substr(0, this.carFile.name.lastIndexOf('.'));
     } else {
       this.carImgLocalPath = this.carDefaultImg;
     }     
@@ -143,8 +149,7 @@ export class SellCarComponent implements OnInit {
         this.sellCarForm.value.model + '/' +
         this.userAdditionalData[0].email + '/' + 
         id + '/' + 
-        this.carImgName + "-" + 
-        this.generateIdService.generateId(), this.carFile)
+        this.carFile.name, this.carFile)
       .then(uploadTask => {
         uploadTask.ref.getDownloadURL()
         .then(url => {
@@ -153,7 +158,7 @@ export class SellCarComponent implements OnInit {
           resolve();
         })
         .catch( error => {
-          this.getCarImgURLError = error; 
+          this.getCarImgURLError = error.message; 
         })
         this.uploadCarImgToFirestoreError = null;
       })
@@ -172,7 +177,7 @@ export class SellCarComponent implements OnInit {
           this.carImgLocalPaths.push(event.target.result);
         }
         reader.readAsDataURL(event.target.files[i]);
-        this.carImgNames.push(this.carFiles[i].name.substr(0, this.carFiles[i].name.lastIndexOf('.')));
+        this.carImgNames.push(this.carFiles[i].name);
       }
     } else {
       this.carFiles = null;
@@ -193,8 +198,8 @@ export class SellCarComponent implements OnInit {
           this.userAdditionalData[0].email + '/' + 
           id + '/' +
           "/carImages/" +
-          this.carImgNames[i] + "-" + 
-          this.generateIdService.generateId(), this.carFiles[i])
+          this.generateIdService.generateId() +
+          "-" + this.carImgNames[i], this.carFiles[i])
         .then(uploadTask => {
           uploadTask.ref.getDownloadURL()
           .then(url => {

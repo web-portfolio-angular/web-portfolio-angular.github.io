@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../shared/services/auth.service';
 import { Animations } from '../shared/animations';
 import { SubjectsService } from '../shared/services/subjects.service';
+import { AdditionUserInfoService } from '../shared/services/user-additional-info.service';
 
 @Component({
   selector: 'app-header',
@@ -25,7 +26,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private subjectsService: SubjectsService) {}
+    private subjectsService: SubjectsService
+  ) {}
 
   ngOnInit() {
     this.subUser = this.authService.user.subscribe(user => {

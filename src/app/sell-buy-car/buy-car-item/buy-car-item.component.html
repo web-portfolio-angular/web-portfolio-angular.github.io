@@ -38,8 +38,18 @@
     </div>
     <p *ngIf="!car.carImages">There are no images uploaded</p>
   </div>
+
   <div class="test" *ngIf="isInEditMode">
     <form [formGroup]="changeCarDetailsForm" (ngSubmit)="submitCarDetailChanges(changeCarDetailsForm)">
+      <div>
+        <input formControlName="carImg"
+        #chooseCarImg style="display: none;"
+        type="file" 
+        (change)="onChooseCarImg($event)" 
+        accept=".png,.jpg,.jpeg,.svg,.heic">
+        <img [src]="carImgLocalPath">
+        <button type="button" (click)="chooseCarImg.click()">Change Car Image</button>
+      </div>
       <div>
         <textarea formControlName="description"></textarea>
       </div>
@@ -88,6 +98,9 @@
         <p *ngIf="uploadCarImagesToFirestoreError" class="error-msg">{{ uploadCarImagesToFirestoreError }}</p>
         <p *ngIf="updateSecondHandCarError" class="error-msg">{{ updateSecondHandCarError }}</p>
         <p *ngIf="setcarImgURLsError" class="error-msg">{{ setcarImgURLsError }}</p>
+        <p *ngIf="deleteOldImgError" class="error-msg">{{ deleteOldImgError }}</p>
+        <p *ngIf="getCarImgURLError" class="error-msg">{{ getCarImgURLError }}</p>
+        <p *ngIf="uploadCarImgToFirestoreError" class="error-msg">{{ uploadCarImgToFirestoreError }}</p>
       </div>
     </form>
   </div>

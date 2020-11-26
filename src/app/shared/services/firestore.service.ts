@@ -122,6 +122,7 @@ export class FirestoreService {
 
   updateSecondHandCar(newInfo){
     return this.firestore.doc(newInfo.doc + '/' + newInfo.id).update({
+      carImg: newInfo.carImg,
       description: newInfo.description,
       price: newInfo.price     
      })

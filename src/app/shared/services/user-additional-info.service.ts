@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 import { FirestoreService } from '../../shared/services/firestore.service';
 import { UserAdditionalInfo } from '../models/user.model';
 
 @Injectable({providedIn: 'root'})
 export class AdditionUserInfoService {
-  userAdditionalDataSubject = new Subject<any>();
+  userAdditionalDataSubject = new BehaviorSubject<UserAdditionalInfo[]>(null);
   userAdditionalData: UserAdditionalInfo[];
 
   constructor(
@@ -31,7 +31,7 @@ export class AdditionUserInfoService {
           ...e.payload.doc.data() as UserAdditionalInfo
         }
       })
-      this.userAdditionalDataSubject.next(this.userAdditionalData);
+      this.userAdditionalDataSubject.next(this.userAdditionalData);      
     })
   }
 }

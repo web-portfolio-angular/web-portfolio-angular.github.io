@@ -29,7 +29,9 @@ export class BuyCarItemComponent implements OnInit {
   changeCarDetailsForm: FormGroup;
   isInEditMode: boolean = false;
   ownerEmail: string = null;
+  carFile: any;
   carFiles: any;
+  carImgLocalPath: string;
   carImgNames: any = [];
   carImgLocalPaths: any = [];
   carImgURLs: any = [];
@@ -38,6 +40,9 @@ export class BuyCarItemComponent implements OnInit {
   updateSecondHandCarError: string = null;
   setcarImgURLsError: string = null;
   isLoading: boolean = false;
+  deleteOldImgError: string = null;
+  getCarImgURLError: string = null;
+  uploadCarImgToFirestoreError: string = null;
 
   constructor(
     private subjectService: SubjectsService,
@@ -49,7 +54,6 @@ export class BuyCarItemComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.additionUserInfoService.getUserAdditionalData();
     this.userAdditionalInfoSub = this.additionUserInfoService.userAdditionalDataSubject.subscribe(userData => {
       this.userAdditionalData = userData;
       this.ownerEmail = this.userAdditionalData[0].email;
@@ -63,12 +67,15 @@ export class BuyCarItemComponent implements OnInit {
     });
 
     this.changeCarDetailsForm = this.formBuilder.group({
-      description: new FormControl(null, Validators.required),
+      carImg: new FormControl(null),
+      model: new FormControl(null),
+      description: new FormControl(null, Validators.required),      
       price: new FormControl(null, Validators.required),
       carImgs: new FormControl(null)
     });
 
     this.currentCarImages = this.car.carImages;
+    this.carImgLocalPath = this.car.carImg;
   }
 
   ngOnDestroy(): void {
@@ -89,27 +96,83 @@ export class BuyCarItemComponent implements OnInit {
     this.isLoading = true;
 
     const id = this.car.id;
+    let carImg = this.car.carImg;
     const doc = this.car.model;
 
-    this.onUploadCarImagesToFirestore(id).then(() => {
-      if (this.carImgNames.length > 0) {
-        for (let i = 0; i < this.carImgNames.length; i++) {
-          const img = changeCarDetailsForm.value.carImgs[i];
-          const newImgInfo = {id, img, doc}
-          this.firestore.updateSecondHanImagesCar(newImgInfo)
-        }
+    this.onUploadCarImageToFirestore(id).then(() => {
+      if (changeCarDetailsForm.value.carImg) {
+        carImg = changeCarDetailsForm.value.carImg;
       }
-      const description = changeCarDetailsForm.value.description;
-      const price = changeCarDetailsForm.value.price;      
-      const newInfo = {description, price, id, doc};
-      this.firestore.updateSecondHandCar(newInfo)
-      .then(() => {
-        this.isLoading = false;
-        this.updateSecondHandCarError = null;
-      }, error => {
-        this.updateSecondHandCarError = error.message;
-      });
-    })    
+      this.onUploadCarImagesToFirestore(id).then(() => {
+        if (this.carImgNames.length > 0) {
+          for (let i = 0; i < this.carImgNames.length; i++) {
+            const img = changeCarDetailsForm.value.carImgs[i];
+            const newImgInfo = {id, img, doc}
+            this.firestore.updateSecondHanImagesCar(newImgInfo)
+          }
+        }
+        const description = changeCarDetailsForm.value.description;
+        const price = changeCarDetailsForm.value.price;      
+        const newInfo = {carImg, description, price, id, doc};
+        this.firestore.updateSecondHandCar(newInfo)
+        .then(() => {
+          this.isLoading = false;
+          this.updateSecondHandCarError = null;
+          this.onCancel();
+        }, error => {
+          this.updateSecondHandCarError = error.message;
+        })
+      })
+    })
+  }
+
+  onChooseCarImg(event) {
+    this.carFile = event.target.files[0];  
+    if (this.carFile) {
+      const reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.carImgLocalPath = event.target.result;
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    } else {
+      this.carImgLocalPath = this.car.carImg;
+    }  
+  }
+
+  onUploadCarImageToFirestore(id: string) {
+    return new Promise((resolve) => {
+      if (!this.carFile) {
+        resolve();
+      }
+      this.angularFireStorage.upload(
+        "/carsForSell/" + 
+        this.changeCarDetailsForm.value.model + '/' +
+        this.userAdditionalData[0].email + '/' + 
+        id + '/' + 
+        this.carFile.name, this.carFile)
+      .then(uploadTask => {
+        uploadTask.ref.getDownloadURL()
+        .then(url => {
+          this.changeCarDetailsForm.value.carImg = url;          
+          this.firestore.delete(this.car.carImg)
+          .then(() => {
+            this.deleteOldImgError = null;
+          })
+          .catch(error => {
+            this.deleteOldImgError = error.message;
+          })
+          this.getCarImgURLError = null;  
+          resolve();
+        })
+        .catch( error => {
+          this.getCarImgURLError = error.message; 
+        })
+        this.uploadCarImgToFirestoreError = null;
+      })
+      .catch(error => {
+        this.uploadCarImgToFirestoreError = error.message;
+      })
+    })
   }
 
   onChooseCarImgs(event) {
@@ -121,7 +184,7 @@ export class BuyCarItemComponent implements OnInit {
           this.carImgLocalPaths.push(event.target.result);
         }
         reader.readAsDataURL(event.target.files[i]);
-        this.carImgNames.push(this.carFiles[i].name.substr(0, this.carFiles[i].name.lastIndexOf('.')));
+        this.carImgNames.push(this.carFiles[i].name);
       }
     } else {
       this.carFiles = null;
@@ -131,7 +194,7 @@ export class BuyCarItemComponent implements OnInit {
     }
   }
 
-  onUploadCarImagesToFirestore(id) {
+  onUploadCarImagesToFirestore(id: string) {
     return new Promise((resolve) => {
       if(this.carImgNames.length == 0) {
         resolve();
@@ -143,8 +206,8 @@ export class BuyCarItemComponent implements OnInit {
           this.userAdditionalData[0].email + '/' + 
           id + '/' +
           "/carImages/" +
-          this.carImgNames[i] + "-" + 
-          this.generateIdService.generateId(), this.carFiles[i])
+          this.generateIdService.generateId() +
+          "-" + this.carImgNames[i], this.carFiles[i])
         .then(uploadTask => {
           uploadTask.ref.getDownloadURL()
           .then(url => {
@@ -170,7 +233,8 @@ export class BuyCarItemComponent implements OnInit {
   onEdit() {
     this.changeCarDetailsForm.controls['description'].setValue(this.car.description);
     this.changeCarDetailsForm.controls['price'].setValue(this.car.price);
-    this.isInEditMode = true;
+    this.changeCarDetailsForm.controls['model'].setValue(this.car.model);
+    this.isInEditMode = true;    
   }
 
   removeCarImg(index) {
@@ -186,6 +250,8 @@ export class BuyCarItemComponent implements OnInit {
     this.carImgLocalPaths = [];
     this.carImgNames = [];
     this.changeCarDetailsForm.controls['carImgs'].setValue('');
+    this.changeCarDetailsForm.controls['carImg'].setValue('');
+    this.carImgLocalPath = this.car.carImg;
     this.isInEditMode = false;    
   }
 }
