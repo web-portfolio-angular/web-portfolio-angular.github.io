@@ -12,7 +12,6 @@ import { ThemeService } from '../../shared/services/theme.service';
 import { AuthService } from '../../shared/services/auth.service';
 import { SubjectsService } from '../../shared/services/subjects.service';
 import { AdditionUserInfoService } from '../../shared/services/user-additional-info.service';
-import { GenerateIdService } from '../../shared/services/generateId.service';
 
 @Component({
   selector: 'app-user-info',
@@ -52,7 +51,6 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     private subjectsService: SubjectsService,
     private angularFireStorage: AngularFireStorage,
     private additionUserInfoService: AdditionUserInfoService
-    // private generateIdService: GenerateIdService
   ) {}
 
   ngOnInit() {    
