@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore  } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
 import * as firebase from 'firebase/app';
 
 import { UserAdditionalInfo } from '../models/user.model';
@@ -8,7 +9,14 @@ import { CarsForSell } from '../models/car.model';
 
 @Injectable({providedIn: 'root'})
 export class FirestoreService {
-  constructor(private firestore: AngularFirestore) {}
+  constructor(
+    private firestore: AngularFirestore,
+    private storage: AngularFireStorage
+  ) {}
+
+  delete(url) {
+    return this.storage.storage.refFromURL(url).delete();
+  }
 
   // phone codes
   getPhoneCodes() {

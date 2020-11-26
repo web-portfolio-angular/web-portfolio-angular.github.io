@@ -39,7 +39,6 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   file: any;
   defaultImg: string;
   imgLocalPath: string;
-  imgName: string;
   errorMsgOnAvatarUpload: string;
   errorMsgOnAvatarWrite: string;
   isLoading = false;
@@ -52,8 +51,8 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     private router: Router,
     private subjectsService: SubjectsService,
     private angularFireStorage: AngularFireStorage,
-    private additionUserInfoService: AdditionUserInfoService,
-    private generateIdService: GenerateIdService
+    private additionUserInfoService: AdditionUserInfoService
+    // private generateIdService: GenerateIdService
   ) {}
 
   ngOnInit() {    
@@ -149,7 +148,6 @@ export class UserInfoComponent implements OnInit, OnDestroy {
         this.imgLocalPath = event.target.result;
       }
       reader.readAsDataURL(event.target.files[0]);
-      this.imgName = this.file.name.substr(0, this.file.name.lastIndexOf('.'));
     } else {
       this.imgLocalPath = this.defaultImg;
     }  
@@ -157,7 +155,10 @@ export class UserInfoComponent implements OnInit, OnDestroy {
 
   uploadAvatarToFirestorage() {
     this.isLoading = true;
-    this.angularFireStorage.upload("/userImages/" + this.userAdditionalData[0].email+'/' + this.imgName + "-" + this.generateIdService.generateId(), this.file)
+    if (this.userAdditionalData[0].userImg !== this.subjectsService.defaultUserImg) {
+      this.firestore.delete(this.userAdditionalData[0].userImg);
+    }
+    this.angularFireStorage.upload("/userImages/" + this.userAdditionalData[0].email+'/' + this.file.name, this.file)
     .then(uploadTask => {
       uploadTask.ref.getDownloadURL().then(url => {
         const userImg = url;

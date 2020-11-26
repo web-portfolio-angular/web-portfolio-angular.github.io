@@ -6,6 +6,7 @@ import { AuthService } from '../shared/services/auth.service';
 import { FirestoreService} from '../shared/services/firestore.service';
 import { UserAdditionalInfo } from '../shared/models/user.model';
 import { PhoneCodes } from '../shared/models/phone-codes.model';
+import { SubjectsService } from '../shared/services/subjects.service';
 
 @Component({
   selector: 'app-signup',
@@ -18,13 +19,14 @@ export class SignupComponent implements OnInit {
   isLoading: boolean = false;
   phoneCodes: PhoneCodes[];
   errorMsgOnloadPhoneCodes: string = null;
-  defaultUserImg: string = 'https://firebasestorage.googleapis.com/v0/b/portfolio-e1ec5.appspot.com/o/userImages%2Fdefault-user.jpg?alt=media&token=7487f1ec-16b1-4814-9943-cb30c8ce1eab';  
+  defaultUserImg: string = this.subjectsService.defaultUserImg;  
 
   constructor(
     private authService: AuthService, 
     private firestore: FirestoreService, 
     private router: Router, 
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private subjectsService: SubjectsService
   ) {}
 
   ngOnInit() {

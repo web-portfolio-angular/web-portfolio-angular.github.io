@@ -5,6 +5,8 @@ import { UserAdditionalInfo } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class SubjectsService implements OnDestroy {
+	defaultUserImg: string = 'https://firebasestorage.googleapis.com/v0/b/portfolio-e1ec5.appspot.com/o/userImages%2Fdefault-user.jpg?alt=media&token=7487f1ec-16b1-4814-9943-cb30c8ce1eab';
+
 	userInfoMenuStateSubject = new BehaviorSubject <string>(null);
 	userInfoMenuState: string = 'out';
 
