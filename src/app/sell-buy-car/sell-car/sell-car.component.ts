@@ -1,8 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import * as firebase from 'firebase/app';
 
 import { CarManufactureYear, ProductLink } from '../../shared/models/car.model';
@@ -16,8 +15,7 @@ import { GenerateIdService } from '../../shared/services/generateId.service';
   templateUrl: './sell-car.component.html',
   styles: []
 })
-export class SellCarComponent implements OnInit, OnDestroy {
-  private userAdditionalInfoSub: Subscription;
+export class SellCarComponent implements OnInit {
   sellCarForm: FormGroup;
   carFile: any;  
   carDefaultImg: string = '../../../assets/img/cell-buy-car/upload-img.png';
@@ -83,17 +81,7 @@ export class SellCarComponent implements OnInit, OnDestroy {
       this.getCarManufactureYearError = error.message;     
     });
 
-    this.additionUserInfoService.getUserAdditionalData();
-    this.userAdditionalInfoSub = this.additionUserInfoService.userAdditionalDataSubject.subscribe(userData => {
-      this.userAdditionalData = userData;
-      if(!this.userAdditionalData) {
-        return
-      }
-    })
-  }
-
-  ngOnDestroy() {
-    this.userAdditionalInfoSub.unsubscribe()
+    this.userAdditionalData = this.additionUserInfoService.userAdditionalData;
   }
 
   onSubmit(sellCarForm) {

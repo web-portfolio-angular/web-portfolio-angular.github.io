@@ -5,17 +5,20 @@
 		<p *ngIf="getCarManufactureYearError" class="error-msg">{{ getCarManufactureYearError }}</p>
 	</div>
 	<form class="sell-car-container__form" [formGroup]="sellCarForm" (ngSubmit)="onSubmit(sellCarForm)">
-		<div>
+		<div class="sell-car-container__drop-downs">
+			<div>
+				<div></div>
+				<div  [ngClass]="{'invalid': !sellCarForm.get('model').valid && sellCarForm.get('model').touched}">
+					<mat-form-field>
+						<mat-select formControlName="model">
+							<mat-option *ngFor="let carModel of carModels" [value]="carModel.name">
+								{{ carModel.name }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+			</div>
 			<mat-form-field>
-				<mat-label>Model</mat-label>
-				<mat-select formControlName="model">
-					<mat-option *ngFor="let carModel of carModels" [value]="carModel.name">
-						{{ carModel.name }}
-					</mat-option>
-				</mat-select>
-			</mat-form-field>
-			<mat-form-field>
-				<mat-label>Year</mat-label>
 				<mat-select formControlName="year">
 					<mat-option *ngFor="let carManufactureYear of carManufactureYears" [value]="carManufactureYear.year">
 						{{ carManufactureYear.year }}

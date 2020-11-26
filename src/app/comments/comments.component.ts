@@ -18,7 +18,6 @@ import { AuthService } from '../shared/services/auth.service';
 })
 export class CommentsComponent implements OnInit, OnDestroy {
   private subUser: Subscription;
-  private userAdditionalDataSub: Subscription;
   private showUserInfoSub: Subscription;
   private shownUserSub: Subscription;
   userAdditionalData: UserAdditionalInfo[];
@@ -48,10 +47,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
       this.isAuth = !user ? false : true;
     })
 
-    this.additionUserInfoService.getUserAdditionalData();
-    this.userAdditionalDataSub = this.additionUserInfoService.userAdditionalDataSubject.subscribe(userData => {
-      this.userAdditionalData = userData;
-    })
+    this.userAdditionalData = this.additionUserInfoService.userAdditionalData;
 
     this.isLoading = true;
     this.firestore.getComments().subscribe(data => {
@@ -85,7 +81,6 @@ export class CommentsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     this.subUser.unsubscribe();
-    this.userAdditionalDataSub.unsubscribe();
     this.showUserInfoSub.unsubscribe();
     this.shownUserSub.unsubscribe();
   }

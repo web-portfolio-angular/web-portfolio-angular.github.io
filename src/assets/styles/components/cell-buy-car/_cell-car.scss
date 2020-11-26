@@ -1,11 +1,41 @@
 .sell-car-container {
     background-color: var(--color2);
-    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 10px 1px rgba($black, 0.75);
     border-radius: 3px;
     &__form {
         max-width: 767px;
         padding: 20px;
         margin: 0 auto;
+    }
+    &__drop-downs {
+      text-align: center;
+      .mat-form-field {
+        * {
+          padding: 0 !important;
+        }
+        border-radius: 3px;
+        background-color: $white;
+        width: 49%;
+        padding: 5px;
+        margin: 0.5%;
+        box-sizing: border-box;
+        .mat-form-field-infix {
+          border: none;
+          height: 28px !important;
+          display: flex !important;
+          align-items: center;
+          .ng-star-inserted {
+            @include rubik;
+            color: $black;
+          }
+          .mat-select-arrow {
+            color: $black;
+          }
+        }
+        .mat-form-field-underline {
+          display: none;
+        }
+      }
     }
     &__img {
       text-align: center;

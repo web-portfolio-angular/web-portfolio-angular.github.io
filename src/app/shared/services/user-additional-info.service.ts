@@ -9,7 +9,9 @@ export class AdditionUserInfoService {
   userAdditionalDataSubject = new Subject<any>();
   userAdditionalData: UserAdditionalInfo[];
 
-  constructor( private firestore: FirestoreService){}
+  constructor(
+    private firestore: FirestoreService
+  ){}
 
 	getUserAdditionalData(){    
     const userData: {
