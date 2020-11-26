@@ -133,4 +133,10 @@ export class FirestoreService {
       carImages: firebase.firestore.FieldValue.arrayUnion(img.img)
     });
   }
+
+  setSecondHanCurrentImages(newInfo){
+    return this.firestore.doc(newInfo.doc + '/' + newInfo.id).update({
+      carImages: newInfo.currentImgs
+    });
+  }
 }

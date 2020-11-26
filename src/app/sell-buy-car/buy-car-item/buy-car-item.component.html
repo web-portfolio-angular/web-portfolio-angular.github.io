@@ -61,10 +61,11 @@
           <div *ngIf="!car.carImages">
             <p>There are no images uploaded</p>
           </div>
-          <div *ngIf="currentCarImages">
+          <div *ngIf="currentCarImages.length > 0">
             <p>Current Images</p>
-            <div *ngFor="let carImage of currentCarImages">
+            <div *ngFor="let carImage of currentCarImages; let i = index">
               <img [src]="carImage">
+              <div (click)="deleteCurrentImages(i, carImage)">X</div>
             </div>            
           </div>
           <div *ngIf="carImgLocalPaths.length > 0">

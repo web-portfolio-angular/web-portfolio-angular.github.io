@@ -43,6 +43,7 @@ export class BuyCarItemComponent implements OnInit {
   deleteOldImgError: string = null;
   getCarImgURLError: string = null;
   uploadCarImgToFirestoreError: string = null;
+  currentImageForDelete: any = [];
 
   constructor(
     private subjectService: SubjectsService,
@@ -74,7 +75,7 @@ export class BuyCarItemComponent implements OnInit {
       carImgs: new FormControl(null)
     });
 
-    this.currentCarImages = this.car.carImages;
+    this.currentCarImages = [...this.car.carImages];
     this.carImgLocalPath = this.car.carImg;
   }
 
@@ -103,11 +104,19 @@ export class BuyCarItemComponent implements OnInit {
       if (changeCarDetailsForm.value.carImg) {
         carImg = changeCarDetailsForm.value.carImg;
       }
+      if (this.currentImageForDelete.length > 0) {
+        for (let i = 0; i < this.currentImageForDelete.length; i++) {
+          this.firestore.delete(this.currentImageForDelete[i])
+        }
+        const currentImgs = this.currentCarImages;
+        const newInfo = { doc, id, currentImgs }
+        this.firestore.setSecondHanCurrentImages(newInfo);        
+      }
       this.onUploadCarImagesToFirestore(id).then(() => {
         if (this.carImgNames.length > 0) {
           for (let i = 0; i < this.carImgNames.length; i++) {
             const img = changeCarDetailsForm.value.carImgs[i];
-            const newImgInfo = {id, img, doc}
+            const newImgInfo = { doc, id, img }
             this.firestore.updateSecondHanImagesCar(newImgInfo)
           }
         }
@@ -252,6 +261,13 @@ export class BuyCarItemComponent implements OnInit {
     this.changeCarDetailsForm.controls['carImgs'].setValue('');
     this.changeCarDetailsForm.controls['carImg'].setValue('');
     this.carImgLocalPath = this.car.carImg;
+    this.currentCarImages = [...this.car.carImages];
+    this.currentImageForDelete = [];    
     this.isInEditMode = false;    
+  }
+
+  deleteCurrentImages(index, url) {
+    this.currentCarImages.splice(index, 1)
+    this.currentImageForDelete.push(url)    
   }
 }
