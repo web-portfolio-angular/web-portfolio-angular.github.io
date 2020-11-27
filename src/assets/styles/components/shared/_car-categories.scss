@@ -1,222 +1,219 @@
 .categories-info {
-  background-color: var(--color2);
-  padding: 10px;
-  border-radius: 3px;
-  box-shadow: 0px 0px 10px 1px rgba($black, 0.75);
-  margin-bottom: 30px;
-  &__text {
-    text-align: center;
+    background-color: var(--color2);
+    padding: 10px;
+    border-radius: 3px;
+    box-shadow: 0px 0px 10px 1px rgba($black, 0.75);
     margin-bottom: 30px;
-    h2 {
-      color: $default-red;
-      font-size: 1.2em;
-      font-weight: bold;
-      margin-bottom: 20px;
+    &__text {
+        text-align: center;
+        margin-bottom: 30px;
+        h2 {
+            color: $default-red;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        p {
+            color: var(--color6);
+        }
     }
-    p {
-      color: var(--color6);
+    &__cars {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        >div {
+            cursor: pointer;
+            position: relative;
+            width: 25%;
+            @include hoverStyleCustom ('.top-cars-hover') {
+                display: block
+            }
+            img {
+                width: 100%;
+                display: block;
+            }
+            .top-cars-hover {
+                display: none;
+                position: absolute;
+                bottom: 0;
+                padding: 10px;
+                box-sizing: border-box;
+                color: $white;
+                background: rgba($black, 0.9);
+                width: 100%;
+                font-weight: bold;
+            }
+        }
     }
-  }
-  &__cars {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    >div {
-      cursor: pointer;
-      position: relative;
-      width: 25%;
-      @include hoverStyleCustom ('.top-cars-hover') {
-        display: block
-      }    
-      img {
-        width: 100%;
-        display: block;    
-      }
-      .top-cars-hover {
-        display: none;
-        position: absolute;
-        bottom: 0;
-        padding: 10px;
-        box-sizing: border-box;
-        color: $white;
-        background: rgba($black, 0.9);
-        width: 100%;
-        font-weight: bold;
-      }
-    }
-  }
 }
 
 .sell-buy-car {
-  &__router-links {
-    @include flexCenterVSB;
-    align-items: stretch;
-    margin-bottom: 10px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    box-shadow: 0px 0px 5px 1px rgba($black, 0.75);
-    background-color: rgba($black, 0.5);
-    li {
-      @include btn;
-      @include flexCenterHV;
-      @include hover (normal) {
-        position: relative;
-    top: -3px;
-      }
-      text-align: center;
-      box-sizing: border-box;
-      list-style: none;
-      padding: 15px;
-      color: $white;
-      font-size: 1.3em;
-      width: calc(50% - 1px);
-      background-color: $default-red;      
-      &:nth-child(1){
+    &__router-links {
+        @include flexCenterVSB;
+        align-items: stretch;
+        margin-bottom: 10px;
         border-top-left-radius: 20px;
-      }
-      &:nth-child(2){
         border-top-right-radius: 20px;
-      }
+        box-shadow: 0px 0px 5px 1px rgba($black, 0.75);
+        background-color: rgba($black, 0.5);
+        li {
+            @include btn;
+            @include flexCenterHV;
+            @include hover (normal) {
+                position: relative;
+                top: -3px;
+            }
+            text-align: center;
+            box-sizing: border-box;
+            list-style: none;
+            padding: 15px;
+            color: $white;
+            font-size: 1.3em;
+            width: calc(50% - 1px);
+            background-color: $default-red;
+            &:nth-child(1) {
+                border-top-left-radius: 20px;
+            }
+            &:nth-child(2) {
+                border-top-right-radius: 20px;
+            }
+        }
+        .categories-active {
+            background-color: $disabled-red;
+            color: $gray;
+        }
     }
-    .categories-active {
-      background-color: $disabled-red;
-      color: $gray;
-    }
-  }
 }
 
 .categories {
-  @include media (lar) {
-    display: flex;
-  }
-  &__content {
     @include media (lar) {
-      width: 220px;
-      margin-right: 10px;
+        display: flex;
     }
-    p {
-      background-color: $default-red;
-      text-align: center;
-      padding: 15px;
-      color: $white;
-      font-size: 1.5em;
-      border-top-left-radius: 3px;
-      border-top-right-radius: 3px;
-      box-shadow: 0px 0px 5px 1px rgba($black, 0.75);
-      position: relative;
-      z-index: 2;
-    }
-    ul {
-      white-space: nowrap;
-      height: 50px;      
-      display: flex;
-      margin-bottom: 10px;
-      background-color: $black;
-      border-bottom-left-radius: 3px;
-      border-bottom-right-radius: 3px;
-      box-shadow: 0px 0px 5px 1px rgba($black, 0.75);
-      position: relative;
-      z-index: 1;
-      overflow: auto;
-      @include scrollbar (normal);
-      @include media (lar) {
-        height: 528px;
-        overflow: auto;
-        display: block;
-      }
-      li {
-        padding: 15px;
-        list-style: none;
-        color: $white;
-        @include btn;
-        @include hover (normal) {
-          @include categories-active;
-        }
+    &__content {
         @include media (lar) {
-          text-align: center;
+            width: 220px;
+            margin-right: 10px;
         }
-      }
-      .categories-active {
-        @include categories-active;
-      }
+        p {
+            background-color: $default-red;
+            text-align: center;
+            padding: 15px;
+            color: $white;
+            font-size: 1.5em;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+            box-shadow: 0px 0px 5px 1px rgba($black, 0.75);
+            position: relative;
+            z-index: 2;
+        }
+        ul {
+            white-space: nowrap;
+            height: 50px;
+            display: flex;
+            margin-bottom: 10px;
+            background-color: $black;
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 3px;
+            box-shadow: 0px 0px 5px 1px rgba($black, 0.75);
+            position: relative;
+            z-index: 1;
+            overflow: auto;
+            @include scrollbar (normal);
+            @include media (lar) {
+                height: 528px;
+                overflow: auto;
+                display: block;
+            }
+            li {
+                padding: 15px;
+                list-style: none;
+                color: $white;
+                @include btn;
+                @include hover (normal) {
+                    @include categories-active;
+                }
+                @include media (lar) {
+                    text-align: center;
+                }
+            }
+            .categories-active {
+                @include categories-active;
+            }
+        }
+        .call-us {
+            display: none;
+            @include media (lar) {
+                display: block;
+                margin-top: 20px;
+                padding: 20px;
+                height: 250px;
+                border-radius: 3px;
+                background-image: url("../../../img/products/call-us.jpg");
+                box-shadow: 0px 0px 5px 1px rgba($black, 0.75);
+            }
+            h3 {
+                color: $black;
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            a {
+                font-size: 1.3em;
+                color: $default-red;
+                display: block;
+                text-align: center;
+                font-weight: bold;
+                user-select: none;
+            }
+        }
     }
-    .call-us {
-      display: none;
-      @include media (lar) {
-        display: block;
-        margin-top: 20px;
-        padding: 20px;
-        height: 250px;
+    &__router {
+        background-color: var(--color2);
+        box-shadow: 0px 0px 10px 1px rgba($black, 0.75);
         border-radius: 3px;
-        background-image: url("../../../img/products/call-us.jpg");
-        box-shadow: 0px 0px 5px 1px rgba($black, 0.75);
-      }
-      h3 {
-        color: $black;
-        font-weight: bold;
-        text-align: center;
-        margin-bottom: 20px;
-      }
-      a {
-        font-size: 1.3em;
-        color: $default-red;
-        display: block;
-        text-align: center;
-        font-weight: bold;
-        user-select: none;
-      }
+        max-height: 895px;
+        overflow: auto;
+        @include scrollbar (normal);
+        @include media (lar) {
+            width: calc(100% - 220px);
+            box-sizing: border-box;
+        }
     }
-  }
-  &__router {
-    background-color: var(--color2);
-    box-shadow: 0px 0px 10px 1px rgba($black, 0.75);
-    border-radius: 3px;
-    max-height: 895px;
-    overflow: auto;
-    @include scrollbar (normal);
-    @include media (lar) {
-      width: calc(100% - 220px);
-      box-sizing: border-box;
-    }
-  }
 }
 
 .cars-container {
-  position: relative;
-  min-height: 600px;
-  height: 100%;
-  padding: 10px 0;
-  box-sizing: border-box;
-  .cars {
-    text-align: center;
-  }
+    position: relative;
+    min-height: 600px;
+    height: 100%;
+    padding: 10px 0 10px 10px;
+    box-sizing: border-box;
 }
 
 .call-us-mob {
-  background-image: url("../../../img/products/call-us-mob.jpg");
-  background-repeat: no-repeat;
-  background-position: right;
-  height: 100px;
-  margin-top: 30px;
-  border-radius: 3px;
-  box-shadow: 0px 0px 5px 1px rgba($black, 0.75);
-  flex-direction: column;
-  @include flexCenterH;
-  @include media (lar) {
-    display: none;
-  }
-  h3 {
-    color: $black;
-    font-weight: bold;
-    margin-bottom: 10px;
-    width: calc(100% - 155px);
-    text-align: center;
-  }
-  a {
-    color: $default-red;
-    font-weight: bold;
-    user-select: none;
-    width: calc(100% - 155px);
-    text-align: center;
-  }
+    background-image: url("../../../img/products/call-us-mob.jpg");
+    background-repeat: no-repeat;
+    background-position: right;
+    height: 100px;
+    margin-top: 30px;
+    border-radius: 3px;
+    box-shadow: 0px 0px 5px 1px rgba($black, 0.75);
+    flex-direction: column;
+    @include flexCenterH;
+    @include media (lar) {
+        display: none;
+    }
+    h3 {
+        color: $black;
+        font-weight: bold;
+        margin-bottom: 10px;
+        width: calc(100% - 155px);
+        text-align: center;
+    }
+    a {
+        color: $default-red;
+        font-weight: bold;
+        user-select: none;
+        width: calc(100% - 155px);
+        text-align: center;
+    }
 }

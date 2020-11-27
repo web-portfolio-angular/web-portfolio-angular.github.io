@@ -9,6 +9,7 @@
   border: 1px solid var(--color9);
   color: var(--color6);
   display: inline-block;
+  vertical-align:top;
   @include media (larmed) {
     width: 31%;
   }
@@ -56,5 +57,6 @@
   }
   &__images {
     margin-top: 15px;
+    text-align: center;
   }
 }

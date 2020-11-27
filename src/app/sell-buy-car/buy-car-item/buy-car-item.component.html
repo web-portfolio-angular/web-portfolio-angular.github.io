@@ -1,52 +1,67 @@
-<div  class="car-item">
+<div class="car-buy-item car-item">
   <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
-  <img class="car-item__img" [src]="car.carImg">
-
   <div>
+    <img class="car-item__img" [src]="car.carImg">
+  </div>
+  <div class="car-buy-item__model">
     <p>{{ car.model }}</p>
     <p>{{ car.year }}</p>
-  
+  </div>
+  <hr class="car-item__hr">
+  <div class="car-buy-item__description">
     <p>{{ car.description }}</p>
-  
-    <p>{{ car.price }}</p>
   </div>
-
-
-  <div *ngIf="ownerEmail == car.owner">
-    <button type="button" (click)="onEdit()">Edit</button>
-  </div>
-
-
-  <p>{{ car.date.toDate() | date:'dd.MM.yyyy' }}</p>
-
-  <div>
-    <div class="comment-img"
-      [ngStyle]="{'background-image': (car.owner | getUserInfo:'userImg' | async)}">
-    </div>
+  <hr class="car-item__hr">
+  <div class="car-item__prise">
     <div>
-      {{car.owner | getUserInfo:'name' | async}}
-      {{car.owner | getUserInfo:'phoneCode' | async}}
-      {{car.owner | getUserInfo:'phone' | async}}
-      {{car.owner}}
-    </div>    
+      <p>&#36; {{ car.price }}</p>
+    </div>
+    <div class="add-to-cart">
+      <p>Add to Cart</p>
+    </div>
   </div>
-
+  <hr class="car-item__hr">
+  <div class="car-buy-item__owner-info">
+    <div class="owner">
+      <p>Owner</p>
+      <div *ngIf="ownerEmail == car.owner">
+        <button class="btn-default narrow-btn" type="button" (click)="onEdit()">Edit Car</button>
+      </div>
+    </div>
+    <div class="owner-avatar" [ngStyle]="{'background-image': (car.owner | getUserInfo:'userImg' | async)}">
+    </div>
+    <div class="owner-info">
+      <p>Name: {{car.owner | getUserInfo:'name' | async}}</p>
+      <p>
+        Phone:
+        <a href="tel:
+            {{car.owner | getUserInfo:'phoneCode' | async}}
+            {{car.owner | getUserInfo:'phone' | async}}">
+          +{{car.owner | getUserInfo:'phoneCode' | async}} {{car.owner | getUserInfo:'phone' | async}}
+        </a>
+      </p>
+      <p>Email: <a href="mailto:{{ car.owner }}">{{ car.owner }}</a></p>
+    </div>
+  </div>
+  <div>
+    <p>Created: {{ car.date.toDate() | date:'dd.MM.yyyy' }}</p>
+  </div>
   <div>
     <div *ngIf="car.carImages" class="car-item__images">
       <button class="btn-default narrow-btn" (click)="onShowCarImages(car.id)">View Images</button>
       <app-car-images *ngIf="carShowImages && carId==car.id" [carImgs]="car.carImages"></app-car-images>
     </div>
-    <p *ngIf="!car.carImages">There are no images uploaded</p>
+    <p class="no-car-images" *ngIf="car.carImages.length == 0">There are no images uploaded</p>
   </div>
+
+
+
 
   <div class="test" *ngIf="isInEditMode">
     <form [formGroup]="changeCarDetailsForm" (ngSubmit)="submitCarDetailChanges(changeCarDetailsForm)">
       <div>
-        <input formControlName="carImg"
-        #chooseCarImg style="display: none;"
-        type="file" 
-        (change)="onChooseCarImg($event)" 
-        accept=".png,.jpg,.jpeg,.svg,.heic">
+        <input formControlName="carImg" #chooseCarImg style="display: none;" type="file"
+          (change)="onChooseCarImg($event)" accept=".png,.jpg,.jpeg,.svg,.heic">
         <img [src]="carImgLocalPath">
         <button type="button" (click)="chooseCarImg.click()">Change Car Image</button>
       </div>
@@ -66,7 +81,7 @@
             <div *ngFor="let carImage of currentCarImages; let i = index">
               <img [src]="carImage">
               <div (click)="deleteCurrentImages(i, carImage)">X</div>
-            </div>            
+            </div>
           </div>
           <div *ngIf="carImgLocalPaths.length > 0">
             <p>New Images</p>
@@ -79,12 +94,8 @@
           </div>
         </div>
         <div>
-          <input formControlName="carImgs"
-          #chooseCarImgs style="display: none;"
-          type="file" 
-          (change)="onChooseCarImgs($event)" 
-          accept=".png,.jpg,.jpeg,.svg,.heic"
-          multiple="multiple">
+          <input formControlName="carImgs" #chooseCarImgs style="display: none;" type="file"
+            (change)="onChooseCarImgs($event)" accept=".png,.jpg,.jpeg,.svg,.heic" multiple="multiple">
           <button type="button" class="btn-default narrow-btn ng-star-inserted" (click)="chooseCarImgs.click()">
             <p *ngIf="!currentCarImages">Select Images</p>
             <p *ngIf="currentCarImages">Select More Images</p>
@@ -109,7 +120,7 @@
 
 <!--  -->
 <style>
-  .test{
+  .test {
     position: fixed;
     top: 50px;
     left: 0;

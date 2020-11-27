@@ -17,12 +17,7 @@
         <img src="../../assets//img/sign/phone.png">
       </div>
       <div>
-        <span>
-          +{{ shownUser.phoneCode }}                    
-        </span>
-        <span>
-          {{ shownUser.phone }}
-        </span>
+        <a href="tel:{{ shownUser.phoneCode }}{{ shownUser.phone }}">+{{ shownUser.phoneCode }}{{ shownUser.phone }}</a>
       </div>
     </div>
     <div class="comment-user-info__element">

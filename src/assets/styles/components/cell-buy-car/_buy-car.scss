@@ -1,0 +1,40 @@
+.car-buy-item {
+    &__model {
+        @include flexCenterVSA;
+    }
+    &__description {
+        white-space: pre-line;
+        overflow: auto;
+        height: 75px;
+        @include scrollbar(normal);
+    }
+    &__owner-info {
+        .owner {
+            @include flexCenterVSB;
+            p {
+                font-size: 1.1em;
+                color: $default-red;
+            }
+        }
+        .owner-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 3px solid $default-red;
+            background-size: cover;
+            background-position: center;
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 15px;
+        }
+        .owner-info {
+            margin-bottom: 15px;
+            a {
+                color: $default-red !important;
+            }
+        }
+    }
+    .no-car-images {
+        padding: 12px 0;
+    }
+}
