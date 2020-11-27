@@ -24,7 +24,7 @@ export class SellCarComponent implements OnInit, OnDestroy {
   carDefaultImg: string = '../../../assets/img/cell-buy-car/upload-img.png';
   carImgLocalPath: string = this.carDefaultImg;
   carImgURL: string;
-  carFiles: any;  
+  carFiles: any = [];  
   carImgNames: any = [];
   carImgLocalPaths: any = [];
   carImgURLs: any = [];
@@ -169,21 +169,15 @@ export class SellCarComponent implements OnInit, OnDestroy {
   }
 
   onChooseCarImgs(event) {
-    this.carFiles = event.target.files;    
-    if(this.carFiles.length > 0) {
-      for (let i = 0; i < this.carFiles.length; i++){
-        const reader = new FileReader();
-        reader.onload = (event: any) => {
-          this.carImgLocalPaths.push(event.target.result);
-        }
-        reader.readAsDataURL(event.target.files[i]);
-        this.carImgNames.push(this.carFiles[i].name);
+    for (let i = 0; i < event.target.files.length; i++){
+      this.carFiles.push(event.target.files[i]);
+      const reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.carImgLocalPaths.push(event.target.result);
       }
-    } else {
-      this.carFiles = null;
-      this.carImgLocalPaths = [];
-      this.carImgNames = [];
-    }
+      reader.readAsDataURL(event.target.files[i]);
+      this.carImgNames.push(this.carFiles[i].name);
+    } 
   }
 
   onUploadCarImagesToFirestore(id) {
