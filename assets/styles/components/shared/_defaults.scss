@@ -75,3 +75,13 @@ img {
     font-size: 1.1em;
     padding: 10px 0 0 0;
 }
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched,
+.invalid {
+    border: 2px solid $default-red !important;
+}
+
+.mat-select-panel {
+    @include scrollbar(normal)
+}
