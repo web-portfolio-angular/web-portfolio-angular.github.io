@@ -51,6 +51,7 @@
 			(change)="onChooseCarImg($event)" 
 			accept=".png,.jpg,.jpeg,.svg,.heic">
 			<button type="button" class="button btn-default narrow-btn ng-star-inserted" (click)="chooseCarImg.click()">Chоose Image</button>
+			<p class="info-text">(The field is mandatory)</p>
 		</div>
 		<hr class="sell-car-container__form__hr">
 		<div>
@@ -71,6 +72,7 @@
 				</div>
 			</div>
 			<button type="button" class="button btn-default narrow-btn ng-star-inserted" (click)="chooseCarImgs.click()">Chоose Images</button>
+			<p class="info-text">(You could add images later)</p>
 			<input formControlName="carImgs"
 			#chooseCarImgs style="display: none;"
 			type="file" 

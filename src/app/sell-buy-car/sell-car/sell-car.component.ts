@@ -219,7 +219,8 @@ export class SellCarComponent implements OnInit, OnDestroy {
   removeCarImg(index) {
     this.carImgLocalPaths.splice(index, 1);
     this.carImgNames.splice(index, 1);
-    if(this.carImgLocalPaths == 0 && this.carImgNames == 0) {
+    this.carFiles.splice(index, 1);
+    if(this.carFiles == 0) {
       this.sellCarForm.value.carImgs = null;
     }
   }

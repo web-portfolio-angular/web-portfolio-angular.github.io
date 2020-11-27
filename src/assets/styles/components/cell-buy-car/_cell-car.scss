@@ -129,6 +129,11 @@
         .error {
             color: $default-red;
         }
+        .info-text {
+          color: $default-red;
+          text-align: center;
+          padding: 5px 0;
+        }
         .textarea {
             @include default-textarea;
         }
