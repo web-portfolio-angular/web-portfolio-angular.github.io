@@ -1,76 +1,77 @@
 * {
-  margin: 0;
-  padding: 0;
-  font-size: 15px;  
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  @include rubik;
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    @include rubik;
 }
 
 body {
-  overflow-x: hidden;
-  background-color: var(--color1);
-  min-width: 320px; 
-  @include scrollbar (body);
+    overflow-x: hidden;
+    background-color: var(--color1);
+    min-width: 320px;
+    padding-top: 100px;
+    @include scrollbar (body);
 }
 
 ::selection {
-  background: $default-red;
-  color: $white;
+    background: $default-red;
+    color: $white;
 }
 
 .container {
-  max-width: 980px;
-  padding: 0 5%;
-  margin: 0 auto;
+    max-width: 980px;
+    padding: 0 5%;
+    margin: 0 auto;
 }
 
 img {
-  user-select: none;
+    user-select: none;
 }
 
 .btn-default-center {
-  display: block;
-  margin: 0 auto;
+    display: block;
+    margin: 0 auto;
 }
 
 .btn-default {
-  background-color: $default-red;
-  width: 100%;
-  height: 50px;
-  line-height: 50px;
-  color: $white;
-  font-size: 1.1em;
-  transition: all 0.5s ease;
-  border-radius: 3px;
-  @include btn;
-  &:disabled {
-    background-color: $disabled-red;
-    color: $gray;
-    cursor: not-allowed;
-  }
-  @include hover (normal) {
-    background-color: $disabled-red;
-  }
-  @include media (med) {
-    width: 190px;
-  }
+    background-color: $default-red;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    color: $white;
+    font-size: 1.1em;
+    transition: all 0.5s ease;
+    border-radius: 3px;
+    @include btn;
+    &:disabled {
+        background-color: $disabled-red;
+        color: $gray;
+        cursor: not-allowed;
+    }
+    @include hover (normal) {
+        background-color: $disabled-red;
+    }
+    @include media (med) {
+        width: 190px;
+    }
 }
 
 .narrow-btn {
-  width: auto !important;
-  height: auto;
-  line-height: 1.1em;
-  padding: 5px;
+    width: auto !important;
+    height: auto;
+    line-height: 1.1em;
+    padding: 5px;
 }
 
 .hr-border {
-  border-top: 1px solid var(--color9);
-  border-bottom: 1px solid var(--color5);
-  margin: 20px 0;
+    border-top: 1px solid var(--color9);
+    border-bottom: 1px solid var(--color5);
+    margin: 20px 0;
 }
 
 .error-msg {
-  color: $default-red;
-  font-size: 1.1em;
-  padding: 10px 0 0 0;
+    color: $default-red;
+    font-size: 1.1em;
+    padding: 10px 0 0 0;
 }

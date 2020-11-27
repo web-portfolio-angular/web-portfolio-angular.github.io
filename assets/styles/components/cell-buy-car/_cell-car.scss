@@ -1,0 +1,121 @@
+.sell-car-container {
+  position: relative;
+    background-color: var(--color2);
+    box-shadow: 0px 0px 10px 1px rgba($black, 0.75);
+    border-radius: 3px;
+    &__form {
+        max-width: 767px;
+        padding: 20px;
+        margin: 0 auto;
+        &__drop-downs {
+            &__el {
+                width: 49%;
+                &:nth-child(1) {
+                    margin-right: 1%;
+                }
+            }
+            @include flexCenterVSB;
+            .mat-form-field {
+                * {
+                    padding: 0 !important;
+                }
+                border-radius: 3px;
+                background-color: rgba($white, 0.5);
+                border: 1px solid var(--color8);
+                width: 100%;
+                padding: 5px;
+                box-sizing: border-box;
+                .mat-form-field-infix {
+                    border: none;
+                    height: 28px !important;
+                    display: flex !important;
+                    align-items: center;
+                    .ng-star-inserted {
+                        @include rubik;
+                        color: var(--color7);
+                    }
+                    .mat-select-arrow {
+                        color: var(--color7);
+                    }
+                }
+                .mat-form-field-underline {
+                    display: none;
+                }
+            }
+        }
+        &__car-images {
+            .img-container {
+                max-height: 400px;
+                padding: 10px;
+                flex-wrap: wrap;
+                overflow: auto;
+                border-radius: 3px;
+                background-color: rgba($white, 0.5);
+                border: 1px solid var(--color8);
+                @include flexCenterHV;
+                @include scrollbar(normal);
+                .img-element {
+                    position: relative;
+                    padding: 3px;
+                    img {
+                        max-width: 200px;
+                        max-height: 112px;
+                        border-radius: 3px;
+                    }
+                    div {
+                        position: absolute;
+                        top: 7px;
+                        right: 7px;
+                        width: 20px;
+                        height: 20px;
+                        font-weight: bold;
+                        color: $white;
+                        background-color: $default-red;
+                        border-radius: 50%;
+                        ;
+                        @include flexCenterHV;
+                        @include btn;
+                    }
+                }
+            }
+        }
+        &__hr {
+            margin: 15px 0px;
+            border: none;
+            border-top: 1px solid $default-red;
+        }
+        .el-label {
+            color: var(--color7);
+            margin-bottom: 5px;
+        }
+        .defaut-img {
+            text-align: center;
+            img {
+                max-width: 200px;
+                max-height: 112px;
+                margin: 0 auto;
+                display: block;
+                border-radius: 3px;
+            }
+        }
+        .button {
+            margin: 15px auto;
+            display: block;
+        }
+        .price {
+            color: var(--color7);
+            input {
+                border-radius: 3px;
+                background-color: rgba($white, 0.5);
+                border: 1px solid var(--color8);
+                color: var(--color7);
+                outline: none;
+                padding: 10px;
+                @include inputNoArrows;
+            }
+        }
+        .textarea {
+            @include default-textarea;
+        }
+    }
+}

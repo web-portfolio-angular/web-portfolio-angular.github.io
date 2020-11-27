@@ -1,11 +1,9 @@
 @import "variables/colors";
 @import "variables/themes";
-
 @import "mixins/media";
 @import "mixins/hover";
 @import "mixins/fonts";
 @import "mixins/shorthand";
-
 @import "components/shared/defaults";
 @import "components/shared/scroll-top";
 @import "components/shared/car-images";
@@ -15,13 +13,9 @@
 @import "components/header/user-info";
 @import "components/home/home";
 @import "components/products/car-item";
-@import "components/cell-car/cell-car";
+@import "components/cell-buy-car/cell-car";
 @import "components/comments/comments";
 @import "components/comments/comment-user-info";
 @import "components/comments/_comment";
 @import "components/sign/sign";
 @import "components/footer/footer";
-
-body {
-  padding-top: 100px !important;
-}
