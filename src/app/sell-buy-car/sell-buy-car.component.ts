@@ -18,7 +18,7 @@ export class SellBuyCarComponent implements OnInit {
 
     if (lastVisitedLink) {
       this.router.navigate([lastVisitedLink]);
-    }    
+    }
   }
 
   saveLastVisitedLinkToLocalStore(link: string) {

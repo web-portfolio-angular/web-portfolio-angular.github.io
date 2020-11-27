@@ -5,9 +5,9 @@
 		<p *ngIf="getCarManufactureYearError" class="error-msg">{{ getCarManufactureYearError }}</p>
 	</div>
 	<form class="sell-car-container__form" [formGroup]="sellCarForm" (ngSubmit)="onSubmit(sellCarForm)">
-		<div class="sell-car-container__drop-downs">
-			<div>
-				<div></div>
+		<div class="sell-car-container__form__drop-downs">
+			<div class="sell-car-container__form__drop-downs__el">
+				<p class="el-label">Model</p>
 				<div  [ngClass]="{'invalid': !sellCarForm.get('model').valid && sellCarForm.get('model').touched}">
 					<mat-form-field>
 						<mat-select formControlName="model">
@@ -18,16 +18,20 @@
 					</mat-form-field>
 				</div>
 			</div>
-			<mat-form-field>
-				<mat-select formControlName="year">
-					<mat-option *ngFor="let carManufactureYear of carManufactureYears" [value]="carManufactureYear.year">
-						{{ carManufactureYear.year }}
-					</mat-option>
-				</mat-select>
-			</mat-form-field>
+			<div class="sell-car-container__form__drop-downs__el">
+				<p class="el-label">Year</p>
+				<mat-form-field>
+					<mat-select formControlName="year">
+						<mat-option *ngFor="let carManufactureYear of carManufactureYears" [value]="carManufactureYear.year">
+							{{ carManufactureYear.year }}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
 		</div>
+		<hr class="sell-car-container__form__hr">	
 		<div>
-			<div class="sell-car-container__img">
+			<div class="defaut-img">
 				<img [src]="carImgLocalPath">
 			</div>
 			<input formControlName="carImg"
@@ -35,25 +39,28 @@
 			type="file" 
 			(change)="onChooseCarImg($event)" 
 			accept=".png,.jpg,.jpeg,.svg,.heic">
-			<button type="button" class="btn-default narrow-btn ng-star-inserted" (click)="chooseCarImg.click()">Chоose Image</button>
+			<button type="button" class="button btn-default narrow-btn ng-star-inserted" (click)="chooseCarImg.click()">Chоose Image</button>
 		</div>
+		<hr class="sell-car-container__form__hr">
 		<div>
-			<textarea placeholder="Description..." formControlName="description"></textarea>
+			<textarea class="textarea" placeholder="Description..." formControlName="description"></textarea>
 		</div>
-		<div>
-			<input type="number" name="price" formControlName="price">
+		<div class="price">
+			<p class="el-label">Price in $</p>
+			<input class="" type="number" name="price" formControlName="price">
 		</div>
-		<div>
-			<div *ngIf="carImgLocalPaths.length == 0">
+		<hr class="sell-car-container__form__hr">
+		<div class="sell-car-container__form__car-images">
+			<div class="defaut-img" *ngIf="carImgLocalPaths.length == 0">
 				<img [src]="carDefaultImg">
-			</div>
-			<button type="button" class="btn-default narrow-btn ng-star-inserted" (click)="chooseCarImgs.click()">Chоose Images</button>
-			<div *ngIf="carImgLocalPaths.length > 0">
-				<div *ngFor="let carImgLocalPath of carImgLocalPaths; let i = index">
+			</div>			
+			<div class="img-container" *ngIf="carImgLocalPaths.length > 0">
+				<div class="img-element" *ngFor="let carImgLocalPath of carImgLocalPaths; let i = index">
 					<img [src]="carImgLocalPath">
 					<div (click)="removeCarImg(i)">X</div>
 				</div>
 			</div>
+			<button type="button" class="button btn-default narrow-btn ng-star-inserted" (click)="chooseCarImgs.click()">Chоose Images</button>
 			<input formControlName="carImgs"
 			#chooseCarImgs style="display: none;"
 			type="file" 
@@ -61,8 +68,9 @@
 			accept=".png,.jpg,.jpeg,.svg,.heic"
 			multiple="multiple">			
 		</div>
+		<hr class="sell-car-container__form__hr">
 		<div>
-      <button type="submit" [disabled]="!sellCarForm.valid">Add to the Shop</button>
+      <button type="submit" [disabled]="!sellCarForm.valid" class="button btn-default narrow-btn ng-star-inserted">Add to the Shop</button>
 		</div>
 		<div>
 			<p *ngIf="sellCarError" class="error-msg">{{ sellCarError }}</p>
