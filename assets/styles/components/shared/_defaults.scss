@@ -83,5 +83,6 @@ textarea.ng-invalid.ng-touched,
 }
 
 .mat-select-panel {
-    @include scrollbar(normal)
+    @include scrollbar(normal);
+    outline: none;
 }
