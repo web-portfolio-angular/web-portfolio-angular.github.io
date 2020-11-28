@@ -136,6 +136,7 @@
         }
         .textarea {
             @include default-textarea;
+            @include scrollbar(normal);
         }
     }
 }
