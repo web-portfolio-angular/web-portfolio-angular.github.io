@@ -30,6 +30,7 @@
     }
     &__owner-info {
         .owner {
+            height: 30px;
             @include flexCenterVSB;
             p {
                 font-size: 1.1em;
