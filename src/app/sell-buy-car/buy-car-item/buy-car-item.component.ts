@@ -30,7 +30,7 @@ export class BuyCarItemComponent implements OnInit {
   isInEditMode: boolean = false;
   ownerEmail: string = null;
   carFile: any;
-  carFiles: any;
+  carFiles: any = [];
   carImgLocalPath: string;
   carImgNames: any = [];
   carImgLocalPaths: any = [];
@@ -185,22 +185,15 @@ export class BuyCarItemComponent implements OnInit {
   }
 
   onChooseCarImgs(event) {
-    this.carFiles = event.target.files;
-    if(this.carFiles.length > 0) {
-      for (let i = 0; i < this.carFiles.length; i++){
-        const reader = new FileReader();
-        reader.onload = (event: any) => {
-          this.carImgLocalPaths.push(event.target.result);
-        }
-        reader.readAsDataURL(event.target.files[i]);
-        this.carImgNames.push(this.carFiles[i].name);
+    for (let i = 0; i < event.target.files.length; i++){
+      this.carFiles.push(event.target.files[i]);
+      const reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.carImgLocalPaths.push(event.target.result);
       }
-    } else {
-      this.carFiles = null;
-      this.carImgLocalPaths = [];
-      this.carImgNames = [];
-      this.changeCarDetailsForm.controls['carImgs'].setValue('');
-    }
+      reader.readAsDataURL(event.target.files[i]);
+      this.carImgNames.push(this.carFiles[i].name);
+    } 
   }
 
   onUploadCarImagesToFirestore(id: string) {
@@ -249,20 +242,21 @@ export class BuyCarItemComponent implements OnInit {
   removeCarImg(index) {
     this.carImgLocalPaths.splice(index, 1);
     this.carImgNames.splice(index, 1);
-    if(this.carImgLocalPaths == 0 && this.carImgNames == 0) {
+    this.carFiles.splice(index, 1);
+    if(this.carFiles == 0) {
       this.changeCarDetailsForm.value.carImgs = null;
     }
   }
 
   onCancel() {
-    this.carFiles = null;
+    this.carFiles = [];
     this.carImgLocalPaths = [];
     this.carImgNames = [];
     this.changeCarDetailsForm.controls['carImgs'].setValue('');
     this.changeCarDetailsForm.controls['carImg'].setValue('');
     this.carImgLocalPath = this.car.carImg;
     this.currentCarImages = [...this.car.carImages];
-    this.currentImageForDelete = [];    
+    this.currentImageForDelete = [];  
     this.isInEditMode = false;    
   }
 

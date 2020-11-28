@@ -183,6 +183,7 @@ export class SellCarComponent implements OnInit, OnDestroy {
   onUploadCarImagesToFirestore(id) {
     return new Promise((resolve) => {
       if(this.carImgNames.length == 0) {
+        this.sellCarForm.value.carImgs = this.carImgURLs;
         resolve();
       }
       for (let i = 0; i < this.carImgNames.length; i++) {
