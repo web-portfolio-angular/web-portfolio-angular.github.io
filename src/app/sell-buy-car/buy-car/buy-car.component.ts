@@ -47,11 +47,7 @@ export class BuyCarComponent implements OnInit, OnDestroy {
       lastVisitedLink: string
     } = JSON.parse(localStorage.getItem('sell-buy-car/buy-LastVisitedLink'));
 
-    const lastVisitedTab: {
-      lastVisitedLink: string
-    } = JSON.parse(localStorage.getItem('sell-buy-car-LastVisitedLink'));
-
-    if (lastVisitedLink && lastVisitedTab.toString() == '/sell-buy-car/buy') {
+    if (lastVisitedLink) {
       this.router.navigate([lastVisitedLink]);      
     }  
   }

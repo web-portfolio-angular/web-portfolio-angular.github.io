@@ -12,16 +12,5 @@ export class SellBuyCarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const lastVisitedLink: {
-      lastVisitedLink: string
-    } = JSON.parse(localStorage.getItem('sell-buy-car-LastVisitedLink'));
-
-    if (lastVisitedLink) {
-      this.router.navigate([lastVisitedLink]);
-    }
-  }
-
-  saveLastVisitedLinkToLocalStore(link: string) {
-    localStorage.setItem('sell-buy-car-LastVisitedLink', JSON.stringify('/sell-buy-car/' + link));
   }
 }
