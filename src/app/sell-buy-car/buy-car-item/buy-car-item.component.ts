@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 
-import { CarsForSell } from 'src/app/shared/models/car.model';
+import { Car, CarsForSell } from 'src/app/shared/models/car.model';
 import { SubjectsService } from 'src/app/shared/services/subjects.service';
 import { FirestoreService } from 'src/app/shared/services/firestore.service';
 import { AdditionUserInfoService } from 'src/app/shared/services/user-additional-info.service';
@@ -44,7 +44,7 @@ export class BuyCarItemComponent implements OnInit {
   getCarImgURLError: string = null;
   uploadCarImgToFirestoreError: string = null;
   currentImageForDelete: any = [];
-
+  
   constructor(
     private subjectService: SubjectsService,
     private formBuilder: FormBuilder,

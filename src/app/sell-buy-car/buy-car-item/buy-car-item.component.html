@@ -1,7 +1,6 @@
 <div class="car-buy-item car-item">
   <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
-  <div>
-    <img class="car-item__img" [src]="car.carImg">
+  <div class="car-buy-item__car-img" [ngStyle]="{'background-image': 'url(\'' + car?.carImg + '\')'}">
   </div>
   <div class="car-buy-item__model">
     <p>{{ car.model }}</p>
@@ -51,7 +50,7 @@
       <button class="btn-default narrow-btn" (click)="onShowCarImages(car.id)">View Images</button>
       <app-car-images *ngIf="carShowImages && carId==car.id" [carImgs]="car.carImages"></app-car-images>
     </div>
-    <p class="no-car-images" *ngIf="car.carImages.length == 0">There are no images uploaded</p>
+    <p class="no-car-images" *ngIf="car.carImages.length == 0">No images uploaded</p>
   </div>
 
 
@@ -127,9 +126,5 @@
     width: 100%;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
-  }
-
-  img {
-    width: 100px;
   }
 </style>

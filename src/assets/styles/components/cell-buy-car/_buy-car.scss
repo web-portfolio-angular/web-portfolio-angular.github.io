@@ -1,4 +1,24 @@
 .car-buy-item {
+    &__car-img {
+        width: 100%;
+        padding-top: 56.25%;
+        position: relative;
+        margin-bottom: 15px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        border-radius: 3px;
+        box-shadow: 0px 0px 5px 1px rgba($black, 0.75);
+        img {
+            position: absolute;
+            height: 100%;
+            top: 0;
+            margin-left: 50%;
+            transform: translate(-50%);
+            box-shadow: 0px 0px 5px 1px rgba($black, 0.75);
+            border-radius: 3px;
+        }
+    }
     &__model {
         @include flexCenterVSA;
     }
@@ -14,6 +34,7 @@
             p {
                 font-size: 1.1em;
                 color: $default-red;
+                font-weight: bold;
             }
         }
         .owner-avatar {
@@ -36,5 +57,6 @@
     }
     .no-car-images {
         padding: 12px 0;
+        text-align: center;
     }
 }
