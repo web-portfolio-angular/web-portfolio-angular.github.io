@@ -45,6 +45,10 @@
           padding: 10px;
         }
       }
+      .disabled-link {
+        color: $gray;
+        pointer-events: none;
+      }
     }
     &__hamburger {
       width: 30px;
