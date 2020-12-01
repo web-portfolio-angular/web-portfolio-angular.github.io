@@ -33,13 +33,15 @@
       [ngClass]="{'disabled-pointer-events' : disableButton}"
       [routerLink]="['/services']" 
       routerLinkActive="nav-active" 
-      *ngIf="isAuth">Services
+      *ngIf="isAuth"
+      class="disabled-link">Services
     </li>
     <li (click)="swithcNavigationMenuState()"
       [ngClass]="{'disabled-pointer-events' : disableButton}"
       [routerLink]="['/gallery']" 
       routerLinkActive="nav-active" 
-      *ngIf="isAuth">Callery
+      *ngIf="isAuth"
+      class="disabled-link">Callery
     </li>
     <li (click)="swithcNavigationMenuState()"
       [ngClass]="{'disabled-pointer-events' : disableButton}"
@@ -49,7 +51,8 @@
     <li (click)="swithcNavigationMenuState()"
       [ngClass]="{'disabled-pointer-events' : disableButton}"
       [routerLink]="['/contacts']" 
-      routerLinkActive="nav-active">Contacts
+      routerLinkActive="nav-active"
+      class="disabled-link">Contacts
     </li>
   </ul>
   <div class="nav-container__sign-btns">
